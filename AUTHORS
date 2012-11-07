@@ -1,0 +1,5 @@
+James Titcumb <james@asgrim.com>
+Richard Holloway <richard@richardjh.org>
+
+UPDATE THE AUTHORS
+git log --all --format='%aN <%aE>' | sort -u
