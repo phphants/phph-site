@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<?php echo $this->headTitle('PHP Hampshire')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+	<?php echo $this->headLink()->appendStylesheet($this->basePath() . '/css/style.css'); ?>
+
+	<?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
+
+</head>
+<body>
+	<header>
+		<img src="<?php echo $this->basePath('images/phph-logo.png'); ?>" alt="PHP Hampshire Logo" />
+		<p>PHP Hampshire</p>
+		<nav>
+			<?php echo $this->navigation('Navigation')->menu(); ?>
+		</nav>
+	</header>
+
+	<?php echo $this->content; ?>
+
+	<footer>
+		<p>&copy; <?php echo date("Y"); ?> PHP Hampshire. All website source code available under <a href="http://opensource.org/licenses/MIT">MIT license</a> from <a href="https://github.com/phphants/phph-site">PHPH Github</a>.
+	</footer>
+	<?php echo $this->inlineScript() ?>
+</body>
+</html>
