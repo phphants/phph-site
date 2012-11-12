@@ -5,6 +5,8 @@ Website for www.phphants.co.uk.
 
 For more information, or to get involved, join [PHP Hampshire](http://community.phphants.co.uk).
 
+[![Build Status](https://secure.travis-ci.org/phphants/phph-site.png?branch=master)](https://travis-ci.org/phphants/phph-site)
+
 Installation
 ------------
 
