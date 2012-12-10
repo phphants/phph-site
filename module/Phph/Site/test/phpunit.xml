@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="Bootstrap.php">
+<phpunit bootstrap="Bootstrap.php" colors="true" backupGlobals="false">
     <testsuites>
         <testsuite name="phph-site">
             <directory>./Phph/SiteTest</directory>
