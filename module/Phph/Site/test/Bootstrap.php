@@ -27,9 +27,9 @@ class Bootstrap
 
         $zf2ModulePaths = array();
 
-        if(isset($testConfig['module_listener_options']['module_paths'])) {
+        if (isset($testConfig['module_listener_options']['module_paths'])) {
             $modulePaths = $testConfig['module_listener_options']['module_paths'];
-            foreach($modulePaths as $modulePath) {
+            foreach ($modulePaths as $modulePath) {
                 if (($path = static::findParentPath($modulePath)) ) {
                     $zf2ModulePaths[] = $path;
                 }
@@ -104,6 +104,7 @@ class Bootstrap
             if ($previousDir === $dir) return false;
             $previousDir = $dir;
         }
+
         return $dir . '/' . $path;
     }
 }

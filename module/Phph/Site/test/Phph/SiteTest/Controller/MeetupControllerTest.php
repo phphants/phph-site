@@ -38,11 +38,11 @@ class MeetupControllerTest extends PHPUnit_Framework_TestCase
 
     public function testIndexActionCanBeAccessed()
     {
-    	$this->routeMatch->setParam('action', 'index');
+        $this->routeMatch->setParam('action', 'index');
 
-    	$result   = $this->controller->dispatch($this->request);
-    	$response = $this->controller->getResponse();
+        $result   = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
 
-    	$this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }
