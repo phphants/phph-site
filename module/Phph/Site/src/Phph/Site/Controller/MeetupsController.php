@@ -29,7 +29,7 @@ class MeetupsController extends AbstractActionController
     {
         return new ViewModel(
             array(
-                'meetup' => $this->meetupsService->getLatestMeetup(),
+                'future_meetups' => $this->meetupsService->getFutureMeetups(),
             )
         );
     }
