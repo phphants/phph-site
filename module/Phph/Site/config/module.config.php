@@ -4,6 +4,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Phph\Site\Controller\IndexController' => 'Phph\Site\Controller\IndexController',
+            'Phph\Site\Controller\JoinUsController' => 'Phph\Site\Controller\JoinUsController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -37,6 +38,16 @@ return array(
                     ),
                 ),
             ),
+            'join' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/join',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\JoinUsController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'navigation' => array(
@@ -48,6 +59,10 @@ return array(
             'meetups' => array(
                 'label' => 'Meetups',
                 'route' => 'meetups',
+            ),
+            'join' => array(
+                'label' => 'Join Us',
+                'route' => 'join',
             ),
         ),
     ),
