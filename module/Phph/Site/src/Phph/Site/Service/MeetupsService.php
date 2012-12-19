@@ -61,6 +61,29 @@ class MeetupsService extends AbstractActionController
     }
 
     /**
+     * Get all the future meetups as an array
+     *
+     * @return array of MeetupEntity objects
+     */
+    public function getFutureMeetups()
+    {
+        $meetups = $this->getMeetupsList();
+
+        $now = new \DateTime();
+
+        $future_meetups = array();
+
+        foreach ($meetups as $meetup) {
+            $date = new \DateTime(str_replace(".php", "", $meetup));
+            if ($date->diff($now)->invert) {
+                $future_meetups[] = $this->getMeetup($meetup);
+            }
+        }
+
+        return $future_meetups;
+    }
+
+    /**
      * Load an individual meetup file
      *
      * @param  string       $file The file (from the cached directory list)
