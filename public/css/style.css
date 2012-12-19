@@ -100,3 +100,9 @@ section#main ul li {
 	list-style: disc inside;
 	margin-top: 2px;
 }
+
+#google-groups-link {
+	border-bottom: none;
+	float: right;
+	margin: 17px 0 0 0;
+}
