@@ -5,6 +5,7 @@ return array(
         'invokables' => array(
             'Phph\Site\Controller\IndexController' => 'Phph\Site\Controller\IndexController',
             'Phph\Site\Controller\JoinUsController' => 'Phph\Site\Controller\JoinUsController',
+            'Phph\Site\Controller\ContactController' => 'Phph\Site\Controller\ContactController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -48,6 +49,16 @@ return array(
                     ),
                 ),
             ),
+            'contact' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/contact',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\ContactController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'navigation' => array(
@@ -63,6 +74,10 @@ return array(
             'join' => array(
                 'label' => 'Join Us',
                 'route' => 'join',
+            ),
+            'contact' => array(
+                'label' => 'Contact',
+                'route' => 'contact',
             ),
         ),
     ),
