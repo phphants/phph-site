@@ -3,7 +3,7 @@ phph-site
 
 Website for www.phphants.co.uk.
 
-For more information, or to get involved, join [PHP Hampshire](http://community.phphants.co.uk).
+For more information, or to get involved, join [PHP Hampshire](http://phphants.co.uk/join).
 
 [![Build Status](https://secure.travis-ci.org/phphants/phph-site.png?branch=master)](https://travis-ci.org/phphants/phph-site)
 
