@@ -6,6 +6,7 @@ return array(
             'Phph\Site\Controller\IndexController' => 'Phph\Site\Controller\IndexController',
             'Phph\Site\Controller\JoinUsController' => 'Phph\Site\Controller\JoinUsController',
             'Phph\Site\Controller\ContactController' => 'Phph\Site\Controller\ContactController',
+            'Phph\Site\Controller\SponsorsController' => 'Phph\Site\Controller\SponsorsController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -59,6 +60,16 @@ return array(
                     ),
                 ),
             ),
+            'sponsors' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/sponsors',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\SponsorsController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'navigation' => array(
@@ -70,6 +81,10 @@ return array(
             'meetups' => array(
                 'label' => 'Meetups',
                 'route' => 'meetups',
+            ),
+            'sponsors' => array(
+                'label' => 'Sponsors',
+                'route' => 'sponsors',
             ),
             'join' => array(
                 'label' => 'Join Us',

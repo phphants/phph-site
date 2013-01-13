@@ -12,6 +12,7 @@ class MeetupEntity
     protected $location;
     protected $topic;
     protected $talkingPoints;
+    protected $widget;
 
     public function exchangeArray($data)
     {
@@ -121,5 +122,17 @@ class MeetupEntity
     public function getTalkingPoints()
     {
         return $this->talkingPoints;
+    }
+
+    public function setWidget($widgetString)
+    {
+        $this->widget = $widgetString;
+
+        return $this;
+    }
+
+    public function getWidget()
+    {
+        return $this->widget;
     }
 }
