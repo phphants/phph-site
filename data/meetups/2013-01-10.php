@@ -5,7 +5,7 @@ use Phph\Site\Model\MeetupEntity;
 $meetup = new MeetupEntity();
 
 $meetup->setId(0)
-    ->setDate(new DateTime('2013-01-10 18:00'))
+    ->setFromDate(new DateTime('2013-01-10 18:00'))
     ->setLocation('The Red Lion, Horndean')
     ->setTopic('Prerequisite knowledge for working with ZF2')
     ->setTalkingPoints(array(

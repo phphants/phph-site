@@ -5,7 +5,10 @@ namespace Phph\Site\Model;
 class MeetupEntity
 {
     protected $id;
-    protected $date;
+    protected $fromDate;
+    protected $toDate;
+    protected $registrationUrl;
+    protected $locationUrl;
     protected $location;
     protected $topic;
     protected $talkingPoints;
@@ -30,9 +33,9 @@ class MeetupEntity
         return $this->id;
     }
 
-    public function setDate(\DateTime $date)
+    public function setFromDate(\DateTime $date)
     {
-        $this->date = $date;
+        $this->fromDate = $date;
 
         return $this;
     }
@@ -40,9 +43,48 @@ class MeetupEntity
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getFromDate()
     {
-        return $this->date;
+        return $this->fromDate;
+    }
+
+    public function setToDate(\DateTime $date)
+    {
+        $this->toDate = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getToDate()
+    {
+        return $this->toDate;
+    }
+
+    public function setRegistrationUrl($url)
+    {
+        $this->registrationUrl = (string) $url;
+
+        return $this;
+    }
+
+    public function getRegistrationUrl()
+    {
+        return $this->registrationUrl;
+    }
+
+    public function setLocationUrl($url)
+    {
+        $this->locationUrl = (string) $url;
+
+        return $this;
+    }
+
+    public function getLocationUrl()
+    {
+        return $this->locationUrl;
     }
 
     public function setLocation($location)

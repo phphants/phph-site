@@ -9,28 +9,51 @@ class RenderMeetup extends AbstractHelper
 {
     public function __invoke(MeetupEntity $meetup)
     {
-        $date = $meetup->getDate()->format('jS F Y');
-        $time = $meetup->getDate()->format('ga');
+        $date = $meetup->getFromDate()->format('jS F Y');
+        $from_time = $meetup->getFromDate()->format('ga');
+        if ($meetup->getToDate()) {
+            $to_time = $meetup->getToDate()->format('ga');
+        }
+        $registration_url = $meetup->getRegistrationUrl();
         $location = $meetup->getLocation();
+        $location_url = $meetup->getLocationUrl();
         $topic = $meetup->getTopic();
         $talking_points = $meetup->getTalkingPoints();
 
         $talking_points_html = '';
-        foreach ($talking_points as $point) {
-            $talking_points_html .= "			<li>{$point}</li>\n";
+        foreach ($talking_points as $speaker => $point) {
+            if (!is_numeric($speaker)) {
+                $talking_points_html .= "			<li>{$point} &mdash; <em>(by {$speaker})</em></li>\n";
+            } else {
+                $talking_points_html .= "			<li>{$point}</li>\n";
+            }
         }
 
-        $str = <<<DOC
-<h3>{$date}</h3>
-<ul>
-    <li><strong>Time:</strong> From {$time} (for ~2-3 hours)</li>
-    <li><strong>Location:</strong> {$location}</li>
-    <li><strong>Topic of the Month:</strong> {$topic}</li>
-    <li><strong>Talking points</strong>
-        <ul>\n{$talking_points_html}</ul>
-    </li>
-</ul>
-DOC;
+        $str = "<h3>{$date}</h3>";
+
+        $str .= "<ul>";
+
+        if (isset($to_time)) {
+            $str .= "<li><strong>Time:</strong> {$from_time} - {$to_time}</li>";
+        } else {
+            $str .= "<li><strong>Time:</strong> From {$from_time} (for ~2-3 hours)</li>";
+        }
+
+        if (isset($location_url)) {
+            $str .= "<li><strong>Location:</strong> <a href=\"{$location_url}\">{$location}</a></li>";
+        } else {
+            $str .= "<li><strong>Location:</strong> {$location}</li>";
+        }
+
+        $str .= "<li><strong>Registration Required:</strong> <a href=\"{$registration_url}\">{$registration_url}</a></li>";
+
+        if (isset($topic)) {
+            $str .= "<li><strong>Topic of the Month:</strong> {$topic}</li>";
+        }
+
+        $str .= "<li><strong>Talks:</strong><ul>\n{$talking_points_html}</ul></li>";
+
+        $str .= "</ul>";
 
         return $str;
     }
