@@ -1,7 +1,6 @@
 <?php $this->headTitle('Meetups'); ?>
 
-<h1>Meetups</h1>
-<h2>Next Meetup<?php echo count($future_meetups) > 1 ? 's' : ''; ?></h2>
+<h2>Next Meetup<?php echo count($future_meetups) > 1 ? 's' : ''; ?>...</h2>
 
 <?php if (count($future_meetups) > 0): ?>
     <?php foreach ($future_meetups as $meetup): ?>
