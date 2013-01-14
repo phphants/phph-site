@@ -47,6 +47,9 @@ a {
 a:hover {
 	color: #001133;
 }
+a.noborder {
+	border: none;
+}
 p {
 	margin: 15px 0;
 }
@@ -105,4 +108,22 @@ section#main ul li {
 	border-bottom: none;
 	float: right;
 	margin: 17px 0 0 0;
+}
+
+.align-right {
+	float: right;
+	padding-left: 10px;
+	}
+.align-left {
+	float: left;
+	padding-right: 10px;
+	}
+
+img.sponsor-logo {
+	width: 95px;
+	height: 95px;
+}
+
+#sponsors {
+	padding: 20px 180px;
 }

@@ -55,6 +55,13 @@ class RenderMeetup extends AbstractHelper
 
         $str .= "</ul>";
 
+        $widget = $meetup->getWidget();
+
+        if ($widget)
+        {
+            $str .= "<div class=\"padding\"></div>" . $widget;
+        }
+
         return $str;
     }
 }
