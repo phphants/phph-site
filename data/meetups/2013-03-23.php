@@ -1,6 +1,7 @@
 <?php
 
 use Phph\Site\Model\MeetupEntity;
+use Phph\Site\Model\TalkEntity;
 
 $eventbriteWidget = '<div style="width:100%; text-align:left; padding-top: 20px" >';
 $eventbriteWidget .= '<iframe  src="http://www.eventbrite.co.uk/tickets-external?eid=5224635024&ref=etckt&v=2" frameborder="0" height="214" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>';
@@ -21,10 +22,9 @@ $meetup->setId(0)
     ->setLocationUrl("http://goo.gl/maps/WzD3p")
     ->setLocation('Port 57, Portsmouth')
     ->setTalkingPoints(array(
-        #'Speaker One' => 'Talk 1',
-        #'Speaker Two' => 'Talk 2',
-        #'Speaker Three' => 'Talk 3',
-        'To be confirmed...',
+        new TalkEntity('Lee Boynton', 'leeboynton', 'Integrating Node.js With PHP'),
+        new TalkEntity('Dan Barker', 'bandarker', 'Dealing With Legacy Systems'),
+        'One more speaker tba...',
     ))
     ->setWidget($eventbriteWidget);
 
