@@ -24,7 +24,7 @@ $meetup->setId(0)
     ->setTalkingPoints(array(
         new TalkEntity('Lee Boynton', 'leeboynton', 'Integrating Node.js With PHP'),
         new TalkEntity('Dan Barker', 'bandarker', 'Dealing With Legacy Systems'),
-        'One more speaker tba...',
+        new TalkEntity('Eddie Abou-Jaoude', 'eddiejaoude', 'Zend Framework, The "M" in MVC'),
     ))
     ->setWidget($eventbriteWidget);
 
