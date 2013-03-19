@@ -23,7 +23,7 @@ $meetup->setId(0)
     ->setLocation('Port 57, Portsmouth')
     ->setTalkingPoints(array(
         new TalkEntity('Lee Boynton', 'leeboynton', 'Integrating Node.js With PHP'),
-        new TalkEntity('Dan Barker', 'bandarker', 'Dealing With Legacy Systems'),
+        new TalkEntity('Phil Bennett', 'phil_bennett', 'Creating a native iOS and Android App in 20 mins using HTML5, Yii and PhoneGap'),
         new TalkEntity('Eddie Abou-Jaoude', 'eddiejaoude', 'Zend Framework, The "M" in MVC'),
     ))
     ->setWidget($eventbriteWidget);
