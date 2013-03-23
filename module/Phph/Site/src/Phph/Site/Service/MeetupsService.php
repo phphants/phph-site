@@ -75,7 +75,8 @@ class MeetupsService extends AbstractActionController
 
         foreach ($meetups as $meetup) {
             $date = new \DateTime(str_replace(".php", "", $meetup));
-            if ($date->diff($now)->invert) {
+            $diff = $date->diff($now);
+            if ($diff->invert || $diff->days == 0) {
                 $future_meetups[] = $this->getMeetup($meetup);
             }
         }
