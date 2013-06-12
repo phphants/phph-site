@@ -23,7 +23,7 @@ $meetup->setId(0)
     ->setLocation('Broad Oak Social Club, Airport Service Road, Portsmouth')
     ->setTalkingPoints(array(
         new TalkEntity('Derick Rethans', 'derickr', 'Introduction to MongoDB'),
-        'TBC',
+        new TalkEntity('Stuart Herbert', 'stuherbert', 'Automating Tests Using Storyplayer'),
     ))
     ->setWidget($eventbriteWidget);
 
