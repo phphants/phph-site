@@ -10,9 +10,9 @@ class RenderMeetup extends AbstractHelper
     public function __invoke(MeetupEntity $meetup)
     {
         $date = $meetup->getFromDate()->format('jS F Y');
-        $from_time = $meetup->getFromDate()->format('ga');
+        $from_time = $meetup->getFromDate()->format('g:ia');
         if ($meetup->getToDate()) {
-            $to_time = $meetup->getToDate()->format('ga');
+            $to_time = $meetup->getToDate()->format('g:ia');
         }
         $registration_url = $meetup->getRegistrationUrl();
         $location = $meetup->getLocation();
