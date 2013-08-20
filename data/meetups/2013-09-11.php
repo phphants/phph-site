@@ -25,6 +25,7 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Michael Cullum', 'michaelcullumuk', 'PHP FIG: Standardising PHP'),
+        new TalkEntity('James Titcumb', 'asgrim', 'Lightning Talk - Composer')
     ))
     ->setWidget($eventbriteWidget);
 
