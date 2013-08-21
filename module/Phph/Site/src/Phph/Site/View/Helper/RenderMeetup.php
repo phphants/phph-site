@@ -53,6 +53,16 @@ class RenderMeetup extends AbstractHelper
 
         $str .= "<li><strong>Talks:</strong><ul>\n{$talking_points_html}</ul></li>";
 
+        if (count($meetup->getSchedule()) > 0) {
+            $str .= "<li><strong>Schedule:</strong><ul>\n";
+
+            foreach ($meetup->getSchedule() as $item) {
+                $str .= "			<li>{$item}</li>\n";
+            }
+
+            $str .= "</ul></li>";
+        }
+
         $str .= "</ul>";
 
         $widget = $meetup->getWidget();

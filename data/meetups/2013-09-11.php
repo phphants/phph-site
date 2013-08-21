@@ -2,6 +2,7 @@
 
 use Phph\Site\Model\MeetupEntity;
 use Phph\Site\Model\TalkEntity;
+use Phph\Site\Model\ScheduleEntity;
 
 $etitle = 'PHP Hampshire - September Meetup';
 $eid = '7896441469';
@@ -25,7 +26,16 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Michael Cullum', 'michaelcullumuk', 'PHP FIG: Standardising PHP'),
-        new TalkEntity('James Titcumb', 'asgrim', 'Lightning Talk - Composer')
+        new TalkEntity('James Titcumb', 'asgrim', 'Lightning Talk - Composer'),
+    ))
+    ->setSchedule(array(
+        new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
+        new ScheduleEntity(new \DateTime('19:20'), 'Welcome announcement'),
+        new ScheduleEntity(new \DateTime('19:30'), 'Michael Cullum (PHP FIG: Standardising PHP)'),
+        new ScheduleEntity(new \DateTime('20:30'), 'Break'),
+        new ScheduleEntity(new \DateTime('20:40'), 'Lightning Talk - Composer'),
+        new ScheduleEntity(new \DateTime('20:50'), 'Closing Comments'),
+        new ScheduleEntity(new \DateTime('21:00'), 'Social Gathering at <a href="http://brewhouseandkitchen.com/">Brewhouse Pompey</a>'),
     ))
     ->setWidget($eventbriteWidget);
 
