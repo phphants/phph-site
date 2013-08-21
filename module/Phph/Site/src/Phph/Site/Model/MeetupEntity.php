@@ -13,6 +13,12 @@ class MeetupEntity
     protected $topic;
     protected $talkingPoints;
     protected $widget;
+    protected $schedule;
+
+    public function __construct()
+    {
+        $this->schedule = array();
+    }
 
     public function exchangeArray($data)
     {
@@ -134,5 +140,17 @@ class MeetupEntity
     public function getWidget()
     {
         return $this->widget;
+    }
+
+    public function setSchedule(array $schedule)
+    {
+    	$this->schedule = $schedule;
+
+        return $this;
+    }
+
+    public function getSchedule()
+    {
+        return $this->schedule;
     }
 }
