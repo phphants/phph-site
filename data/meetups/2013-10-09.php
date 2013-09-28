@@ -26,7 +26,7 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Robb Lewis', 'rmlewisuk', '1 million in 10 days'),
-        '<strong>Another talk</strong> TBC!',
+        new TalkEntity('James Titcumb', 'asgrim', 'Errors, Exceptions and Logging'),
     ))
     ->setWidget($eventbriteWidget);
 
