@@ -25,7 +25,8 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        'Talks are to be confirmed...',
+        new TalkEntity('Rob Davis', 'therobyouknow', 'Building sites with Drupal, its \'Lego\'-like modules and Vagrant for general web development'),
+        'Another talk TBC',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
