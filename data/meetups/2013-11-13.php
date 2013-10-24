@@ -26,7 +26,7 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Rob Davis', 'therobyouknow', 'Building sites with Drupal, its \'Lego\'-like modules and Vagrant for general web development'),
-        'Another talk TBC',
+        new TalkEntity('Herb Miller', 'herb_miller', 'Probably doing it wrong.'),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
