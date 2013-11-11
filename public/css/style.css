@@ -100,8 +100,9 @@ section#main ul {
 	margin: 10px 20px;
 }
 section#main ul li {
-	list-style: disc inside;
+	list-style: disc outside;
 	margin-top: 2px;
+	margin-left: 5px;
 }
 
 #google-groups-link {
@@ -126,4 +127,10 @@ img.sponsor-logo {
 
 #sponsors {
 	padding: 20px 180px;
+}
+
+.talk-abstract {
+	font-size: 80%;
+	margin: 10px 10px;
+	font-style: italic;
 }
