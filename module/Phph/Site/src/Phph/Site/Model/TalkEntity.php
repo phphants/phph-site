@@ -7,12 +7,14 @@ class TalkEntity
     protected $speakerName;
     protected $speakerTwitter;
     protected $talkName;
+    protected $abstract;
 
-    public function __construct($speakerName, $speakerTwitter, $talkName)
+    public function __construct($speakerName, $speakerTwitter, $talkName, $abstract = null)
     {
         $this->speakerName = $speakerName;
         $this->speakerTwitter = $speakerTwitter;
         $this->talkName = $talkName;
+        $this->abstract = $abstract;
     }
 
     public function __toString()
@@ -26,6 +28,12 @@ class TalkEntity
         }
 
         $s .= ')</em>';
+
+        $abstract = $this->getAbstract();
+        if (!empty($abstract)) {
+            $s .= '<br /><p class="talk-abstract">' . $abstract . '</p>';
+        }
+
         return $s;
     }
 
@@ -63,5 +71,17 @@ class TalkEntity
     public function getTalkName()
     {
         return $this->talkName;
+    }
+
+    public function setAbstract($abstract)
+    {
+        $this->abstract = (string)$abstract;
+
+        return $this;
+    }
+
+    public function getAbstract()
+    {
+        return $this->abstract;
     }
 }
