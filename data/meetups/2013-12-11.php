@@ -35,7 +35,7 @@ about SplType.
 
 Finally, I\'d like to plug my php-enum library by stepping into a few things that
 it does to make your life easier in comparison to SplEnum.'),
-        'Loads of prize giveaways from JetBrains PhpStorm, GitHub, O\'Reilly, SpectrumIT, FTPloy',
+        'Loads of prize giveaways from Zend, GitHub, JetBrains PhpStorm, O\'Reilly, SpectrumIT, FTPloy',
         'Also some extra special Christmas treats!',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
