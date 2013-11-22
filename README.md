@@ -17,8 +17,7 @@ The recommended way to get a working copy of this project is to clone the reposi
     cd /var/www/
     git clone https://github.com/phphants/phph-site.git
     cd phph-site
-    php composer.phar self-update
-    php composer.phar install
+    composer install
 
 
 ###Virtual Host
