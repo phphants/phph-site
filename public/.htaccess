@@ -1,3 +1,5 @@
+Redirect 302 /subscribe http://eepurl.com/DaINX
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
