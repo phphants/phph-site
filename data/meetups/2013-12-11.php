@@ -35,7 +35,7 @@ about SplType.
 
 Finally, I\'d like to plug my php-enum library by stepping into a few things that
 it does to make your life easier in comparison to SplEnum.'),
-        'Pink elePHPant raffle:  Raffle tickets are £1 per entry, or £3 for 5 entries (a strip). Raffle tickets will be available at the event only.',
+        'Pink elePHPant raffle:  Raffle tickets are &pound;1 per entry, or &pound;3 for 5 entries (a strip). Raffle tickets will be available at the event only.',
         'Loads of prize giveaways from Zend, GitHub, JetBrains PhpStorm, O\'Reilly, SpectrumIT, FTPloy',
         'Also some extra special Christmas treats!',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
