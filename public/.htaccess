@@ -1,4 +1,5 @@
 Redirect 302 /subscribe http://eepurl.com/DaINX
+Redirect 302 /survey2013 https://docs.google.com/forms/d/1IgUNMaEa051iOyhobibYE9G_HsUMJCTKgHBgkFdxA7o/viewform
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
