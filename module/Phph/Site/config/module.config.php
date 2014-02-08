@@ -40,6 +40,16 @@ return array(
                     ),
                 ),
             ),
+            'meetups-ical' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/meetups.ics',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\MeetupsController',
+                        'action'  => 'ical',
+                    ),
+                ),
+            ),
             'join' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
