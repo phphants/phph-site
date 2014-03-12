@@ -33,7 +33,7 @@ $meetup->setId(0)
     ->setTalkingPoints(array(
         new TalkEntity('Zend', 'zend', 'The Great PHP Hampshire Zend elePHPant Hunt', $abstract),
         new TalkEntity('Kimberley Ford', 'luco_el_loco', 'Kim\'s Car: An Introduction to Object Oriented Programming in PHP'),
-        new TalkEntity('Rebecca Short', 'BeckiShort', 'Coding with SEO in mind'),
+        new TalkEntity('Rebecca Short', 'RebeccaShortSEO', 'Coding with SEO in mind'),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
