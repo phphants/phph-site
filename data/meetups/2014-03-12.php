@@ -32,8 +32,8 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Zend', 'zend', 'The Great PHP Hampshire Zend elePHPant Hunt', $abstract),
-        new TalkEntity('Kimberley Ford', 'luco_el_loco', 'Lightning Talk'),
-        new TalkEntity('Becki Short', 'BeckiShort', 'Lightning Talk'),
+        new TalkEntity('Kimberley Ford', 'luco_el_loco', 'Kim\'s Car: An Introduction to Object Oriented Programming in PHP'),
+        new TalkEntity('Rebecca Short', 'RebeccaShortSEO', 'Coding with SEO in mind'),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
