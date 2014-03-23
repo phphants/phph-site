@@ -103,6 +103,9 @@ header nav ul li a {
 
 	color: inherit;
 	text-decoration: none;
+
+	-webkit-transition: color .15s;
+			transition: color .15s;
 }
 
 header nav ul li a:hover {
@@ -179,6 +182,9 @@ header .nav-button{
 	background-color: #ec7748;
 	border-radius: 5px;
 	box-shadow: 0 3px 0 rgba(0,0,0,.15);
+
+	-webkit-transition: all .05s;
+			transition: all .05s;
 }
 
 @media (max-width: 600px) {
@@ -303,7 +309,6 @@ footer .links li {
 	width: 25%;
 
 	font-size: .9em;
-	
 	list-style: none;
 }
 
@@ -317,6 +322,9 @@ footer .links li a {
 
 	color: inherit;
 	text-decoration: none;
+
+	-webkit-transition: color .05s;
+			transition: color .05s;
 }
 
 footer .links li a:hover {
