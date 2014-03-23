@@ -1,50 +1,138 @@
-body {
-	background-color: #eeeeee;
-	font-family: "Open Sans", sans-serif;
+/* reset */
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box;
+	
+	/* box-sizing means widths are calculated to include paddings and borders */
+
 	margin: 0;
 	padding: 0;
 }
-a {
-	color: #ec7748;
+
+body {
+	background-color: #eeeeee;
+	font-family: "Open Sans", sans-serif;
 }
+
+a{ color: #ec7748; }
+
 .fixed-width {
 	width: 80%;
 	max-width: 990px;
 	margin: 0 auto;
 }
-@media (max-width: 400px){
+
+@media (max-width: 800px){
+	.fixed-width {
+		width: 90%;
+	}
+}
+
+@media (max-width: 600px){
 	.fixed-width {
 		width: 100%;
 	}
 }
+
 header {
+	padding: 15px 10px;
+	overflow: hidden; /* acts as a clearfix */
+	
 	background-color: #223e80;
-	color: white;
-	box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.75);
+	color: #fff;
 }
-header nav ul {
+
+.header-logo {
+	display: block;
+	float: left;
+	width: 20%;
+	max-width: 140px;
+	max-height: 70px;
+}
+
+@media (max-width: 600px){
+	.header-logo { width: 80px; }
+}
+
+header nav {
 	float: right;
-	padding: 0;
-	margin: 40px 0 0 0;
+	max-width: 80%;
 }
+
+@media (max-width: 600px){
+	header nav{
+		/*display: none; */
+		max-width: 100%;
+		width: 100%;
+		margin-top: 20px;
+	}
+}
+
 header nav ul li {
-	margin-left: 15px;
-	display: inline;
+	display: inline-block;
+	
+	color: #d8d8d8;
+
+	list-style: none;
 	text-transform: uppercase;
 }
+
+@media (max-width: 800px){
+	header nav ul li {
+		font-size: .75em;
+	}
+}
+
+@media (max-width: 600px){
+	header nav ul li{
+		width: 100%;
+
+		background: rgba(255,255,255,.25);
+		border-bottom: 1px solid #aaa;
+	}
+	
+	header nav ul li:hover{ background: rgba(255,255,255,.45); }
+	
+	header nav ul li:last-child{ border: none; }
+}
+
 header nav ul li a {
-	color: #d8d8d8;
+	display: block;
+	padding: 20px 10px;
+
+	color: inherit;
 	text-decoration: none;
 }
+
 header nav ul li a:hover {
 	color: #ffffff;
 }
 header nav ul li.active a {
 	color: #ec7748;
 }
-#logo {
-	margin: 15px 0 15px 20px;
+
+header .nav-button{
+	display: none;
+	float: right;
+	padding: 10px;
+
+	font-size: .8em;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: white;
+
+	background: rgba(255,255,255,.25);
+	border: 1px solid #aaa;
+	border-radius: 5px;
 }
+
+@media (max-width: 600px){
+	header .nav-button{
+		display: block;
+	}
+}
+
 footer {
 	background-color: white;
 	box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.25);
