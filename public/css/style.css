@@ -23,13 +23,13 @@ a{ color: #ec7748; }
 	margin: 0 auto;
 }
 
-@media (max-width: 800px){
+@media (max-width: 800px) {
 	.fixed-width {
 		width: 90%;
 	}
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
 	.fixed-width {
 		width: 100%;
 	}
@@ -51,7 +51,7 @@ header {
 	max-height: 70px;
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
 	.header-logo { width: 80px; }
 }
 
@@ -60,9 +60,9 @@ header nav {
 	max-width: 80%;
 }
 
-@media (max-width: 600px){
-	header nav{
-		/*display: none; */
+@media (max-width: 600px) {
+	header nav {
+		display: none; 
 		max-width: 100%;
 		width: 100%;
 		margin-top: 20px;
@@ -78,23 +78,23 @@ header nav ul li {
 	text-transform: uppercase;
 }
 
-@media (max-width: 800px){
+@media (max-width: 800px) {
 	header nav ul li {
 		font-size: .75em;
 	}
 }
 
-@media (max-width: 600px){
-	header nav ul li{
+@media (max-width: 600px) {
+	header nav ul li {
 		width: 100%;
 
 		background: rgba(255,255,255,.25);
 		border-bottom: 1px solid #aaa;
 	}
 	
-	header nav ul li:hover{ background: rgba(255,255,255,.45); }
+	header nav ul li:hover { background: rgba(255,255,255,.45); }
 	
-	header nav ul li:last-child{ border: none; }
+	header nav ul li:last-child { border: none; }
 }
 
 header nav ul li a {
@@ -108,6 +108,7 @@ header nav ul li a {
 header nav ul li a:hover {
 	color: #ffffff;
 }
+
 header nav ul li.active a {
 	color: #ec7748;
 }
@@ -123,7 +124,6 @@ header .nav-button{
 	color: white;
 
 	background: rgba(255,255,255,.25);
-	border: 1px solid #aaa;
 	border-radius: 5px;
 }
 
@@ -149,52 +149,74 @@ footer nav ul {
 footer nav ul li {
 	display: inline;
 }
+
 #content {
 	margin: 15px auto;
 }
-#hero {
-	padding: 30px 0;
-	background-color: #8ca1d1;
-	box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.75);
+
+.hero {
+	padding: 15px 0;
 	text-align: center;
+	
+	background-color: #8ca1d1;
 }
-#hero h1 {
-	font-family: 'Yanone Kaffeesatz', arial, serif;
-	font-size: 60px;
-	margin: 0;
-	margin-bottom: 30px;
+
+@media (max-width: 600px) {
+	.hero { font-size: .75em; }
+}
+
+.hero h1 {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 4em;
 	color: #ededf5;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+	text-shadow: 0 3px 0 rgba(0,0,0,.15);
 }
-#hero p {
-	font-size: 26px;
-	color: #ededf5;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-	margin: 0;
-	padding: 0 0 30px 0;
-}
-#hero a {
-	display: block;
-	width: 90%;
-	height: 70px;
-	line-height: 65px;
-	background-color: #ec7748;
+
+.hero p {
+	width: 80%;
 	margin: 0 auto;
-	color: #ffffff;
-	text-decoration: none;
-	font-size: 25px;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-	border-radius: 6px;
-	background: -moz-linear-gradient(top, #f5b69d 0%, #ec7748 75%, #ec7748);
-	background: -webkit-gradient(linear, left top, left bottom, from(#f5b69d), color-stop(0.75, #ec7748), to(#ec7748));
-	box-shadow: 0px 0px 3px rgba(000,000,000,0.5), inset 0px 0px 1px rgba(139,62,32,1);
-}
-#hero a:hover {
+	padding: 1em;
+	line-height: 1.25;
+	
+	font-size: 1.5em;
 	color: #ededf5;
-	background: -moz-linear-gradient(top, #f5b69d 0%, #ec7748 65%, #ec7748);
-	background: -webkit-gradient(linear, left top, left bottom, from(#f5b69d), color-stop(0.65, #ec7748), to(#ec7748));
-	box-shadow: 0px 0px 3px rgba(000,000,000,0.6), inset 0px 0px 1px rgba(139,62,32,1);
+	text-shadow: 0 2px 0 rgba(0,0,0,.15);
 }
+
+@media (max-width: 600px) {
+	.hero p { width: 100%; }
+}
+
+.hero .register-button {
+	display: block;
+	width: 60%;
+	margin: 0 auto;
+	padding: .75em .5em;
+
+	font-size: 1.5em;
+	text-decoration: none;
+	color: #fff;
+	
+	background-color: #ec7748;
+	border-radius: 5px;
+	box-shadow: 0 3px 0 rgba(0,0,0,.15);
+}
+
+@media (max-width: 600px) {
+	.hero .register-button { width: 80%; }
+}
+
+.hero .register-button::after{ content: ' »'; }
+
+.hero .register-button:hover {
+	box-shadow: none;
+	
+	-webkit-transform: translateY(3px);
+			transform: translateY(3px);
+	
+	cursor: pointer;
+}
+
 .announcement {
 	color: #666666;
 	font-size: 20px;
@@ -204,6 +226,7 @@ footer nav ul li {
 	background-image: url('/images/bubble.png');
 	background-repeat: no-repeat;
 }
+
 h2 {
 	color: #666666;
 	font-size: 25px;
