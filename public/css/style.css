@@ -133,23 +133,6 @@ header .nav-button{
 	}
 }
 
-footer {
-	background-color: white;
-	box-shadow: 0px -2px 5px 0px rgba(50, 50, 50, 0.25);
-	text-align: center;
-}
-footer p {
-	margin: 0;
-	padding: 20px 0 0 0;
-}
-footer nav ul {
-	margin: 0;
-	padding: 0 0 20px 0;
-}
-footer nav ul li {
-	display: inline;
-}
-
 .hero {
 	padding: 15px 0;
 	text-align: center;
@@ -279,10 +262,72 @@ footer nav ul li {
 	}
 }
 
+footer {
+	padding: 1em;
+
+	background-color: #2E2E2E;
+	color: #f5f5f5;
+	text-align: center;
+}
+
+footer .details {
+	color: #666;
+	font-size: .9em;
+}
+
+footer .details a {
+	color: inherit;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+footer .details a:hover {
+	border-bottom: 2px solid;
+}
+
+footer .links{
+	width: 60%;
+	margin: 0 auto 50px;
+	overflow: hidden;
+}
+
+@media (max-width: 600px) {
+	footer .links{
+		width: 100%;
+		margin-bottom: 10px; 
+	}
+}
+
+footer .links li {
+	float: left;
+	width: 25%;
+
+	font-size: .9em;
+	
+	list-style: none;
+}
+
+@media (max-width: 600px) {
+	footer .links li{ width: 50%; }
+}
+
+footer .links li a {
+	display: block;
+	padding: 1em .25em;
+
+	color: inherit;
+	text-decoration: none;
+}
+
+footer .links li a:hover {
+	color: #EC7748;
+}
+
 .align-right {
 	float: right;
 	padding-left: 10px;
 }
+
 .align-left {
 	float: left;
 	padding-right: 10px;
