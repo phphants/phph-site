@@ -5,23 +5,35 @@ $this->headTitle('Welcome!');
 
 <?php echo $this->partial('layout/hero'); ?>
 
-<div class="fixed-width" id="content">
-	<div class="announcement">
-		<p>We are looking for speakers for our monthly meetups! To volunteer, please <a href="mailto:speak@phphants.co.uk">email us</a>.</p>
-	</div>
+<div class="fixed-width">
+<div id="content">
 
-	<h2>Our meetups...</h2>
-	<p><strong>Our meetups take place on every 2<sup>nd</sup> Wednesday of the month from 7pm at the <a href="http://www.oasisthevenue.com/">Oasis Conference Centre</a> in Portsmouth.</strong></p>
-	<a href="<?php echo $this->url('meetups'); ?>">Check our Meetups page for how to register &raquo;</a>
+    <section>
 
-    <h2>Support Us</h2>
-    <p>Please support your local PHP user group in Hampshire by donating to help shape future events!</p>
+        <h1>Our meetups...</h1>
+        <p>Our meetups take place on every <strong>2<sup>nd</sup> Wednesday of the month from 7pm at the <a href="http://www.oasisthevenue.com/">Oasis Conference Centre</a> in Portsmouth</strong>.</p>
+        <a href="<?php echo $this->url('meetups'); ?>">Check our Meetups page for how to register &raquo;</a>
 
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="8Q4PUM75V8DGS">
-    <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-    </form>
+    </section>
 
+	<section>
+
+        <h1>Support Us</h1>
+        <p>Please support your local PHP user group in Hampshire by donating to help shape future events!</p>
+
+        <form class="paypal-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="8Q4PUM75V8DGS">
+            <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal – The safer, easier way to pay online.">
+        </form>
+
+    </section>
+
+</div>
+</div>
+
+<div class="fixed-width">
+<div class="announcement">
+    <p>We are looking for speakers for our monthly meetups! To volunteer, please <a href="mailto:speak@phphants.co.uk">email us</a>.</p>
+</div>
 </div>

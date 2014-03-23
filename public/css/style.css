@@ -150,10 +150,6 @@ footer nav ul li {
 	display: inline;
 }
 
-#content {
-	margin: 15px auto;
-}
-
 .hero {
 	padding: 15px 0;
 	text-align: center;
@@ -217,31 +213,72 @@ footer nav ul li {
 	cursor: pointer;
 }
 
-.announcement {
+#content{
 	width: 80%;
 	margin: 0 auto;
-	min-height: 46px;
-	padding: .5em;
-	padding-left: 66px;
-	
-	font-size: 1em;
-	color: #666;
-	
-	background-image: url('/images/bubble.png');
-	background-repeat: no-repeat;
-	background-position: 10px top;
+	padding: 1em .5em;
+	overflow: hidden; /* acts as a clearfix */
 }
 
-@media (max-width: 600px) {
-	.announcement {
+@media (max-width: 800px) {
+	#content {
 		width: 100%;
 	}
 }
 
-h2 {
-	color: #666666;
-	font-size: 25px;
+#content section {
+	width: 50%;
+	float: left;
+	padding: .5em;
 }
+
+@media (max-width: 600px) {
+	#content section { width: 100%; }
+}
+
+#content h1 {
+	font-size: 1.5em;
+	color: #2C3C61;
+}
+
+#content p {
+	color: #333;
+	padding: 1em 0;
+}
+
+.announcement {
+	position: relative;
+	padding: .5em;
+	width: 50%;
+	margin: 20px auto;
+	
+	font-size: 1.15em;
+	color: #555;
+	text-align: center;
+	
+	background: rgba(0,0,0,.15);
+	border-radius: 10px;
+	border-bottom-left-radius: 0;
+}
+
+.announcement::before {
+	content: '';
+	position: absolute;
+	left: -20px;
+	bottom: 0;
+	display: block;
+
+	border: 10px solid rgba(0,0,0,.15);
+	border-top-color: transparent;
+	border-left-color: transparent;
+}
+
+@media (max-width: 600px) {
+	.announcement {
+		width: 85%;
+	}
+}
+
 .align-right {
 	float: right;
 	padding-left: 10px;
@@ -250,16 +287,17 @@ h2 {
 	float: left;
 	padding-right: 10px;
 }
+
 #google-groups-link {
 	border-bottom: none;
 	float: right;
 	margin: 17px 0 0 0;
 }
+
 img.sponsor-logo {
 	width: 200px;
 }
-#sponsors {
-}
+
 .talk-abstract {
 	font-size: 80%;
 	margin: 10px 10px;
