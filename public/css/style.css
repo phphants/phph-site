@@ -196,7 +196,7 @@ header .nav-button{
 	cursor: pointer;
 }
 
-#content{
+.content{
 	width: 80%;
 	margin: 0 auto;
 	padding: 1em .5em;
@@ -204,27 +204,27 @@ header .nav-button{
 }
 
 @media (max-width: 800px) {
-	#content {
+	.content {
 		width: 100%;
 	}
 }
 
-#content section {
+.content section {
 	width: 50%;
 	float: left;
 	padding: .5em;
 }
 
 @media (max-width: 600px) {
-	#content section { width: 100%; }
+	.content section { width: 100%; }
 }
 
-#content h1 {
+.content h1 {
 	font-size: 1.5em;
 	color: #2C3C61;
 }
 
-#content p {
+.content p {
 	color: #333;
 	padding: 1em 0;
 }
