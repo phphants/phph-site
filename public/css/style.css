@@ -218,13 +218,24 @@ footer nav ul li {
 }
 
 .announcement {
-	color: #666666;
-	font-size: 20px;
-	padding-left: 50px;
-	height: 36px;
-	line-height: 36px;
+	width: 80%;
+	margin: 0 auto;
+	min-height: 46px;
+	padding: .5em;
+	padding-left: 66px;
+	
+	font-size: 1em;
+	color: #666;
+	
 	background-image: url('/images/bubble.png');
 	background-repeat: no-repeat;
+	background-position: 10px top;
+}
+
+@media (max-width: 600px) {
+	.announcement {
+		width: 100%;
+	}
 }
 
 h2 {
