@@ -114,6 +114,8 @@ return array(
     'view_manager' => array(
         'template_map' => array(
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/header' => __DIR__ . '/../view/layout/header.phtml',
+            'layout/footer' => __DIR__ . '/../view/layout/footer.phtml',
         ),
         'template_path_stack' => array(
             'Site' => __DIR__ . '/../view',

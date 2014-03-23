@@ -4,47 +4,18 @@
 	<meta charset="utf-8">
 	<?php echo $this->headTitle('PHP Hampshire')->setSeparator(' - ')->setAutoEscape(false) ?>
 
+	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300' rel='stylesheet' type='text/css'>
 	<?php echo $this->headLink()->appendStylesheet($this->basePath() . '/css/style.css'); ?>
 
-	<?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
-
+	<?php echo $this->headScript(); ?>
 </head>
 <body>
-	<header>
-		<a href="https://github.com/phphants/phph-site">
-			<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-		</a>
+<?php echo $this->partial('layout/header'); ?>
 
-		<img src="<?php echo $this->basePath('images/phph-logo.png'); ?>" alt="PHP Hampshire Logo" />
-		<h1>PHP Hampshire</h1>
-		<nav>
-			<?php echo $this->navigation('Navigation')->menu(); ?>
-		</nav>
-		<div class="clear"></div>
-	</header>
+<?php echo $this->content; ?>
 
-	<section id="main">
-	<?php echo $this->content; ?>
-	</section>
+<?php echo $this->partial('layout/footer'); ?>
 
-	<footer>
-		<p>&copy; <?php echo date("Y"); ?> PHP Hampshire. All website source code available under <a href="http://opensource.org/licenses/MIT">MIT license</a> from <a href="https://github.com/phphants/phph-site">PHPH Github</a> |
-		<a href="https://plus.google.com/100929948456763294967" rel="publisher">Google+</a> |
-		<a href="https://twitter.com/phphants">Twitter</a> |
-		<a href="http://www.facebook.com/pughants">Facebook</a>
-	</footer>
-
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-3367595-6', 'phphants.co.uk');
-	  ga('send', 'pageview');
-
-	</script>
-
-	<?php echo $this->inlineScript() ?>
+<?php echo $this->inlineScript() ?>
 </body>
 </html>
