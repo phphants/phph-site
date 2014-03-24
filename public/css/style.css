@@ -1,18 +1,24 @@
+
 /* reset */
 * {
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
-			box-sizing: border-box;
-	
+		box-sizing: border-box;
+
+	margin: 0; padding: 0;	
 	/* box-sizing means widths are calculated to include paddings and borders */
 
-	margin: 0;
-	padding: 0;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
 }
 
 body {
-	background-color: #eeeeee;
+	background-color: #eee;
 	font-family: "Open Sans", sans-serif;
+	margin-bottom: 120px;
 }
 
 a{ color: #ec7748; }
@@ -141,6 +147,9 @@ header .nav-button{
 	text-align: center;
 	
 	background-color: #8ca1d1;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 
 @media (max-width: 600px) {
