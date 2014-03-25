@@ -1,7 +1,8 @@
 <?php $this->headTitle('Meetups'); ?>
 
-<div class="fixed-width" id="content">
-    <h2>Next Meetup<?php echo count($future_meetups) > 1 ? 's' : ''; ?>...</h2>
+<div class="fixed-width">
+<div class="content">
+    <h1>Next Meetup<?php echo count($future_meetups) > 1 ? 's' : ''; ?>...</h1>
 
     <?php if (count($future_meetups) > 0): ?>
         <?php foreach ($future_meetups as $meetup): ?>
@@ -10,4 +11,5 @@
     <?php else: ?>
     <strong>No meetups currently planned...</strong>
     <?php endif; ?>
+</div>
 </div>
