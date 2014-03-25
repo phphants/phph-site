@@ -15,37 +15,47 @@ html {
 }
 
 body {
-	background-color: #eee;
-	font-family: "Open Sans", sans-serif;
 	margin-bottom: 200px;
-	padding-bottom: 25px;
+	
+	background-color: #223e80; /* fallback color if gradients are not supported */
+	background-image: -webkit-linear-gradient(top, #223e80, #466BB9);
+	background-image:    -moz-linear-gradient(top, #223e80, #466BB9);
+	background-image:     -ms-linear-gradient(top, #223e80, #466BB9);
+	background-image:      -o-linear-gradient(top, #223e80, #466BB9);
+	background-image:         linear-gradient(to bottom, #223e80, #466BB9);
+	
+	font-family: "Open Sans", sans-serif;
 }
 
 a{ color: #ec7748; }
 
-.fixed-width {
+.content-wrapper{
+	background: #eee;
+	padding-bottom: 25px;
+}
+
+.wrapper {
 	width: 80%;
 	max-width: 990px;
 	margin: 0 auto;
 }
 
 @media (max-width: 800px) {
-	.fixed-width {
+	.wrapper {
 		width: 90%;
 	}
 }
 
 @media (max-width: 600px) {
-	.fixed-width {
+	.wrapper {
 		width: 100%;
 	}
 }
 
 header {
 	padding: 15px 10px;
-	overflow: hidden; /* acts as a clearfix */
+	overflow: auto; /* clearfix */
 	
-	background-color: #223e80;
 	color: #fff;
 }
 
@@ -145,8 +155,6 @@ header .nav-button{
 .hero {
 	padding: 15px 0;
 	text-align: center;
-	
-	background-color: #8ca1d1;
 }
 
 @media (max-width: 600px) {
