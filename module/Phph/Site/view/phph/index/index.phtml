@@ -14,7 +14,7 @@ $this->headTitle('Welcome!');
 
         <h1>Our meetups...</h1>
         <p>Our meetups take place on every <strong>2<sup>nd</sup> Wednesday of the month from 7pm at the <a href="http://www.oasisthevenue.com/">Oasis Conference Centre</a> in Portsmouth</strong>.</p>
-        <a href="<?php echo $this->url('meetups'); ?>">Check our Meetups page for how to register &raquo;</a>
+        <p><a href="<?php echo $this->url('meetups'); ?>">Check our Meetups page for how to register &raquo;</a></p>
 
     </section>
 
@@ -35,9 +35,7 @@ $this->headTitle('Welcome!');
 </div>
 
 <div class="wrapper">
-<div class="announcement">
-    <p>We are looking for speakers for our monthly meetups! To volunteer, please <a href="mailto:speak@phphants.co.uk">email us</a>.</p>
-</div>
+    <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups! To volunteer, <strong>please email us</strong>.</a>
 </div>
 
 </div>

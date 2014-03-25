@@ -290,7 +290,19 @@ header .nav-button{
 	padding: .5em 0;
 }
 
+.content p a {
+	text-decoration: none;
+
+	border-bottom: 1px solid;
+}
+
+.content p a:hover{ border-color: transparent; }
+
+.content p strong { font-weight: 700; }
+.content p strong a { color: inherit; }
+
 .announcement {
+	display: block;
 	position: relative;
 	padding: .5em;
 	width: 50%;
@@ -299,10 +311,15 @@ header .nav-button{
 	font-size: 1.15em;
 	color: #555;
 	text-align: center;
+	text-decoration: none;
 	
 	background: rgba(0,0,0,.15);
 	border-radius: 10px;
 	border-bottom-left-radius: 0;
+}
+
+.announcement:hover {
+	opacity: .9;
 }
 
 .announcement::before {
