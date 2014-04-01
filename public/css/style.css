@@ -351,10 +351,23 @@ header .nav-button{
 	}
 }
 
-.talk-abstract {
-	font-size: 80%;
-	margin: 10px 10px;
+.meetup-details li {
+	padding: .25em 0;
+}
+
+.talks {
+	padding: 0 1em;
+	list-style: none;
+}
+
+p.talk-abstract {
+	margin: .75em;
+	padding: 0 1em;
+
 	font-style: italic;
+	font-size: .9em;
+	
+	border-left: 2px solid #ccc;
 }
 
 footer {

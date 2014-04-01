@@ -29,9 +29,9 @@ class RenderMeetup extends AbstractHelper
             }
         }
 
-        $str = "<h3>{$date}</h3>";
+        $str = "<h2>{$date}</h2>";
 
-        $str .= "<ul>";
+        $str .= "<ul class='meetup-details'>";
 
         if (isset($to_time)) {
             $str .= "<li><strong>Time:</strong> {$from_time} - {$to_time}</li>";
@@ -51,7 +51,7 @@ class RenderMeetup extends AbstractHelper
             $str .= "<li><strong>Topic of the Month:</strong> {$topic}</li>";
         }
 
-        $str .= "<li><strong>Talks:</strong><ul>\n{$talking_points_html}</ul></li>";
+        $str .= "<li><strong>Talks:</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
 
         if (count($meetup->getSchedule()) > 0) {
             $str .= "<li><strong>Schedule:</strong><ul>\n";
