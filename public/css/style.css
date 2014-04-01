@@ -331,6 +331,11 @@ header .nav-button{
 .content p strong { font-weight: 700; }
 .content p strong a { color: inherit; }
 
+.paypal-donate{
+	width: 50%;
+	margin: 10px auto 0;
+}
+
 .announcement {
 	display: block;
 	position: relative;
