@@ -328,11 +328,17 @@ header .nav-button{
 	margin: 20px auto;
 	
 	font-size: 1.15em;
-	color: #555;
+	color: #3F3F3F;
 	text-align: center;
 	text-decoration: none;
 	
-	background: rgba(0,0,0,.15);
+	background: #B3B3B3;
+	background-image: -webkit-linear-gradient(top, #CFCFCF, #B3B3B3);
+	background-image:    -moz-linear-gradient(top, #CFCFCF, #B3B3B3);
+	background-image:     -ms-linear-gradient(top, #CFCFCF, #B3B3B3);
+	background-image:      -o-linear-gradient(top, #CFCFCF, #B3B3B3);
+	background-image:         linear-gradient(to bottom, #CFCFCF, #B3B3B3);
+
 	border-radius: 10px;
 	border-bottom-left-radius: 0;
 }
@@ -348,7 +354,7 @@ header .nav-button{
 	bottom: 0;
 	display: block;
 
-	border: 10px solid rgba(0,0,0,.15);
+	border: 10px solid #B3B3B3;
 	border-top-color: transparent;
 	border-left-color: transparent;
 }
