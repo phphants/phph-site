@@ -404,7 +404,6 @@ footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 200px;
 	padding: 1em;
 
 	background-color: #2E2E2E;
@@ -429,7 +428,7 @@ footer .details a:hover {
 
 footer .links{
 	width: 60%;
-	margin: 0 auto 50px;
+	margin: 0 auto 1em;
 	overflow: hidden;
 }
 
@@ -454,7 +453,7 @@ footer .links li {
 
 footer .links li a {
 	display: block;
-	padding: 1em .25em;
+	padding: .25em;
 
 	color: inherit;
 	text-decoration: none;
