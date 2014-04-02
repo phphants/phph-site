@@ -16,6 +16,11 @@
 
 		$('.nav-button').click(function(){
 			$('nav').toggleClass('nav--shown');
+			if($('nav').hasClass('nav--shown')){
+				$('.nav-button').text('Close');
+			}else{
+				$('.nav-button').text('Menu');
+			}
 		});
 
 	});
