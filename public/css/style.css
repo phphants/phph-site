@@ -199,7 +199,7 @@ header .nav-button{
 }
 
 .hero p {
-	width: 80%;
+	width: 85%;
 	margin: 0 auto;
 	padding: 1em;
 	line-height: 1.25;
@@ -223,12 +223,12 @@ header .nav-button{
 	text-decoration: none;
 	color: #fff;
 	
-	background-color: #ec7748;
-	background-image: -webkit-linear-gradient(top, #ec7748, #C45428);
-	background-image:    -moz-linear-gradient(top, #ec7748, #C45428);
-	background-image:     -ms-linear-gradient(top, #ec7748, #C45428);
-	background-image:      -o-linear-gradient(top, #ec7748, #C45428);
-	background-image:         linear-gradient(to bottom, #ec7748, #C45428);
+	background-color: #EC6A36;
+	background-image: -webkit-linear-gradient(top, #ec7748, #EC6A36);
+	background-image:    -moz-linear-gradient(top, #ec7748, #EC6A36);
+	background-image:     -ms-linear-gradient(top, #ec7748, #EC6A36);
+	background-image:      -o-linear-gradient(top, #ec7748, #EC6A36);
+	background-image:         linear-gradient(to bottom, #ec7748, #EC6A36);
 
 	border-radius: 5px;
 	box-shadow: 0 3px 0 rgba(0,0,0,.15);
