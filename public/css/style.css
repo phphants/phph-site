@@ -378,6 +378,10 @@ p.talk-abstract {
 	border-left: 2px solid #ccc;
 }
 
+.content .contact-links li{
+	list-style-position: inside;
+}
+
 footer {
 	position: absolute;
 	bottom: 0;
