@@ -1,15 +1,30 @@
 <footer>
-	<div class="fixed-width">
-		<p>&copy; <?php echo date('Y'); ?> PHP Hampshire. All website source code available under <a href="http://opensource.org/licenses/MIT">MIT license</a> from <a href="https://github.com/phphants/phph-site">PHPH Github</a>.</p>
-		<nav><ul>
+	<div class="wrapper">
+		<ul class="links">
 			<li><a href="https://github.com/phphants">GitHub</a></li>
 			<li><a href="https://plus.google.com/100929948456763294967">Google+</a></li>
 			<li><a href="https://twitter.com/phphants">Twitter</a></li>
 			<li><a href="https://facebook.com/pughants">Facebook</a></li>
-		</ul></nav>
+		</ul>
+		<p class="details">&copy; <?php echo date('Y'); ?> PHP Hampshire. All website source code available under <a href="http://opensource.org/licenses/MIT">MIT license</a> from <a href="https://github.com/phphants/phph-site">PHPH Github</a>.</p>
 	</div>
 </footer>
 
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+
+		$('.nav-button').click(function(){
+			$('nav').toggleClass('nav--shown');
+			if($('nav').hasClass('nav--shown')){
+				$('.nav-button').text('Close');
+			}else{
+				$('.nav-button').text('Menu');
+			}
+		});
+
+	});
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
