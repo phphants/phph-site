@@ -4,7 +4,7 @@ namespace Phph\SiteTest\Controller;
 
 use Phph\SiteTest\Bootstrap;
 use Zend\Mvc\Router\Http\TreeRouteStack as HttpRouter;
-use Application\Controller\IndexController;
+use Phph\Site\Controller\IndexController;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;
