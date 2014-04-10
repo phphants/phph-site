@@ -54,6 +54,6 @@ class VideosController extends AbstractActionController
 
     public function indexAction()
     {
-        return ['videos' => $this->videos];
+        return array('videos' => $this->videos);
     }
 }
