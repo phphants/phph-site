@@ -7,6 +7,7 @@ return array(
             'Phph\Site\Controller\JoinUsController' => 'Phph\Site\Controller\JoinUsController',
             'Phph\Site\Controller\ContactController' => 'Phph\Site\Controller\ContactController',
             'Phph\Site\Controller\SponsorsController' => 'Phph\Site\Controller\SponsorsController',
+            'Phph\Site\Controller\VideosController' => 'Phph\Site\Controller\VideosController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -80,6 +81,16 @@ return array(
                     ),
                 ),
             ),
+            'videos' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/videos',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\VideosController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'navigation' => array(
@@ -91,6 +102,10 @@ return array(
             'meetups' => array(
                 'label' => 'Meetups',
                 'route' => 'meetups',
+            ),
+            'videos' => array(
+                'label' => 'Videos',
+                'route' => 'videos',
             ),
             'sponsors' => array(
                 'label' => 'Sponsors',

@@ -1,0 +1,19 @@
+<?php
+$title = "Videos";
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+    <ul id="videos">
+    <?php foreach ($videos as $video): ?>
+        <li>
+            <h3 class="title"><?php echo $video['title']; ?></h3>
+            <h4 class="speaker"><span class="unbold">by</span> <?php echo $video['speaker']; ?> <span class="unbold">on</span> <?php echo $video['date']; ?></h4>
+            <iframe width="640" height="360" src="//www.youtube-nocookie.com/embed/<?php echo $video['code']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>
