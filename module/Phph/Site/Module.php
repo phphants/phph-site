@@ -12,7 +12,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/', __NAMESPACE__) . '/',
+                    __NAMESPACE__ => __DIR__ . '/src/',
                 ),
             ),
         );
