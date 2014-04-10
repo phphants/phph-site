@@ -457,3 +457,21 @@ footer .links li a {
 footer .links li a:hover {
 	color: #EC7748;
 }
+
+ul#videos li {
+	width: 640px;
+	display: block;
+	border-bottom: 3px solid #223e80;
+	padding-bottom: 20px;
+	margin: 20px auto;
+}
+ul#videos li span.unbold {
+	font-weight: normal;
+}
+ul#videos li .title {
+	color: #ec7748;
+	font-size: 22px;
+}
+ul#videos li .speaker {
+	padding-bottom: 15px;
+}
