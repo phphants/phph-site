@@ -9,6 +9,18 @@ class VideosController extends AbstractActionController
 {
     protected $videos = array(
         array(
+            'code' => 'j2zosvPs1UI',
+            'title' => 'Enabling Agile through enabling BDD in PHP projects ',
+            'speaker' => 'Konstantin Kudryashov',
+            'date' => '9th April 2014',
+        ),
+        array(
+            'code' => 'sY_cKzwyC5k',
+            'title' => 'What RabbitMQ Can Do For You',
+            'speaker' => 'James Titcumb',
+            'date' => '9th April 2014',
+        ),
+        array(
             'code' => '4t5EKEZz724',
             'title' => 'Functional PHP',
             'speaker' => 'Simon Holywell',
