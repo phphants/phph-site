@@ -475,3 +475,12 @@ ul#videos li .title {
 ul#videos li .speaker {
 	padding-bottom: 15px;
 }
+ul#videos .video {
+	height: 360px;
+	width: 100%;
+}
+@media (max-width: 700px) {
+	ul#videos li {
+		width: auto;
+	}
+}
