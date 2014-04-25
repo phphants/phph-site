@@ -8,6 +8,7 @@ return array(
             'Phph\Site\Controller\ContactController' => 'Phph\Site\Controller\ContactController',
             'Phph\Site\Controller\SponsorsController' => 'Phph\Site\Controller\SponsorsController',
             'Phph\Site\Controller\VideosController' => 'Phph\Site\Controller\VideosController',
+            'Phph\Site\Controller\CodeOfConductController' => 'Phph\Site\Controller\CodeOfConductController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -87,6 +88,16 @@ return array(
                     'route' => '/videos',
                     'defaults' => array(
                         'controller' => 'Phph\Site\Controller\VideosController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
+            'codeofconduct' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/code-of-conduct',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\CodeOfConductController',
                         'action'  => 'index',
                     ),
                 ),
