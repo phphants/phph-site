@@ -32,7 +32,7 @@ $meetup->setId(0)
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
         new TalkEntity('Michael Heap', 'mheap', 'Bring Your Application Into 2014', $abstract),
-        'Lightning talk - tbc',
+        new TalkEntity('Gareth Evans', 'garoevans', 'How I use PHPStorm day-to-day', 'Lightning talk from Gareth on PHP Storm'),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
