@@ -21,7 +21,7 @@ $meetup = new MeetupEntity();
 $abstract = <<<END
 After spending time helping PHP Women by manning stands and uncon rooms, Jenny Wong has spent a lot of conference socials being asked questions about PHP Women by individuals. Lets save Wong’s vocal chords and ask her in a group setting instead. Discussion is expected and welcomed.
 
-If you would like to ask a question in advance (you can ask anonymously too), please complete <a href="https://docs.google.com/forms/d/1CVW7WqcLECuSJ18Wdre0HSNPwqIaeR9K77bfRUKXtb0/viewform?usp=send_form">this form</a>.
+<br /><br/>If you would like to ask a question in advance (you can ask anonymously too), please complete <a href="https://docs.google.com/forms/d/1CVW7WqcLECuSJ18Wdre0HSNPwqIaeR9K77bfRUKXtb0/viewform?usp=send_form">this form</a>.
 END;
 
 $meetup->setId(0)
