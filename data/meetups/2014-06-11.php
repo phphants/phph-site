@@ -19,9 +19,10 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-After spending time helping PHP Women by manning stands and uncon rooms, Jenny Wong has spent a lot of conference socials being asked questions about PHP Women by individuals. Lets save Wong’s vocal chords and ask her in a group setting instead. Discussion is expected and welcomed.
-
-<br /><br/>If you would like to ask a question in advance (you can ask anonymously too), please complete <a href="https://docs.google.com/forms/d/1CVW7WqcLECuSJ18Wdre0HSNPwqIaeR9K77bfRUKXtb0/viewform?usp=send_form">this form</a>.
+Many people have preconceptions of PHP Women. They wonder what the point of the group is, or believe that PHP Women is a feminist tech group of sorts.<br /><br />
+Jenny has spent time manning numerous conference stands, running uncon rooms and spending conference socials explaining to individuals what PHP Women is about and why it is important such a group exists.<br /><br />
+At PHPNE14 Jenny decided to give a talk entitled: PHP Women - Ask Me Anything. There she shared her skepticism, experiences & take on how PHP Women is empowering people to get more involved within the tech community. Following an invitation from PHP Hampshire, Jenny will be travelling down to share and discuss her thoughts on the matter.<br /><br />
+Questions and discussions are welcomed and much appreciated. If you would like to ask a question in advance (you can ask anonymously), please complete <a href="https://docs.google.com/forms/d/1CVW7WqcLECuSJ18Wdre0HSNPwqIaeR9K77bfRUKXtb0/viewform?usp=send_form">this form</a>.<br /><br />
 END;
 
 $meetup->setId(0)
@@ -31,7 +32,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        new TalkEntity('Jenny Wong', 'miss_jwo', 'PHP Women - Ask Me Anything', $abstract),
+        new TalkEntity('Jenny Wong', 'miss_jwo', 'Inclusivity and the PHP Community', $abstract),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
