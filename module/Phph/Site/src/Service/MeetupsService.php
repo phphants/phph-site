@@ -83,7 +83,7 @@ class MeetupsService extends AbstractActionController
         
         asort($future_meetups);
 
-        return [reset($future_meetups)];
+        return array(reset($future_meetups));
     }
 
     /**
