@@ -77,9 +77,11 @@ class MeetupsService extends AbstractActionController
             $date = new \DateTime(str_replace(".php", "", $meetup));
             $diff = $date->diff($now);
             if ($diff->invert || $diff->days == 0) {
-                $future_meetups[] = $this->getMeetup($meetup);
+                $future_meetups[$date->format('Ymd')] = $this->getMeetup($meetup);
             }
         }
+        
+        asort($future_meetups);
 
         return $future_meetups;
     }
