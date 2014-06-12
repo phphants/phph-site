@@ -7,16 +7,16 @@
     "packages": [
         {
             "name": "sabre/vobject",
-            "version": "3.2.0",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-vobject.git",
-                "reference": "dd1dd19b6601cdc99408b70ec260052825f70b8f"
+                "reference": "5dc71fbb70200398d2e280437665260d40820a62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/dd1dd19b6601cdc99408b70ec260052825f70b8f",
-                "reference": "dd1dd19b6601cdc99408b70ec260052825f70b8f",
+                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/5dc71fbb70200398d2e280437665260d40820a62",
+                "reference": "5dc71fbb70200398d2e280437665260d40820a62",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 }
             ],
             "description": "The VObject library for PHP allows you to easily parse and manipulate iCalendar and vCard objects",
-            "homepage": "https://github.com/fruux/sabre-vobject",
+            "homepage": "http://sabre.io/vobject/",
             "keywords": [
                 "VObject",
                 "iCalendar",
@@ -62,7 +62,7 @@
                 "jCard",
                 "vCard"
             ],
-            "time": "2014-04-02 23:53:27"
+            "time": "2014-06-12 16:56:34"
         },
         {
             "name": "zendframework/zendframework",
