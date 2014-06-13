@@ -3,7 +3,7 @@ phph-site
 
 Website for www.phphants.co.uk.
 
-For more information, vist us at [PHP Hampshire](http://phphants.co.uk).
+For more information, visit us at [PHP Hampshire](http://phphants.co.uk).
 
 [![Build Status](https://secure.travis-ci.org/phphants/phph-site.png?branch=master)](https://travis-ci.org/phphants/phph-site)
 
