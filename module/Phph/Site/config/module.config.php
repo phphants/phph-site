@@ -4,7 +4,6 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Phph\Site\Controller\IndexController' => 'Phph\Site\Controller\IndexController',
-            'Phph\Site\Controller\JoinUsController' => 'Phph\Site\Controller\JoinUsController',
             'Phph\Site\Controller\ContactController' => 'Phph\Site\Controller\ContactController',
             'Phph\Site\Controller\SponsorsController' => 'Phph\Site\Controller\SponsorsController',
             'Phph\Site\Controller\VideosController' => 'Phph\Site\Controller\VideosController',
@@ -50,16 +49,6 @@ return array(
                     'defaults' => array(
                         'controller' => 'Phph\Site\Controller\MeetupsController',
                         'action'  => 'ical',
-                    ),
-                ),
-            ),
-            'join' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/join',
-                    'defaults' => array(
-                        'controller' => 'Phph\Site\Controller\JoinUsController',
-                        'action'  => 'index',
                     ),
                 ),
             ),
