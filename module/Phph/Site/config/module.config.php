@@ -143,10 +143,6 @@ return array(
                 'label' => 'Sponsors',
                 'route' => 'sponsors',
             ),
-            'join' => array(
-                'label' => 'Join Us',
-                'route' => 'join',
-            ),
             'contact' => array(
                 'label' => 'Contact',
                 'route' => 'contact',
