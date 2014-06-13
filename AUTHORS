@@ -1,6 +1,7 @@
 James Titcumb <james@asgrim.com>
 Lee Boynton <lee@lboynton.com>
 Richard Holloway <richard@richardjh.org>
+Zac Colley <hi@zaccolley.com>
 
 UPDATE THE AUTHORS
 git log --all --format='%aN <%aE>' | sort -u
