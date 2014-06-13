@@ -9,6 +9,7 @@ return array(
             'Phph\Site\Controller\SponsorsController' => 'Phph\Site\Controller\SponsorsController',
             'Phph\Site\Controller\VideosController' => 'Phph\Site\Controller\VideosController',
             'Phph\Site\Controller\CodeOfConductController' => 'Phph\Site\Controller\CodeOfConductController',
+            'Phph\Site\Controller\ChatController' => 'Phph\Site\Controller\ChatController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -99,6 +100,26 @@ return array(
                     'defaults' => array(
                         'controller' => 'Phph\Site\Controller\CodeOfConductController',
                         'action'  => 'index',
+                    ),
+                ),
+            ),
+            'chat' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/chat',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\ChatController',
+                        'action'  => 'index',
+                    ),
+                ),
+            ),
+            'chat-help' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/chat/help',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\ChatController',
+                        'action'  => 'help',
                     ),
                 ),
             ),
