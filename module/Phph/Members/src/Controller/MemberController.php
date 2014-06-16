@@ -40,23 +40,26 @@ class MemberController extends AbstractActionController
 
     public function registerAction()
     {
-        $postData = array(
-            'name' => 'Richard Holloway',
-            'twitter' => 'richardjh_org',
-            'email' => 'richard@webok.co.uk',
-            'website' => 'http://richardjh.org',
-        );
+        if($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost();
+            $this->memberService->addMember($postData);
 
-        $this->memberService->addMember($postData);
+            return $this->redirect('member-pending');
+        }
+
+        return new ViewModel;
+    }
+
+    public function verifyAction()
+    {
+        $key = $this->getEvent()->getRouteMatch()->getParam('key');
+        $this->memberService->verifyMember($key);
 
         return new ViewModel();
     }
 
-    public function confirmAction()
+    public function pendingAction()
     {
-        $key = $this->getEvent()->getParam('key');
-        $this->memberService->confirmMember($key);
-
-        return new ViewModel();
+        return new ViewModel;
     }
 }

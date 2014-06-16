@@ -35,12 +35,13 @@ class MemberService
 
         if (!file_exists($filePath)) {
 
-            throw new Exception($filePath . ' does not exist');
+            return array();
         }
         $json = file_get_contents($filePath);
         $memberData = json_decode($json);
 
         if(!is_array($memberData)) {
+
             return array();
         }
 
@@ -102,10 +103,11 @@ class MemberService
         list($firstName, $lastName) = explode(' ', $member['name']);
 
         $url = 'http://localhost:8000';//@todo
-        $path = '/members/confirm/';//@todo
+        $path = '/members/verify/';//@todo
 
         $to = $member['email'];
         $subject = 'Verify registration to PHP Hampshire';
+
         $message = '';
         $message .= 'Hi ' . $firstName . PHP_EOL;
         $message .= PHP_EOL;
@@ -114,14 +116,16 @@ class MemberService
         $message .= PHP_EOL;
         $message .= $url . $path . $member['key'] . PHP_EOL;
         $message .= PHP_EOL;
-        $headers = 'From: info@phphants.co.uk' . "\r\n" .
-            'Reply-To: info@phphants.co.uk' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+
+        $headers = '';
+        $headers .= 'From: info@phphants.co.uk' . "\r\n";
+        $headers .= 'Reply-To: info@phphants.co.uk' . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
     }
 
-    public function confirmMember($key)
+    public function verifyMember($key)
     {
         $memberList = $this->getMemberList(true);
         $members = array();

@@ -7,4 +7,17 @@ $this->headTitle($title);
 
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
+
+    <p>You do not need to register here to be a part of PHP Hampshire. This just allows us to see how many people consider themselves to be a part of the PHP community in Hampshire. We hope that in doing so, it will encourage others to get involved.</p>
+
+    <p>You can show your support for PHP Hampshire by registering below.</p>
+
+    <form method="post" action="<?php echo $this->url('member-register');?>" >
+        <input id="name" name="name" placeholder="Your full name" /><br>
+        <input id="twitter" name="twitter" placeholder="Your twitter handle" /><br>
+        <input id="email" name="email" placeholder="Your email address" /><br>
+        <input id="website" name="website" placeholder="Your website or blog" /><br>
+        <br>
+        <input type="submit" id="submit" name="submit" value="Register" /><br>
+    </form>
 </div>

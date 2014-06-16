@@ -8,6 +8,7 @@ $this->headTitle($title);
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
 
+    <p><a href="<?php echo $this->url('member-register');?>" >Register</a></p>
     <ul class="members" >
     <?php foreach($members as $member):?>
         <li class="member">

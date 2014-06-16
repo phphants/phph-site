@@ -33,13 +33,23 @@ return array(
                     ),
                 ),
             ),
-            'member-confirm' => array(
+            'member-verify' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/members/confirm/:key',
+                    'route' => '/members/verify/:key',
                     'defaults' => array(
                         'controller' => 'Phph\Members\Controller\MemberController',
-                        'action'  => 'confirm',
+                        'action'  => 'verify',
+                    ),
+                ),
+            ),
+            'member-pending' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/members/pending',
+                    'defaults' => array(
+                        'controller' => 'Phph\Members\Controller\MemberController',
+                        'action'  => 'pending',
                     ),
                 ),
             ),
