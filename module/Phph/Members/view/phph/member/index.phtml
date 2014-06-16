@@ -1,6 +1,9 @@
 <?php
 $title = "Members";
 $this->headTitle($title);
+
+echo $this->headLink()->appendStylesheet($this->basePath() . '/css/members.css');
+
 ?>
 
 </div><!-- end of gradient-wrapper -->
@@ -8,7 +11,7 @@ $this->headTitle($title);
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
 
-    <p><a href="<?php echo $this->url('member-register');?>" >Register</a></p>
+    <p>Everyone is welcome to join PHP Hampshire, so please show your support and <a href="<?php echo $this->url('member-register');?>" >register here</a>.</p>
     <ul class="members" >
     <?php foreach($members as $member):?>
         <li class="member">

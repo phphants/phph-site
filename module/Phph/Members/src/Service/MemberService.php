@@ -2,8 +2,9 @@
 
 namespace Phph\Members\Service;
 
-use Exception;
+use Zend\Filter\StripTags;
 use Zend\Stdlib\Parameters;
+use Zend\Validator\EmailAddress;
 
 class MemberService
 {
@@ -25,7 +26,9 @@ class MemberService
     }
 
     /**
-     * Get a list of members
+     * Get a list of live members, or all members if $showAll is true
+     *
+     * @param bool $showAll
      *
      * @return array
      */
@@ -73,14 +76,19 @@ class MemberService
      */
     public function addMember($postData)
     {
-        if (!isset($postData['email'])) {
+        $emailValidator = new EmailAddress();
+        $stripTags = new StripTags();
+
+
+        if (!isset($postData['email']) or !$emailValidator->isValid($postData['email'])) {
+
             return false;
         }
         $member = array();
-        $member['name'] = isset($postData['name'])?$postData['name']:'';
-        $member['twitter'] = isset($postData['twitter'])?$postData['twitter']:'';
+        $member['name'] = isset($postData['name'])?$stripTags->filter($postData['name']):'';
+        $member['twitter'] = isset($postData['twitter'])?$stripTags->filter($postData['twitter']):'';
         $member['email'] = $postData['email'];
-        $member['website'] = isset($postData['website'])?$postData['website']:'';
+        $member['website'] = isset($postData['website'])?$stripTags->filter($postData['website']):'';
         $member['live'] = false;
         $member['key'] = mt_rand();
 
@@ -93,17 +101,25 @@ class MemberService
         {
             return false;
         }
-        $this->sendConfirmation($member);
 
-        return true;
+        return $this->sendConfirmation($member);
     }
 
+    /**
+     * Send email confirmation with verification link
+     *
+     * @param array $member
+     * @return bool
+     */
     private function sendConfirmation($member)
     {
-        list($firstName, $lastName) = explode(' ', $member['name']);
+        if (!isset($member['email'])) {
 
-        $url = 'http://localhost:8000';//@todo
-        $path = '/members/verify/';//@todo
+            return false;
+        }
+        $nameParts = explode(' ', $member['name']);
+        $firstName = $nameParts[0];
+        $verifyLink = $_SERVER['HTTP_HOST'] . '/members/verify/';
 
         $to = $member['email'];
         $subject = 'Verify registration to PHP Hampshire';
@@ -114,7 +130,7 @@ class MemberService
         $message .= 'Someone tried to register as a member to PHP Hampshire using this email address. ' . PHP_EOL;
         $message .= 'If this was you please click the following link to confirm your registration.' . PHP_EOL;
         $message .= PHP_EOL;
-        $message .= $url . $path . $member['key'] . PHP_EOL;
+        $message .= $verifyLink . $member['key'] . PHP_EOL;
         $message .= PHP_EOL;
 
         $headers = '';
@@ -122,22 +138,33 @@ class MemberService
         $headers .= 'Reply-To: info@phphants.co.uk' . "\r\n";
         $headers .= 'X-Mailer: PHP/' . phpversion();
 
-        mail($to, $subject, $message, $headers);
+        return mail($to, $subject, $message, $headers);
     }
 
+    /**
+     * Update the status of a member with matching key, to live.
+     * Return true if the key matches a record.
+     *
+     * @param string $key
+     * @return bool
+     */
     public function verifyMember($key)
     {
         $memberList = $this->getMemberList(true);
         $members = array();
+        $hit = false;
 
         foreach ($memberList as $member)
         {
             if ($key == $member['key']) {
                 $member['live'] = true;
+                $hit = true;
             }
             $members[] = $member;
         }
         $json = json_encode($members);
         file_put_contents($this->membersDataPath, $json);
+
+        return $hit;
     }
 }

@@ -43,6 +43,16 @@ return array(
                     ),
                 ),
             ),
+            'member-verify-fail' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/members/verify/fail',
+                    'defaults' => array(
+                        'controller' => 'Phph\Members\Controller\MemberController',
+                        'action'  => 'verifyFail',
+                    ),
+                ),
+            ),
             'member-pending' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(

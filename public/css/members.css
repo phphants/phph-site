@@ -1,0 +1,21 @@
+.avatar {
+    float: right;
+}
+
+ul li   {
+    display: inline-block;
+}
+
+.member {
+    width: 300px;
+    float: left;
+    padding: 15px;
+    margin: 10px;
+    background-color: #f5f5f5;
+}
+
+.member-text {
+    width: 180px;
+    overflow:hidden;
+    white-space:nowrap;
+}

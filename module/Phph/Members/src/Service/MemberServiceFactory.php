@@ -19,6 +19,7 @@ class MemberServiceFactory implements FactoryInterface
             throw new Exception('Members data path config not found');
         }
         $membersDataPath = $config['phph-site']['membersDataPath'];
+
         $memberService = new MemberService;
         $memberService->setMembersDataPath($membersDataPath);
 
