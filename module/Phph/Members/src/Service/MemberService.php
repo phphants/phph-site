@@ -119,7 +119,7 @@ class MemberService
         }
         $nameParts = explode(' ', $member['name']);
         $firstName = $nameParts[0];
-        $verifyLink = $_SERVER['HTTP_HOST'] . '/members/verify/';
+        $verifyLink = 'http://' . $_SERVER['HTTP_HOST'] . '/members/verify/';
 
         $to = $member['email'];
         $subject = 'Verify registration to PHP Hampshire';
