@@ -3,6 +3,7 @@
 namespace Phph\Members\Controller;
 
 use Phph\Members\Service\MemberService;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Validator\EmailAddress;
 use Zend\View\Model\ViewModel;
@@ -28,6 +29,11 @@ class MemberController extends AbstractActionController
         return $this;
     }
 
+    /**
+     * Display index page
+     *
+     * @return ViewModel
+     */
     public function indexAction()
     {
         $members = $this->memberService->getMemberList();
@@ -39,6 +45,11 @@ class MemberController extends AbstractActionController
         );
     }
 
+    /**
+     * Register a member
+     *
+     * @return Response|ViewModel
+     */
     public function registerAction()
     {
         if($this->getRequest()->isPost()) {
@@ -75,6 +86,11 @@ class MemberController extends AbstractActionController
         return new ViewModel;
     }
 
+    /**
+     * Verify the registration link
+     *
+     * @return Response|ViewModel
+     */
     public function verifyAction()
     {
         $key = $this->getEvent()->getRouteMatch()->getParam('key');
@@ -86,11 +102,21 @@ class MemberController extends AbstractActionController
         return new ViewModel();
     }
 
+    /**
+     * Display verification failure page
+     *
+     * @return ViewModel
+     */
     public function verifyFailAction()
     {
         return new ViewModel;
     }
 
+    /**
+     * Display registration pending page
+     *
+     * @return ViewModel
+     */
     public function pendingAction()
     {
         return new ViewModel;

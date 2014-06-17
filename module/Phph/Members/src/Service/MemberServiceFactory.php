@@ -2,11 +2,20 @@
 
 namespace Phph\Members\Service;
 
+use Exception;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class MemberServiceFactory implements FactoryInterface
 {
+    /**
+     * Build the MemberService
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return MemberService
+     * @throws Exception
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('config');

@@ -9,7 +9,7 @@ use Zend\Validator\EmailAddress;
 class MemberService
 {
     /**
-     * @var string
+     * @var string $membersDataPath
      */
     protected $membersDataPath;
 
@@ -26,7 +26,7 @@ class MemberService
     }
 
     /**
-     * Get a list of live members, or all members if $showAll is true
+     * Get a list of live members, [or all members if $showAll is true]
      *
      * @param bool $showAll
      *

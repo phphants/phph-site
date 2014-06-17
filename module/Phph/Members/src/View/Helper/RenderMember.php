@@ -7,6 +7,13 @@ use Zend\View\Helper\Gravatar;
 
 class RenderMember extends AbstractHelper
 {
+    /**
+     * Build the member list entry
+     *
+     * @param array $member
+     *
+     * @return string
+     */
     public function __invoke(array $member)
     {
         $output = '';
