@@ -79,7 +79,6 @@ class MemberService
         $emailValidator = new EmailAddress();
         $stripTags = new StripTags();
 
-
         if (!isset($postData['email']) or !$emailValidator->isValid($postData['email'])) {
 
             return false;
@@ -97,8 +96,7 @@ class MemberService
 
         $json = json_encode($members);
 
-        if (!file_put_contents($this->membersDataPath, $json))
-        {
+        if (!file_put_contents($this->membersDataPath, $json)) {
             return false;
         }
 
