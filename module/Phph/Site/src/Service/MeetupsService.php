@@ -80,10 +80,14 @@ class MeetupsService extends AbstractActionController
                 $future_meetups[$date->format('Ymd')] = $this->getMeetup($meetup);
             }
         }
-        
+
         asort($future_meetups);
 
-        return array(reset($future_meetups));
+        if (count($future_meetups) > 0) {
+            return array(reset($future_meetups));
+        } else {
+            return array();
+        }
     }
 
     /**
