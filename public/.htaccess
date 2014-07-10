@@ -1,5 +1,6 @@
 Redirect 302 /subscribe http://eepurl.com/DaINX
 Redirect 302 /survey2013 https://docs.google.com/forms/d/1IgUNMaEa051iOyhobibYE9G_HsUMJCTKgHBgkFdxA7o/viewform
+Redirect 302 /free-zf2-book http://leanpub.com/using-zend-framework-2/c/DI$COUNT
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
