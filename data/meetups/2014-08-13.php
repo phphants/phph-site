@@ -23,8 +23,8 @@ Balancing technical debt and getting things done is one of the hardest problems 
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-08-06 19:00'))
-    ->setToDate(new DateTime('2014-08-06 23:00'))
+    ->setFromDate(new DateTime('2014-08-13 19:00'))
+    ->setToDate(new DateTime('2014-08-13 23:00'))
     ->setRegistrationUrl("http://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NH')
