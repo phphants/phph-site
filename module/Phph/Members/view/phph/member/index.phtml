@@ -1,0 +1,22 @@
+<?php
+$title = "Members";
+$this->headTitle($title);
+
+echo $this->headLink()->appendStylesheet($this->basePath() . '/css/members.css');
+
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <p>Everyone is welcome to join PHP Hampshire, so please show your support and <a href="<?php echo $this->url('member-register');?>" >register here</a>.</p>
+    <ul class="members" >
+    <?php foreach($members as $member):?>
+        <li class="member">
+            <?php echo $this->renderMember($member);?>
+        </li>
+    <?php endforeach;?>
+    </ul>
+</div>

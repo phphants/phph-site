@@ -1,0 +1,59 @@
+<?php
+$title = "Register";
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <p>
+        You do not need to register to be a part of PHP Hampshire.
+        However, registering helps demonstrate the size of the PHP community in Hampshire and encourages others to get involved.
+    </p>
+
+    <p>You can show your support for PHP Hampshire by registering here.</p>
+
+    <?php if (isset($errors['generalError'])):?>
+        <p class="error" ><?php echo $this->escapeHtml($errors['generalError']);?></p>
+    <?php endif;?>
+
+    <form method="post" action="<?php echo $this->url('member-register');?>" >
+        <table>
+            <tr>
+                <th><label for="name">Name</label>*</th>
+                <td><input id="name" name="name" placeholder="Joe Bloggs" /></td>
+            </tr>
+            <?php if (isset($errors['nameError'])):?>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td class="error" ><?php echo $this->escapeHtml($errors['nameError']);?></td>
+                </tr>
+            <?php endif;?>
+            <tr>
+                <th><label for="twitter">Twitter</label></th>
+                <td><input id="twitter" name="twitter" placeholder="@joebloggs" /></td>
+            </tr>
+            <tr>
+                <th><label for="email">Email</label>*</th>
+                <td><input id="email" name="email" placeholder="joe.bloggs@example.com" /></td>
+            </tr>
+            <?php if (isset($errors['emailError'])):?>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td class="error" ><?php echo $this->escapeHtml($errors['emailError']);?></td>
+                </tr>
+            <?php endif;?>
+            <tr>
+                <th><label for="website">Website</label></th>
+                <td><input id="website" name="website" placeholder="http://joebloggs.org" /></td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td><input type="submit" id="submit" name="submit" value="Register" /></td>
+            </tr>
+        </table>
+        <p>* Your name and email address are required for registration.</p>
+    </form>
+</div>

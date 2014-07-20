@@ -9,6 +9,7 @@
     "homepage": "http://www.phphants.co.uk/",
     "require": {
         "php": ">= 5.3.3",
+        "ext-json": "*",
         "zendframework/zendframework": "2.*",
         "sabre/vobject": "3.*"
     }
