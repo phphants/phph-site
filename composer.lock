@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "45fe27965717370d841235f8536f25d9",
+    "hash": "46d187b7bb9804bd5520e363d7e843e9",
     "packages": [
         {
             "name": "sabre/vobject",
-            "version": "3.2.3",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-vobject.git",
-                "reference": "5dc71fbb70200398d2e280437665260d40820a62"
+                "reference": "9581f4baf6ce01fb6ca58574cf0597144a878089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/5dc71fbb70200398d2e280437665260d40820a62",
-                "reference": "5dc71fbb70200398d2e280437665260d40820a62",
+                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/9581f4baf6ce01fb6ca58574cf0597144a878089",
+                "reference": "9581f4baf6ce01fb6ca58574cf0597144a878089",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,8 @@
                 "php": ">=5.3.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "*"
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "*"
             },
             "bin": [
                 "bin/vobject",
@@ -38,8 +39,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Sabre\\VObject": "lib/"
+                "psr-4": {
+                    "Sabre\\VObject\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -63,24 +64,24 @@
                 "jCard",
                 "vCard"
             ],
-            "time": "2014-06-12 16:56:34"
+            "time": "2014-08-07 17:47:13"
         },
         {
             "name": "zendframework/zendframework",
-            "version": "2.3.1",
+            "version": "2.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "055eac4314425c291f3ef0e104a6196a8fc24cd5"
+                "reference": "ffca3e3eefd7fbe0f316ed0224edff368949223d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/055eac4314425c291f3ef0e104a6196a8fc24cd5",
-                "reference": "055eac4314425c291f3ef0e104a6196a8fc24cd5",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/ffca3e3eefd7fbe0f316ed0224edff368949223d",
+                "reference": "ffca3e3eefd7fbe0f316ed0224edff368949223d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23",
+                "php": ">=5.3.3",
                 "zendframework/zendxml": "~1.0-dev"
             },
             "replace": {
@@ -141,16 +142,14 @@
                 "fabpot/php-cs-fixer": "*@dev",
                 "ircmaxell/random-lib": "dev-master",
                 "ircmaxell/security-lib": "dev-master",
-                "mikey179/vfsstream": "1.2.*",
-                "phpunit/phpunit": "3.7.*",
-                "satooshi/php-coveralls": "dev-master",
-                "sebastianbergmann/phpcov": "1.1.0"
+                "ocramius/proxy-manager": "0.4.*",
+                "phpunit/phpunit": "3.7.*"
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
                 "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
                 "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-                "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
+                "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
                 "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
                 "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
             },
@@ -162,8 +161,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev",
-                    "dev-develop": "2.4-dev"
+                    "dev-master": "2.2-dev",
+                    "dev-develop": "2.3-dev"
                 }
             },
             "autoload": {
@@ -181,7 +180,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2014-04-15 14:47:18"
+            "time": "2014-04-15 14:31:59"
         },
         {
             "name": "zendframework/zendxml",
@@ -229,20 +228,13 @@
             "time": "2014-03-05 22:25:44"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": [],
+    "prefer-stable": false,
     "platform": {
         "php": ">= 5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
