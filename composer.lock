@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "sabre/vobject",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruux/sabre-vobject.git",
-                "reference": "9581f4baf6ce01fb6ca58574cf0597144a878089"
+                "reference": "ab7eb33fa799ba10e791f5f728bd168e2eba3f61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/9581f4baf6ce01fb6ca58574cf0597144a878089",
-                "reference": "9581f4baf6ce01fb6ca58574cf0597144a878089",
+                "url": "https://api.github.com/repos/fruux/sabre-vobject/zipball/ab7eb33fa799ba10e791f5f728bd168e2eba3f61",
+                "reference": "ab7eb33fa799ba10e791f5f728bd168e2eba3f61",
                 "shasum": ""
             },
             "require": {
@@ -64,7 +64,7 @@
                 "jCard",
                 "vCard"
             ],
-            "time": "2014-08-07 17:47:13"
+            "time": "2014-08-18 19:30:06"
         },
         {
             "name": "zendframework/zendframework",
@@ -228,13 +228,21 @@
             "time": "2014-03-05 22:25:44"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": [
+
+    ],
     "prefer-stable": false,
     "platform": {
         "php": ">= 5.3.3"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }
