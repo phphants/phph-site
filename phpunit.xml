@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="module/Phph/Site/test/Bootstrap.php" backupGlobals="false">
+    <testsuites>
+        <testsuite name="phph-site">
+            <directory>./module/Phph/Site/test/Phph/SiteTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

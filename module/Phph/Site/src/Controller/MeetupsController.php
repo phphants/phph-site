@@ -2,10 +2,8 @@
 
 namespace Phph\Site\Controller;
 
-use Phph\Site\Service\MeetupsService;
-
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Phph\Site\Service\MeetupsService;
 use Sabre\VObject\Component\VCalendar;
 
 class MeetupsController extends AbstractActionController
@@ -29,15 +27,13 @@ class MeetupsController extends AbstractActionController
     /**
      * Meetups Index
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return array
      */
     public function indexAction()
     {
-        return new ViewModel(
-            array(
-                'future_meetups' => $this->meetupsService->getFutureMeetups(),
-            )
-        );
+        return [
+            'future_meetups' => $this->meetupsService->getFutureMeetups(),
+        ];
     }
 
     public function icalAction()
