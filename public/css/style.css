@@ -484,3 +484,15 @@ ul#videos .video {
 		width: auto;
 	}
 }
+
+ul#team li {
+	overflow: hidden; /* clearfix */
+	padding-bottom: 20px;
+	list-style-type: none;
+}
+ul#team li img {
+	width: 200px;
+	height: 200px;
+	float: left;
+	padding-right: 20px;
+}

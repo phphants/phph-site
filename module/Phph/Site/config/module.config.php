@@ -9,6 +9,7 @@ return array(
             'Phph\Site\Controller\VideosController' => 'Phph\Site\Controller\VideosController',
             'Phph\Site\Controller\CodeOfConductController' => 'Phph\Site\Controller\CodeOfConductController',
             'Phph\Site\Controller\ChatController' => 'Phph\Site\Controller\ChatController',
+            'Phph\Site\Controller\TeamController' => 'Phph\Site\Controller\TeamController',
         ),
         'factories' => array(
             'Phph\Site\Controller\MeetupsController' => 'Phph\Site\Controller\MeetupsControllerFactory',
@@ -109,6 +110,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'Phph\Site\Controller\ChatController',
                         'action'  => 'help',
+                    ),
+                ),
+            ),
+            'team' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/team',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\TeamController',
+                        'action'  => 'index',
                     ),
                 ),
             ),
