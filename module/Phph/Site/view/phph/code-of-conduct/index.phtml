@@ -4,16 +4,24 @@ $this->headTitle($title);
 ?>
 
 </div><!-- end of gradient-wrapper -->
-	
+
+<style>
+div.content ul li {
+	list-style-type: disc;
+	list-style-position: outside;
+	margin-left: 30px;
+}
+</style>
+
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
-    <p>PHP Hampshire is a community driven PHP User Group, run by volunteers. It is for anyone wishing to learn PHP and related technologies, share knowledge and promote the PHP community in Hampshire.</p>
-    <p>To achieve this, PHP Hampshire provide communication channels such as <a href="https://groups.google.com/group/phphants" >Google Groups</a>, <a href="https://github.com/phphants" >Github</a>, IRC channel (#phph on Freenode), <a href="https://twitter.com/phphants" >Twitter</a>, <a href="https://www.facebook.com/pughants">Facebook</a>, monthly meetups and social events.</p>
-    <p>Communication can be informal and chatty but should be appropriate for a professional audience.  These channels are open to everyone, regardless of education, experience, age, gender, sexual orientation, disability, physical appearance, race, or religion.</p>
-    <p><strong>No one is to be excluded nor made to feel they are excluded.</strong></p>
+    <p>All attendees, speakers, sponsors and volunteers at our meetings are required to agree with the following code
+    of conduct. Organisers will enforce this code throughout all events. We are expecting cooperation from all
+    participants to help ensuring a safe, inclusive environment for everybody.</p>
 
-    <h2>General Rules</h2>
-    <p>We expect you to:</p>
+    <p><strong><em>tl;dr: We operate a zero-tolerance policy on harassment. Don&#39;t be a jerk.</em></strong></p>
+
+    <p>Additionally, we expect you to:</p>
     <p>
         <ul>
             <li>Behave professionally.</li>
@@ -22,27 +30,46 @@ $this->headTitle($title);
             <li>Be respectful to others.</li>
         </ul>
     </p>
-    <p>And these zero-tolerance rules are absolutely hard and fast:</p>
-    <p>
-        <ul>
-            <li>Sexual language and imagery is not appropriate.</li>
-            <li>Sexist, racist or exclusionary jokes are not appropriate.</li>
-        </ul>
-    </p>
 
-    <h2>Complaints</h2>
+    <h2>Need Help?</h2>
     <p>You can contact the organisers at <a href="mailto:info@phphants.co.uk">info@phphants.co.uk</a>, send a direct message to <a href="https://twitter.com/phphants" >@phphants</a> on twitter or speak to an organiser, in person, at an event.</p>
-    <p>The current organisers are:
-        <ul>
-            <li>James Titcumb (<a href="https://twitter.com/asgrim" >@asgrim</a>)</li>
-            <li>Simon Wade (<a href="https://twitter.com/swade61" >@swade61</a>)</li>
-            <li>Richard Holloway (<a href="https://twitter.com/richardjh_org" >@richardjh_org</a>)</li>
-            <li>Lee Boynton (<a href="https://twitter.com/leeboynton" >@leeboynton</a>)</li>
-        </ul>
-    </p>
+    <p>The list of current organisers and how to contact them is available on the <a href="<?php echo $this->url('team'); ?>">team page</a>.</p>
     <p>If you have a complaint that involves an organiser, you can contact one of the others in confidence. The group is the priority and steps will be taken to ensure the group is successful.</p>
     <p>PHP Hampshire is part of a larger community of PHP User Groups, around the world. If you feel your complaint requires external arbitration, let one of the organisers know and we can discuss the issue with the organisers of those User Groups.</p>
 
-    <h2>Amendments</h2>
-    <p>PHP Hampshire is a community effort. If you have suggestions on ways it can improve, including changes to this code of conduct, please <a href="mailto:info@phphants.co.uk" >let us know</a>.</p>
+    <h2>The Quick Version</h2>
+    <p>Our user group is dedicated to providing a harassment-free experience for everyone, regardless of gender, age,
+    sexual orientation, disability, physical appearance, body size, race, or religion (or lack thereof).
+    We do not tolerate harassment of community participants in any form. Sexual language and imagery is not
+    appropriate for any venue, including talks, workshops, parties, Twitter and other online media.
+    Community members violating these rules may be sanctioned or expelled from the community at the discretion of the
+    organisers.</p>
+
+    <h2>The Less Quick Version</h2>
+    <p>Harassment includes offensive verbal comments related to gender, age, sexual orientation, disability, physical
+    appearance, body size, race, religion, sexual images in public spaces, deliberate intimidation, stalking, following,
+    harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact,
+    and unwelcome sexual attention.</p>
+    <p>Participants asked to stop any harassing behavior are expected to comply immediately.</p>
+    <p>Sponsors are also subject to the anti-harassment policy. In particular, sponsors should not use sexualised
+    images, activities, or other material. Booth staff (including volunteers) should not use sexualised
+    clothing/uniforms/costumes, or otherwise create a sexualised environment.</p>
+    <p>If a participant engages in harassing behavior, the organisers may take any action they deem
+    appropriate, including warning the offender or expulsion from the community with no refund.</p>
+    <p>If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact
+    an organiser immediately.</p>
+    <p>The organisers will be happy to help participants contact hotel/venue security or local law enforcement,
+    provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the any event.
+    We value your attendance.</p>
+    <p>We expect community participants to follow these rules at all times, including at meetups, conferences,
+    workshops, via our online communities (Twitter, Facebook, Googel Groups, GitHub, IRC, etc.) and any related socials.</p>
+
+    <div class="footer">
+        <p><small><em>
+        This Code of Conduct is based on the text available from <a href="http://confcodeofconduct.com">confcodeofconduct.com</a>, which we have modified to make appropriate for use in our user group.<br>
+        Original source and credit: <a href="http://2012.jsconf.us/#/about">http://2012.jsconf.us/#/about</a> &amp; <a href="http://geekfeminism.wikia.com/wiki/Conference_anti-harassment/Policy">The Ada Initiative</a><br>
+        Please help by translating or improving: <a href="https://github.com/leftlogic/confcodeofconduct.com">http://github.com/leftlogic/confcodeofconduct.com</a><br>
+        This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a></em></small>
+        </p>
+    </div>
 </div>
