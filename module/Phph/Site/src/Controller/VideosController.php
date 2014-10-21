@@ -8,8 +8,26 @@ class VideosController extends AbstractActionController
 {
     protected $videos = [
         [
+            'code' => 'Ch8hu0A0yB0',
+            'title' => "Don't code, bake. An introduction to CakePHP",
+            'speaker' => 'David Yell',
+            'date' => '8th October 2014',
+        ],
+        [
+            'code' => 'ChEJQdlVtLU',
+            'title' => 'Introducing the OWASP Top 10',
+            'speaker' => 'Gary Hockin',
+            'date' => '10th September 2014',
+        ],
+        [
+            'code' => 'Wwg8lT2pxU0',
+            'title' => 'Bring Your Application Into 2014',
+            'speaker' => 'Michael Heap',
+            'date' => '14th May 2014',
+        ],
+        [
             'code' => 'j2zosvPs1UI',
-            'title' => 'Enabling Agile through enabling BDD in PHP projects ',
+            'title' => 'Enabling Agile through enabling BDD in PHP projects',
             'speaker' => 'Konstantin Kudryashov',
             'date' => '9th April 2014',
         ],
