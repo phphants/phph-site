@@ -9,7 +9,7 @@ class VideosController extends AbstractActionController
     protected $videos = [
         [
             'code' => 'Ch8hu0A0yB0',
-            'title' => 'Don\'t code, bake. An introduction to CakePHP',
+            'title' => "Don't code, bake. An introduction to CakePHP",
             'speaker' => 'David Yell',
             'date' => '8th October 2014',
         ],
