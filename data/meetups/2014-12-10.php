@@ -26,8 +26,8 @@ $meetup->setId(0)
     ->setFromDate(new DateTime('2014-12-10 19:00'))
     ->setToDate(new DateTime('2014-12-10 23:00'))
     ->setRegistrationUrl("http://www.eventbrite.co.uk/event/{$eid}")
-    ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
-    ->setLocation('Oasis the Venue, Arundel Street, PO1 1NH')
+    ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
+    ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
     	new TalkEntity('Andy Piper', 'andypiper', '<strong>Connecting to the Pulse of the Planet</strong>', $abstract),
         'Super Special Xmas Prize Draws - with prizes from <strong>Spectrum IT, GitHub, php|architect, JetBrains, O\'Reilly &amp; more</strong>!',
