@@ -19,7 +19,8 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+Imagine if you could easily reuse any 3D design content to create immersive 3D experiences for web users. This is what the Autodesk View and Data API enables you to do. You can use it to convert 3D data designed or captured in various design softwares into a lightweight format that can be streamed into a WebGL based viewer. Not only will it have 3D geometry information but all the associated meta data as well that was captured in the design: part numbers, hierarchy, notes, etc
+For more information visit: <a href="http://developer.autodesk.com" >developer.autodesk.com</a>
 END;
 
 $meetup->setId(0)
@@ -29,8 +30,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-//    	new TalkEntity('Andy Piper', 'andypiper', '<strong>Connecting to the Pulse of the Planet</strong>', $abstract),
-        'Talk is tbc - please email <a href="mailto:speak@phphants.co.uk">speak@phphants.co.uk</a> ASAP if you would like to do a talk!!',
+    	new TalkEntity('Alex Nagy', 'AdamTheNagy', '<strong>Make the Web 3D</strong>', $abstract),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
