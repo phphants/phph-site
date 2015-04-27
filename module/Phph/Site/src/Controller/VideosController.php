@@ -8,6 +8,24 @@ class VideosController extends AbstractActionController
 {
     protected $videos = [
         [
+            'code' => 'NrUsD8yAAIE',
+            'title' => 'Debugging: past, present and future',
+            'speaker' => 'Derick Rethans',
+            'date' => '8th April 2015',
+        ],
+        [
+            'code' => 'HNdDuDuxZOM',
+            'title' => 'Your API is a UI',
+            'speaker' => 'Christopher Hoult',
+            'date' => '11th March 2015',
+        ],
+        [
+            'code' => 'Pze7HZL2w0Y',
+            'title' => 'Test Strategies &amp;&amp; Process',
+            'speaker' => 'Owen Beresford',
+            'date' => '11th February 2015',
+        ],
+        [
             'code' => 'Ch8hu0A0yB0',
             'title' => "Don't code, bake. An introduction to CakePHP",
             'speaker' => 'David Yell',
