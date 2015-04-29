@@ -2,12 +2,13 @@
 
 namespace Phph\Site\View\Helper;
 
+use Phph\Site\Model\TalkEntity;
 use Zend\View\Helper\AbstractHelper;
 use Phph\Site\Model\MeetupEntity;
 
 class RenderMeetup extends AbstractHelper
 {
-    public function __invoke(MeetupEntity $meetup)
+    public function full(MeetupEntity $meetup)
     {
         $date = $meetup->getFromDate()->format('jS F Y');
         $from_time = $meetup->getFromDate()->format('g:ia');
@@ -21,6 +22,7 @@ class RenderMeetup extends AbstractHelper
         $talking_points = $meetup->getTalkingPoints();
 
         $talking_points_html = '';
+        $talk_count = count($talking_points);
         foreach ($talking_points as $speaker => $point) {
             if (!is_numeric($speaker)) {
                 $talking_points_html .= "			<li>{$point} &mdash; <em>(by {$speaker})</em></li>\n";
@@ -51,7 +53,7 @@ class RenderMeetup extends AbstractHelper
             $str .= "<li><strong>Topic of the Month:</strong> {$topic}</li>";
         }
 
-        $str .= "<li><strong>Talks:</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
+        $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
 
         if (count($meetup->getSchedule()) > 0) {
             $str .= "<li><strong>Schedule:</strong><ul>\n";
@@ -71,6 +73,37 @@ class RenderMeetup extends AbstractHelper
         {
             $str .= "<div class=\"padding\"></div>" . $widget;
         }
+
+        return $str;
+    }
+
+    public function short(MeetupEntity $meetup)
+    {
+        $date = $meetup->getFromDate()->format('jS F Y');
+        $talking_points = $meetup->getTalkingPoints();
+
+        $talking_points_html = '';
+        $talk_count = 0;
+        foreach ($talking_points as $point) {
+            if ($point instanceof TalkEntity) {
+                $s = $point->getTalkName() . ' &mdash; <em>(by ';
+
+                if ($point->getSpeakerTwitter() != '') {
+                    $s .= '<strong><a href="https://twitter.com/' . $point->getSpeakerTwitter() . '">' . $point->getSpeakerName() . '</a></strong>';
+                } else {
+                    $s .= '<strong>' . $point->getSpeakerName() . '</strong>';
+                }
+
+                $s .= ')</em>';
+                $talking_points_html .= $s;
+                $talk_count++;
+            }
+        }
+
+        $str = "<h2>{$date}</h2>";
+        $str .= "<ul class='meetup-details'>";
+        $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
+        $str .= "</ul>";
 
         return $str;
     }
