@@ -103,7 +103,7 @@ class RenderMeetup extends AbstractHelper
         $str = "<h2>{$date}</h2>";
         $str .= "<ul class='meetup-details'>";
         $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
-        $str .= "</ul>";
+        $str .= "</ul><br />";
 
         return $str;
     }
