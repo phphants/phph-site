@@ -19,7 +19,9 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+We've often seen "magic" code, but how does it even work?<br />
+Let's explore some arguably bad PHP coding techniques that are actually used in real world libraries to solve problems that would otherwise be a huge burden for all of us.<br /><br />
+Do not try this at home!
 END;
 
 $meetup->setId(0)
