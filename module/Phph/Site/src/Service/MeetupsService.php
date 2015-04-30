@@ -84,7 +84,7 @@ class MeetupsService extends AbstractActionController
         asort($future_meetups);
 
         if (count($future_meetups) > 0) {
-            return array(reset($future_meetups));
+            return $future_meetups;
         } else {
             return array();
         }
