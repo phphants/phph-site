@@ -123,6 +123,16 @@ return array(
                     ),
                 ),
             ),
+            'subscribe' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/subscribe',
+                    'defaults' => array(
+                        'controller' => 'Phph\Site\Controller\MeetupsController',
+                        'action'  => 'subscribe',
+                    ),
+                ),
+            ),
         ),
     ),
     'navigation' => array(

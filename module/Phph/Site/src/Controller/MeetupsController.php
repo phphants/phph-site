@@ -42,8 +42,7 @@ class MeetupsController extends AbstractActionController
 
         $meetups = $this->meetupsService->getFutureMeetups();
 
-        foreach ($meetups as $meetup)
-        {
+        foreach ($meetups as $meetup) {
             $from = $meetup->getFromDate();
             $from->setTimezone(new \DateTimeZone('Europe/London'));
 
@@ -57,9 +56,14 @@ class MeetupsController extends AbstractActionController
             ));
         }
 
-        $response = $this->getResponse();;
+        $response = $this->getResponse();
         $response->setContent($cal->serialize());
         $response->getHeaders()->addHeaderLine('Content-Type', 'text/calendar');
         return $response;
+    }
+
+    public function subscribeAction()
+    {
+        return $this->redirect()->toUrl('http://eepurl.com/DaINX')->setStatusCode(302);
     }
 }
