@@ -33,6 +33,7 @@ $meetup->setId(0)
     ->setTalkingPoints(array(
     	new TalkEntity('Marco Pivetta', 'ocramius', 'Voodoo PHP', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
+        'Giveaway - 1x copy of Grumpy Little Book of Hack by Chris Hartjes',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
