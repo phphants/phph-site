@@ -34,7 +34,7 @@ $meetup->setId(0)
     	new TalkEntity('Marco Pivetta', 'ocramius', 'Voodoo PHP', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         'Giveaway - 1x copy of Grumpy Little Book of Hack by Chris Hartjes',
-        'Giveaway - FREE Ticket for <a href="http://2015.phpsouthcoast.co.uk/">PHP South Coast conference 2015</a>!!!'
+        'Giveaway - FREE Ticket for <a href="http://2015.phpsouthcoast.co.uk/">PHP South Coast conference 2015</a>!!!',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
