@@ -19,10 +19,7 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-You've been programming for a while now. You're beginning to feel that you've got a handle on things but at the same
-time can't escape the feeling that you've somehow plateaued in your growth as a software developer. In this talk
-Yitzchok, a rabbinic scholar and software developer, shares the "wisdom of the sages" as practical, actionable advice -
-strategies and tactics - that you can use to reinvigorate your growth as a software developer.
+tbc
 END;
 
 $meetup->setId(0)
@@ -32,7 +29,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Yitzchok Willroth', 'coderabbi', 'Talmudic Maxims to Maximize Your Growth as a Developer', $abstract),
+    	new TalkEntity('Ellie Zheleva', 'elizheleva', 'tbc', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
