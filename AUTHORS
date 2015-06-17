@@ -2,6 +2,7 @@ James Titcumb <james@asgrim.com>
 Lee Boynton <lee@lboynton.com>
 Richard Holloway <richard@richardjh.org>
 Zac Colley <hi@zaccolley.com>
+Gareth Evans <garoevans@gmail.com>
 
 UPDATE THE AUTHORS
 git log --all --format='%aN <%aE>' | sort -u
