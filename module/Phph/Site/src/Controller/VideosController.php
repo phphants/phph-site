@@ -8,6 +8,18 @@ class VideosController extends AbstractActionController
 {
     protected $videos = [
         [
+            'code' => 'P9TReLHjLTM',
+            'title' => 'Generated Power - PHP 5.5 Generators',
+            'speaker' => 'Mark Baker',
+            'date' => '10th June 2015',
+        ],
+        [
+            'code' => 'ONIPTP1nVZ0',
+            'title' => 'Voodoo PHP',
+            'speaker' => 'Marco Pivetta',
+            'date' => '13th May 2015',
+        ],
+        [
             'code' => 'NrUsD8yAAIE',
             'title' => 'Debugging: past, present and future',
             'speaker' => 'Derick Rethans',
