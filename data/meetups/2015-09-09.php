@@ -19,7 +19,7 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+Slim is a PHP micro framework that enables you to write powerful web applications and APIs. In this talk, I will give an overview of the upcoming version 3 of framework and show how you can easily write maintainable applications with it. We will look at how Slim's middleware system leverages the new PSR-7 HTTP request and response definitions to create easily understandable and flexible applications. By the end of the talk, you will be equipped to create Slim applications yourself.
 END;
 
 $meetup->setId(0)
@@ -29,7 +29,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Rob Allen / akrabat', 'akrabat', 'tbc', $abstract),
+    	new TalkEntity('Rob Allen', 'akrabat', 'Getting started with Slim 3', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
