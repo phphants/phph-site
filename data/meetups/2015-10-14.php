@@ -19,7 +19,9 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+OWASP Top Ten Risks is one of the most cited documents and describes the top 10 critical security vulnerabilities. In order to prevent them, developers must be aware of the controls they can incorporate in the early stages of software development lifecycle.<br />
+<br />
+To help this process, OWASP Top Ten Proactive Controls has been created. This is a list of security techniques that should be included in every software development project. The talk presents each control and then maps them to the OWASP risks they help preventing.
 END;
 
 $meetup->setId(0)
@@ -29,7 +31,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('tbc', 'tbc', 'tbc', $abstract),
+    	new TalkEntity('Katy Anton', 'KatyAnton', 'OWASP Proactive controls for developers - how to prevent the Top 10 Risks', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
