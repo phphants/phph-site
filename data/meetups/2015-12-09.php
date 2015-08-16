@@ -33,8 +33,14 @@ $meetup->setId(0)
         'Super Special Xmas Prize Draws!',
         'Mince pies and yule logs!',
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
-        '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
+	->setSchedule(array(
+		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
+		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
+		new ScheduleEntity(new \DateTime('19:30'), 'Stu Herbert'),
+		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
+		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
+	))
     ->setWidget($eventbriteWidget);
 
 return $meetup;
