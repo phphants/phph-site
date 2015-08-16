@@ -31,8 +31,14 @@ $meetup->setId(0)
     ->setTalkingPoints(array(
     	new TalkEntity('Phil Bennett and Jackson Willis', 'phil_bennett', 'tbc', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
-        '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
+	->setSchedule(array(
+		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
+		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
+		new ScheduleEntity(new \DateTime('19:30'), 'Phil Bennett and Jackson Willis'),
+		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
+		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
+	))
     ->setWidget($eventbriteWidget);
 
 return $meetup;
