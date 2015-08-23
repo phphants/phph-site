@@ -19,7 +19,7 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-Slim is a PHP micro framework that enables you to write powerful web applications and APIs. In this talk, I will give an overview of the upcoming version 3 of framework and show how you can easily write maintainable applications with it. We will look at how Slim's middleware system leverages the new PSR-7 HTTP request and response definitions to create easily understandable and flexible applications. By the end of the talk, you will be equipped to create Slim applications yourself.
+Protecting your users' data with just a username and password is no longer satisfactory. Two-factor authentication (2FA) is the primary method of countering the effects of stolen passwords, and it is easy to implement in your web application. In this session, we will discuss what two-factor authentication is, how it works, and the challenges associated with it. We will then look how to integrate two-factor authentication into your PHP application's login workflow. We'll consider a Google Authenticator implementation, so you can make your users' accounts more secure. Finally, we will cover some plugins that WordPress & Drupal developers can use to enable this easily!
 END;
 
 $meetup->setId(0)
@@ -29,13 +29,13 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Rob Allen', 'akrabat', 'Getting started with Slim 3', $abstract),
+    	new TalkEntity('Rob Allen', 'akrabat', 'Secure your web application with two-factor authentication', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
     ))
 	->setSchedule(array(
 		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
 		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-		new ScheduleEntity(new \DateTime('19:30'), 'Rob Allen - Getting started with Slim 3'),
+		new ScheduleEntity(new \DateTime('19:30'), 'Rob Allen - Secure your web application with two-factor authentication'),
 		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
 		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
 	))
