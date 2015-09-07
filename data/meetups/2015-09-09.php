@@ -37,7 +37,7 @@ $meetup->setId(0)
 		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
 		new ScheduleEntity(new \DateTime('19:30'), 'Rob Allen - Secure your web application with two-factor authentication'),
 		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
-		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <del title="Brewhouse is temporarily closed :("><a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)</del> <a href="http://www.jdwetherspoon.co.uk/home/pubs/the-isambard-kingdom-brunel">The Isambard Kingdom Brunel</a> (Wetherspoons)'),
+		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <del title="Brewhouse is temporarily closed :("><a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)</del> <a href="http://www.jdwetherspoon.co.uk/home/pubs/the-trafalgar">The Trafalgar</a> (Wetherspoons)'),
 	))
     ->setWidget($eventbriteWidget);
 
