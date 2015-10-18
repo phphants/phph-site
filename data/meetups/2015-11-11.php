@@ -19,7 +19,21 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+The problem is that we, as developers, understand how the web works. This is exaggerated by knowing in even more depth,
+how the application/website we are building works. We know how to add a user into a specific group, because we wrote the
+code that does it. We understand the intricacies of the systems we build, and often spend so long building them, and
+running through cycles of the processes to accomplish certain tasks, that we forget to think about the usability of our
+applications.<br />
+<br />
+Usability is often an after-thought of developers, or it is palmed off to a UI/UX expert. As developers, we need to get
+into the mindset of the person who will use the application, not the person who wants the application created, and
+incorporate proper usability into more than just form elements and removing all of the sliders that exist.
+END;
+
+$abstractPhil = <<<END
+How hard is it to get a form right? It's just some standard inputs and a button. Using some "rigorous" user testing
+with our "state of the art" user testing equipment we dug into how the default form options and builders on some leading
+frameworks went down with the general public. Is taking the easy way out as a developer making it harder for your users?
 END;
 
 $meetup->setId(0)
@@ -29,9 +43,10 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Phil Bennett and Jackson Willis', 'phil_bennett', 'tbc', $abstract),
-        '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
-    ))
+		    new TalkEntity('Jackson Willis', 'jacksonwillis', 'Using usability to develop your development', $abstract),
+		    new TalkEntity('Phil Bennett', 'phil_bennett', 'It\'s a form, how hard can it be?', $abstractPhil),
+		    '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
+	    ))
 	->setSchedule(array(
 		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
 		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
