@@ -19,7 +19,7 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-tbc
+While built for the web, PHP doesn't abstract the actual HTTP messages. The new PSR-7 specification defines these, allowing you to code to shared interfaces instead of specific frameworks. Additionally, strong, shared HTTP abstractions give rise to a concept called "Middleware," software that sits between a request and a response. Come discover how PSR-7 works, learn about common middleware patterns, and discover how the two will change how you develop in PHP!
 END;
 
 $meetup->setId(0)
@@ -29,7 +29,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Matthew Weier O\'Phinney', 'mwop', 'tbc', $abstract),
+    	new TalkEntity('Matthew Weier O\'Phinney', 'mwop', 'PSR-7 and Middleware: The Future of PHP', $abstract),
         'Super Special Xmas Prize Draws!',
         'Mince pies and yule logs!',
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
