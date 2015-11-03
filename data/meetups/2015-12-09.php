@@ -29,7 +29,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Stu Herbert', 'stuherbert', 'tbc', $abstract),
+    	new TalkEntity('Matthew Weier O\'Phinney', 'mwop', 'tbc', $abstract),
         'Super Special Xmas Prize Draws!',
         'Mince pies and yule logs!',
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
@@ -37,7 +37,7 @@ $meetup->setId(0)
 	->setSchedule(array(
 		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
 		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-		new ScheduleEntity(new \DateTime('19:30'), 'Stu Herbert'),
+		new ScheduleEntity(new \DateTime('19:30'), 'Matthew Weier O\'Phinney'),
 		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
 		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
 	))
