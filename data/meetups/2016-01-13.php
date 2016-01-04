@@ -33,7 +33,7 @@ $meetup->setId(0)
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
     ))
 	->setSchedule(array(
-		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
+		new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
 		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
 		new ScheduleEntity(new \DateTime('19:30'), 'Christopher Hoult'),
 		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
