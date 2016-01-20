@@ -33,6 +33,7 @@ class MeetupsController extends AbstractActionController
     {
         return [
             'future_meetups' => $this->meetupsService->getFutureMeetups(),
+            'past_meetups' => $this->meetupsService->getPastMeetups(),
         ];
     }
 

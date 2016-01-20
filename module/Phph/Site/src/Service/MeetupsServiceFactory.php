@@ -10,8 +10,7 @@ class MeetupsServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');
-        $service = new MeetupsService();
-        $service->setMeetupsDataPath($config['phph-site']['meetupsDataPath']);
+        $service = new MeetupsService(realpath($config['phph-site']['meetupsDataPath']));
 
         return $service;
     }

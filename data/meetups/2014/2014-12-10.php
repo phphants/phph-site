@@ -29,7 +29,7 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Andy Piper', 'andypiper', '<strong>Connecting to the Pulse of the Planet</strong>', $abstract),
+    	new TalkEntity('Andy Piper', 'andypiper', 'Connecting to the Pulse of the Planet', $abstract),
         'Super Special Xmas Prize Draws - with prizes from <strong>Spectrum IT, GitHub, php|architect, JetBrains, O\'Reilly &amp; more</strong>!',
         'elePHPant Raffles!',
         'Mince pies and yule logs!',
