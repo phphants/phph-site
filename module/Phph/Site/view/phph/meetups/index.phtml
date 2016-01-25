@@ -27,3 +27,11 @@ $first = true;
     <strong>No meetups currently planned...</strong>
     <?php endif; ?>
 </div>
+
+<div class="wrapper content">
+    <hr /><br />
+    <h1>Previous meetups</h1>
+    <?php foreach ($past_meetups as $meetup): ?>
+        <?= $this->renderMeetup()->short($meetup); ?>
+    <?php endforeach; ?>
+</div>

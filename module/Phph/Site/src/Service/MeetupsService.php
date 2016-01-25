@@ -4,22 +4,26 @@ namespace Phph\Site\Service;
 
 use Phph\Site\Model\MeetupEntity;
 
-use Zend\Mvc\Controller\AbstractActionController;
-
-class MeetupsService extends AbstractActionController
+class MeetupsService
 {
+    /**
+     * @var string
+     */
     private $meetupsDataPath;
+
+    /**
+     * @var MeetupEntity[]
+     */
     private $cachedDirectoryListing;
 
     /**
      * Assign the meetups data path
      *
-     * @param  string $meetupsDataPath
-     * @return void
+     * @param string $meetupsDataPath
      */
-    public function setMeetupsDataPath($meetupsDataPath)
+    public function __construct($meetupsDataPath)
     {
-        $this->meetupsDataPath = (string) $meetupsDataPath;
+        $this->meetupsDataPath = (string)$meetupsDataPath;
     }
 
     /**
@@ -33,12 +37,13 @@ class MeetupsService extends AbstractActionController
         if (!is_array($this->cachedDirectoryListing)) {
             $this->cachedDirectoryListing = array();
 
-            $directoryIterator = new \DirectoryIterator($this->meetupsDataPath);
+            $directoryIterator = new \RecursiveDirectoryIterator($this->meetupsDataPath);
+            $iteratorIterator = new \RecursiveIteratorIterator($directoryIterator);
 
-            foreach ($directoryIterator as $file) {
+            foreach ($iteratorIterator as $file) {
                 /* @var $file \DirectoryIterator */
                 if (substr($file->getFilename(), -4) == '.php') {
-                    $this->cachedDirectoryListing[] = $file->getFilename();
+                    $this->cachedDirectoryListing[] = str_replace($this->meetupsDataPath, '', $file->getPathname());
                 }
             }
 
@@ -74,7 +79,7 @@ class MeetupsService extends AbstractActionController
         $future_meetups = array();
 
         foreach ($meetups as $meetup) {
-            $date = new \DateTime(str_replace(".php", "", $meetup));
+            $date = $this->extractDateTimeFromMeetupFilename($meetup);
             $diff = $date->diff($now);
             if ($diff->invert || $diff->days == 0) {
                 $future_meetups[$date->format('Ymd')] = $this->getMeetup($meetup);
@@ -88,6 +93,43 @@ class MeetupsService extends AbstractActionController
         } else {
             return array();
         }
+    }
+
+    /**
+     * Get all the past meetups as an array
+     *
+     * @return array of MeetupEntity objects
+     */
+    public function getPastMeetups()
+    {
+        $meetups = $this->getMeetupsList();
+
+        $now = new \DateTime();
+
+        $pastMeetups = [];
+
+        foreach ($meetups as $meetup) {
+            $date = $this->extractDateTimeFromMeetupFilename($meetup);
+            $diff = $date->diff($now);
+            if (!$diff->invert) {
+                $pastMeetups[$date->format('Ymd')] = $this->getMeetup($meetup);
+            }
+        }
+
+        arsort($pastMeetups);
+
+        return $pastMeetups;
+    }
+
+    /**
+     * Do a dumb extraction of the date from a meetup filename
+     *
+     * @param string $meetup
+     * @return \DateTime
+     */
+    private function extractDateTimeFromMeetupFilename($meetup)
+    {
+        return new \DateTime(str_replace(".php", "", substr($meetup, strrpos($meetup, '/')+1)));
     }
 
     /**

@@ -95,15 +95,18 @@ class RenderMeetup extends AbstractHelper
                 }
 
                 $s .= ')</em>';
-                $talking_points_html .= $s;
+                $talking_points_html .= '<li>' . $s . '</li>';
                 $talk_count++;
             }
         }
 
         $str = "<h2>{$date}</h2>";
-        $str .= "<ul class='meetup-details'>";
-        $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
-        $str .= "</ul><br />";
+
+        if ($talk_count) {
+            $str .= "<ul class='meetup-details'>";
+            $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
+            $str .= "</ul><br />";
+        }
 
         return $str;
     }
