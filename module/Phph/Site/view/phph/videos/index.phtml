@@ -12,7 +12,9 @@ $this->headTitle($title);
         <li>
             <h3 class="title"><?php echo $video['title']; ?></h3>
             <h4 class="speaker"><span class="unbold">by</span> <?php echo $video['speaker']; ?> <span class="unbold">on</span> <?php echo $video['date']; ?></h4>
-            <iframe class="video" src="//www.youtube-nocookie.com/embed/<?php echo $video['code']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+            <div class="lazyload-youtube" data-youtube-id="<?php echo $video['code']; ?>" data-ratio="16:9">
+              <a href="https://youtu.be/<?php echo $video['code']; ?>">Watch on YouTube</a>
+            </div>
         </li>
     <?php endforeach; ?>
     </ul>
