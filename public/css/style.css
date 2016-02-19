@@ -473,6 +473,10 @@ header .nav-button:active{
 
 .content .sponsor:last-child{ border: none; }
 
+.sponsor-logo {
+	width: 200px;
+}
+
 .content .sponsor img {
 	float: right;
 	max-width: 50%;
