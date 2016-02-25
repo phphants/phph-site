@@ -19,7 +19,7 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-This talk starts with a comparison of the different practices and tools we can use in the PHP ecosystem and is followed by a continuousphp demo. So that viewers can see a demo app tested and deployed in real time, with all the practices and tools explained before.
+This talk starts with a comparison of the different practices and tools we can use in the PHP ecosystem and is followed by a continuousphp demo, so that viewers can see a demo app tested and deployed in real time, with all the practices and tools explained before.
 END;
 
 $meetup->setId(0)
@@ -32,6 +32,7 @@ $meetup->setId(0)
     	new TalkEntity('Mike Rogers', 'MikeRogers0', '5 minute lightning talk'),
     	new TalkEntity('Frederic Dewinne', 'fdewinne', 'The Continuous Talk', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
+		'A year PhpStorm license prize, courtesy of JetBrains',
     ))
 	->setSchedule(array(
 		new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),

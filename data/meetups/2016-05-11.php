@@ -33,6 +33,7 @@ $meetup->setId(0)
     	'Lightning talk - tbc',
     	new TalkEntity('Richard Harrison', 'phphants', 'Creating Unit Test Mocks - PHPUnit or Prophecy?', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
+		'A year PhpStorm license prize, courtesy of JetBrains',
     ))
 	->setSchedule(array(
 		new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
