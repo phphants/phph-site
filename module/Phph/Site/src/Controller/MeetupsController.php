@@ -50,11 +50,13 @@ class MeetupsController extends AbstractActionController
             $month = $from->format('F');
             $year = $from->format('Y');
 
-            $cal->add('VEVENT', array(
+            $cal->add('VEVENT', [
+                'UID' => $from->format('YmdHis') . '@phphants.co.uk',
                 'SUMMARY' => sprintf('PHP Hampshire %s %d Meetup', $month, $year),
+                'DTSTAMP' => $from,
                 'DTSTART' => $from,
                 'DTEND' => $meetup->getToDate(),
-            ));
+            ]);
         }
 
         $response = $this->getResponse();
