@@ -21,7 +21,7 @@ $meetup = new MeetupEntity();
 $abstract = <<<END
 Docker, the hottest technology around at the moment. It swept the Ops world by storm in 2014, became mainstream in 2015, and now it’s set to dominate the developer world, in 2016.
 Docker is a tool that allows you to package your application up into a single-runnable distributable binary - akin to the phar, but in Hulk mode. Docker allows you, a developer, to specify the exact environment your application needs to run, across development; test; staging; and production.
-In this talk I will cover the creation of this utopian distributable and show you how to can compose your entire production infrastructure locally with only a small YAML file and without installing a single thing.
+In this talk I will cover the creation of this utopian distributable and show you how you can compose your entire production infrastructure locally with only a small YAML file and without installing a single thing.
 Lets say hello, to Docker.
 END;
 
@@ -32,19 +32,19 @@ $meetup->setId(0)
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	'Lightning talk - tbc',
-    	new TalkEntity('David McKay', 'rawkode', 'Kickass Development Environments with Docker', $abstract),
+        'Lightning talk - tbc',
+        new TalkEntity('David McKay', 'rawkode', 'Kickass Development Environments with Docker', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
-		'A year PhpStorm license prize, courtesy of JetBrains',
+        'A year PhpStorm license prize, courtesy of JetBrains',
     ))
-	->setSchedule(array(
-		new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
-		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-		new ScheduleEntity(new \DateTime('19:30'), 'TBC'),
-		new ScheduleEntity(new \DateTime('19:40'), 'David McKay'),
-		new ScheduleEntity(new \DateTime('20:40'), 'Closing comments'),
-		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
-	))
+    ->setSchedule(array(
+        new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
+        new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
+        new ScheduleEntity(new \DateTime('19:30'), 'TBC'),
+        new ScheduleEntity(new \DateTime('19:40'), 'David McKay'),
+        new ScheduleEntity(new \DateTime('20:40'), 'Closing comments'),
+        new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
+    ))
     ->setWidget($eventbriteWidget);
 
 return $meetup;
