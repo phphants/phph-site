@@ -4,8 +4,8 @@ use Phph\Site\Model\MeetupEntity;
 use Phph\Site\Model\TalkEntity;
 use Phph\Site\Model\ScheduleEntity;
 
-$etitle = 'PHP Hampshire - May 2016 Meetup';
-$eid = '22224553237';
+$etitle = 'PHP Hampshire - July 2016 Meetup';
+$eid = '25051456581';
 $eventbriteWidget = '<div style="width:100%; text-align:left; padding-top: 20px" >';
 $eventbriteWidget .= '<iframe  src="https://www.eventbrite.co.uk/tickets-external?eid=' . $eid . '&ref=etckt&v=2" frameborder="0" height="240" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>';
 $eventbriteWidget .= '<div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" >';
@@ -19,27 +19,29 @@ $eventbriteWidget .= '</div></div>';
 $meetup = new MeetupEntity();
 
 $abstract = <<<END
-This talk will look at how PHPUnit and Prophecy compare when using mock objects to unit test PHP code. Whilst PHPUnit is the standard test library for PHP, Prophecy is a good alternative for generating mock objects and has been included within PHPUnit since version 4.5.<br /><br />
-The talk will start by introducing the use of mock objects in unit testing and define four types of test double : dummy, stub, mock and spy. The main part of the talk will then concentrate on how each of these types are implemented; firstly, using PHPUnit, and secondly, using Prophecy. The talk will conclude by discussing when a developer might use Prophecy mock objects and when PHPUnit mocks might be more appropriate.
+Docker, the hottest technology around at the moment. It swept the Ops world by storm in 2014, became mainstream in 2015, and now it’s set to dominate the developer world, in 2016.
+Docker is a tool that allows you to package your application up into a single-runnable distributable binary - akin to the phar, but in Hulk mode. Docker allows you, a developer, to specify the exact environment your application needs to run, across development; test; staging; and production.
+In this talk I will cover the creation of this utopian distributable and show you how you can compose your entire production infrastructure locally with only a small YAML file and without installing a single thing.
+Lets say hello, to Docker.
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2016-05-11 19:00'))
-    ->setToDate(new DateTime('2016-05-11 23:00'))
+    ->setFromDate(new DateTime('2016-07-13 19:00'))
+    ->setToDate(new DateTime('2016-07-13 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-        new TalkEntity('Zac Colley', 'zaccolley', '5 minute lightning talk'),
-        new TalkEntity('Richard Harrison', 'phphants', 'Creating Unit Test Mocks - PHPUnit or Prophecy?', $abstract),
+        'Lightning talk - tbc',
+        new TalkEntity('David McKay', 'rawkode', 'Kickass Development Environments with Docker', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         'A year PhpStorm license prize, courtesy of JetBrains',
     ))
     ->setSchedule(array(
         new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
         new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-        new ScheduleEntity(new \DateTime('19:30'), 'Zac Colley'),
-        new ScheduleEntity(new \DateTime('19:40'), 'Richard Harrison'),
+        new ScheduleEntity(new \DateTime('19:30'), 'TBC'),
+        new ScheduleEntity(new \DateTime('19:40'), 'David McKay'),
         new ScheduleEntity(new \DateTime('20:40'), 'Closing comments'),
         new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
     ))
