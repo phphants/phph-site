@@ -31,7 +31,7 @@ $meetup->setId(0)
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
         new TalkEntity('Zac Colley', 'zaccolley', '5 minute lightning talk'),
-        new TalkEntity('Richard Harrison', 'phphants', 'Creating Unit Test Mocks - PHPUnit or Prophecy?', $abstract),
+        new TalkEntity('Richard Harrison', 'nimbadger', 'Creating Unit Test Mocks - PHPUnit or Prophecy?', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         'A year PhpStorm license prize, courtesy of JetBrains',
     ))
