@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - June 2016 Meetup';
 $eid = '25051234918';
@@ -16,7 +16,7 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 As software developers, we are in great demand. There are lots of companies out there looking for good developers, but how do we know what companies are good to work for?
@@ -28,24 +28,24 @@ Overall by following these steps, we should make the job hunt easier, and more p
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2016-06-08 19:00'))
-    ->setToDate(new DateTime('2016-06-08 23:00'))
+    ->setFromDate(new DateTimeImmutable('2016-06-08 19:00'))
+    ->setToDate(new DateTimeImmutable('2016-06-08 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
         'Lightning talk - tbc',
-        new TalkEntity('Stanko Markovic', 'greyshirt', 'How to do interviews properly - look from both sides', $abstract),
+        new Talk('Stanko Markovic', 'greyshirt', 'How to do interviews properly - look from both sides', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         'A year PhpStorm license prize, courtesy of JetBrains',
     ))
     ->setSchedule(array(
-        new ScheduleEntity(new \DateTime('19:00'), 'Arrival with beer and pizza'),
-        new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-        new ScheduleEntity(new \DateTime('19:30'), 'TBC'),
-        new ScheduleEntity(new \DateTime('19:40'), 'Stanko Markovic'),
-        new ScheduleEntity(new \DateTime('20:40'), 'Closing comments'),
-        new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
+        new Schedule(new \DateTimeImmutable('19:00'), 'Arrival with beer and pizza'),
+        new Schedule(new \DateTimeImmutable('19:25'), 'Welcome announcement'),
+        new Schedule(new \DateTimeImmutable('19:30'), 'TBC'),
+        new Schedule(new \DateTimeImmutable('19:40'), 'Stanko Markovic'),
+        new Schedule(new \DateTimeImmutable('20:40'), 'Closing comments'),
+        new Schedule(new \DateTimeImmutable('20:45'), 'Social gathering at <a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)'),
     ))
     ->setWidget($eventbriteWidget);
 

@@ -1,11 +1,11 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
+use App\Entity\Meetup;
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2011-11-19 12:00'))
+    ->setFromDate(new DateTimeImmutable('2011-11-19 12:00'))
     ->setLocation('Private location')
     ->setTopic('GoDeploy roadmap')
     ->setTalkingPoints(array(

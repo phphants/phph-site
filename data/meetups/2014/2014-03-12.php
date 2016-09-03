@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - March 2014 Meetup';
 $eid = '9904061314';
@@ -16,7 +16,7 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 We've got something a little different this time around! We've got a Zend elePHPant hunt. <em>You'll need to bring a laptop and have downloaded the Zend Server installer beforehand.</em><br /><br />
@@ -25,15 +25,15 @@ It's your opportunity to get your hands on "Chilli" the Red elePHPant with the h
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-03-12 19:00'))
-    ->setToDate(new DateTime('2014-03-12 23:00'))
+    ->setFromDate(new DateTimeImmutable('2014-03-12 19:00'))
+    ->setToDate(new DateTimeImmutable('2014-03-12 23:00'))
     ->setRegistrationUrl("http://ele.phphants.co.uk/")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        new TalkEntity('Zend', 'zend', 'The Great PHP Hampshire Zend elePHPant Hunt', $abstract),
-        new TalkEntity('Kimberley Ford', 'luco_el_loco', 'Kim\'s Car: An Introduction to Object Oriented Programming in PHP'),
-        new TalkEntity('Rebecca Short', 'RebeccaShortSEO', 'Coding with SEO in mind'),
+        new Talk('Zend', 'zend', 'The Great PHP Hampshire Zend elePHPant Hunt', $abstract),
+        new Talk('Kimberley Ford', 'luco_el_loco', 'Kim\'s Car: An Introduction to Object Oriented Programming in PHP'),
+        new Talk('Rebecca Short', 'RebeccaShortSEO', 'Coding with SEO in mind'),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);

@@ -1,11 +1,11 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
+use App\Entity\Meetup;
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2013-01-10 18:00'))
+    ->setFromDate(new DateTimeImmutable('2013-01-10 18:00'))
     ->setLocation('The Red Lion, Horndean')
     ->setTopic('Prerequisite knowledge for working with ZF2')
     ->setTalkingPoints(array(

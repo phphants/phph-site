@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - November 2014 Meetup';
 $eid = '13586326067';
@@ -16,20 +16,20 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 When you have a huge website and you decide to make the move to Symfony, it can be a very daunting prospect of having to rewrite your entire website on top of the Symfony framework. We’ll go through how this can be done as smoothly as possible with a large enterprise size website, piece by piece, deploying your site every step of the way, following along with the example of phpBB, an organisation going through this process, to discover the right and wrong way to go about it and many tools you can use on enterprise-scale Symfony applications to help along the way.
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-11-12 19:00'))
-    ->setToDate(new DateTime('2014-11-12 23:00'))
+    ->setFromDate(new DateTimeImmutable('2014-11-12 19:00'))
+    ->setToDate(new DateTimeImmutable('2014-11-12 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-    	new TalkEntity('Michael Cullum', 'michaelcullumuk', 'Converting a website to a new religion: Symfony', $abstract),
+    	new Talk('Michael Cullum', 'michaelcullumuk', 'Converting a website to a new religion: Symfony', $abstract),
     	'9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);
