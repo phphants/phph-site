@@ -3,110 +3,97 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-class Talk
+use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
+use Ramsey\Uuid\Uuid;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="talk")
+ */
+final class Talk
 {
     /**
-     * @var string
+     * @ORM\Id
+     * @ORM\Column(name="id", type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $speakerName;
+    private $id;
 
     /**
-     * @var string
+     * @ORM\ManyToOne(targetEntity=Meetup::class, inversedBy="talks")
+     * @ORM\JoinColumn(name="meetup_id", referencedColumnName="id", nullable=false)
+     * @var Meetup
      */
-    private $speakerTwitter;
+    private $meetup;
 
     /**
-     * @var string
+     * @ORM\Column(name="time", type="datetime", nullable=false)
+     * @var DateTimeImmutable
      */
-    private $talkName;
+    private $time;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Speaker::class)
+     * @ORM\JoinColumn(name="speaker_id", referencedColumnName="id", nullable=true)
+     * @var Speaker
+     */
+    private $speaker;
+
+    /**
+     * @ORM\Column(name="title", type="string", length=1024, nullable=false)
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(name="abstract", type="string", nullable=true)
      * @var string
      */
     private $abstract;
 
-    public function __construct(string $speakerName, string $speakerTwitter, string $talkName, string $abstract = null)
+    private function __construct()
     {
-        $this->speakerName = $speakerName;
-        $this->speakerTwitter = $speakerTwitter;
-        $this->talkName = $talkName;
-        $this->abstract = $abstract;
+        $this->id = Uuid::uuid4();
     }
 
-    public function __toString() : string
+    public static function fromTitle(Meetup $meetup, DateTimeImmutable $time, string $title) : self
     {
-        $s = $this->getTalkName() . ' &mdash; <em>(by ';
-
-        if ($this->getSpeakerTwitter() !== '') {
-            $s .= '<strong><a href="https://twitter.com/' . $this->getSpeakerTwitter() . '">'
-                . $this->getSpeakerName()
-                . '</a></strong>';
-        } else {
-            $s .= '<strong>' . $this->getSpeakerName() . '</strong>';
-        }
-
-        $s .= ')</em>';
-
-        $abstract = $this->getAbstract();
-        if (null !== $abstract && '' !== $abstract) {
-            $s .= '<br /><p class="talk-abstract">' . $abstract . '</p>';
-        }
-
-        return $s;
+        $talk = new self();
+        $talk->meetup = $meetup;
+        $talk->time = $time;
+        $talk->title = $title;
+        return $talk;
     }
 
-    public function setSpeakerName(string $speakerName) : self
+    public static function fromStandardTalk(
+        Meetup $meetup,
+        DateTimeImmutable $time,
+        Speaker $speaker,
+        string $title,
+        string $abstract
+    ) : self
     {
-        $this->speakerName = $speakerName;
-        return $this;
+        $talk = new self();
+        $talk->meetup = $meetup;
+        $talk->time = $time;
+        $talk->speaker = $speaker;
+        $talk->title = $title;
+        $talk->abstract = $abstract;
+        return $talk;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSpeakerName()
+    public function getSpeaker() : Speaker
     {
-        return $this->speakerName;
+        return $this->speaker;
     }
 
-    public function setSpeakerTwitter(string $speakerTwitter) : self
+    public function getTitle() : string
     {
-        $this->speakerTwitter = $speakerTwitter;
-        return $this;
+        return $this->title;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSpeakerTwitter() : string
-    {
-        return $this->speakerTwitter;
-    }
-
-    public function setTalkName(string $talkName) : self
-    {
-        $this->talkName = $talkName;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTalkName()
-    {
-        return $this->talkName;
-    }
-
-    public function setAbstract(string $abstract) : self
-    {
-        $this->abstract = $abstract;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAbstract()
+    public function getAbstract() : string
     {
         return $this->abstract;
     }
