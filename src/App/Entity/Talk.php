@@ -46,7 +46,7 @@ class Talk
         $s .= ')</em>';
 
         $abstract = $this->getAbstract();
-        if (!empty($abstract)) {
+        if (null !== $abstract && '' !== $abstract) {
             $s .= '<br /><p class="talk-abstract">' . $abstract . '</p>';
         }
 

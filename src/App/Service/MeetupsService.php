@@ -67,7 +67,7 @@ final class MeetupsService implements MeetupsServiceInterface
         foreach ($meetups as $meetup) {
             $date = $this->extractDateTimeFromMeetupFilename($meetup);
             $diff = $date->diff($now);
-            if ($diff->invert || $diff->days == 0) {
+            if ($diff->invert || $diff->days === 0) {
                 $future_meetups[$date->format('Ymd')] = $this->getMeetup($meetup);
             }
         }
@@ -129,13 +129,13 @@ final class MeetupsService implements MeetupsServiceInterface
      */
     private function getMeetup(string $file) : Meetup
     {
-        $fullpath = $this->meetupsDataPath . $file;
+        $fullPath = $this->meetupsDataPath . $file;
 
-        if (!file_exists($fullpath)) {
+        if (!file_exists($fullPath)) {
             throw Exception\MeetupDataNotFound::fromFilename($file);
         }
 
-        $meetup = include $fullpath;
+        $meetup = include $fullPath;
 
         if (!($meetup instanceof Meetup)) {
             throw Exception\InvalidMeetupData::fromFilenameAndData($file, $meetup);
