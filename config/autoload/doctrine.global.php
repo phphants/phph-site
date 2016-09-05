@@ -1,0 +1,30 @@
+<?php
+declare(strict_types = 1);
+
+return [
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driver_class' => \Doctrine\DBAL\Driver\PDOPgSql\Driver::class,
+                'params' => [
+                    'url' => 'postgres://postgres@localhost/phphants',
+                ],
+            ],
+        ],
+        'driver' => [
+            'orm_default' => [
+                'class' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
+                'drivers' => [
+                    'App\Entity' => 'app_entity',
+                ],
+            ],
+            'app_entity' => [
+                'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [
+                    __DIR__ . '/../../src/App/Entity',
+                ],
+            ],
+        ],
+    ],
+];
