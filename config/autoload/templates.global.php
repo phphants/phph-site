@@ -32,7 +32,14 @@ return [
 
     'view_helpers' => [
         'invokables' => [
+            App\View\Helper\RenderMeetup::class => App\View\Helper\RenderMeetup::class,
+        ],
+        'factories' => [
+            App\View\Helper\IsDebug::class => App\View\Helper\IsDebugFactory::class,
+        ],
+        'aliases' => [
             'renderMeetup' => App\View\Helper\RenderMeetup::class,
+            'isDebug' => App\View\Helper\IsDebug::class,
         ],
     ],
 ];

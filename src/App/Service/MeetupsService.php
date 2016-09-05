@@ -53,13 +53,14 @@ final class MeetupsService implements MeetupsServiceInterface
     /**
      * Get all the future meetups as an array
      * @return Meetup[]
-     * @throws \Exception
+     * @throws \App\Service\Exception\MeetupDataNotFound
+     * @throws \App\Service\Exception\InvalidMeetupData
      */
     public function getFutureMeetups() : array
     {
         $meetups = $this->getMeetupsList();
 
-        $now = new \DateTime();
+        $now = new DateTimeImmutable();
 
         $future_meetups = array();
 
@@ -83,13 +84,14 @@ final class MeetupsService implements MeetupsServiceInterface
     /**
      * Get all the past meetups as an array
      * @return Meetup[]
-     * @throws \Exception
+     * @throws \App\Service\Exception\MeetupDataNotFound
+     * @throws \App\Service\Exception\InvalidMeetupData
      */
     public function getPastMeetups() : array
     {
         $meetups = $this->getMeetupsList();
 
-        $now = new \DateTime();
+        $now = new DateTimeImmutable();
 
         $pastMeetups = [];
 
@@ -114,28 +116,29 @@ final class MeetupsService implements MeetupsServiceInterface
      */
     private function extractDateTimeFromMeetupFilename(string $meetup) : DateTimeImmutable
     {
-        return new DateTimeImmutable(str_replace(".php", "", substr($meetup, strrpos($meetup, '/')+1)));
+        return new DateTimeImmutable(str_replace('.php', '', substr($meetup, strrpos($meetup, '/')+1)));
     }
 
     /**
      * Load an individual meetup file
      *
-     * @param  string       $file The file (from the cached directory list)
-     * @throws \Exception
+     * @param  string $file The file (from the cached directory list)
      * @return Meetup
+     * @throws \App\Service\Exception\InvalidMeetupData
+     * @throws \App\Service\Exception\MeetupDataNotFound
      */
-    private function getMeetup(string $file)
+    private function getMeetup(string $file) : Meetup
     {
         $fullpath = $this->meetupsDataPath . $file;
 
         if (!file_exists($fullpath)) {
-            throw new \RuntimeException("Could not find meetup data file: {$fullpath}");
+            throw Exception\MeetupDataNotFound::fromFilename($file);
         }
 
         $meetup = include $fullpath;
 
         if (!($meetup instanceof Meetup)) {
-            throw new \RuntimeException("Meetup file {$fullpath} did not return a valid Meetup entity");
+            throw Exception\InvalidMeetupData::fromFilenameAndData($file, $meetup);
         }
 
         return $meetup;

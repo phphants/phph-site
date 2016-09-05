@@ -9,5 +9,10 @@ $this->headTitle($title);
     <h1><?= $title; ?></h1>
     <p>An error has occurred whilst attempting to serve this page.</p>
     <p>We encountered a <?= $this->escapeHtml(sprintf('%d %s', $this->status, $this->reason)); ?> error.</p>
-    <pre><code><?php var_dump($this->error); ?></code></pre>
+    <?php if ($this->isDebug()): ?>
+        <pre><code><?php
+            /** @noinspection ForgottenDebugOutputInspection */
+            var_dump($this->error);
+        ?></code></pre>
+    <?php endif; ?>
 </div>
