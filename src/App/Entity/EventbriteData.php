@@ -28,13 +28,13 @@ use Ramsey\Uuid\Uuid;
     private $meetup;
 
     /**
-     * @ORM\Column(name="url", type="string", length=1024, nullable=true)
+     * @ORM\Column(name="url", type="string", length=1024, nullable=false)
      * @var string
      */
     private $url;
 
     /**
-     * @ORM\Column(name="eventbriteId", type="string", length=1024, nullable=true)
+     * @ORM\Column(name="eventbriteId", type="string", length=1024, nullable=false)
      * @var string
      */
     private $eventbriteId;
@@ -51,6 +51,16 @@ use Ramsey\Uuid\Uuid;
         $eventbriteData->url = $url;
         $eventbriteData->eventbriteId = $eventbriteId;
         return $eventbriteData;
+    }
+
+    public function getUrl() : string
+    {
+        return $this->url;
+    }
+
+    public function getEventbriteId() : string
+    {
+        return $this->eventbriteId;
     }
 }
 

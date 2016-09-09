@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -93,5 +94,38 @@ use Ramsey\Uuid\Uuid;
                 throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
             }
         }
+    }
+
+    public function getFromDate() : \DateTimeImmutable
+    {
+        return new \DateTimeImmutable($this->fromDate->format('Y-m-d'));
+    }
+
+    public function getToDate() : \DateTimeImmutable
+    {
+        return new \DateTimeImmutable($this->toDate->format('Y-m-d'));
+    }
+
+    /**
+     * @return Talk[]|Collection
+     */
+    public function getTalks() : Collection
+    {
+        return $this->talks;
+    }
+
+    public function getEventbriteData() : EventbriteData
+    {
+        return $this->eventbriteData;
+    }
+
+    public function getLocation() : Location
+    {
+        return $this->location;
+    }
+
+    public function getTopic() : string
+    {
+        return $this->topic;
     }
 }

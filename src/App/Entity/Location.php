@@ -50,4 +50,19 @@ use Ramsey\Uuid\Uuid;
         $location->url = $url;
         return $location;
     }
+
+    public function getName() : string
+    {
+        return $this->name;
+    }
+
+    public function getAddress() : string
+    {
+        return $this->address;
+    }
+
+    public function getUrl() : string
+    {
+        return $this->url;
+    }
 }

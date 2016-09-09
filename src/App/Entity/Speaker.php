@@ -27,7 +27,7 @@ use Ramsey\Uuid\Uuid;
 
     /**
      * @ORM\Column(name="twitterHandle", type="string", length=1024, nullable=true)
-     * @var string
+     * @var string|null
      */
     private $twitterHandle;
 
@@ -49,7 +49,10 @@ use Ramsey\Uuid\Uuid;
         return $this->fullName;
     }
 
-    public function getTwitterHandle() : string
+    /**
+     * @return string|null
+     */
+    public function getTwitterHandle()
     {
         return $this->twitterHandle;
     }
