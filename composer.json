@@ -28,5 +28,10 @@
         "psr-4": {
             "AppTest\\": "test/AppTest/"
         }
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "server": "php -S localhost:8080 -t public",
+        "test": "phpunit"
     }
 }

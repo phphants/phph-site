@@ -22,7 +22,7 @@ final class MeetupsIcsAction implements MiddlewareInterface
         $this->meetupsService = $meetupsService;
     }
 
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(Request $request, Response $response, callable $next = null) : TextResponse
     {
         $cal = new VCalendar();
 

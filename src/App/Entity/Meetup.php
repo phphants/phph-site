@@ -43,7 +43,7 @@ class Meetup
     private $topic;
 
     /**
-     * @var array
+     * @var Talk[]|string[]
      */
     private $talkingPoints = [];
 

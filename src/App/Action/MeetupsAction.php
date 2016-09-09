@@ -28,7 +28,7 @@ final class MeetupsAction implements MiddlewareInterface
         $this->meetupsService = $meetupsService;
     }
 
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(Request $request, Response $response, callable $next = null) : HtmlResponse
     {
         return new HtmlResponse($this->templateRenderer->render(
             'app::meetups',

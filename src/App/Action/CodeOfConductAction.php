@@ -21,7 +21,7 @@ final class CodeOfConductAction implements MiddlewareInterface
         $this->templateRenderer = $templateRenderer;
     }
 
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(Request $request, Response $response, callable $next = null) : HtmlResponse
     {
         return new HtmlResponse($this->templateRenderer->render('app::code-of-conduct'));
     }

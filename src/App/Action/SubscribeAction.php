@@ -10,7 +10,7 @@ use Zend\Stratigility\MiddlewareInterface;
 
 final class SubscribeAction implements MiddlewareInterface
 {
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(Request $request, Response $response, callable $next = null) : RedirectResponse
     {
         return new RedirectResponse('http://eepurl.com/DaINX');
     }
