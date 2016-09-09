@@ -59,7 +59,7 @@ class Meetup
 
     public function __construct()
     {
-        $this->schedule = array();
+        $this->schedule = [];
     }
 
     public function exchangeArray($data) : array

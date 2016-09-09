@@ -26,9 +26,9 @@ final class RenderMeetup extends AbstractHelper
         $talk_count = count($talking_points);
         foreach ($talking_points as $speaker => $point) {
             if (!is_numeric($speaker)) {
-                $talking_points_html .= "			<li>{$point} &mdash; <em>(by {$speaker})</em></li>\n";
+                $talking_points_html .= "            <li>{$point} &mdash; <em>(by {$speaker})</em></li>\n";
             } else {
-                $talking_points_html .= "			<li>{$point}</li>\n";
+                $talking_points_html .= "            <li>{$point}</li>\n";
             }
         }
 
@@ -48,30 +48,31 @@ final class RenderMeetup extends AbstractHelper
             $str .= "<li><strong>Location:</strong> {$location}</li>";
         }
 
-        $str .= "<li><strong>Registration Required:</strong> <a href=\"{$registration_url}\">{$registration_url}</a></li>";
+        $str .= '<li><strong>Registration Required:</strong> ';
+        $str .= "<a href=\"{$registration_url}\">{$registration_url}</a></li>";
 
         if (isset($topic)) {
             $str .= "<li><strong>Topic of the Month:</strong> {$topic}</li>";
         }
 
-        $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
+        $str .= '<li><strong>Talk' . ($talk_count > 1 ? 's' : '') . ':</strong>';
+        $str .= "<ul class='talks'>\n{$talking_points_html}</ul></li>";
 
         if (count($meetup->getSchedule()) > 0) {
             $str .= "<li><strong>Schedule:</strong><ul>\n";
 
             foreach ($meetup->getSchedule() as $item) {
-                $str .= "			<li>{$item}</li>\n";
+                $str .= "            <li>{$item}</li>\n";
             }
 
-            $str .= "</ul></li>";
+            $str .= '</ul></li>';
         }
 
-        $str .= "</ul>";
+        $str .= '</ul>';
 
         $widget = $meetup->getWidget();
 
-        if ($widget)
-        {
+        if ($widget) {
             $str .= "<div class=\"padding\"></div>" . $widget;
         }
 
@@ -89,8 +90,10 @@ final class RenderMeetup extends AbstractHelper
             if ($point instanceof TalkEntity) {
                 $s = $point->getTalkName() . ' &mdash; <em>(by ';
 
-                if ($point->getSpeakerTwitter() != '') {
-                    $s .= '<strong><a href="https://twitter.com/' . $point->getSpeakerTwitter() . '">' . $point->getSpeakerName() . '</a></strong>';
+                if ((string)$point->getSpeakerTwitter() !== '') {
+                    $s .= '<strong><a href="https://twitter.com/' . $point->getSpeakerTwitter() . '">'
+                        . $point->getSpeakerName()
+                        . '</a></strong>';
                 } else {
                     $s .= '<strong>' . $point->getSpeakerName() . '</strong>';
                 }
@@ -105,8 +108,10 @@ final class RenderMeetup extends AbstractHelper
 
         if ($talk_count) {
             $str .= "<ul class='meetup-details'>";
-            $str .= "<li><strong>Talk" . ($talk_count > 1 ? 's' : '') . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
-            $str .= "</ul><br />";
+            $str .= '<li><strong>Talk'
+                . ($talk_count > 1 ? 's' : '')
+                . ":</strong><ul class='talks'>\n{$talking_points_html}</ul></li>";
+            $str .= '</ul><br />';
         }
 
         return $str;

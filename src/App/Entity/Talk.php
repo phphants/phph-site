@@ -38,7 +38,9 @@ class Talk
         $s = $this->getTalkName() . ' &mdash; <em>(by ';
 
         if ($this->getSpeakerTwitter() !== '') {
-            $s .= '<strong><a href="https://twitter.com/' . $this->getSpeakerTwitter() . '">' . $this->getSpeakerName() . '</a></strong>';
+            $s .= '<strong><a href="https://twitter.com/' . $this->getSpeakerTwitter() . '">'
+                . $this->getSpeakerName()
+                . '</a></strong>';
         } else {
             $s .= '<strong>' . $this->getSpeakerName() . '</strong>';
         }

@@ -15,6 +15,9 @@ class InvalidMeetupDataTest extends \PHPUnit_Framework_TestCase
         $exception = InvalidMeetupData::fromFilenameAndData('/foo/bar', 123);
 
         self::assertInstanceOf(InvalidMeetupData::class, $exception);
-        self::assertSame('Meetup file /foo/bar did not return a valid Meetup entity (was integer)', $exception->getMessage());
+        self::assertSame(
+            'Meetup file /foo/bar did not return a valid Meetup entity (was integer)',
+            $exception->getMessage()
+        );
     }
 }

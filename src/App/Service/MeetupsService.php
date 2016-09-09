@@ -32,7 +32,7 @@ final class MeetupsService implements MeetupsServiceInterface
     private function getMeetupsList() : array
     {
         if (!is_array($this->cachedDirectoryListing)) {
-            $this->cachedDirectoryListing = array();
+            $this->cachedDirectoryListing = [];
 
             $directoryIterator = new \RecursiveDirectoryIterator($this->meetupsDataPath);
             $iteratorIterator = new \RecursiveIteratorIterator($directoryIterator);
@@ -62,7 +62,7 @@ final class MeetupsService implements MeetupsServiceInterface
 
         $now = new DateTimeImmutable();
 
-        $future_meetups = array();
+        $future_meetups = [];
 
         foreach ($meetups as $meetup) {
             $date = $this->extractDateTimeFromMeetupFilename($meetup);
@@ -77,7 +77,7 @@ final class MeetupsService implements MeetupsServiceInterface
         if (count($future_meetups) > 0) {
             return $future_meetups;
         } else {
-            return array();
+            return [];
         }
     }
 
