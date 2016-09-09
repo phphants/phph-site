@@ -12,7 +12,7 @@ use Ramsey\Uuid\Uuid;
  * @ORM\Entity
  * @ORM\Table(name="meetup")
  */
-final class Meetup
+/*final */class Meetup
 {
     /**
      * @ORM\Id

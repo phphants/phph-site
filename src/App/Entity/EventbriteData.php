@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
  * @ORM\Entity
  * @ORM\Table(name="eventbrite_data")
  */
-final class EventbriteData
+/*final */class EventbriteData
 {
     /**
      * @ORM\Id

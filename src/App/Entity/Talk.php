@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  * @ORM\Entity
  * @ORM\Table(name="talk")
  */
-final class Talk
+/*final */class Talk
 {
     /**
      * @ORM\Id

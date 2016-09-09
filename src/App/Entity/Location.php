@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
  * @ORM\Entity
  * @ORM\Table(name="location")
  */
-final class Location
+/*final */class Location
 {
     /**
      * @ORM\Id
