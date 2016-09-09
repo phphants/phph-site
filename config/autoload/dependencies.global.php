@@ -14,7 +14,7 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             App\Service\MeetupsServiceInterface::class => App\Service\MeetupsServiceFactory::class,
-            Doctrine\ORM\EntityManager::class => ContainerInteropDoctrine\EntityManagerFactory::class,
+            Doctrine\ORM\EntityManagerInterface::class => ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
         'delegators' => [
             Zend\View\HelperPluginManager::class => [
