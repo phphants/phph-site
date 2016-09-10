@@ -33,6 +33,7 @@ class MeetupsController extends AbstractActionController
     {
         return [
             'future_meetups' => $this->meetupsService->getFutureMeetups(),
+            'past_meetups' => $this->meetupsService->getPastMeetups(),
         ];
     }
 
@@ -42,24 +43,30 @@ class MeetupsController extends AbstractActionController
 
         $meetups = $this->meetupsService->getFutureMeetups();
 
-        foreach ($meetups as $meetup)
-        {
+        foreach ($meetups as $meetup) {
             $from = $meetup->getFromDate();
             $from->setTimezone(new \DateTimeZone('Europe/London'));
 
             $month = $from->format('F');
             $year = $from->format('Y');
 
-            $cal->add('VEVENT', array(
+            $cal->add('VEVENT', [
+                'UID' => $from->format('YmdHis') . '@phphants.co.uk',
                 'SUMMARY' => sprintf('PHP Hampshire %s %d Meetup', $month, $year),
+                'DTSTAMP' => $from,
                 'DTSTART' => $from,
                 'DTEND' => $meetup->getToDate(),
-            ));
+            ]);
         }
 
-        $response = $this->getResponse();;
+        $response = $this->getResponse();
         $response->setContent($cal->serialize());
         $response->getHeaders()->addHeaderLine('Content-Type', 'text/calendar');
         return $response;
+    }
+
+    public function subscribeAction()
+    {
+        return $this->redirect()->toUrl('http://eepurl.com/DaINX')->setStatusCode(302);
     }
 }

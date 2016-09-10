@@ -22,9 +22,9 @@ class TalkEntity
         $s = $this->getTalkName() . ' &mdash; <em>(by ';
 
         if ($this->getSpeakerTwitter() != '') {
-            $s .= '<a href="https://twitter.com/' . $this->getSpeakerTwitter() . '">' . $this->getSpeakerName() . '</a>';
+            $s .= '<strong><a href="https://twitter.com/' . $this->getSpeakerTwitter() . '">' . $this->getSpeakerName() . '</a></strong>';
         } else {
-            $s .= $this->getSpeakerName();
+            $s .= '<strong>' . $this->getSpeakerName() . '</strong>';
         }
 
         $s .= ')</em>';
