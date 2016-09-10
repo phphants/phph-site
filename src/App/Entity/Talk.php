@@ -72,8 +72,7 @@ use Ramsey\Uuid\Uuid;
         Speaker $speaker,
         string $title,
         string $abstract
-    ) : self
-    {
+    ) : self {
         $talk = new self();
         $talk->meetup = $meetup;
         $talk->time = $time;

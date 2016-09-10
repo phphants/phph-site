@@ -81,8 +81,7 @@ use Ramsey\Uuid\Uuid;
         Location $location,
         array $talks,
         string $topic = null
-    ) : self
-    {
+    ) : self {
         $meetup = new self();
         $meetup->fromDate = $from;
         $meetup->toDate = $to;

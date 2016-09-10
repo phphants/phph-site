@@ -63,4 +63,3 @@ use Ramsey\Uuid\Uuid;
         return $this->eventbriteId;
     }
 }
-
