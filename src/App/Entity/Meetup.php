@@ -94,6 +94,7 @@ use Ramsey\Uuid\Uuid;
                 throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
             }
         }
+        return $meetup;
     }
 
     public function getFromDate() : \DateTimeImmutable
