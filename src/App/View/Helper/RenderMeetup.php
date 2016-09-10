@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\View\Helper;
 
-use App\Entity\Talk as TalkEntity;
 use App\Entity\Meetup as MeetupEntity;
 use Zend\View\Helper\AbstractHelper;
 
@@ -11,16 +10,16 @@ final class RenderMeetup extends AbstractHelper
 {
     public function full(MeetupEntity $meetup) : string
     {
-        $date = $meetup->getFromDate()->format('jS F Y');
+        $humanReadableDate = $meetup->getFromDate()->format('jS F Y');
         $from_time = $meetup->getFromDate()->format('g:ia');
         if ($meetup->getToDate()) {
             $to_time = $meetup->getToDate()->format('g:ia');
         }
-        $registration_url = $meetup->getRegistrationUrl();
-        $location = $meetup->getLocation();
-        $location_url = $meetup->getLocationUrl();
+        $registration_url = $meetup->getEventbriteData()->getUrl();
+        $location = $meetup->getLocation()->getName() . ', ' . $meetup->getLocation()->getAddress();
+        $location_url = $meetup->getLocation()->getUrl();
         $topic = $meetup->getTopic();
-        $talking_points = $meetup->getTalkingPoints();
+        $talking_points = $meetup->getTalks();
 
         $talking_points_html = '';
         $talk_count = count($talking_points);
@@ -32,7 +31,7 @@ final class RenderMeetup extends AbstractHelper
             }
         }
 
-        $str = "<h2>{$date}</h2>";
+        $str = "<h2>{$humanReadableDate}</h2>";
 
         $str .= "<ul class='meetup-details'>";
 
@@ -58,19 +57,12 @@ final class RenderMeetup extends AbstractHelper
         $str .= '<li><strong>Talk' . ($talk_count > 1 ? 's' : '') . ':</strong>';
         $str .= "<ul class='talks'>\n{$talking_points_html}</ul></li>";
 
-        if (count($meetup->getSchedule()) > 0) {
-            $str .= "<li><strong>Schedule:</strong><ul>\n";
-
-            foreach ($meetup->getSchedule() as $item) {
-                $str .= "            <li>{$item}</li>\n";
-            }
-
-            $str .= '</ul></li>';
-        }
-
         $str .= '</ul>';
 
-        $widget = $meetup->getWidget();
+        $widget = $this->getView()->partial('layout::eventbrite-widget', [
+            'eventId' => $meetup->getEventbriteData()->getEventbriteId(),
+            'eventTitle' => 'PHP Hampshire ' . $meetup->getFromDate()->format('F Y') . ' Meetup',
+        ]);
 
         if ($widget) {
             $str .= "<div class=\"padding\"></div>" . $widget;
@@ -82,26 +74,24 @@ final class RenderMeetup extends AbstractHelper
     public function short(MeetupEntity $meetup) : string
     {
         $date = $meetup->getFromDate()->format('jS F Y');
-        $talking_points = $meetup->getTalkingPoints();
+        $talking_points = $meetup->getTalks();
 
         $talking_points_html = '';
         $talk_count = 0;
-        foreach ($talking_points as $point) {
-            if ($point instanceof TalkEntity) {
-                $s = $point->getTalkName() . ' &mdash; <em>(by ';
+        foreach ($talking_points as $talk) {
+            $s = $talk->getTitle() . ' &mdash; <em>(by ';
 
-                if ((string)$point->getSpeakerTwitter() !== '') {
-                    $s .= '<strong><a href="https://twitter.com/' . $point->getSpeakerTwitter() . '">'
-                        . $point->getSpeakerName()
-                        . '</a></strong>';
-                } else {
-                    $s .= '<strong>' . $point->getSpeakerName() . '</strong>';
-                }
-
-                $s .= ')</em>';
-                $talking_points_html .= '<li>' . $s . '</li>';
-                $talk_count++;
+            if (null !== $talk->getSpeaker()->getTwitterHandle()) {
+                $s .= '<strong><a href="https://twitter.com/' . $talk->getSpeaker()->getTwitterHandle() . '">'
+                    . $talk->getSpeaker()->getFullName()
+                    . '</a></strong>';
+            } else {
+                $s .= '<strong>' . $talk->getSpeaker()->getFullName(). '</strong>';
             }
+
+            $s .= ')</em>';
+            $talking_points_html .= '<li>' . $s . '</li>';
+            $talk_count++;
         }
 
         $str = "<h2>{$date}</h2>";
