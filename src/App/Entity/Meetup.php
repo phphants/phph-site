@@ -56,6 +56,7 @@ use Ramsey\Uuid\Uuid;
 
     /**
      * @ORM\OneToMany(targetEntity=Talk::class, mappedBy="meetup")
+     * @ORM\OrderBy({"time" = "ASC"})
      * @var ArrayCollection|Talk[]
      */
     private $talks;

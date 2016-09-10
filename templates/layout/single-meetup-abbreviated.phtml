@@ -1,0 +1,23 @@
+<?php
+declare(strict_types = 1);
+
+/** @var \App\Entity\Meetup $meetup */
+?>
+
+<h2><?= $meetup->getFromDate()->format('jS F Y'); ?></h2>
+
+<?php if (count($meetup->getTalks()) > 0): ?>
+<ul class="meetup-details">
+    <li>
+        <strong>Talk<?= count($meetup->getTalks()) === 1 ? '' : 's'; ?>:</strong>
+        <ul class="talks">
+        <?php foreach ($meetup->getTalks() as $talk): ?>
+            <li>
+                <?= $this->escapeHtml($talk->getTitle()); ?> &mdash;
+                    <em>(by <strong><?= $this->twitterLinkOrName($talk->getSpeaker()); ?></strong>)</em>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </li>
+</ul>
+<?php endif; ?>

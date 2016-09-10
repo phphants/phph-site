@@ -33,12 +33,14 @@ return [
     'view_helpers' => [
         'invokables' => [
             App\View\Helper\RenderMeetup::class => App\View\Helper\RenderMeetup::class,
+            App\View\Helper\TwitterLinkOrName::class => App\View\Helper\TwitterLinkOrName::class,
         ],
         'factories' => [
             App\View\Helper\IsDebug::class => App\View\Helper\IsDebugFactory::class,
         ],
         'aliases' => [
             'renderMeetup' => App\View\Helper\RenderMeetup::class,
+            'twitterLinkOrName' => App\View\Helper\TwitterLinkOrName::class,
             'isDebug' => App\View\Helper\IsDebug::class,
         ],
     ],

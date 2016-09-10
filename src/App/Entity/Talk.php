@@ -92,8 +92,16 @@ use Ramsey\Uuid\Uuid;
         return $this->title;
     }
 
-    public function getAbstract() : string
+    /**
+     * @return string|null
+     */
+    public function getAbstract()
     {
         return $this->abstract;
+    }
+
+    public function getTime() : \DateTimeImmutable
+    {
+        return new \DateTimeImmutable($this->time->format('Y-m-d H:i:s'));
     }
 }
