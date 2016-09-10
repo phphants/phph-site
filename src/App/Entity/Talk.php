@@ -47,7 +47,7 @@ use Ramsey\Uuid\Uuid;
     private $title;
 
     /**
-     * @ORM\Column(name="abstract", type="string", nullable=true)
+     * @ORM\Column(name="abstract", type="text", nullable=true)
      * @var string
      */
     private $abstract;
