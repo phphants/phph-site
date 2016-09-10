@@ -34,6 +34,7 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
             FROM ' . Meetup::class . ' meetup
                 JOIN meetup.eventbriteData eventbriteData 
             WHERE meetup.fromDate >= :fromDate
+            ORDER BY meetup.fromDate DESC
         ')->setParameters([
             'fromDate' => $pointInTime->setTime(0, 0, 0)
         ]);
@@ -52,6 +53,7 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
             SELECT meetup
             FROM ' . Meetup::class . ' meetup
             WHERE meetup.fromDate < :fromDate
+            ORDER BY meetup.fromDate DESC
         ')->setParameters([
             'fromDate' => $pointInTime->setTime(0, 0, 0)
         ]);
