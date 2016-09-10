@@ -37,8 +37,7 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
             'fromDate' => (new DateTimeImmutable())->setTime(0, 0, 0)
         ]);
 
-        $meetups = $query->getResult();
-        return $meetups;
+        return $query->getResult();
     }
 
     /**
@@ -56,7 +55,6 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
             'fromDate' => (new DateTimeImmutable())->setTime(0, 0, 0)
         ]);
 
-        $meetups = $query->getResult();
-        return $meetups;
+        return $query->getResult();
     }
 }
