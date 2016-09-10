@@ -13,8 +13,10 @@ declare(strict_types = 1);
         <ul class="talks">
         <?php foreach ($meetup->getTalks() as $talk): ?>
             <li>
-                <?= $this->escapeHtml($talk->getTitle()); ?> &mdash;
-                    <em>(by <strong><?= $this->twitterLinkOrName($talk->getSpeaker()); ?></strong>)</em>
+                <?= $this->escapeHtml($talk->getTitle()); ?>
+                <?php if (null !== $talk->getSpeaker()): ?>
+                    &mdash; <em>(by <strong><?= $this->twitterLinkOrName($talk->getSpeaker()); ?></strong>)</em>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
         </ul>
