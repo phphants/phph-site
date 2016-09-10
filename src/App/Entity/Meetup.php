@@ -93,18 +93,19 @@ use Ramsey\Uuid\Uuid;
             if (!$talk instanceof Talk) {
                 throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
             }
+            $meetup->talks->add($talk);
         }
         return $meetup;
     }
 
     public function getFromDate() : \DateTimeImmutable
     {
-        return new \DateTimeImmutable($this->fromDate->format('Y-m-d'));
+        return new \DateTimeImmutable($this->fromDate->format('Y-m-d H:i:s'));
     }
 
     public function getToDate() : \DateTimeImmutable
     {
-        return new \DateTimeImmutable($this->toDate->format('Y-m-d'));
+        return new \DateTimeImmutable($this->toDate->format('Y-m-d H:i:s'));
     }
 
     /**

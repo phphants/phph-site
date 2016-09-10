@@ -4,20 +4,23 @@ declare(strict_types = 1);
 namespace App\Service;
 
 use App\Entity\Meetup;
+use DateTimeImmutable;
 
 interface MeetupsServiceInterface
 {
     /**
-     * Get all future planned meetups
+     * Get all meetups after specified date
      *
-     * @return Meetup[]
+     * @param DateTimeImmutable $pointInTime
+     * @return Meetup[]|array
      */
-    public function getFutureMeetups() : array;
+    public function findMeetupsAfter(DateTimeImmutable $pointInTime) : array;
 
     /**
-     * Get all meetups in the past
+     * Get all meetups before specified date
      *
-     * @return Meetup[]
+     * @param DateTimeImmutable $pointInTime
+     * @return Meetup[]|array
      */
-    public function getPastMeetups() : array;
+    public function findMeetupsBefore(DateTimeImmutable $pointInTime) : array;
 }

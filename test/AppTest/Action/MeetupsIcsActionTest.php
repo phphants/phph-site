@@ -18,7 +18,7 @@ final class MeetupsIcsActionTest extends \PHPUnit_Framework_TestCase
     public function testActionRendersViewAndRetrievesFutureMeetups()
     {
         $meetupsService = $this->createMock(MeetupsServiceInterface::class);
-        $meetupsService->expects(self::once())->method('getFutureMeetups')->willReturn([
+        $meetupsService->expects(self::once())->method('findMeetupsAfter')->willReturn([
             Meetup::fromStandardMeetup(
                 new \DateTimeImmutable(),
                 new \DateTimeImmutable(),
@@ -30,7 +30,7 @@ final class MeetupsIcsActionTest extends \PHPUnit_Framework_TestCase
                 []
             )
         ]);
-        $meetupsService->expects(self::never())->method('getPastMeetups');
+        $meetupsService->expects(self::never())->method('findMeetupsBefore');
 
         $response = (new MeetupsIcsAction($meetupsService))->__invoke(
             new ServerRequest(['/']),

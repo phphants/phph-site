@@ -24,9 +24,10 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
      * Get all future planned meetups
      * Entities to be fetched must have Eventbrite data for displaying registration, otherwise it is considered inactive
      *
-     * @return Meetup[]
+     * @param DateTimeImmutable $pointInTime
+     * @return \App\Entity\Meetup[]|array
      */
-    public function getFutureMeetups() : array
+    public function findMeetupsAfter(DateTimeImmutable $pointInTime) : array
     {
         $query = $this->entityManager->createQuery('
             SELECT meetup
@@ -34,7 +35,7 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
                 JOIN meetup.eventbriteData eventbriteData 
             WHERE meetup.fromDate >= :fromDate
         ')->setParameters([
-            'fromDate' => (new DateTimeImmutable())->setTime(0, 0, 0)
+            'fromDate' => $pointInTime->setTime(0, 0, 0)
         ]);
 
         return $query->getResult();
@@ -45,14 +46,14 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
      *
      * @return Meetup[]
      */
-    public function getPastMeetups() : array
+    public function findMeetupsBefore(DateTimeImmutable $pointInTime) : array
     {
         $query = $this->entityManager->createQuery('
             SELECT meetup
             FROM ' . Meetup::class . ' meetup
             WHERE meetup.fromDate < :fromDate
         ')->setParameters([
-            'fromDate' => (new DateTimeImmutable())->setTime(0, 0, 0)
+            'fromDate' => $pointInTime->setTime(0, 0, 0)
         ]);
 
         return $query->getResult();

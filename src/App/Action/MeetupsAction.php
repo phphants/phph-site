@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Action;
 
 use App\Service\MeetupsServiceInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -30,11 +31,13 @@ final class MeetupsAction implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $next = null) : HtmlResponse
     {
+        $now = new DateTimeImmutable();
+
         return new HtmlResponse($this->templateRenderer->render(
             'app::meetups',
             [
-                'futureMeetups' => $this->meetupsService->getFutureMeetups(),
-                'pastMeetups' => $this->meetupsService->getPastMeetups(),
+                'futureMeetups' => $this->meetupsService->findMeetupsAfter($now),
+                'pastMeetups' => $this->meetupsService->findMeetupsBefore($now),
             ]
         ));
     }

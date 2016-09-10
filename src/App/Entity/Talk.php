@@ -82,7 +82,10 @@ use Ramsey\Uuid\Uuid;
         return $talk;
     }
 
-    public function getSpeaker() : Speaker
+    /**
+     * @return Speaker|null
+     */
+    public function getSpeaker()
     {
         return $this->speaker;
     }
