@@ -126,7 +126,10 @@ use Ramsey\Uuid\Uuid;
         return $this->location;
     }
 
-    public function getTopic() : string
+    /**
+     * @return string|null
+     */
+    public function getTopic()
     {
         return $this->topic;
     }
