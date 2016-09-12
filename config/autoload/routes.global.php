@@ -18,6 +18,8 @@ return [
             App\Action\ChatAction::class => App\Action\ChatActionFactory::class,
             App\Action\ChatHelpAction::class => App\Action\ChatHelpActionFactory::class,
             App\Action\TeamAction::class => App\Action\TeamActionFactory::class,
+            App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
+            App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
     'routes' => [
@@ -85,6 +87,30 @@ return [
             'name' => 'subscribe',
             'path' => '/subscribe',
             'middleware' => App\Action\SubscribeAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-login',
+            'path' => '/account/login',
+            'middleware' => App\Action\Account\LoginAction::class,
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-dashboard',
+            'path' => '/account/dashboard',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\DashboardAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-logout',
+            'path' => '/account/logout',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\LogoutAction::class,
+            ],
             'allowed_methods' => ['GET'],
         ],
     ],
