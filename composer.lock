@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "427b5a1502082619760cd0d7aab3102e",
-    "content-hash": "86b5516da2773fb7ffb8ee5e1f14f978",
+    "hash": "b34bfc82bba9742b907c170ef291dba7",
+    "content-hash": "b5e7211dfacfcf80126840e0f2438f6c",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1583,6 +1583,68 @@
             "time": "2016-09-02 02:12:52"
         },
         {
+            "name": "zendframework/zend-authentication",
+            "version": "2.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-authentication.git",
+                "reference": "1422dec160eb769c719cad2229847fcbf20a1405"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-authentication/zipball/1422dec160eb769c719cad2229847fcbf20a1405",
+                "reference": "1422dec160eb769c719cad2229847fcbf20a1405",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.7.*",
+                "phpunit/phpunit": "~4.0",
+                "zendframework/zend-crypt": "^2.6",
+                "zendframework/zend-db": "^2.7",
+                "zendframework/zend-http": "^2.5.4",
+                "zendframework/zend-ldap": "^2.6",
+                "zendframework/zend-session": "^2.6.2",
+                "zendframework/zend-uri": "^2.5",
+                "zendframework/zend-validator": "^2.6"
+            },
+            "suggest": {
+                "zendframework/zend-crypt": "Zend\\Crypt component",
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-http": "Zend\\Http component",
+                "zendframework/zend-ldap": "Zend\\Ldap component",
+                "zendframework/zend-session": "Zend\\Session component",
+                "zendframework/zend-uri": "Zend\\Uri component",
+                "zendframework/zend-validator": "Zend\\Validator component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev",
+                    "dev-develop": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Authentication\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides an API for authentication and includes concrete authentication adapters for common use case scenarios",
+            "homepage": "https://github.com/zendframework/zend-authentication",
+            "keywords": [
+                "Authentication",
+                "zf2"
+            ],
+            "time": "2016-02-28 15:02:34"
+        },
+        {
             "name": "zendframework/zend-code",
             "version": "3.0.4",
             "source": {
@@ -2343,6 +2405,72 @@
                 "zf"
             ],
             "time": "2016-07-15 14:59:51"
+        },
+        {
+            "name": "zendframework/zend-session",
+            "version": "2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-session.git",
+                "reference": "346e9709657b81a5d53d70ce754730a26d1f02f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-session/zipball/346e9709657b81a5d53d70ce754730a26d1f02f2",
+                "reference": "346e9709657b81a5d53d70ce754730a26d1f02f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^7.0",
+                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "container-interop/container-interop": "^1.1",
+                "fabpot/php-cs-fixer": "1.7.*",
+                "mongodb/mongodb": "^1.0.1",
+                "phpunit/phpunit": "~4.0",
+                "zendframework/zend-cache": "^2.6.1",
+                "zendframework/zend-db": "^2.7",
+                "zendframework/zend-http": "^2.5.4",
+                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
+                "zendframework/zend-validator": "^2.6"
+            },
+            "suggest": {
+                "mongodb/mongodb": "If you want to use the MongoDB session save handler",
+                "zendframework/zend-cache": "Zend\\Cache component",
+                "zendframework/zend-db": "Zend\\Db component",
+                "zendframework/zend-http": "Zend\\Http component",
+                "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+                "zendframework/zend-validator": "Zend\\Validator component"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev",
+                    "dev-develop": "2.8-dev"
+                },
+                "zf": {
+                    "component": "Zend\\Session",
+                    "config-provider": "Zend\\Session\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Session\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "manage and preserve session data, a logical complement of cookie data, across multiple page requests by the same client",
+            "homepage": "https://github.com/zendframework/zend-session",
+            "keywords": [
+                "session",
+                "zf2"
+            ],
+            "time": "2016-07-05 18:32:50"
         },
         {
             "name": "zendframework/zend-stdlib",
