@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Action;
 
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 

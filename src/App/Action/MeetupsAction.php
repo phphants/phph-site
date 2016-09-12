@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Action;
 
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;

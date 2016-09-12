@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Meetup;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;

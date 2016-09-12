@@ -1,16 +1,16 @@
 <?php
 declare(strict_types = 1);
 
-namespace AppTest\Service;
+namespace AppTest\Service\Meetup;
 
 use App\Entity\Meetup;
-use App\Service\DoctrineMeetupsService;
+use App\Service\Meetup\DoctrineMeetupsService;
 use DateTimeImmutable;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * @covers \App\Service\DoctrineMeetupsService
+ * @covers \App\Service\Meetup\DoctrineMeetupsService
  */
 class DoctrineMeetupsServiceTest extends \PHPUnit_Framework_TestCase
 {

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace AppTest\Action;
 
 use App\Action\MeetupsAction;
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Template\TemplateRendererInterface;

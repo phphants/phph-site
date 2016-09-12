@@ -6,7 +6,7 @@ namespace AppTest\Action;
 use App\Action\MeetupsIcsAction;
 use App\Entity\Location;
 use App\Entity\Meetup;
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 

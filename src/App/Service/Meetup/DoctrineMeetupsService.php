@@ -1,9 +1,8 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Service;
+namespace App\Service\Meetup;
 
-use App\Entity\EventbriteData;
 use App\Entity\Meetup;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
