@@ -18,6 +18,7 @@ return [
             App\Action\ChatAction::class => App\Action\ChatActionFactory::class,
             App\Action\ChatHelpAction::class => App\Action\ChatHelpActionFactory::class,
             App\Action\TeamAction::class => App\Action\TeamActionFactory::class,
+            App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],

@@ -689,3 +689,7 @@ ul#team li img {
 	float: left;
 	padding-right: 20px;
 }
+
+.error {
+	color: #ff0000;
+}
