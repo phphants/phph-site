@@ -18,8 +18,8 @@ $eventbriteWidget .= '</div></div>';
 
 $meetup = new MeetupEntity();
 
-$abstract = <<<END
-tbc
+$abstract = <<<'END'
+During 10+ years of teaching PHP I have come to recognise that many introductory-level students find the client-server architecture of server-side web applications confusing and often confuse the programming constructs used to get data from the front-end (e.g. HTML form, query string) and from the database. Beginner students also often fail to appreciate the meaning of code inside a typical loop used to iterate through the results of an SELECT query in PHP.  "EPHP" aims to give students a clearer appreciation of what is actually going on with a typical database-driven PHP application by visualising the components of the application and how they interact. Students can see the data cross the network, and view and edit representations of the HTTP requests and responses live in the browser - as well as clearly see the link between $_GET and $_POST variables and the corresponding form data, and visualise the operation of a typical "while" loop used to visualise database results. The talk will include a demo as well as technical details on how the application is built, and will invite feedback from the audience.
 END;
 
 $meetup->setId(0)
