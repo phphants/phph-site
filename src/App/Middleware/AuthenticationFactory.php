@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use App\Service\Authentication\AuthenticationServiceInterface;
 use Interop\Container\ContainerInterface;
-use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**

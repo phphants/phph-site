@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace AppTest\Action;
 
 use App\Middleware\Authentication;
-use Zend\Authentication\AuthenticationServiceInterface;
+use App\Service\Authentication\AuthenticationServiceInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Template\TemplateRendererInterface;

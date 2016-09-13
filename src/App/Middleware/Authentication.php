@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Middleware;
 
+use App\Service\Authentication\AuthenticationServiceInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Stratigility\MiddlewareInterface;
