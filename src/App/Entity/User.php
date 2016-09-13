@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="`user`")
  */
 /*final */class User
 {
