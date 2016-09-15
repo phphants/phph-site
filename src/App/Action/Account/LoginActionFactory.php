@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Action\Account;
 
+use App\Form\Account\LoginForm;
 use App\Service\Authentication\AuthenticationServiceInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Helper\UrlHelper;
@@ -18,7 +19,8 @@ final class LoginActionFactory
         return new LoginAction(
             $container->get(AuthenticationServiceInterface::class),
             $container->get(TemplateRendererInterface::class),
-            $container->get(UrlHelper::class)
+            $container->get(UrlHelper::class),
+            new LoginForm()
         );
     }
 }

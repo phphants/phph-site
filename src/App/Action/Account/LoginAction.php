@@ -10,6 +10,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Helper\UrlHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Form\FormInterface;
 use Zend\Stratigility\MiddlewareInterface;
 
 final class LoginAction implements MiddlewareInterface
@@ -29,33 +30,41 @@ final class LoginAction implements MiddlewareInterface
      */
     private $urlHelper;
 
+    /**
+     * @var FormInterface
+     */
+    private $form;
+
     public function __construct(
         AuthenticationServiceInterface $authenticationService,
         TemplateRendererInterface $templateRenderer,
-        UrlHelper $urlHelper
+        UrlHelper $urlHelper,
+        FormInterface $form
     ) {
         $this->templateRenderer = $templateRenderer;
         $this->authenticationService = $authenticationService;
         $this->urlHelper = $urlHelper;
+        $this->form = $form;
     }
 
     public function __invoke(Request $request, Response $response, callable $next = null) : Response
     {
-        $error = null;
-
         if ('POST' === strtoupper($request->getMethod())) {
-            // @todo validate the form properly
-            $data = $request->getParsedBody();
+            $this->form->setData($request->getParsedBody());
 
-            if ($this->authenticationService->authenticate($data['email'], $data['password'])) {
-                return new RedirectResponse($this->urlHelper->generate('account-dashboard'));
+            if ($this->form->isValid()) {
+                $data = $this->form->getData();
+
+                if ($this->authenticationService->authenticate($data['email'], $data['password'])) {
+                    return new RedirectResponse($this->urlHelper->generate('account-dashboard'));
+                }
+
+                $this->form->get('email')->setMessages(['Unable to login']);
             }
-
-            $error = 'Unable to authenticate';
         }
 
         return new HtmlResponse($this->templateRenderer->render('account::login', [
-            'error' => $error,
+            'form' => $this->form,
         ]));
     }
 }

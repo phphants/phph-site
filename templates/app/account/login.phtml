@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-/** @var string|null $error */
+/** @var \App\Form\Account\LoginForm $form */
 
 $title = 'Login';
 $this->headTitle($title);
@@ -18,17 +18,21 @@ $this->headTitle($title);
     }
     ?>
 
-    <form method="POST">
-        <label>
-            Email:
-            <input type="text" name="email" placeholder="foo@bar.com" />
-        </label>
+    <?= $this->form()->openTag($form); ?>
 
-        <label>
-            Password:
-            <input type="password" name="password" placeholder="******" />
-        </label>
+    <?= $this->formRow($form->get('email')->setAttributes([
+        'placeholder' => 'foo@bar.com',
+    ])); ?>
 
-        <input type="submit" value="Login" />
-    </form>
+    <br />
+
+    <?= $this->formRow($form->get('password')); ?>
+
+    <br />
+
+    <?= $this->formRow($form->get('submit')); ?>
+
+    <?= $this->formRow($form->get('loginForm_csrf')); ?>
+    <?= $this->form()->closeTag(); ?>
+
 </div>
