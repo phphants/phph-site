@@ -9,6 +9,8 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Helper\UrlHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Form\Element\Text;
+use Zend\Form\FormInterface;
 
 /**
  * @covers \App\Action\Account\LoginAction
@@ -26,7 +28,12 @@ final class LoginActionTest extends \PHPUnit_Framework_TestCase
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
 
-        $response = (new LoginAction($auth, $renderer, $urlHelper))->__invoke(
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::never())->method('setData');
+        $form->expects(self::never())->method('isValid');
+        $form->expects(self::never())->method('getData');
+
+        $response = (new LoginAction($auth, $renderer, $urlHelper, $form))->__invoke(
             (new ServerRequest(['/']))->withMethod('GET'),
             new Response()
         );
@@ -37,8 +44,6 @@ final class LoginActionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidPostRequestRendersTemplate()
     {
-        self::markTestIncomplete('Validation not written yet');
-
         $auth = $this->createMock(AuthenticationServiceInterface::class);
         $auth->expects(self::never())->method('authenticate');
 
@@ -48,7 +53,12 @@ final class LoginActionTest extends \PHPUnit_Framework_TestCase
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
 
-        $response = (new LoginAction($auth, $renderer, $urlHelper))->__invoke(
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::once())->method('setData')->with(['email' => '', 'password' => '']);
+        $form->expects(self::once())->method('isValid')->willReturn(false);
+        $form->expects(self::never())->method('getData');
+
+        $response = (new LoginAction($auth, $renderer, $urlHelper, $form))->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody(['email' => '', 'password' => '']),
@@ -73,7 +83,19 @@ final class LoginActionTest extends \PHPUnit_Framework_TestCase
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
 
-        $response = (new LoginAction($auth, $renderer, $urlHelper))->__invoke(
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::once())->method('setData')->with([
+            'email' => 'foo@bar.com',
+            'password' => 'incorrect password',
+        ]);
+        $form->expects(self::once())->method('isValid')->willReturn(true);
+        $form->expects(self::once())->method('getData')->willReturn([
+            'email' => 'foo@bar.com',
+            'password' => 'incorrect password',
+        ]);
+        $form->expects(self::once())->method('get')->with('email')->willReturn(new Text());
+
+        $response = (new LoginAction($auth, $renderer, $urlHelper, $form))->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody(['email' => 'foo@bar.com', 'password' => 'incorrect password']),
@@ -101,7 +123,18 @@ final class LoginActionTest extends \PHPUnit_Framework_TestCase
             ->with('account-dashboard')
             ->willReturn('/account/dashboard');
 
-        $response = (new LoginAction($auth, $renderer, $urlHelper))->__invoke(
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::once())->method('setData')->with([
+            'email' => 'foo@bar.com',
+            'password' => 'incorrect password',
+        ]);
+        $form->expects(self::once())->method('isValid')->willReturn(true);
+        $form->expects(self::once())->method('getData')->willReturn([
+            'email' => 'foo@bar.com',
+            'password' => 'incorrect password',
+        ]);
+
+        $response = (new LoginAction($auth, $renderer, $urlHelper, $form))->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody(['email' => 'foo@bar.com', 'password' => 'incorrect password']),
