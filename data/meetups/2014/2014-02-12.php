@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - February 2014 Meetup';
 $eid = '9904055296';
@@ -16,7 +16,7 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 In the PHP world functions are generally sneered at due to their simplicity and perceived as an evil side effect of spaghetti code. This is not necessarily the case however as when functions are combined in a logical manner they can be very powerful.<br /><br />
@@ -26,13 +26,13 @@ During my talk you'll hear some history, functional theory (introduced gently I 
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-02-12 19:00'))
-    ->setToDate(new DateTime('2014-02-12 23:00'))
+    ->setFromDate(new DateTimeImmutable('2014-02-12 19:00'))
+    ->setToDate(new DateTimeImmutable('2014-02-12 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        new TalkEntity('Simon Holywell', 'Treffynnon', 'Functional PHP', $abstract),
+        new Talk('Simon Holywell', 'Treffynnon', 'Functional PHP', $abstract),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);

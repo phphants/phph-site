@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - December Meetup';
 $eid = '8872569093';
@@ -16,17 +16,17 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2013-12-11 19:00'))
-    ->setToDate(new DateTime('2013-12-11 23:00'))
+    ->setFromDate(new DateTimeImmutable('2013-12-11 19:00'))
+    ->setToDate(new DateTimeImmutable('2013-12-11 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis Conference Centre, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        new TalkEntity('Phil Bennett', 'phil_bennett', 'How to develop your development of being a developer without doing any developing', 'A light hearted look at being less shit, covering the periphery skills required including communication, delivery and not being a berk.'),
-        new TalkEntity('Gareth Evans', 'garoevans', 'PHP and Enums', 'This talk should begin with a very general introduction to Enums. What is an
+        new Talk('Phil Bennett', 'phil_bennett', 'How to develop your development of being a developer without doing any developing', 'A light hearted look at being less shit, covering the periphery skills required including communication, delivery and not being a berk.'),
+        new Talk('Gareth Evans', 'garoevans', 'PHP and Enums', 'This talk should begin with a very general introduction to Enums. What is an
 Enum and what is it for? Then, the direction should turn towards PHP, how does
 this work in PHP, where do I need it in PHP what are the benefits of using it.
 

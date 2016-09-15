@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - May 2015 Meetup';
 $eid = '16512822296';
@@ -16,7 +16,7 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 We've often seen "magic" code, but how does it even work?<br />
@@ -25,13 +25,13 @@ Do not try this at home!
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2015-05-13 19:00'))
-    ->setToDate(new DateTime('2015-05-13 23:00'))
+    ->setFromDate(new DateTimeImmutable('2015-05-13 19:00'))
+    ->setToDate(new DateTimeImmutable('2015-05-13 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Marco Pivetta', 'ocramius', 'Voodoo PHP', $abstract),
+    	new Talk('Marco Pivetta', 'ocramius', 'Voodoo PHP', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
         'Giveaway - 1x copy of Grumpy Little Book of Hack by Chris Hartjes',
         'Giveaway - FREE Ticket for <a href="http://2015.phpsouthcoast.co.uk/">PHP South Coast conference 2015</a>!!!',

@@ -1,0 +1,40 @@
+
+<?php
+$this->headTitle('Welcome!');
+?>
+
+<?php echo $this->partial('layout::hero'); ?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+
+    <section>
+
+        <h1>Our meetups...</h1>
+        <p>Our meetups take place on every <strong>2<sup>nd</sup> Wednesday of the month from 7pm at the <a href="http://goo.gl/maps/ET78d">Oasis Conference Centre (Arundel Street)</a> in Portsmouth</strong>.</p>
+        <p>To be notified of meetups by email, please <a href="<?php echo $this->url('subscribe');?>">subscribe</a>.</p>
+        <p>We care about creating a safe environment for everyone, you can read our <a href="<?php echo $this->url('code-of-conduct'); ?>">code of conduct</a> for more information.</p>
+        <p><a href="<?php echo $this->url('meetups'); ?>">Check our Meetups page for how to register &raquo;</a></p>
+
+    </section>
+
+    <section>
+
+        <h1>Support Us</h1>
+        <p>Please support your local PHP user group in Hampshire by donating to help shape future events!</p>
+
+        <form class="paypal-donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="8Q4PUM75V8DGS">
+            <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal – The safer, easier way to pay online.">
+        </form>
+        <br />
+
+    </section>
+
+</div>
+
+<div class="wrapper">
+    <a href="mailto:speak@phphants.co.uk" class="announcement">We are looking for speakers for our monthly meetups! To volunteer, <strong>please email us</strong>.</a>
+</div>

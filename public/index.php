@@ -1,12 +1,12 @@
 <?php
-/**
- * This makes our life easier when dealing with paths. Everything is relative
- * to the application root now.
- */
+declare(strict_types=1);
+
 chdir(dirname(__DIR__));
+require __DIR__ . '/../vendor/autoload.php';
 
-// Setup autoloading
-require 'init_autoloader.php';
+/** @var \Interop\Container\ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
 
-// Run the application!
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+/** @var \Zend\Expressive\Application $app */
+$app = $container->get(\Zend\Expressive\Application::class);
+$app->run();

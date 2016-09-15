@@ -1,11 +1,17 @@
-Redirect 302 /survey2013 https://docs.google.com/forms/d/1IgUNMaEa051iOyhobibYE9G_HsUMJCTKgHBgkFdxA7o/viewform
-Redirect 302 /free-zf2-book http://leanpub.com/using-zend-framework-2/c/DI$COUNT
-Redirect 302 /donate https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8Q4PUM75V8DGS
-Redirect 302 /phpsc16 https://www.eventbrite.co.uk/e/php-south-coast-conference-2016-tickets-20336186080?discount=UG_PHPHN
-
 RewriteEngine On
+# The following rule tells Apache that if the requested filename
+# exists, simply serve it.
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
-RewriteRule ^.*$ index.php [NC,L]
+
+# The following rewrites all other queries to index.php. The
+# condition ensures that if you are using Apache aliases to do
+# mass virtual hosting, the base path will be prepended to
+# allow proper resolution of the index.php file; it will work
+# in non-aliased environments as well, providing a safe, one-size
+# fits all solution.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]

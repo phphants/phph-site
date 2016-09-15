@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - August 2014 Meetup';
 $eid = '11915885735';
@@ -16,20 +16,20 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 Balancing technical debt and getting things done is one of the hardest problems we have. When should we write beautiful, elegant, clean code and when should we just hammer away blindly at the keyboard until it's done? This talk goes in to why this balance is so difficult and covers everything from estimations to refactoring and testing, with a focus on real world PHP apps.
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-08-13 19:00'))
-    ->setToDate(new DateTime('2014-08-13 23:00'))
+    ->setFromDate(new DateTimeImmutable('2014-08-13 19:00'))
+    ->setToDate(new DateTimeImmutable('2014-08-13 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NH&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NH,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NH')
     ->setTalkingPoints(array(
-        new TalkEntity('Dave Hulbert', 'dave1010', 'The Benefit of Sneezing Code Into an Editor vs Clean Code', $abstract),
+        new Talk('Dave Hulbert', 'dave1010', 'The Benefit of Sneezing Code Into an Editor vs Clean Code', $abstract),
         '9pm Social @ Brewhouse Pompey (The White Swan)',
     ))
     ->setWidget($eventbriteWidget);

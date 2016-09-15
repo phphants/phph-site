@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - December 2014 Meetup';
 $eid = '13601216605';
@@ -16,20 +16,20 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 Twitter is a global, real-time platform; an indispensable companion to life in the moment and what’s happening in the world at any given time. The Twitter APIs and platform give developers the opportunity to tap into the pulse of the planet and use that data in innovative ways. This talk will provide some examples, and look at how to take advantage of the platform through Twitter APIs.
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2014-12-10 19:00'))
-    ->setToDate(new DateTime('2014-12-10 23:00'))
+    ->setFromDate(new DateTimeImmutable('2014-12-10 19:00'))
+    ->setToDate(new DateTimeImmutable('2014-12-10 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Andy Piper', 'andypiper', 'Connecting to the Pulse of the Planet', $abstract),
+    	new Talk('Andy Piper', 'andypiper', 'Connecting to the Pulse of the Planet', $abstract),
         'Super Special Xmas Prize Draws - with prizes from <strong>Spectrum IT, GitHub, php|architect, JetBrains, O\'Reilly &amp; more</strong>!',
         'elePHPant Raffles!',
         'Mince pies and yule logs!',

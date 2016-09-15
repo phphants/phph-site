@@ -1,8 +1,8 @@
 <?php
 
-use Phph\Site\Model\MeetupEntity;
-use Phph\Site\Model\TalkEntity;
-use Phph\Site\Model\ScheduleEntity;
+use App\Entity\Meetup;
+use App\Entity\Talk;
+use App\Entity\Schedule;
 
 $etitle = 'PHP Hampshire - September 2015 Meetup';
 $eid = '16783273222';
@@ -16,28 +16,28 @@ $eventbriteWidget .= '<span style="color:#888;"> powered by </span>';
 $eventbriteWidget .= '<a style="color:#888; text-decoration:none;" target="_blank" href="https://www.eventbrite.co.uk?ref=etckt">Eventbrite</a>';
 $eventbriteWidget .= '</div></div>';
 
-$meetup = new MeetupEntity();
+$meetup = new Meetup();
 
 $abstract = <<<END
 Protecting your users' data with just a username and password is no longer satisfactory. Two-factor authentication (2FA) is the primary method of countering the effects of stolen passwords, and it is easy to implement in your web application. In this session, we will discuss what two-factor authentication is, how it works, and the challenges associated with it. We will then look how to integrate two-factor authentication into your PHP application's login workflow. We'll consider a Google Authenticator implementation, so you can make your users' accounts more secure. Finally, we will cover some plugins that WordPress & Drupal developers can use to enable this easily!
 END;
 
 $meetup->setId(0)
-    ->setFromDate(new DateTime('2015-09-09 19:00'))
-    ->setToDate(new DateTime('2015-09-09 23:00'))
+    ->setFromDate(new DateTimeImmutable('2015-09-09 19:00'))
+    ->setToDate(new DateTimeImmutable('2015-09-09 23:00'))
     ->setRegistrationUrl("https://www.eventbrite.co.uk/event/{$eid}")
     ->setLocationUrl("https://www.google.co.uk/maps?q=Oasis+Venue,+Arundel+Street,+PO1+1NP&hl=en&ll=50.799642,-1.086724&spn=0.011772,0.031629&sll=50.799734,-1.086874&sspn=0.011772,0.031629&hq=Oasis+Venue,&hnear=Arundel+St,+PO1+1NP,+United+Kingdom&t=m&z=16")
     ->setLocation('Oasis the Venue, Arundel Street, PO1 1NP')
     ->setTalkingPoints(array(
-    	new TalkEntity('Rob Allen', 'akrabat', 'Secure your web application with two-factor authentication', $abstract),
+    	new Talk('Rob Allen', 'akrabat', 'Secure your web application with two-factor authentication', $abstract),
         '&pound;20 Amazon.co.uk gift voucher prize draw, courtesy of Spectrum IT',
     ))
 	->setSchedule(array(
-		new ScheduleEntity(new \DateTime('19:00'), 'Arrival'),
-		new ScheduleEntity(new \DateTime('19:25'), 'Welcome announcement'),
-		new ScheduleEntity(new \DateTime('19:30'), 'Rob Allen - Secure your web application with two-factor authentication'),
-		new ScheduleEntity(new \DateTime('20:30'), 'Closing comments'),
-		new ScheduleEntity(new \DateTime('20:45'), 'Social gathering at <del title="Brewhouse is temporarily closed :("><a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)</del> <a href="http://www.jdwetherspoon.co.uk/home/pubs/the-trafalgar">The Trafalgar</a> (Wetherspoons)'),
+		new Schedule(new \DateTimeImmutable('19:00'), 'Arrival'),
+		new Schedule(new \DateTimeImmutable('19:25'), 'Welcome announcement'),
+		new Schedule(new \DateTimeImmutable('19:30'), 'Rob Allen - Secure your web application with two-factor authentication'),
+		new Schedule(new \DateTimeImmutable('20:30'), 'Closing comments'),
+		new Schedule(new \DateTimeImmutable('20:45'), 'Social gathering at <del title="Brewhouse is temporarily closed :("><a href="http://brewhouseandkitchen.com/portsmouth">Brewhouse Pompey</a> (The White Swan)</del> <a href="http://www.jdwetherspoon.co.uk/home/pubs/the-trafalgar">The Trafalgar</a> (Wetherspoons)'),
 	))
     ->setWidget($eventbriteWidget);
 
