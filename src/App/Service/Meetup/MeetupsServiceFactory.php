@@ -12,8 +12,11 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  */
 final class MeetupsServiceFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : DoctrineMeetupsService
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) : DoctrineMeetupsService {
         return new DoctrineMeetupsService(
             $container->get(EntityManagerInterface::class)
         );
