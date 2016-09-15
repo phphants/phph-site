@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class IndexActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : IndexAction
     {
         return new IndexAction($container->get(TemplateRendererInterface::class));
     }

@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class CodeOfConductActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : CodeOfConductAction
     {
         return new CodeOfConductAction($container->get(TemplateRendererInterface::class));
     }

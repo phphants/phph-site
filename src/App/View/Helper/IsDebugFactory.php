@@ -11,7 +11,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  */
 final class IsDebugFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : IsDebug
     {
         return new IsDebug($container->get('config')['debug'] === true);
     }

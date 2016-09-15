@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class TeamActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : TeamAction
     {
         return new TeamAction($container->get(TemplateRendererInterface::class));
     }

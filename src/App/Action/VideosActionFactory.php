@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class VideosActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : VideosAction
     {
         return new VideosAction($container->get(TemplateRendererInterface::class));
     }

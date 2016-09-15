@@ -11,7 +11,7 @@ use Interop\Container\ContainerInterface;
  */
 final class MeetupsIcsActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : MeetupsIcsAction
     {
         return new MeetupsIcsAction(
             $container->get(MeetupsServiceInterface::class)

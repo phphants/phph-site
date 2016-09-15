@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class SponsorsActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : SponsorsAction
     {
         return new SponsorsAction($container->get(TemplateRendererInterface::class));
     }

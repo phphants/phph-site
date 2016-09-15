@@ -12,7 +12,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class MeetupsActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : MeetupsAction
     {
         return new MeetupsAction(
             $container->get(MeetupsServiceInterface::class),

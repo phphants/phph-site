@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class ChatHelpActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : ChatHelpAction
     {
         return new ChatHelpAction($container->get(TemplateRendererInterface::class));
     }

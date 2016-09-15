@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class ContactActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : ContactAction
     {
         return new ContactAction($container->get(TemplateRendererInterface::class));
     }
