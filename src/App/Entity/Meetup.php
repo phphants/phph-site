@@ -116,6 +116,13 @@ use Ramsey\Uuid\Uuid;
         return $this->talks;
     }
 
+    public function getAbbreviatedTalks() : Collection
+    {
+        return $this->talks->filter(function (Talk $talk) {
+            return null !== $talk->getSpeaker();
+        });
+    }
+
     public function getEventbriteData() : EventbriteData
     {
         return $this->eventbriteData;

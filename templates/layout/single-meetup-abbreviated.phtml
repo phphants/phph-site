@@ -4,9 +4,7 @@ declare(strict_types = 1);
 /** @var \App\Entity\Meetup $meetup */
 
 /** @var \App\Entity\Talk[]|\Doctrine\Common\Collections\Collection $abbreviatedTalks */
-$abbreviatedTalks = $meetup->getTalks()->filter(function (\App\Entity\Talk $talk) {
-    return null !== $talk->getSpeaker();
-});
+$abbreviatedTalks = $meetup->getAbbreviatedTalks();
 ?>
 
 <h2><?= $meetup->getFromDate()->format('jS F Y'); ?></h2>

@@ -6,6 +6,7 @@ namespace AppTest\Entity;
 use App\Entity\EventbriteData;
 use App\Entity\Location;
 use App\Entity\Meetup;
+use App\Entity\Speaker;
 use App\Entity\Talk;
 
 /**
@@ -51,5 +52,31 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Item with key 0 in talks was not a Talk');
         Meetup::fromStandardMeetup($from, $to, $location, $talks, $topic);
+    }
+
+    public function testGetAbbreviatedTalksOnlyFetchesTalksWithSpeakers()
+    {
+        $from = new \DateTimeImmutable('2016-12-31 19:00:00');
+        $to = new \DateTimeImmutable('2016-12-31 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location', 'Address', 'http://test-uri');
+        $talks = [
+            $talkWithSpeaker = $this->createMock(Talk::class),
+            $talkWithoutSpeaker = $this->createMock(Talk::class),
+        ];
+        $topic = 'MyTopic';
+
+        $talkWithSpeaker->expects(self::once())->method('getSpeaker')->willReturn(Speaker::fromNameAndTwitter(
+            'Happy Harry',
+            'HappyHarry'
+        ));
+
+        $talkWithoutSpeaker->expects(self::once())->method('getSpeaker')->willReturn(null);
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location, $talks, $topic);
+
+        $abbreviatedTalks = $meetup->getAbbreviatedTalks();
+
+        self::assertCount(1, $abbreviatedTalks);
+        self::assertSame($talkWithSpeaker, $abbreviatedTalks->first());
     }
 }
