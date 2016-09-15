@@ -11,7 +11,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class DashboardActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : DashboardAction
     {
         return new DashboardAction($container->get(TemplateRendererInterface::class));
     }

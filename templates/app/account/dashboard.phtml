@@ -9,4 +9,9 @@ $this->headTitle($title);
 
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
+
+    <p>Things wot you can do:</p>
+    <ul>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">Logout</a></li>
+    </ul>
 </div>

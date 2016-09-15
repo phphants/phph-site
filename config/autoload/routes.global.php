@@ -20,6 +20,7 @@ return [
             App\Action\TeamAction::class => App\Action\TeamActionFactory::class,
             App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
+            App\Action\Account\LogoutAction::class => App\Action\Account\LogoutActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],

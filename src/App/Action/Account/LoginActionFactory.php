@@ -14,7 +14,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class LoginActionFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : LoginAction
     {
         return new LoginAction(
             $container->get(AuthenticationServiceInterface::class),
