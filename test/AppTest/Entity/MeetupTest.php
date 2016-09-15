@@ -33,6 +33,8 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
         self::assertSame('2016-12-31 19:00:00', $meetup->getFromDate()->format('Y-m-d H:i:s'));
         self::assertSame('2016-12-31 23:00:00', $meetup->getToDate()->format('Y-m-d H:i:s'));
+        self::assertNotSame($from, $meetup->getFromDate());
+        self::assertNotSame($to, $meetup->getFromDate());
         self::assertSame([$talk], $meetup->getTalks()->toArray());
         self::assertSame($location, $meetup->getLocation());
         self::assertSame($topic, $meetup->getTopic());

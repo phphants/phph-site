@@ -84,8 +84,8 @@ use Ramsey\Uuid\Uuid;
         string $topic = null
     ) : self {
         $meetup = new self();
-        $meetup->fromDate = $from;
-        $meetup->toDate = $to;
+        $meetup->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
+        $meetup->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
         $meetup->location = $location;
         $meetup->topic = $topic;
 
