@@ -24,11 +24,11 @@ class Version20160905103242 extends AbstractMigration
 
         $this->addSql('CREATE TABLE meetup (id UUID NOT NULL, location_id UUID NOT NULL, from_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, to_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, topic VARCHAR(1024) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_9377E2864D218E ON meetup (location_id)');
-        $this->addSql('CREATE TABLE talk (id UUID NOT NULL, meetup_id UUID NOT NULL, speaker_id UUID DEFAULT NULL, time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, title VARCHAR(1024) NOT NULL, abstract VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE talk (id UUID NOT NULL, meetup_id UUID NOT NULL, speaker_id UUID DEFAULT NULL, time TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, title VARCHAR(1024) NOT NULL, abstract TEXT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_9F24D5BB591E2316 ON talk (meetup_id)');
         $this->addSql('CREATE INDEX IDX_9F24D5BBD04A0F27 ON talk (speaker_id)');
         $this->addSql('CREATE TABLE speaker (id UUID NOT NULL, full_name VARCHAR(1024) NOT NULL, twitterHandle VARCHAR(1024) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE eventbrite_data (id UUID NOT NULL, meetup_id UUID NOT NULL, url VARCHAR(1024) DEFAULT NULL, eventbriteId VARCHAR(1024) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE eventbrite_data (id UUID NOT NULL, meetup_id UUID NOT NULL, url VARCHAR(1024) NOT NULL, eventbriteId VARCHAR(1024) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_9A8A6D6C591E2316 ON eventbrite_data (meetup_id)');
         $this->addSql('CREATE TABLE location (id UUID NOT NULL, name VARCHAR(1024) NOT NULL, address VARCHAR(1024) NOT NULL, url VARCHAR(1024) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE meetup ADD CONSTRAINT FK_9377E2864D218E FOREIGN KEY (location_id) REFERENCES location (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
