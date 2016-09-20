@@ -51,6 +51,11 @@ use Ramsey\Uuid\Uuid;
         return $location;
     }
 
+    public function getId() : string
+    {
+        return (string)$this->id;
+    }
+
     public function getName() : string
     {
         return $this->name;
