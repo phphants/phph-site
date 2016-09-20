@@ -1,0 +1,29 @@
+<?php
+declare(strict_types = 1);
+
+/** @var \App\Form\Account\MeetupForm $form */
+
+$title = 'Add a new meetup';
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <?= $this->form()->openTag($form); ?>
+
+    <?= $this->formRow($form->get('from')); ?>
+    <br />
+    <?= $this->formRow($form->get('to')); ?>
+    <br />
+    <?= $this->formRow($form->get('location')); ?>
+    <br />
+
+    <?= $this->formRow($form->get('submit')); ?>
+
+    <?= $this->formRow($form->get('meetupForm_csrf')); ?>
+    <?= $this->form()->closeTag(); ?>
+
+</div>

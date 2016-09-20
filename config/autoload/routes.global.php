@@ -21,6 +21,7 @@ return [
             App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
             App\Action\Account\LogoutAction::class => App\Action\Account\LogoutActionFactory::class,
+            App\Action\Account\Meetup\AddMeetupAction::class => App\Action\Account\Meetup\AddMeetupActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -105,6 +106,15 @@ return [
                 App\Action\Account\DashboardAction::class,
             ],
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-meetup-add',
+            'path' => '/account/meetup/add',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Meetup\AddMeetupAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name' => 'account-logout',
