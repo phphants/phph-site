@@ -1,4 +1,11 @@
-<?php $this->headTitle('Meetups'); ?>
+<?php
+declare(strict_types=1);
+
+$this->headTitle('Meetups');
+
+/** @var \App\Entity\Meetup[] $futureMeetups */
+/** @var \App\Entity\Meetup[] $pastMeetups */
+?>
 
 </div><!-- end of gradient-wrapper -->
 
@@ -13,13 +20,13 @@ $first = true;
         <?php foreach ($futureMeetups as $meetup): ?>
             <?php
             if ($first) {
-                echo $this->renderMeetup()->full($meetup);
+                echo $this->partial('layout::single-meetup-full', ['meetup' => $meetup]);
                 $first = false;
                 if (count($futureMeetups) > 1) {
                     echo '<br /><hr /><br /><h1>Planned future meetups...</h1>';
                 }
             } else {
-                echo $this->renderMeetup()->short($meetup);
+                echo $this->partial('layout::single-meetup-abbreviated', ['meetup' => $meetup]);
             }
             ?>
         <?php endforeach; ?>
@@ -32,6 +39,6 @@ $first = true;
     <hr /><br />
     <h1>Previous meetups</h1>
     <?php foreach ($pastMeetups as $meetup): ?>
-        <?= $this->renderMeetup()->short($meetup); ?>
+        <?= $this->partial('layout::single-meetup-abbreviated', ['meetup' => $meetup]); ?>
     <?php endforeach; ?>
 </div>

@@ -13,7 +13,10 @@
         "zendframework/zend-expressive-fastroute": "^1.2",
         "zendframework/zend-servicemanager": "^3.1",
         "zendframework/zend-expressive-zendviewrenderer": "^1.1",
-        "sabre/vobject": "^4.1"
+        "sabre/vobject": "^4.1",
+        "dasprid/container-interop-doctrine": "^0.2.2",
+        "doctrine/migrations": "^1.4",
+        "ramsey/uuid": "^3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5",

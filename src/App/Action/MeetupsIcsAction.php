@@ -3,7 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Action;
 
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
+use DateTimeImmutable;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Sabre\VObject\Component\VCalendar;
@@ -24,9 +25,10 @@ final class MeetupsIcsAction implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $next = null) : TextResponse
     {
+        $now = new DateTimeImmutable();
         $cal = new VCalendar();
 
-        $meetups = $this->meetupsService->getFutureMeetups();
+        $meetups = $this->meetupsService->findMeetupsAfter($now);
 
         foreach ($meetups as $meetup) {
             $from = $meetup->getFromDate();

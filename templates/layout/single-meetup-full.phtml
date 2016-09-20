@@ -1,0 +1,68 @@
+<?php
+declare(strict_types = 1);
+
+/** @var \App\Entity\Meetup $meetup */
+?>
+
+<h2><?= $meetup->getFromDate()->format('jS F Y'); ?></h2>
+
+<ul class="meetup-details">
+    <li>
+        <strong>Time:</strong>
+        <?= $meetup->getFromDate()->format('g:ia'); ?> - <?= $meetup->getToDate()->format('g:ia'); ?>
+    </li>
+
+    <li>
+        <strong>Location:</strong>
+        <?php if (null !== $meetup->getLocation()->getUrl()): ?>
+            <a href="<?= $this->escapeHtmlAttr($meetup->getLocation()->getUrl()); ?>">
+        <?php endif; ?>
+                <?= $this->escapeHtml($meetup->getLocation()->getName()); ?>,
+                <?= $this->escapeHtml($meetup->getLocation()->getAddress()); ?>
+        <?php if (null !== $meetup->getLocation()->getUrl()): ?>
+            </a>
+        <?php endif; ?>
+    </li>
+
+    <?php if (null !== $meetup->getEventbriteData()): ?>
+        <li>
+            <strong>Registration Required:</strong>
+            <a href="<?= $this->escapeHtmlAttr($meetup->getEventbriteData()->getUrl()); ?>">
+                <?= $this->escapeHtml($meetup->getEventbriteData()->getUrl()); ?>
+            </a>
+        </li>
+    <?php endif; ?>
+
+    <?php if (null !== $meetup->getTopic()): ?>
+        <li><strong>Topic of the Month:</strong> <?= $this->escapeHtml($meetup->getTopic()); ?></li>
+    <?php endif; ?>
+
+    <?php if (count($meetup->getTalks()) > 0): ?>
+        <li>
+            <strong>Schedule:</strong>
+            <ul class="talks">
+                <?php foreach ($meetup->getTalks() as $talk): ?>
+                    <li>
+                        <strong><?= $talk->getTime()->format('H:i'); ?></strong> &mdash;
+                        <?= $this->escapeHtml($talk->getTitle()); ?>
+                        <?php if (null !== $talk->getSpeaker()): ?>
+                            &mdash; <em>(by <strong><?= $this->twitterLinkOrName($talk->getSpeaker()); ?></strong>)</em>
+                        <?php endif; ?>
+                        <?php if (null !== $talk->getAbstract()): ?>
+                            <br />
+                            <p class="talk-abstract"><?= $this->escapeHtml($talk->getAbstract()); ?></p>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </li>
+    <?php endif; ?>
+</ul>
+
+<?php if (null !== $meetup->getEventbriteData()): ?>
+    <div class="padding"></div>
+    <?= $this->partial('layout::eventbrite-widget', [
+        'eventId' => $meetup->getEventbriteData()->getEventbriteId(),
+        'eventTitle' => 'PHP Hampshire ' . $meetup->getFromDate()->format('F Y') . ' Meetup',
+    ]); ?>
+<?php endif; ?>

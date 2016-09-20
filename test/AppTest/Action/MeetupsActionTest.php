@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace AppTest\Action;
 
 use App\Action\MeetupsAction;
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -20,8 +20,8 @@ final class MeetupsActionTest extends \PHPUnit_Framework_TestCase
         $renderer->expects(self::once())->method('render')->with('app::meetups')->willReturn('content...');
 
         $meetupsService = $this->createMock(MeetupsServiceInterface::class);
-        $meetupsService->expects(self::once())->method('getFutureMeetups')->willReturn([]);
-        $meetupsService->expects(self::once())->method('getPastMeetups')->willReturn([]);
+        $meetupsService->expects(self::once())->method('findMeetupsAfter')->willReturn([]);
+        $meetupsService->expects(self::once())->method('findMeetupsBefore')->willReturn([]);
 
         $response = (new MeetupsAction($meetupsService, $renderer))->__invoke(
             new ServerRequest(['/']),

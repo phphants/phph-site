@@ -4,8 +4,9 @@ declare(strict_types = 1);
 namespace AppTest\Action;
 
 use App\Action\MeetupsIcsAction;
+use App\Entity\Location;
 use App\Entity\Meetup;
-use App\Service\MeetupsServiceInterface;
+use App\Service\Meetup\MeetupsServiceInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
@@ -16,13 +17,20 @@ final class MeetupsIcsActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionRendersViewAndRetrievesFutureMeetups()
     {
-        $meetup = new Meetup();
-        $meetup->setFromDate(new \DateTimeImmutable());
-        $meetup->setToDate(new \DateTimeImmutable());
-
         $meetupsService = $this->createMock(MeetupsServiceInterface::class);
-        $meetupsService->expects(self::once())->method('getFutureMeetups')->willReturn([$meetup]);
-        $meetupsService->expects(self::never())->method('getPastMeetups');
+        $meetupsService->expects(self::once())->method('findMeetupsAfter')->willReturn([
+            Meetup::fromStandardMeetup(
+                new \DateTimeImmutable(),
+                new \DateTimeImmutable(),
+                Location::fromNameAddressAndUrl(
+                    'Foo',
+                    'Foo Adddress',
+                    'http://test-uri/'
+                ),
+                []
+            )
+        ]);
+        $meetupsService->expects(self::never())->method('findMeetupsBefore');
 
         $response = (new MeetupsIcsAction($meetupsService))->__invoke(
             new ServerRequest(['/']),

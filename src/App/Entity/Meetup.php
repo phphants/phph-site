@@ -3,156 +3,134 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
 
-class Meetup
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="meetup")
+ */
+/*final */class Meetup
 {
     /**
-     * @var int
+     * @ORM\Id
+     * @ORM\Column(name="id", type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @var string
      */
     private $id;
 
     /**
+     * @ORM\Column(name="from_date", type="datetime", nullable=false)
      * @var DateTimeImmutable
      */
     private $fromDate;
 
     /**
+     * @ORM\Column(name="to_date", type="datetime", nullable=false)
      * @var DateTimeImmutable
      */
     private $toDate;
 
     /**
-     * @var string
+     * @ORM\OneToOne(targetEntity=EventbriteData::class, mappedBy="meetup")
+     * @var EventbriteData
      */
-    private $registrationUrl;
+    private $eventbriteData;
 
     /**
-     * @var string
-     */
-    private $locationUrl;
-
-    /**
-     * @var string
+     * @ORM\ManyToOne(targetEntity=Location::class)
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id", nullable=false)
+     * @var Location
      */
     private $location;
 
     /**
+     * @ORM\Column(name="topic", type="string", length=1024, nullable=true)
      * @var string
      */
     private $topic;
 
     /**
-     * @var Talk[]|string[]
+     * @ORM\OneToMany(targetEntity=Talk::class, mappedBy="meetup")
+     * @ORM\OrderBy({"time" = "ASC"})
+     * @var ArrayCollection|Talk[]
      */
-    private $talkingPoints = [];
+    private $talks;
 
-    /**
-     * @var string
-     */
-    private $widget;
-
-    /**
-     * @var Schedule[]
-     */
-    private $schedule = [];
-
-    public function __construct()
+    private function __construct()
     {
-        $this->schedule = [];
-    }
-
-    public function exchangeArray($data) : array
-    {
-        throw new \Exception('Not implemented yet...');
-    }
-
-    public function setId(int $id) : self
-    {
-        $this->id = $id;
-
-        return $this;
+        $this->id = Uuid::uuid4();
+        $this->talks = new ArrayCollection();
     }
 
     /**
-     * @return int
+     * @param DateTimeImmutable $from
+     * @param DateTimeImmutable $to
+     * @param Location $location
+     * @param Talk[] $talks
+     * @param string $topic
+     * @return Meetup
+     * @throws \InvalidArgumentException
      */
-    public function getId() : int
-    {
-        return $this->id;
+    public static function fromStandardMeetup(
+        DateTimeImmutable $from,
+        DateTimeImmutable $to,
+        Location $location,
+        array $talks,
+        string $topic = null
+    ) : self {
+        $meetup = new self();
+        $meetup->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
+        $meetup->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
+        $meetup->location = $location;
+        $meetup->topic = $topic;
+
+        foreach ($talks as $k => $talk) {
+            if (!$talk instanceof Talk) {
+                throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
+            }
+            $meetup->talks->add($talk);
+        }
+        return $meetup;
     }
 
-    public function setFromDate(DateTimeImmutable $date) : self
+    public function getFromDate() : \DateTimeImmutable
     {
-        $this->fromDate = $date;
+        return new \DateTimeImmutable($this->fromDate->format('Y-m-d H:i:s'));
+    }
 
-        return $this;
+    public function getToDate() : \DateTimeImmutable
+    {
+        return new \DateTimeImmutable($this->toDate->format('Y-m-d H:i:s'));
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return Talk[]|Collection
      */
-    public function getFromDate() : DateTimeImmutable
+    public function getTalks() : Collection
     {
-        return $this->fromDate;
+        return $this->talks;
     }
 
-    public function setToDate(DateTimeImmutable $date) : self
+    public function getAbbreviatedTalks() : Collection
     {
-        $this->toDate = $date;
-
-        return $this;
+        return $this->talks->filter(function (Talk $talk) {
+            return null !== $talk->getSpeaker();
+        });
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getToDate() : DateTimeImmutable
+    public function getEventbriteData() : EventbriteData
     {
-        return $this->toDate;
+        return $this->eventbriteData;
     }
 
-    public function setRegistrationUrl(string $url) : self
-    {
-        $this->registrationUrl = $url;
-
-        return $this;
-    }
-
-    public function getRegistrationUrl() : string
-    {
-        return $this->registrationUrl;
-    }
-
-    public function setLocationUrl(string $url) : self
-    {
-        $this->locationUrl = $url;
-
-        return $this;
-    }
-
-    public function getLocationUrl() : string
-    {
-        return $this->locationUrl;
-    }
-
-    public function setLocation(string $location) : self
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    public function getLocation() : string
+    public function getLocation() : Location
     {
         return $this->location;
-    }
-
-    public function setTopic(string $topic) : self
-    {
-        $this->topic = $topic;
-
-        return $this;
     }
 
     /**
@@ -161,43 +139,5 @@ class Meetup
     public function getTopic()
     {
         return $this->topic;
-    }
-
-    public function setTalkingPoints(array $talkingPoints) : self
-    {
-        // @todo validation
-        $this->talkingPoints = $talkingPoints;
-
-        return $this;
-    }
-
-    public function getTalkingPoints() : array
-    {
-        return $this->talkingPoints;
-    }
-
-    public function setWidget(string $widgetString) : self
-    {
-        $this->widget = $widgetString;
-
-        return $this;
-    }
-
-    public function getWidget() : string
-    {
-        return $this->widget;
-    }
-
-    public function setSchedule(array $schedule) : self
-    {
-        // @todo validation
-        $this->schedule = $schedule;
-
-        return $this;
-    }
-
-    public function getSchedule() : array
-    {
-        return $this->schedule;
     }
 }

@@ -1,0 +1,120 @@
+START TRANSACTION;
+
+INSERT INTO location (id, name, address, url) VALUES
+  ('fae3b251-0833-48dd-87f7-363ba1269517', 'Oasis Conference Centre', 'Arundel Street, PO1 1NH', 'http://www.oasisthevenue.co.uk/conference-centre/')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO speaker (id, full_name, twitterhandle) VALUES
+  ('7d7ea477-b7c7-4ceb-86ed-fd179620bbaa', 'Chris Hoult', 'choult'),
+  ('01c4dd4a-6882-4fbd-8592-bf4690ce6ac5', 'Michael Heap', 'mheap'),
+  ('fd288497-0f5a-46b3-9a4b-71c444b2d177', 'Pete Heslop', 'Pwheslop'),
+  ('55c51011-cfc3-4dad-9106-5d1bee954f36', 'David Yell', 'YellDavid'),
+  ('e389026d-f16a-4a69-a8e3-85f59c06425a', 'Mike Rogers', 'MikeRogers0'),
+  ('84e4f674-87ed-4ae8-ac86-55b33f3ccfac', 'Frederic Dewinne', 'fdewinne'),
+  ('9a81349b-b9f7-4131-a182-551bf5502085', 'Gareth Evans', 'garoevans'),
+  ('a6cef45d-ba4b-4190-8359-f2e666cebbd3', 'Richard Harrison', 'nimbadger'),
+  ('a25b4013-48cd-483d-8289-6cc77a646f10', 'Stanko Markovic', 'greyshirt'),
+  ('020130f3-e1f7-44a8-8465-86b2409ca614', 'David MacKay', 'rawkode'),
+  ('3d220bcd-4b31-4ada-bbff-068babd8b0f2', 'Andrew Lucas', 'sqweelygig'),
+  ('2019aeec-ce7b-476d-9810-060167e8ef21', 'Andrew Carter', 'AndrewCarterUK'),
+  ('5a8650db-9b68-4476-b781-d95abbc2a702', 'Ciaran McNulty', 'CiaranMcNulty'),
+  ('0ef6435d-b26a-4265-8a98-7dbb8cc42c65', 'James Titcumb', 'asgrim'),
+  ('7583420a-d8c9-4c5a-b3c6-8f9ecef25801', 'Mark Bradley', 'braddle'),
+  ('2b7bb2a7-b4b3-41f2-8644-d647b7e117ff', 'Wade Urry', 'iWader'),
+  ('09e9e212-b673-4489-9657-1bec2acda607', 'Nick Whitelegg', null)
+ON CONFLICT DO NOTHING;
+
+INSERT INTO meetup (id, location_id, from_date, to_date, topic) VALUES
+  ('c32477c1-a34e-47e1-9c24-b046e01b01d8', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-01-13 19:00', '2016-01-13 23:00', null),
+  ('3f74b2d2-fc5a-453a-8bda-5d116207c029', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-02-10 19:00', '2016-02-10 23:00', null),
+  ('027b19dc-1329-4951-97c2-c0100843cde5', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-03-09 19:00', '2016-03-09 23:00', null),
+  ('e4f288b9-0db5-4c52-812e-ca66aeff40f8', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-04-13 19:00', '2016-04-13 23:00', null),
+  ('3d4db43f-5fec-4dd1-9050-80bc4449e5fa', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-05-11 19:00', '2016-05-11 23:00', null),
+  ('2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-06-08 19:00', '2016-06-08 23:00', null),
+  ('ea0822aa-650b-452d-821a-b14fb7857d3f', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-07-13 19:00', '2016-07-13 23:00', null),
+  ('9466a647-d4f4-49e4-adda-a1d41cacc09f', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-08-10 19:00', '2016-08-10 23:00', null),
+  ('8e4342bb-a163-4c67-a16e-9be3e9fe5f36', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-09-14 19:00', '2016-09-14 23:00', null),
+  ('5006f08e-3359-4a12-b8ab-a674cfe773e9', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-10-12 19:00', '2016-10-12 23:00', null),
+  ('7f1b740d-7774-40fb-8371-097574709552', 'fae3b251-0833-48dd-87f7-363ba1269517', '2016-11-09 19:00', '2016-11-09 23:00', null)
+;
+
+INSERT INTO eventbrite_data (id, meetup_id, url, eventbriteid) VALUES
+  ('db4c0208-5ef4-48fd-a39f-0448689cfb56', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', 'https://www.eventbrite.co.uk/event/19377184681', '19377184681'),
+  ('c385df5a-dc75-4470-b5ce-9076b0441f74', '3f74b2d2-fc5a-453a-8bda-5d116207c029', 'https://www.eventbrite.co.uk/event/19379886763', '19379886763'),
+  ('66f79756-51fc-4a85-9f40-a071c118c795', '027b19dc-1329-4951-97c2-c0100843cde5', 'https://www.eventbrite.co.uk/event/20412914577', '20412914577'),
+  ('3105c3fc-a2ac-4a54-8799-4b08a5a6e85e', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', 'https://www.eventbrite.co.uk/event/22224261364', '22224261364'),
+  ('eb0f29fd-7e00-4b3c-8c3d-8990b5d4838e', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', 'https://www.eventbrite.co.uk/event/22224553237', '22224553237'),
+  ('d5a845a2-99aa-4092-b016-346a7b2aa5cf', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', 'https://www.eventbrite.co.uk/event/25051234918', '25051234918'),
+  ('7e9633e2-13ae-4c86-a80f-4f85814f7796', 'ea0822aa-650b-452d-821a-b14fb7857d3f', 'https://www.eventbrite.co.uk/event/25051456581', '25051456581'),
+  ('278e13d4-226d-4efc-bb9d-9dbd529b73bd', '9466a647-d4f4-49e4-adda-a1d41cacc09f', 'https://www.eventbrite.co.uk/event/25377661268', '25377661268'),
+  ('a372d1ed-023b-40dd-a017-0142b2dc7ccc', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', 'https://www.eventbrite.co.uk/event/26872272691', '26872272691'),
+  ('93f63925-a54d-4819-8b97-71d5c02a3a6f', '5006f08e-3359-4a12-b8ab-a674cfe773e9', 'https://www.eventbrite.co.uk/event/27489285192', '27489285192'),
+  ('976f9f94-9489-40ee-aaa1-6511cb1cda65', '7f1b740d-7774-40fb-8371-097574709552', 'https://www.eventbrite.co.uk/event/27489478771', '27489478771')
+;
+
+INSERT INTO talk(id, meetup_id, speaker_id, time, title, abstract) VALUES
+  ('e16d9f4f-3e18-4495-9145-8e4d74927037', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', null, '2016-01-13 19:00', 'Arrival with beer and pizza', null),
+  ('fd4a41e0-7eeb-48cf-b88a-0e5916176f0d', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', null, '2016-01-13 19:25', 'Welcome announcement', null),
+  ('bc3d5529-3847-4fd8-a7ed-6224cc7bd770', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', '7d7ea477-b7c7-4ceb-86ed-fd179620bbaa', '2016-01-13 19:30', 'Simple Machine Learning', 'Want to separate the signal from the noise, but have too much input to deal with? Fed up with reading everything yourself? Mechanical Turk got you down? Then perhaps you need to apply some machine learning! In this talk, Christopher will cover some basic approaches to machine-learned classification as well as demonstrate a real-life application of it in PHP.'),
+  ('0f56ced4-b645-47bc-869a-6a1c408aa477', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', null, '2016-01-13 20:30', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('1b78319b-e9cf-4b16-b0ae-96ab4d2556ed', 'c32477c1-a34e-47e1-9c24-b046e01b01d8', null, '2016-01-13 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('a974b13f-e9d5-45ed-8c31-1d695514c4ca', '3f74b2d2-fc5a-453a-8bda-5d116207c029', null, '2016-02-10 19:00', 'Arrival with beer and pizza', null),
+  ('08e2b237-b270-41a0-9881-c9ca21a5706d', '3f74b2d2-fc5a-453a-8bda-5d116207c029', null, '2016-02-10 19:25', 'Welcome announcement', null),
+  ('d14003a3-f9c7-4d22-9024-789c7351950e', '3f74b2d2-fc5a-453a-8bda-5d116207c029', '01c4dd4a-6882-4fbd-8592-bf4690ce6ac5', '2016-02-10 19:30', 'Automation Automation Automation', 'A good rule of thumb to have as a developer is that if you have to do something three times or more, you should automate it. Imagine that a task takes you a minute to do, twice a day. Now imagine that you could write something that does it for you, but it would take an hour. Initially, you''ll have lost an hour, but after the first month you''ll be breaking even, as you''ve saved those two minutes per day. Then after the second month, you''ve essentially gained a free hour. Automation is a developer''s best friend. Some things are easier to automate than others, but almost anything can be automated. In this talk, we''ll take a look at what can be automated, what tools are available to help us and crucially, ​*if*​ we should automate it. Surprisingly, sometimes the answer to the question "should we?" is "no".'),
+  ('f59c9d69-27ad-49ad-93e4-f56bedf57167', '3f74b2d2-fc5a-453a-8bda-5d116207c029', null, '2016-02-10 20:30', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('5ee92e99-3f36-48c1-aa46-0c6fda46314f', '3f74b2d2-fc5a-453a-8bda-5d116207c029', null, '2016-02-10 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('a010646e-7f44-4121-8c33-a37b547f428d', '027b19dc-1329-4951-97c2-c0100843cde5', null, '2016-03-09 19:00', 'Arrival with beer and pizza', null),
+  ('986883fa-73e6-4fc1-ab17-4c5376913b2f', '027b19dc-1329-4951-97c2-c0100843cde5', null, '2016-03-09 19:25', 'Welcome announcement', null),
+  ('4d20de2d-e0bd-460f-82d0-2b45ff70c454', '027b19dc-1329-4951-97c2-c0100843cde5', 'fd288497-0f5a-46b3-9a4b-71c444b2d177', '2016-03-09 19:30', '5 minute lightning talk', null),
+  ('4671608e-a0ff-4c6d-8cee-3fb0e6c0eb62', '027b19dc-1329-4951-97c2-c0100843cde5', '55c51011-cfc3-4dad-9106-5d1bee954f36', '2016-03-09 19:40', 'Being an Open Source citizen', 'In a world of open source software, how we treat and work with people we don''t know is important. This talk will cover some lessons I''ve learned, and hopefully encourage people to get involved.'),
+  ('f74a58bb-17eb-4e1d-8505-37ee74adf3aa', '027b19dc-1329-4951-97c2-c0100843cde5', null, '2016-03-09 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('b17997dd-17f9-4a63-a880-8902828e1550', '027b19dc-1329-4951-97c2-c0100843cde5', null, '2016-03-09 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('3afd5e33-84c7-41b7-95f4-59b24882709b', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', null, '2016-04-13 19:00', 'Arrival with beer and pizza', null),
+  ('d5ff8fa6-1df4-4232-8a01-e492b3f2f9a0', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', null, '2016-04-13 19:25', 'Welcome announcement', null),
+  ('b034c047-1513-4646-95af-67030f68eca9', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', 'e389026d-f16a-4a69-a8e3-85f59c06425a', '2016-04-13 19:30', '5 minute lightning talk', null),
+  ('e4b6dfac-b389-4c27-a2c7-53030249f8e6', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', '84e4f674-87ed-4ae8-ac86-55b33f3ccfac', '2016-04-13 19:40', 'The Continuous Talk', 'This talk starts with a comparison of the different practices and tools we can use in the PHP ecosystem and is followed by a continuousphp demo, so that viewers can see a demo app tested and deployed in real time, with all the practices and tools explained before.'),
+  ('430c697b-ff0a-4096-980b-c6f11cef71d0', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', null, '2016-04-13 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('cfec2d4b-0c7f-4c58-b359-6a7053d18562', 'e4f288b9-0db5-4c52-812e-ca66aeff40f8', null, '2016-04-13 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('d75cb34a-d120-458e-8dc6-e54f0088cc9d', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', null, '2016-05-11 19:00', 'Arrival with beer and pizza', null),
+  ('00dc8bc4-38b0-4145-8ed8-e4a47acce5f3', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', null, '2016-05-11 19:25', 'Welcome announcement', null),
+  ('99b35908-e432-41b4-a7c3-55fed37cf9c4', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', '9a81349b-b9f7-4131-a182-551bf5502085', '2016-05-11 19:30', '5 minute lightning talk', null),
+  ('dcee3eb6-6261-4e63-9851-5193fba086a9', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', 'a6cef45d-ba4b-4190-8359-f2e666cebbd3', '2016-05-11 19:40', 'Creating Unit Test Mocks - PHPUnit or Prophecy?', 'This talk will look at how PHPUnit and Prophecy compare when using mock objects to unit test PHP code. Whilst PHPUnit is the standard test library for PHP, Prophecy is a good alternative for generating mock objects and has been included within PHPUnit since version 4.5. The talk will start by introducing the use of mock objects in unit testing and define four types of test double : dummy, stub, mock and spy. The main part of the talk will then concentrate on how each of these types are implemented; firstly, using PHPUnit, and secondly, using Prophecy. The talk will conclude by discussing when a developer might use Prophecy mock objects and when PHPUnit mocks might be more appropriate.'),
+  ('4ee2e173-1d74-4748-94a3-e37f6d3051ab', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', null, '2016-05-11 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('9c36145f-f58d-48a8-8e90-b687ad0c3901', '3d4db43f-5fec-4dd1-9050-80bc4449e5fa', null, '2016-05-11 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('e3b568fc-97e4-4a47-a8bd-94397e969611', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', null, '2016-06-08 19:00', 'Arrival with beer and pizza', null),
+  ('f01ffb79-d9c7-4f45-838c-2380aee42c84', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', null, '2016-06-08 19:25', 'Welcome announcement', null),
+  ('6aaf7c50-3f88-4bc0-8f58-6292f9b803ec', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', 'a25b4013-48cd-483d-8289-6cc77a646f10', '2016-06-08 19:30', 'How to do interviews properly - look from both sides', 'As software developers, we are in great demand. There are lots of companies out there looking for good developers, but how do we know what companies are good to work for? We will look into how to set yourself up for the interview as a candidate, and what signs to look for. There is a clear list of indicators and questions we should ask, that will give us a clear understanding of the way a company is organised. But what happens if a developer has to be the one conducting the interview? Here we will switch things around, as we will go through the way the interviews should be conducted from the interviewer side. We will see what questions to ask, and how to gauge the answers from the candidate. We will look into how to structure the interview, and what techniques to use. Finally we will go over some of the interview basics and how to navigate the usual pitfalls of the job marketplace. Overall by following these steps, we should make the job hunt easier, and more pleasurable for all involved.'),
+  ('a1be39fc-b347-40f2-a83f-a3337bd4cd14', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', null, '2016-06-08 20:30', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('1ac15313-e0ba-49bd-8bb5-119c2053aeba', '2e5c3c93-d7cc-49e8-bb2d-39d97189a4bf', null, '2016-06-08 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('aa6a234a-b80e-41af-bda3-50cbda6855e0', 'ea0822aa-650b-452d-821a-b14fb7857d3f', null, '2016-07-13 19:00', 'Arrival with beer and pizza', null),
+  ('fdd98be4-b8e6-4a44-a94f-e09308b38135', 'ea0822aa-650b-452d-821a-b14fb7857d3f', null, '2016-07-13 19:25', 'Welcome announcement', null),
+  ('efcc5681-af5c-4ee8-8923-28278c7bbde6', 'ea0822aa-650b-452d-821a-b14fb7857d3f', '020130f3-e1f7-44a8-8465-86b2409ca614', '2016-07-13 19:30', 'Kickass Development Environments with Docker', 'Docker, the hottest technology around at the moment. It swept the Ops world by storm in 2014, became mainstream in 2015, and now it’s set to dominate the developer world, in 2016. Docker is a tool that allows you to package your application up into a single-runnable distributable binary - akin to the phar, but in Hulk mode. Docker allows you, a developer, to specify the exact environment your application needs to run, across development; test; staging; and production. In this talk I will cover the creation of this utopian distributable and show you how you can compose your entire production infrastructure locally with only a small YAML file and without installing a single thing. Lets say hello, to Docker.'),
+  ('e2092dc0-5b2f-462d-a6b8-32e8a4a39cbf', 'ea0822aa-650b-452d-821a-b14fb7857d3f', null, '2016-07-13 20:30', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('6d2be763-9fb7-4518-a392-1464858a65d4', 'ea0822aa-650b-452d-821a-b14fb7857d3f', null, '2016-07-13 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('b5320c97-9463-43b0-b58d-cff9f54507cb', '9466a647-d4f4-49e4-adda-a1d41cacc09f', null, '2016-08-10 19:00', 'Arrival with beer and pizza', null),
+  ('38979a85-e9b6-499c-9300-c91d8e75afac', '9466a647-d4f4-49e4-adda-a1d41cacc09f', null, '2016-08-10 19:25', 'Welcome announcement', null),
+  ('44dd61fc-4532-4407-9c4a-1c110078c195', '9466a647-d4f4-49e4-adda-a1d41cacc09f', '3d220bcd-4b31-4ada-bbff-068babd8b0f2', '2016-08-10 19:30', '5 minute lightning talk', null),
+  ('dffbb8e0-70d9-420d-a25b-aad5ced35f38', '9466a647-d4f4-49e4-adda-a1d41cacc09f', '2019aeec-ce7b-476d-9810-060167e8ef21', '2016-08-10 19:40', 'Drinking Beer with a Raspberry Pi and PHP', 'Always been interested in the Raspberry Pi but never known what you could do with it? Got a Raspberry Pi at home that you played with for 5 minutes before you got bored? This talk is for you. We will be making a journey into the world of programming with sensors and other electrical components. The concepts introduced will not be specific to any programming language, but we will use PHP throughout to keep it simple. The demonstration will show how you could use a Raspberry Pi to spice up a home bar. By the end of this talk, you will have acquired the skills to get started on your own hobby electronics projects! Maybe these skills will one day be handy introducing friends and family to the adventures of programming.'),
+  ('0a984c27-7091-4a93-9ec3-157e14b12a5b', '9466a647-d4f4-49e4-adda-a1d41cacc09f', null, '2016-08-10 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('645f2ee0-9bd3-443a-a2d9-548a690c2969', '9466a647-d4f4-49e4-adda-a1d41cacc09f', null, '2016-08-10 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('77916c7c-ab7b-4957-858d-c958f161d06c', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', null, '2016-09-14 19:00', 'Arrival with beer and pizza', null),
+  ('c894fb96-3182-46dd-abb5-f19671e25c45', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', null, '2016-09-14 19:25', 'Welcome announcement', null),
+  ('bab5375c-f673-428a-b563-6c6a29061b4f', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', 'a6cef45d-ba4b-4190-8359-f2e666cebbd3', '2016-09-14 19:30', '5 minute lightning talk', null),
+  ('75c68783-75ae-4283-b8c1-88c13775ad09', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', '5a8650db-9b68-4476-b781-d95abbc2a702', '2016-09-14 19:40', 'Driving Quality with PhpSpec', 'Is a SpecBDD tool the same as a TDD tool, or something quite different? This talk will answer these questions, and show how PhpSpec can be integrated into your development workflow to drive quality in your Object Oriented design.'),
+  ('db272fac-b430-4fda-91b6-e6030c502135', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', null, '2016-09-14 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('78ac2626-b836-4df5-9a75-2ea5cfd12ae1', '8e4342bb-a163-4c67-a16e-9be3e9fe5f36', null, '2016-09-14 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('e3bf8e29-6632-4999-bcf1-d1803bb1f857', '5006f08e-3359-4a12-b8ab-a674cfe773e9', null, '2016-10-12 19:00', 'Arrival with beer and pizza', null),
+  ('56bbf4d1-3e84-4eef-a255-4589b4499c26', '5006f08e-3359-4a12-b8ab-a674cfe773e9', null, '2016-10-12 19:25', 'Welcome announcement', null),
+  ('10a76e7f-8905-4a9c-ab44-a9057f1675d8', '5006f08e-3359-4a12-b8ab-a674cfe773e9', '0ef6435d-b26a-4265-8a98-7dbb8cc42c65', '2016-10-12 19:30', '5 minute lightning talk', null),
+  ('8530a2ff-3823-4ac0-ad24-1b01dac25e62', '5006f08e-3359-4a12-b8ab-a674cfe773e9', '7583420a-d8c9-4c5a-b3c6-8f9ecef25801', '2016-10-12 19:40', 'Imposter Syndrome: Am I Faking It?', 'Do you feel like you''re faking it? like you don''t feel good enough to do your job? Feeling like you''ve blagged your way through your career? Then like me and hundreds of others, you might be suffering from imposter syndrome. During my talk I am going to discuss what imposter syndrome is and how it feels. Then I''m going to talk you through why people suffer from it and how people overcome it. This talk is based on both my personal experiences and those of others. By the end of it I hope you can identify if you are suffering from imposter syndrome and also create a team environment that helps to combat the feeling within your team mates.'),
+  ('483f27b5-90ae-42d3-9fc5-14a1ec0095da', '5006f08e-3359-4a12-b8ab-a674cfe773e9', null, '2016-10-12 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('5ba7df91-d65c-4cbc-9b2a-9f39e00c6455', '5006f08e-3359-4a12-b8ab-a674cfe773e9', null, '2016-10-12 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null),
+  ('4a1ea873-8551-425e-a32b-22330a4761dd', '7f1b740d-7774-40fb-8371-097574709552', null, '2016-11-09 19:00', 'Arrival with beer and pizza', null),
+  ('0e8bc4f6-4d25-4895-948e-fbdc6640fc9f', '7f1b740d-7774-40fb-8371-097574709552', null, '2016-11-09 19:25', 'Welcome announcement', null),
+  ('75dd386e-15e4-4945-aeb9-40fddfc64f6d', '7f1b740d-7774-40fb-8371-097574709552', '2b7bb2a7-b4b3-41f2-8644-d647b7e117ff', '2016-11-09 19:30', '5 minute lightning talk', null),
+  ('defe76fe-0d02-4cd4-9425-658130f6182b', '7f1b740d-7774-40fb-8371-097574709552', '09e9e212-b673-4489-9657-1bec2acda607', '2016-11-09 19:40', 'EPHP: A tool to help students learn the very basics of PHP', 'During 10+ years of teaching PHP I have come to recognise that many introductory-level students find the client-server architecture of server-side web applications confusing and often confuse the programming constructs used to get data from the front-end (e.g. HTML form, query string) and from the database. Beginner students also often fail to appreciate the meaning of code inside a typical loop used to iterate through the results of an SELECT query in PHP.  "EPHP" aims to give students a clearer appreciation of what is actually going on with a typical database-driven PHP application by visualising the components of the application and how they interact. Students can see the data cross the network, and view and edit representations of the HTTP requests and responses live in the browser - as well as clearly see the link between $_GET and $_POST variables and the corresponding form data, and visualise the operation of a typical "while" loop used to visualise database results. The talk will include a demo as well as technical details on how the application is built, and will invite feedback from the audience.'),
+  ('29721483-849b-4096-8b97-0c2fc190b070', '7f1b740d-7774-40fb-8371-097574709552', null, '2016-11-09 20:40', 'Closing comments and Amazon.co.uk voucher draw from Spectrum IT', null),
+  ('53d8fd26-aaed-49a7-8fd7-0e20764f9489', '7f1b740d-7774-40fb-8371-097574709552', null, '2016-11-09 20:45', '9pm Social @ Brewhouse Pompey (The White Swan)', null)
+;
+
+COMMIT;
