@@ -104,7 +104,7 @@ return [
                 App\Middleware\Authentication::class,
                 App\Action\Account\DashboardAction::class,
             ],
-            'allowed_methods' => ['GET', 'POST'],
+            'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'account-logout',

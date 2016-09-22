@@ -34,7 +34,7 @@ final class Authentication implements MiddlewareInterface
      * {@inheritdoc}
      * @throws \InvalidArgumentException
      */
-    public function __invoke(Request $request, Response $response, callable $out = null)
+    public function __invoke(Request $request, Response $response, callable $out = null) : Response
     {
         if (!$this->authenticationService->hasIdentity()) {
             return new HtmlResponse($this->renderer->render('error/403'), 403);

@@ -12,7 +12,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
  */
 final class AuthenticationFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container) : Authentication
     {
         return new Authentication(
             $container->get(AuthenticationServiceInterface::class),

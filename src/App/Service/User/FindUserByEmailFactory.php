@@ -17,8 +17,11 @@ class FindUserByEmailFactory implements FactoryInterface
      * {@inheritdoc}
      * @throws \Interop\Container\Exception\NotFoundException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) : DoctrineFindUserByEmail {
         return new DoctrineFindUserByEmail(
             $container->get(EntityManagerInterface::class)->getRepository(User::class)
         );

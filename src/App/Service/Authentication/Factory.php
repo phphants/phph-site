@@ -17,8 +17,11 @@ class Factory implements FactoryInterface
      * {@inheritdoc}
      * @throws \Interop\Container\Exception\NotFoundException
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ) : ZendAuthenticationService {
         return new ZendAuthenticationService(
             $container->get(FindUserByEmailInterface::class),
             new Session()

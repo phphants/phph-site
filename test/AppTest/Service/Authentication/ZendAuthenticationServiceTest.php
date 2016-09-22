@@ -62,7 +62,7 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testHasIdentityReturnsTrueWhenUserIsAuthenticated()
+    public function testHasIdentityReturnsFalseWhenUserIsNotAuthenticated()
     {
         $users = $this->createMock(FindUserByEmailInterface::class);
 
@@ -72,7 +72,7 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         self::assertFalse((new ZendAuthenticationService($users, $storage))->hasIdentity());
     }
 
-    public function testHasIdentityReturnsFalseWhenUserIsNotAuthenticated()
+    public function testHasIdentityReturnsTrueWhenUserIsAuthenticated()
     {
         $users = $this->createMock(FindUserByEmailInterface::class);
 
