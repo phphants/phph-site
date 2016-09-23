@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace AppTest\Service\Authentication\Exception;
+namespace AppTest\Service\Location\Exception;
 
 use App\Service\Location\Exception\LocationNotFound;
 use Ramsey\Uuid\Uuid;

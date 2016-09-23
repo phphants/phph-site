@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace AppTest\Service\Meetup;
+namespace AppTest\Service\Location;
 
 use App\Entity\Location;
 use App\Service\Location\DoctrineFindLocationByUuid;
