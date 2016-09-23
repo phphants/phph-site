@@ -6,13 +6,13 @@ namespace App\Form\Account;
 use App\Entity\Location;
 use App\Service\Location\GetAllLocationsInterface;
 use Zend\Form\Element\Csrf;
-use Zend\Form\Element\DateTime;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilterProviderInterface;
 
-class MeetupForm extends Form
+class MeetupForm extends Form implements InputFilterProviderInterface
 {
     public function __construct(GetAllLocationsInterface $locations)
     {
@@ -21,13 +21,13 @@ class MeetupForm extends Form
         $locationList = $locations();
 
         $this->add(
-            (new DateTime('from'))
-                ->setFormat('Y-m-d H:i')
+            (new DateTimeSelect('from'))
+                ->setShouldShowSeconds(false)
                 ->setLabel('From')
         );
         $this->add(
-            (new DateTime('to'))
-                ->setFormat('Y-m-d H:i')
+            (new DateTimeSelect('to'))
+                ->setShouldShowSeconds(false)
                 ->setLabel('To')
         );
         $this->add(
@@ -51,5 +51,21 @@ class MeetupForm extends Form
                 'timeout' => 120,
             ],
         ]));
+    }
+
+    public function getInputFilterSpecification()
+    {
+        return [
+            'from' => [
+                'filters' => [
+                    ['name' => \Zend\Filter\DateTimeSelect::class],
+                ],
+            ],
+            'to' => [
+                'filters' => [
+                    ['name' => \Zend\Filter\DateTimeSelect::class],
+                ],
+            ],
+        ];
     }
 }

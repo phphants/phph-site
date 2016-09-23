@@ -6,7 +6,7 @@ namespace AppTest\Form\Account;
 use App\Form\Account\MeetupForm;
 use App\Service\Location\GetAllLocationsInterface;
 use Zend\Form\Element\Csrf;
-use Zend\Form\Element\DateTime;
+use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 
@@ -22,8 +22,8 @@ final class MeetupFormTest extends \PHPUnit_Framework_TestCase
 
         $form = new MeetupForm($locations);
 
-        self::assertInstanceOf(DateTime::class, $form->get('from'));
-        self::assertInstanceOf(DateTime::class, $form->get('to'));
+        self::assertInstanceOf(DateTimeSelect::class, $form->get('from'));
+        self::assertInstanceOf(DateTimeSelect::class, $form->get('to'));
         self::assertInstanceOf(Select::class, $form->get('location'));
         self::assertInstanceOf(Submit::class, $form->get('submit'));
         self::assertInstanceOf(Csrf::class, $form->get('meetupForm_csrf'));

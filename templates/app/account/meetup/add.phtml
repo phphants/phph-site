@@ -14,16 +14,8 @@ $this->headTitle($title);
 
     <?= $this->form()->openTag($form); ?>
 
-    <?= $this->formRow($form->get('from')); ?>
-    <br />
-    <?= $this->formRow($form->get('to')); ?>
-    <br />
-    <?= $this->formRow($form->get('location')); ?>
-    <br />
+    <?= $this->form($form); ?>
 
-    <?= $this->formRow($form->get('submit')); ?>
-
-    <?= $this->formRow($form->get('meetupForm_csrf')); ?>
     <?= $this->form()->closeTag(); ?>
 
 </div>
