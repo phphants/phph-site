@@ -44,6 +44,11 @@ use Ramsey\Uuid\Uuid;
         return $speaker;
     }
 
+    public function getId() : string
+    {
+        return (string)$this->id;
+    }
+
     public function getFullName() : string
     {
         return $this->fullName;
