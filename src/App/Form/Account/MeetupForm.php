@@ -5,6 +5,8 @@ namespace App\Form\Account;
 
 use App\Entity\Location;
 use App\Service\Location\GetAllLocationsInterface;
+use App\Service\Speaker\GetAllSpeakersInterface;
+use Zend\Form\Element\Collection;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
@@ -14,7 +16,7 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class MeetupForm extends Form implements InputFilterProviderInterface
 {
-    public function __construct(GetAllLocationsInterface $locations)
+    public function __construct(GetAllLocationsInterface $locations, GetAllSpeakersInterface $speakers)
     {
         parent::__construct('meetupForm');
 
@@ -44,7 +46,19 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                 )
                 ->setLabel('Location')
         );
-        // @todo add talks
+
+        $this->add(
+            (new Collection('talks'))
+                ->setOptions([
+                    'should_create_template' => true,
+                    'allow_add' => true,
+                    'allow_remove' => true,
+                    'target_element' => new TalkFieldset($speakers),
+                ])
+                ->setLabel('Talks')
+                ->setAttribute('class', 'talks-collection')
+        );
+
         $this->add((new Submit('submit'))->setValue('Save'));
         $this->add(new Csrf('meetupForm_csrf', [
             'csrf_options' => [

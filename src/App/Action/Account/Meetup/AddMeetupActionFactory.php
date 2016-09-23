@@ -6,6 +6,7 @@ namespace App\Action\Account\Meetup;
 use App\Form\Account\MeetupForm;
 use App\Service\Location\FindLocationByUuid;
 use App\Service\Location\GetAllLocationsInterface;
+use App\Service\Speaker\GetAllSpeakersInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Helper\UrlHelper;
@@ -20,7 +21,10 @@ final class AddMeetupActionFactory
     {
         return new AddMeetupAction(
             $container->get(TemplateRendererInterface::class),
-            new MeetupForm($container->get(GetAllLocationsInterface::class)),
+            new MeetupForm(
+                $container->get(GetAllLocationsInterface::class),
+                $container->get(GetAllSpeakersInterface::class)
+            ),
             $container->get(EntityManagerInterface::class),
             $container->get(FindLocationByUuid::class),
             $container->get(UrlHelper::class)
