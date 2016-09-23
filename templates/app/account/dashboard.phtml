@@ -1,0 +1,17 @@
+<?php
+declare(strict_types = 1);
+
+$title = 'Account Dashboard';
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <p>Things wot you can do:</p>
+    <ul>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">Logout</a></li>
+    </ul>
+</div>

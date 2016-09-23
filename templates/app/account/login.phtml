@@ -1,0 +1,32 @@
+<?php
+declare(strict_types = 1);
+
+/** @var \App\Form\Account\LoginForm $form */
+
+$title = 'Login';
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <?= $this->form()->openTag($form); ?>
+
+    <?= $this->formRow($form->get('email')->setAttributes([
+        'placeholder' => 'foo@bar.com',
+    ])); ?>
+
+    <br />
+
+    <?= $this->formRow($form->get('password')); ?>
+
+    <br />
+
+    <?= $this->formRow($form->get('submit')); ?>
+
+    <?= $this->formRow($form->get('loginForm_csrf')); ?>
+    <?= $this->form()->closeTag(); ?>
+
+</div>
