@@ -98,6 +98,11 @@ use Ramsey\Uuid\Uuid;
         return $meetup;
     }
 
+    public function getId() : string
+    {
+        return (string)$this->id;
+    }
+
     public function getFromDate() : \DateTimeImmutable
     {
         return new \DateTimeImmutable($this->fromDate->format('Y-m-d H:i:s'));

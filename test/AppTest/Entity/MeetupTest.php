@@ -8,6 +8,7 @@ use App\Entity\Location;
 use App\Entity\Meetup;
 use App\Entity\Speaker;
 use App\Entity\Talk;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Entity\Meetup
@@ -31,6 +32,7 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         $eventbriteDataProperty->setAccessible(true);
         $eventbriteDataProperty->setValue($meetup, $eventbriteData);
 
+        self::assertTrue(Uuid::isValid($meetup->getId()));
         self::assertSame('2016-12-31 19:00:00', $meetup->getFromDate()->format('Y-m-d H:i:s'));
         self::assertSame('2016-12-31 23:00:00', $meetup->getToDate()->format('Y-m-d H:i:s'));
         self::assertNotSame($from, $meetup->getFromDate());
