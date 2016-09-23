@@ -17,6 +17,7 @@ return [
             App\Service\Meetup\MeetupsServiceInterface::class => App\Service\Meetup\MeetupsServiceFactory::class,
             App\Service\Location\GetAllLocationsInterface::class => App\Service\Location\GetAllLocationsFactory::class,
             App\Service\Location\FindLocationByUuid::class => App\Service\Location\FindLocationByUuidFactory::class,
+            App\Service\Speaker\GetAllSpeakersInterface::class => App\Service\Speaker\GetAllSpeakersFactory::class,
             App\Service\Authentication\AuthenticationServiceInterface::class => App\Service\Authentication\Factory::class,
             Doctrine\ORM\EntityManagerInterface::class => ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
