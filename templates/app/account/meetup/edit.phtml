@@ -19,18 +19,4 @@ $form->prepare();
 
     <?= $this->form()->closeTag(); ?>
 
-    <button onclick="return addTalk()">Add another talk</button>
-
 </div>
-
-<script type="text/javascript">
-    function addTalk() {
-        var currentCount = $('form > fieldset.talks-collection > fieldset').length;
-        var template = $('form > fieldset.talks-collection > span').data('template');
-        template = template.replace(/__index__/g, currentCount);
-
-        $('form > fieldset.talks-collection').append(template);
-
-        return false;
-    }
-</script>

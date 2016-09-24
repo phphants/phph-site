@@ -6,7 +6,6 @@ namespace App\Form\Account;
 use App\Entity\Location;
 use App\Service\Location\GetAllLocationsInterface;
 use App\Service\Speaker\GetAllSpeakersInterface;
-use Zend\Form\Element\Collection;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
@@ -45,19 +44,6 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                     )
                 )
                 ->setLabel('Location')
-        );
-
-        $this->add(
-            (new Collection('talks'))
-                ->setOptions([
-                    'should_create_template' => true,
-                    'count' => 0,
-                    'allow_add' => true,
-                    'allow_remove' => true,
-                    'target_element' => new TalkFieldset($speakers),
-                ])
-                ->setLabel('Talks')
-                ->setAttribute('class', 'talks-collection')
         );
 
         $this->add((new Submit('submit'))->setValue('Save'));
