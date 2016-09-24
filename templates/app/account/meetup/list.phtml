@@ -1,0 +1,37 @@
+<?php
+declare(strict_types=1);
+
+$this->headTitle('Meetups');
+
+/** @var \App\Entity\Meetup[] $meetups */
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>List Meetups</h1>
+
+    <a href="<?= $this->url('account-meetup-add'); ?>">Add a new meetup</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Start Date</td>
+                <td>Location</td>
+                <td>&nbsp;</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($meetups as $meetup): ?>
+            <tr>
+                <td><?= $meetup->getFromDate()->format('Y-m-d'); ?></td>
+                <td><?= $meetup->getLocation()->getName(); ?></td>
+                <td>
+                    <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>
