@@ -11,7 +11,10 @@ $this->headTitle('Meetups');
 <div class="wrapper content">
     <h1>View Meetup : </h1>
 
-    <p><a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit this meetup</a></p>
+    <p>
+        <a href="<?= $this->url('account-meetups-list'); ?>">Back to meetups list</a>
+        <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit this meetup</a>
+    </p>
 
     <?= $this->partial('layout::single-meetup-full', ['meetup' => $meetup]); ?>
 </div>

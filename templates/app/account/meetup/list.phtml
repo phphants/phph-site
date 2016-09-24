@@ -27,6 +27,7 @@ $this->headTitle('Meetups');
                 <td><?= $meetup->getFromDate()->format('Y-m-d'); ?></td>
                 <td><?= $meetup->getLocation()->getName(); ?></td>
                 <td>
+                    <a href="<?= $this->url('account-meetup-view', ['uuid' => $meetup->getId()]); ?>">View</a>
                     <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit</a>
                 </td>
             </tr>
