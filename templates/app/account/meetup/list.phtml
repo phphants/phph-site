@@ -11,13 +11,14 @@ $this->headTitle('Meetups');
 <div class="wrapper content">
     <h1>List Meetups</h1>
 
-    <a href="<?= $this->url('account-meetup-add'); ?>">Add a new meetup</a>
+    <a href="<?= $this->url('account-meetup-add'); ?>" class="link-button">Add a new meetup</a>
 
     <table>
         <thead>
             <tr>
-                <td>Start Date</td>
+                <td>Meetup Date</td>
                 <td>Location</td>
+                <td>Speaker(s)</td>
                 <td>&nbsp;</td>
             </tr>
         </thead>
@@ -27,8 +28,17 @@ $this->headTitle('Meetups');
                 <td><?= $meetup->getFromDate()->format('Y-m-d'); ?></td>
                 <td><?= $meetup->getLocation()->getName(); ?></td>
                 <td>
-                    <a href="<?= $this->url('account-meetup-view', ['uuid' => $meetup->getId()]); ?>">View</a>
-                    <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit</a>
+                    <?php
+                    $speakers = [];
+                    foreach ($meetup->getAbbreviatedTalks() as $talk) {
+                        $speakers[] = $talk->getSpeaker()->getFullName();
+                    }
+                    echo $this->escapeHtml(implode(', ', $speakers));
+                    ?>
+                </td>
+                <td>
+                    <a href="<?= $this->url('account-meetup-view', ['uuid' => $meetup->getId()]); ?>" class="link-button tiny">View</a>
+                    <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>" class="link-button tiny">Edit</a>
                 </td>
             </tr>
         <?php endforeach; ?>
