@@ -18,11 +18,11 @@ $this->headTitle('Meetups');
         <tbody>
             <tr>
                 <td class="label">Start Date &amp; Time</td>
-                <td><?= $meetup->getFromDate()->format('Y-m-d H:i'); ?></td>
+                <td><?= $meetup->getFromDate()->format('d F Y \a\t H:i'); ?></td>
             </tr>
             <tr>
                 <td class="label">End Date &amp; Time</td>
-                <td><?= $meetup->getFromDate()->format('Y-m-d H:i'); ?></td>
+                <td><?= $meetup->getToDate()->format('d F Y \a\t H:i'); ?></td>
             </tr>
             <tr>
                 <td class="label">Location</td>
