@@ -19,9 +19,10 @@ class DoctrineGetAllMeetups implements GetAllMeetupsInterface
 
     /**
      * {@inheritdoc}
+     * @throws \UnexpectedValueException
      */
     public function __invoke() : array
     {
-        return $this->meetups->findAll();
+        return $this->meetups->findBy([], ['fromDate' => 'DESC']);
     }
 }

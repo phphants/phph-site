@@ -20,7 +20,10 @@ class DoctrineGetAllMeetupsTest extends \PHPUnit_Framework_TestCase
         ];
 
         $objectRepository = $this->createMock(ObjectRepository::class);
-        $objectRepository->expects(self::once())->method('findAll')->with()->willReturn($meetups);
+        $objectRepository->expects(self::once())
+            ->method('findBy')
+            ->with([], ['fromDate' => 'DESC'])
+            ->willReturn($meetups);
 
         self::assertSame($meetups, (new DoctrineGetAllMeetups($objectRepository))->__invoke());
     }
