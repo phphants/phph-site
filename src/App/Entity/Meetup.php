@@ -98,6 +98,19 @@ use Ramsey\Uuid\Uuid;
         return $meetup;
     }
 
+    public function updateFromData(
+        DateTimeImmutable $from,
+        DateTimeImmutable $to,
+        Location $location,
+        array $talks
+    ) {
+        $this->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
+        $this->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
+        $this->location = $location;
+
+        // @todo add/update/remove talks
+    }
+
     public function getId() : string
     {
         return (string)$this->id;

@@ -43,6 +43,28 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         self::assertSame($eventbriteData, $meetup->getEventbriteData());
     }
 
+    public function testUpdateFromData()
+    {
+        $from = new \DateTimeImmutable('2016-12-31 19:00:00');
+        $to = new \DateTimeImmutable('2016-12-31 23:00:00');
+        $location1 = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+        $location2 = Location::fromNameAddressAndUrl('Location 2', 'Address 2', 'http://test-uri-2');
+        $talks = [];
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location1, $talks);
+
+        $meetup->updateFromData(
+            new \DateTimeImmutable('2017-12-31 19:00:00'),
+            new \DateTimeImmutable('2017-12-31 23:00:00'),
+            $location2,
+            []
+        );
+
+        self::assertSame('2017', $meetup->getFromDate()->format('Y'));
+        self::assertSame('2017', $meetup->getToDate()->format('Y'));
+        self::assertSame($location2, $meetup->getLocation());
+    }
+
     public function testExceptionThrownCreatingEntityWithInvalidTalk()
     {
         $from = new \DateTimeImmutable('2016-12-31 19:00:00');
