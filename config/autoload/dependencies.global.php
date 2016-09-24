@@ -16,6 +16,7 @@ return [
             App\Service\User\FindUserByEmailInterface::class => App\Service\User\FindUserByEmailFactory::class,
             App\Service\Meetup\FindMeetupByUuidInterface::class => App\Service\Meetup\FindMeetupByUuidFactory::class,
             App\Service\Meetup\MeetupsServiceInterface::class => App\Service\Meetup\MeetupsServiceFactory::class,
+            App\Service\Meetup\GetAllMeetupsInterface::class => App\Service\Meetup\GetAllMeetupsFactory::class,
             App\Service\Location\GetAllLocationsInterface::class => App\Service\Location\GetAllLocationsFactory::class,
             App\Service\Location\FindLocationByUuid::class => App\Service\Location\FindLocationByUuidFactory::class,
             App\Service\Speaker\GetAllSpeakersInterface::class => App\Service\Speaker\GetAllSpeakersFactory::class,
