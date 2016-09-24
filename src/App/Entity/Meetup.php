@@ -150,4 +150,9 @@ use Ramsey\Uuid\Uuid;
     {
         return $this->topic;
     }
+
+    public function isBefore(\DateTimeImmutable $date) : bool
+    {
+        return ($this->toDate < $date);
+    }
 }

@@ -24,7 +24,7 @@ $this->headTitle('Meetups');
         </thead>
         <tbody>
         <?php foreach ($meetups as $meetup): ?>
-            <tr>
+            <tr class="<?= $meetup->isBefore(new \DateTimeImmutable('now')) ? 'past' : 'future'; ?>">
                 <td><?= $meetup->getFromDate()->format('d F Y'); ?></td>
                 <td><?= $meetup->getLocation()->getName(); ?></td>
                 <td>

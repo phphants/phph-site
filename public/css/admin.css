@@ -91,3 +91,10 @@ table td.label {
 tbody tr:nth-child(odd) {
     background-color: rgba(192, 192, 192, 0.2);
 }
+table tr.past td {
+    color: grey;
+    font-style: italic;
+}
+table tr.past td a.link-button.tiny {
+    font-style: normal;
+}

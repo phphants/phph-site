@@ -84,4 +84,26 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         self::assertCount(1, $abbreviatedTalks);
         self::assertSame($talkWithSpeaker, $abbreviatedTalks->first());
     }
+
+    public function testIsBeforeReturnsTrueWhenToDateIsBeforeRequestedDate()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        self::assertTrue($meetup->isBefore(new \DateTimeImmutable('2016-06-05 19:00:00')));
+    }
+
+    public function testIsBeforeReturnsFalseWhenToDateIsAfterRequestedDate()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        self::assertFalse($meetup->isBefore(new \DateTimeImmutable('2016-05-05 19:00:00')));
+    }
 }
