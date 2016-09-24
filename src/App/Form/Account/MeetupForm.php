@@ -51,6 +51,7 @@ class MeetupForm extends Form implements InputFilterProviderInterface
             (new Collection('talks'))
                 ->setOptions([
                     'should_create_template' => true,
+                    'count' => 0,
                     'allow_add' => true,
                     'allow_remove' => true,
                     'target_element' => new TalkFieldset($speakers),
