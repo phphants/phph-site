@@ -21,7 +21,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
     public function testGetRequestRendersTemplate()
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
-        $renderer->expects(self::once())->method('render')->with('account::meetup/add')->willReturn('content...');
+        $renderer->expects(self::once())->method('render')->with('account::meetup/edit')->willReturn('content...');
 
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
@@ -49,7 +49,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPostRequestRendersTemplate()
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
-        $renderer->expects(self::once())->method('render')->with('account::meetup/add')->willReturn('content...');
+        $renderer->expects(self::once())->method('render')->with('account::meetup/edit')->willReturn('content...');
 
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');

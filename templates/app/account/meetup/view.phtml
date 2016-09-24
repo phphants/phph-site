@@ -16,5 +16,42 @@ $this->headTitle('Meetups');
         <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>">Edit this meetup</a>
     </p>
 
-    <?= $this->partial('layout::single-meetup-full', ['meetup' => $meetup]); ?>
+    <table>
+        <tbody>
+            <tr>
+                <td class="label">Start Date &amp; Time</td>
+                <td><?= $meetup->getFromDate()->format('Y-m-d H:i'); ?></td>
+            </tr>
+            <tr>
+                <td class="label">End Date &amp; Time</td>
+                <td><?= $meetup->getFromDate()->format('Y-m-d H:i'); ?></td>
+            </tr>
+            <tr>
+                <td class="label">Location</td>
+                <td><?= $this->escapeHtml($meetup->getLocation()->getName()); ?></td>
+            </tr>
+            <tr>
+                <td class="label">Topic</td>
+                <td><?= $this->escapeHtml(null !== $meetup->getTopic() ? $meetup->getTopic() : 'n/a'); ?></td>
+            </tr>
+            <tr>
+                <td class="label">Eventbrite Link</td>
+                <td>
+                    <?php if (null !== $meetup->getEventbriteData()): ?>
+                        <a href="<?= $this->escapeHtmlAttr($meetup->getEventbriteData()->getUrl()); ?>">
+                            <?= $this->escapeHtml($meetup->getEventbriteData()->getEventbriteId()); ?>
+                        </a>
+                    <?php else: ?>
+                        Not set (create Eventbrite link)
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Talks</td>
+                <td>
+                    @todo
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

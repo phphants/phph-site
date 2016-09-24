@@ -93,7 +93,7 @@ final class EditMeetupActionTest extends \PHPUnit_Framework_TestCase
         $this->form->expects(self::never())->method('isValid');
         $this->form->expects(self::never())->method('getData');
 
-        $this->renderer->expects(self::once())->method('render')->with('account::meetup/add', [
+        $this->renderer->expects(self::once())->method('render')->with('account::meetup/edit', [
             'form' => $this->form,
         ])->willReturn('content...');
 
@@ -116,7 +116,7 @@ final class EditMeetupActionTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidPostRequestRendersTemplate()
     {
-        $this->renderer->expects(self::once())->method('render')->with('account::meetup/add')->willReturn('content...');
+        $this->renderer->expects(self::once())->method('render')->with('account::meetup/edit')->willReturn('content...');
 
         $this->urlHelper->expects(self::never())->method('generate');
 

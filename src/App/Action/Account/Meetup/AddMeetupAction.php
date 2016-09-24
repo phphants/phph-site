@@ -80,7 +80,7 @@ final class AddMeetupAction implements MiddlewareInterface
                 ]));
             }
         }
-        return new HtmlResponse($this->templateRenderer->render('account::meetup/add', [
+        return new HtmlResponse($this->templateRenderer->render('account::meetup/edit', [
             'form' => $this->form,
         ]));
     }
