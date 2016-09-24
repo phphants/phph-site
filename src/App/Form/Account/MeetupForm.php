@@ -23,13 +23,23 @@ class MeetupForm extends Form implements InputFilterProviderInterface
 
         $this->add(
             (new DateTimeSelect('from'))
-                ->setShouldShowSeconds(false)
+                ->setOptions([
+                    'should_show_seconds' => false,
+                    'min_year' => 2010,
+                    'max_year' => date('Y') + 2,
+                ])
                 ->setLabel('From')
+                ->setValue((new \DateTimeImmutable('now 19:00:00'))->format('Y-m-d H:i:s'))
         );
         $this->add(
             (new DateTimeSelect('to'))
-                ->setShouldShowSeconds(false)
+                ->setOptions([
+                    'should_show_seconds' => false,
+                    'min_year' => 2010,
+                    'max_year' => date('Y') + 2,
+                ])
                 ->setLabel('To')
+                ->setValue((new \DateTimeImmutable('now 23:00:00'))->format('Y-m-d H:i:s'))
         );
         $this->add(
             (new Select('location'))
