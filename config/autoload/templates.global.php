@@ -38,10 +38,12 @@ return [
         ],
         'factories' => [
             App\View\Helper\IsDebug::class => App\View\Helper\IsDebugFactory::class,
+            App\View\Helper\User::class => App\View\Helper\UserFactory::class,
         ],
         'aliases' => [
             'twitterLinkOrName' => App\View\Helper\TwitterLinkOrName::class,
             'isDebug' => App\View\Helper\IsDebug::class,
+            'user' => App\View\Helper\User::class,
         ],
     ],
 ];
