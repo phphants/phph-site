@@ -128,7 +128,10 @@ use Ramsey\Uuid\Uuid;
         });
     }
 
-    public function getEventbriteData() : EventbriteData
+    /**
+     * @return EventbriteData
+     */
+    public function getEventbriteData()
     {
         return $this->eventbriteData;
     }
