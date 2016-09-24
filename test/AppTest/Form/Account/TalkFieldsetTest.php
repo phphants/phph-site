@@ -13,7 +13,6 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputInterface;
 
-
 /**
  * @covers \App\Form\Account\TalkFieldset
  */
