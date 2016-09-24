@@ -52,7 +52,7 @@ class TalkFieldset extends Fieldset implements InputFilterProviderInterface
         );
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification() : array
     {
         return [
             'time' => [

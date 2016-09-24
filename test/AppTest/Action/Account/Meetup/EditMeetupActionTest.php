@@ -94,6 +94,7 @@ final class EditMeetupActionTest extends \PHPUnit_Framework_TestCase
         $this->form->expects(self::never())->method('getData');
 
         $this->renderer->expects(self::once())->method('render')->with('account::meetup/edit', [
+            'title' => 'Edit meetup',
             'form' => $this->form,
         ])->willReturn('content...');
 

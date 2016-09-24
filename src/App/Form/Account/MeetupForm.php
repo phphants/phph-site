@@ -64,7 +64,7 @@ class MeetupForm extends Form implements InputFilterProviderInterface
         ]));
     }
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification() : array
     {
         return [
             'from' => [

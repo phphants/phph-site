@@ -90,6 +90,12 @@ use Ramsey\Uuid\Uuid;
         return $meetup;
     }
 
+    /**
+     * @param DateTimeImmutable $from
+     * @param DateTimeImmutable $to
+     * @param Location $location
+     * @return void
+     */
     public function updateFromData(
         DateTimeImmutable $from,
         DateTimeImmutable $to,
@@ -131,7 +137,7 @@ use Ramsey\Uuid\Uuid;
     }
 
     /**
-     * @return EventbriteData
+     * @return EventbriteData|null
      */
     public function getEventbriteData()
     {

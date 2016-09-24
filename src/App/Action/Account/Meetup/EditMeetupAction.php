@@ -93,6 +93,7 @@ final class EditMeetupAction implements MiddlewareInterface
             }
         }
         return new HtmlResponse($this->templateRenderer->render('account::meetup/edit', [
+            'title' => 'Edit meetup',
             'form' => $this->form,
         ]));
     }
