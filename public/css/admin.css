@@ -1,0 +1,62 @@
+
+nav.admin {
+    overflow: hidden;
+    background-color: #c0c0c0;
+}
+
+nav.admin ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+nav.admin ul li a {
+    display: block;
+    padding: 20px 20px;
+    color: inherit;
+    text-decoration: none;
+    -webkit-transition: color .15s;
+    transition: color .15s;
+}
+
+nav.admin ul li a:hover {
+    color: #ffffff;
+}
+
+nav.admin ul li.active a {
+    color: #ec7748;
+}
+
+form {
+    padding: 10px 20px 20px 20px;
+    background-color: white;
+}
+form fieldset {
+    border: 0;
+}
+form fieldset legend, form label span {
+    font-size: 18px;
+    font-weight: bold;
+}
+form label {
+    display: block;
+}
+form label span {
+    display: block;
+}
+
+/* spacing between elements */
+form label, form fieldset, form input[type=submit] {
+    margin-top: 20px;
+}
+
+form input[type=submit] {
+    padding: 10px 40px;
+    border: 0;
+    background-color: #EC6A36;
+    color: white;
+    font-size: 20px;
+}
+form input[type=submit]:hover {
+    background-color: #ec8152;
+    cursor: pointer;
+}
