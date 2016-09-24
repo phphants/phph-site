@@ -71,7 +71,6 @@ use Ramsey\Uuid\Uuid;
      * @param DateTimeImmutable $from
      * @param DateTimeImmutable $to
      * @param Location $location
-     * @param Talk[] $talks
      * @param string $topic
      * @return Meetup
      * @throws \InvalidArgumentException
@@ -80,7 +79,6 @@ use Ramsey\Uuid\Uuid;
         DateTimeImmutable $from,
         DateTimeImmutable $to,
         Location $location,
-        array $talks,
         string $topic = null
     ) : self {
         $meetup = new self();
@@ -89,26 +87,17 @@ use Ramsey\Uuid\Uuid;
         $meetup->location = $location;
         $meetup->topic = $topic;
 
-        foreach ($talks as $k => $talk) {
-            if (!$talk instanceof Talk) {
-                throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
-            }
-            $meetup->talks->add($talk);
-        }
         return $meetup;
     }
 
     public function updateFromData(
         DateTimeImmutable $from,
         DateTimeImmutable $to,
-        Location $location,
-        array $talks
+        Location $location
     ) {
         $this->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
         $this->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
         $this->location = $location;
-
-        // @todo add/update/remove talks
     }
 
     public function getId() : string

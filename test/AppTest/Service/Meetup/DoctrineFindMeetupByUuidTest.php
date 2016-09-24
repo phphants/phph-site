@@ -34,8 +34,7 @@ class DoctrineFindMeetupByUuidTest extends \PHPUnit_Framework_TestCase
         $meetup = Meetup::fromStandardMeetup(
             new \DateTimeImmutable(),
             new \DateTimeImmutable(),
-            Location::fromNameAddressAndUrl('', '', ''),
-            []
+            Location::fromNameAddressAndUrl('', '', '')
         );
 
         $objectRepository = $this->createMock(ObjectRepository::class);

@@ -84,8 +84,7 @@ final class EditMeetupAction implements MiddlewareInterface
                     $meetup->updateFromData(
                         new \DateTimeImmutable($data['from']),
                         new \DateTimeImmutable($data['to']),
-                        $this->findLocationByUuid->__invoke(Uuid::fromString($data['location'])),
-                        []
+                        $this->findLocationByUuid->__invoke(Uuid::fromString($data['location']))
                     );
                 });
                 return new RedirectResponse($this->urlHelper->generate('account-meetup-view', [

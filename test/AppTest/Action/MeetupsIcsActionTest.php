@@ -26,8 +26,7 @@ final class MeetupsIcsActionTest extends \PHPUnit_Framework_TestCase
                     'Foo',
                     'Foo Adddress',
                     'http://test-uri/'
-                ),
-                []
+                )
             )
         ]);
         $meetupsService->expects(self::never())->method('findMeetupsBefore');

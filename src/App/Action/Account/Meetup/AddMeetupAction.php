@@ -69,8 +69,7 @@ final class AddMeetupAction implements MiddlewareInterface
                     $meetup = Meetup::fromStandardMeetup(
                         new \DateTimeImmutable($data['from']),
                         new \DateTimeImmutable($data['to']),
-                        $this->findLocationByUuid->__invoke(Uuid::fromString($data['location'])),
-                        []
+                        $this->findLocationByUuid->__invoke(Uuid::fromString($data['location']))
                     );
                     $this->entityManager->persist($meetup);
                     return $meetup;
