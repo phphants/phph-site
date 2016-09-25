@@ -8,7 +8,7 @@ use App\Entity\Meetup;
 interface GetAllMeetupsInterface
 {
     /**
-     * Return all Meetup. Returns an empty array if there none exist.
+     * Return all Meetup. Returns an empty array if none exist.
      * @return Meetup[]
      */
     public function __invoke() : array;

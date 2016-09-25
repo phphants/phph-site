@@ -8,7 +8,7 @@ use App\Entity\Speaker;
 interface GetAllSpeakersInterface
 {
     /**
-     * Return all Speakers. Returns an empty array if there none exist.
+     * Return all Speakers. Returns an empty array if none exist.
      * @return Speaker[]
      */
     public function __invoke() : array;

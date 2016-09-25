@@ -8,7 +8,7 @@ use App\Entity\Location;
 interface GetAllLocationsInterface
 {
     /**
-     * Return all locations. Returns an empty array if there none exist.
+     * Return all locations. Returns an empty array if none exist.
      * @return Location[]
      */
     public function __invoke() : array;
