@@ -78,7 +78,7 @@ table {
     margin-top: 20px;
 }
 table thead td {
-    background-color: #373737;
+    background-color: #2E2E2E;
     color: white;
 }
 table td {
@@ -97,4 +97,7 @@ table tr.past td {
 }
 table tr.past td a.link-button.tiny {
     font-style: normal;
+}
+table td.nowrap {
+    white-space: nowrap;
 }
