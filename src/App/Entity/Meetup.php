@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Assert\Assertion;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
@@ -81,6 +82,8 @@ use Ramsey\Uuid\Uuid;
         Location $location,
         string $topic = null
     ) : self {
+        Assertion::greaterThan($to, $from, 'To date should be after From date');
+
         $meetup = new self();
         $meetup->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
         $meetup->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
@@ -101,6 +104,8 @@ use Ramsey\Uuid\Uuid;
         DateTimeImmutable $to,
         Location $location
     ) {
+        Assertion::greaterThan($to, $from, 'To date should be after From date');
+
         $this->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
         $this->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
         $this->location = $location;

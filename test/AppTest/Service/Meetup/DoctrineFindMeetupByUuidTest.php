@@ -32,8 +32,8 @@ class DoctrineFindMeetupByUuidTest extends \PHPUnit_Framework_TestCase
     public function testLocationIsReturned()
     {
         $meetup = Meetup::fromStandardMeetup(
-            new \DateTimeImmutable(),
-            new \DateTimeImmutable(),
+            new \DateTimeImmutable('now -2 days'),
+            new \DateTimeImmutable('now'),
             Location::fromNameAddressAndUrl('', '', '')
         );
 

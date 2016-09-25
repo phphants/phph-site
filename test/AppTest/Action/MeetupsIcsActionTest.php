@@ -20,8 +20,8 @@ final class MeetupsIcsActionTest extends \PHPUnit_Framework_TestCase
         $meetupsService = $this->createMock(MeetupsServiceInterface::class);
         $meetupsService->expects(self::once())->method('findMeetupsAfter')->willReturn([
             Meetup::fromStandardMeetup(
-                new \DateTimeImmutable(),
-                new \DateTimeImmutable(),
+                new \DateTimeImmutable('now -2 days'),
+                new \DateTimeImmutable('now'),
                 Location::fromNameAddressAndUrl(
                     'Foo',
                     'Foo Adddress',

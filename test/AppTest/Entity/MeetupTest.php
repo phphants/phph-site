@@ -8,6 +8,7 @@ use App\Entity\Location;
 use App\Entity\Meetup;
 use App\Entity\Speaker;
 use App\Entity\Talk;
+use Assert\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -105,5 +106,32 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
 
         self::assertFalse($meetup->isBefore(new \DateTimeImmutable('2016-05-05 19:00:00')));
+    }
+
+    public function testExceptionThrownWhenFromDateIsAfterToDateWhenCreatingMeetup()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('To date should be after From date');
+        Meetup::fromStandardMeetup($from, $to, $location);
+    }
+
+    public function testExceptionThrownWhenFromDateIsAfterToDateWhenUpdatingMeetup()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        $newFrom = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $newTo = new \DateTimeImmutable('2016-06-01 19:00:00');
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('To date should be after From date');
+        $meetup->updateFromData($newFrom, $newTo, $location);
     }
 }
