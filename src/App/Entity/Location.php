@@ -51,6 +51,19 @@ use Ramsey\Uuid\Uuid;
         return $location;
     }
 
+    /**
+     * @param string $name
+     * @param string $address
+     * @param string $url
+     * @return void
+     */
+    public function updateFromData(string $name, string $address, string $url)
+    {
+        $this->name = $name;
+        $this->address = $address;
+        $this->url = $url;
+    }
+
     public function getId() : string
     {
         return (string)$this->id;
