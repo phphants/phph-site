@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Action\Account\Location;
 
 use App\Form\Account\LocationForm;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Helper\UrlHelper;
@@ -19,7 +19,7 @@ final class EditLocationActionFactory
     {
         return new EditLocationAction(
             $container->get(TemplateRendererInterface::class),
-            $container->get(FindLocationByUuid::class),
+            $container->get(FindLocationByUuidInterface::class),
             new LocationForm(),
             $container->get(EntityManagerInterface::class),
             $container->get(UrlHelper::class)

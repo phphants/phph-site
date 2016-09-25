@@ -3,8 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Action\Account\Location;
 
-use App\Entity\Location;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -24,7 +23,7 @@ final class EditLocationAction implements MiddlewareInterface
     private $templateRenderer;
 
     /**
-     * @var FindLocationByUuid
+     * @var FindLocationByUuidInterface
      */
     private $findLocationByUuid;
 
@@ -45,7 +44,7 @@ final class EditLocationAction implements MiddlewareInterface
 
     public function __construct(
         TemplateRendererInterface $templateRenderer,
-        FindLocationByUuid $findLocationByUuid,
+        FindLocationByUuidInterface $findLocationByUuid,
         FormInterface $form,
         EntityManagerInterface $entityManager,
         UrlHelper $urlHelper

@@ -5,7 +5,7 @@ namespace AppTest\Action\Account\Location;
 
 use App\Action\Account\Location\EditLocationAction;
 use App\Entity\Location;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
@@ -44,7 +44,7 @@ final class EditLocationActionTest extends \PHPUnit_Framework_TestCase
     private $entityManager;
 
     /**
-     * @var FindLocationByUuid|\PHPUnit_Framework_MockObject_MockObject
+     * @var FindLocationByUuidInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     private $findLocation;
 
@@ -65,7 +65,7 @@ final class EditLocationActionTest extends \PHPUnit_Framework_TestCase
         $this->renderer = $this->createMock(TemplateRendererInterface::class);
         $this->urlHelper = $this->createMock(UrlHelper::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
-        $this->findLocation = $this->createMock(FindLocationByUuid::class);
+        $this->findLocation = $this->createMock(FindLocationByUuidInterface::class);
         $this->findLocation->expects(self::once())
             ->method('__invoke')
             ->with($this->location->getId())
