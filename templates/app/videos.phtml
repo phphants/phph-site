@@ -1,6 +1,11 @@
 <?php
+declare(strict_types=1);
+
+/** @var \App\Entity\Video[] $videos */
+
 $title = "Videos";
 $this->headTitle($title);
+
 ?>
 
 </div><!-- end of gradient-wrapper -->
@@ -10,10 +15,15 @@ $this->headTitle($title);
     <ul id="videos">
     <?php foreach ($videos as $video): ?>
         <li>
-            <h3 class="title"><?php echo $video['title']; ?></h3>
-            <h4 class="speaker"><span class="unbold">by</span> <?php echo $video['speaker']; ?> <span class="unbold">on</span> <?php echo $video['date']; ?></h4>
-            <div class="lazyload-youtube" data-youtube-id="<?php echo $video['code']; ?>" data-ratio="16:9">
-              <a href="https://youtu.be/<?php echo $video['code']; ?>">Watch on YouTube</a>
+            <h3 class="title"><?= $this->escapeHtml($video->getTalk()->getTitle()); ?></h3>
+            <h4 class="speaker">
+                <span class="unbold">by</span>
+                <?= $this->escapeHtml($video->getTalk()->getSpeaker()->getFullName()); ?>
+                <span class="unbold">on</span>
+                <?= $this->escapeHtml($video->getTalk()->getTime()->format('d F Y')); ?>
+            </h4>
+            <div class="lazyload-youtube" data-youtube-id="<?= $this->escapeHtmlAttr($video->getYoutubeId()); ?>" data-ratio="16:9">
+              <a href="https://youtu.be/<?= $this->escapeHtmlAttr($video->getYoutubeId()); ?>">Watch on YouTube</a>
             </div>
         </li>
     <?php endforeach; ?>
