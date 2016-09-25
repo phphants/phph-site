@@ -1,0 +1,48 @@
+<?php
+declare(strict_types=1);
+
+$this->headTitle('Meetups');
+
+/** @var \App\Entity\Meetup[] $meetups */
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>List Meetups</h1>
+
+    <a href="<?= $this->url('account-meetup-add'); ?>" class="link-button">Add a new meetup</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Meetup Date</td>
+                <td>Location</td>
+                <td>Speaker(s)</td>
+                <td>&nbsp;</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($meetups as $meetup): ?>
+            <tr class="<?= $meetup->isBefore(new \DateTimeImmutable('now')) ? 'past' : 'future'; ?>">
+                <td><?= $meetup->getFromDate()->format('d F Y'); ?></td>
+                <td><?= $this->escapeHtml($meetup->getLocation()->getName()); ?></td>
+                <td>
+                    <?php
+                    $speakers = [];
+                    foreach ($meetup->getAbbreviatedTalks() as $talk) {
+                        $speakers[] = $talk->getSpeaker()->getFullName();
+                    }
+                    echo $this->escapeHtml(implode(', ', $speakers));
+                    ?>
+                </td>
+                <td>
+                    <a href="<?= $this->url('account-meetup-view', ['uuid' => $meetup->getId()]); ?>" class="link-button tiny">View</a>
+                    <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>" class="link-button tiny">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>

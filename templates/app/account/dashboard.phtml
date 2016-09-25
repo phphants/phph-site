@@ -12,6 +12,7 @@ $this->headTitle($title);
 
     <p>Things wot you can do:</p>
     <ul>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-meetups-list')); ?>">Manage Meetups</a></li>
         <li><a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">Logout</a></li>
     </ul>
 </div>

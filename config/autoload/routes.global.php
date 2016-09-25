@@ -21,6 +21,10 @@ return [
             App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
             App\Action\Account\LogoutAction::class => App\Action\Account\LogoutActionFactory::class,
+            App\Action\Account\Meetup\AddMeetupAction::class => App\Action\Account\Meetup\AddMeetupActionFactory::class,
+            App\Action\Account\Meetup\EditMeetupAction::class => App\Action\Account\Meetup\EditMeetupActionFactory::class,
+            App\Action\Account\Meetup\ViewMeetupAction::class => App\Action\Account\Meetup\ViewMeetupActionFactory::class,
+            App\Action\Account\Meetup\ListMeetupsAction::class => App\Action\Account\Meetup\ListMeetupsActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -105,6 +109,42 @@ return [
                 App\Action\Account\DashboardAction::class,
             ],
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-meetups-list',
+            'path' => '/account/meetups',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Meetup\ListMeetupsAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-meetup-add',
+            'path' => '/account/meetup/add',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Meetup\AddMeetupAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-meetup-view',
+            'path' => '/account/meetup/{uuid}',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Meetup\ViewMeetupAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-meetup-edit',
+            'path' => '/account/meetup/{uuid}/edit',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Meetup\EditMeetupAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name' => 'account-logout',

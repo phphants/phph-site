@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Assert\Assertion;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
@@ -71,7 +72,6 @@ use Ramsey\Uuid\Uuid;
      * @param DateTimeImmutable $from
      * @param DateTimeImmutable $to
      * @param Location $location
-     * @param Talk[] $talks
      * @param string $topic
      * @return Meetup
      * @throws \InvalidArgumentException
@@ -80,22 +80,40 @@ use Ramsey\Uuid\Uuid;
         DateTimeImmutable $from,
         DateTimeImmutable $to,
         Location $location,
-        array $talks,
         string $topic = null
     ) : self {
+        Assertion::greaterThan($to, $from, 'To date should be after From date');
+
         $meetup = new self();
         $meetup->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
         $meetup->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
         $meetup->location = $location;
         $meetup->topic = $topic;
 
-        foreach ($talks as $k => $talk) {
-            if (!$talk instanceof Talk) {
-                throw new \InvalidArgumentException(sprintf('Item with key %s in talks was not a Talk', $k));
-            }
-            $meetup->talks->add($talk);
-        }
         return $meetup;
+    }
+
+    /**
+     * @param DateTimeImmutable $from
+     * @param DateTimeImmutable $to
+     * @param Location $location
+     * @return void
+     */
+    public function updateFromData(
+        DateTimeImmutable $from,
+        DateTimeImmutable $to,
+        Location $location
+    ) {
+        Assertion::greaterThan($to, $from, 'To date should be after From date');
+
+        $this->fromDate = new \DateTimeImmutable($from->format('Y-m-d H:i:s'));
+        $this->toDate = new \DateTimeImmutable($to->format('Y-m-d H:i:s'));
+        $this->location = $location;
+    }
+
+    public function getId() : string
+    {
+        return (string)$this->id;
     }
 
     public function getFromDate() : \DateTimeImmutable
@@ -123,7 +141,10 @@ use Ramsey\Uuid\Uuid;
         });
     }
 
-    public function getEventbriteData() : EventbriteData
+    /**
+     * @return EventbriteData|null
+     */
+    public function getEventbriteData()
     {
         return $this->eventbriteData;
     }
@@ -139,5 +160,10 @@ use Ramsey\Uuid\Uuid;
     public function getTopic()
     {
         return $this->topic;
+    }
+
+    public function isBefore(\DateTimeImmutable $date) : bool
+    {
+        return ($this->toDate < $date);
     }
 }

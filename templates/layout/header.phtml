@@ -1,3 +1,7 @@
+<?php
+declare(strict_types=1);
+?>
+
 <div class="gradient-wrapper">
 
 <header>
@@ -25,3 +29,19 @@
     </nav>
 </div>
 </header>
+
+<?php if ($this->user()->isLoggedIn()): ?>
+    <nav class="admin"><div class="wrapper">
+        <ul>
+            <li>
+                <a href="<?= $this->url('account-dashboard'); ?>">Dashboard</a>
+            </li>
+            <li>
+                <a href="<?= $this->url('account-meetups-list'); ?>">Meetups</a>
+            </li>
+            <li>
+                <a href="<?= $this->url('account-logout'); ?>">Logout</a>
+            </li>
+        </ul>
+    </div></nav>
+<?php endif; ?>
