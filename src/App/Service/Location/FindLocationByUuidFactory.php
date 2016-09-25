@@ -17,7 +17,7 @@ final class FindLocationByUuidFactory implements FactoryInterface
         ContainerInterface $container,
         $requestedName,
         array $options = null
-    ) : FindLocationByUuid {
+    ) : FindLocationByUuidInterface {
         return new DoctrineFindLocationByUuid(
             $container->get(EntityManagerInterface::class)->getRepository(Location::class)
         );

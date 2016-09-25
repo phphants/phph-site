@@ -6,7 +6,7 @@ namespace App\Service\Location;
 use App\Entity\Location;
 use Ramsey\Uuid\UuidInterface;
 
-interface FindLocationByUuid
+interface FindLocationByUuidInterface
 {
     /**
      * @param UuidInterface $uuid

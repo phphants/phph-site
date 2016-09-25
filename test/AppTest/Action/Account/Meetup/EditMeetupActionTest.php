@@ -6,7 +6,7 @@ namespace AppTest\Action\Account\Meetup;
 use App\Action\Account\Meetup\EditMeetupAction;
 use App\Entity\Location;
 use App\Entity\Meetup;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use App\Service\Meetup\FindMeetupByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -52,7 +52,7 @@ final class EditMeetupActionTest extends \PHPUnit_Framework_TestCase
     private $findMeetup;
 
     /**
-     * @var FindLocationByUuid|\PHPUnit_Framework_MockObject_MockObject
+     * @var FindLocationByUuidInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     private $findLocation;
 
@@ -75,7 +75,7 @@ final class EditMeetupActionTest extends \PHPUnit_Framework_TestCase
             ->method('__invoke')
             ->with($this->meetup->getId())
             ->willReturn($this->meetup);
-        $this->findLocation = $this->createMock(FindLocationByUuid::class);
+        $this->findLocation = $this->createMock(FindLocationByUuidInterface::class);
 
         $this->action = new EditMeetupAction(
             $this->renderer,

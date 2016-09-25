@@ -5,7 +5,7 @@ namespace AppTest\Action\Account\Meetup;
 
 use App\Action\Account\Meetup\AddMeetupAction;
 use App\Entity\Location;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
@@ -34,7 +34,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
 
-        $findLocation = $this->createMock(FindLocationByUuid::class);
+        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
         $findLocation->expects(self::never())->method('__invoke');
 
         $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(
@@ -66,7 +66,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
 
-        $findLocation = $this->createMock(FindLocationByUuid::class);
+        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
         $findLocation->expects(self::never())->method('__invoke');
 
         $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(
@@ -113,7 +113,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
 
-        $findLocation = $this->createMock(FindLocationByUuid::class);
+        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
         $findLocation->expects(self::once())->method('__invoke')->with($location->getId())->willReturn($location);
 
         $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(

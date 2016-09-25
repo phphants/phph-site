@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace App\Action\Account\Meetup;
 
 use App\Entity\Meetup;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -34,7 +34,7 @@ final class AddMeetupAction implements MiddlewareInterface
     private $entityManager;
 
     /**
-     * @var FindLocationByUuid
+     * @var FindLocationByUuidInterface
      */
     private $findLocationByUuid;
 
@@ -47,7 +47,7 @@ final class AddMeetupAction implements MiddlewareInterface
         TemplateRendererInterface $templateRenderer,
         FormInterface $form,
         EntityManagerInterface $entityManager,
-        FindLocationByUuid $findLocationByUuid,
+        FindLocationByUuidInterface $findLocationByUuid,
         UrlHelper $urlHelper
     ) {
         $this->templateRenderer = $templateRenderer;

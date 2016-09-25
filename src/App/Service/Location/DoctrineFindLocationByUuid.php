@@ -7,7 +7,7 @@ use App\Entity\Location;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineFindLocationByUuid implements FindLocationByUuid
+class DoctrineFindLocationByUuid implements FindLocationByUuidInterface
 {
     /**
      * @var ObjectRepository

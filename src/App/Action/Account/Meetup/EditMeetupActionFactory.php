@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Action\Account\Meetup;
 
 use App\Form\Account\MeetupForm;
-use App\Service\Location\FindLocationByUuid;
+use App\Service\Location\FindLocationByUuidInterface;
 use App\Service\Location\GetAllLocationsInterface;
 use App\Service\Meetup\FindMeetupByUuidInterface;
 use App\Service\Speaker\GetAllSpeakersInterface;
@@ -28,7 +28,7 @@ final class EditMeetupActionFactory
             ),
             $container->get(EntityManagerInterface::class),
             $container->get(FindMeetupByUuidInterface::class),
-            $container->get(FindLocationByUuid::class),
+            $container->get(FindLocationByUuidInterface::class),
             $container->get(UrlHelper::class)
         );
     }
