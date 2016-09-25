@@ -44,6 +44,11 @@ form label span {
     display: block;
 }
 
+form label input[type=text], form label input[type=password], form label input[type=url] {
+    padding: 3px 5px;
+    width: 250px;
+}
+
 /* spacing between elements */
 form label, form fieldset, form input[type=submit] {
     margin-top: 20px;
