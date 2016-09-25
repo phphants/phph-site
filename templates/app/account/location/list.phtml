@@ -31,8 +31,7 @@ $this->headTitle('Locations');
                     [<a href="<?= $this->escapeHtmlAttr($location->getUrl()); ?>">link</a>]
                 </td>
                 <td class="nowrap">
-                    <a href="<?= $this->url('account-locations-list', ['uuid' => $location->getId()]); ?>" class="link-button tiny">View</a>
-                    <a href="<?= $this->url('account-locations-list', ['uuid' => $location->getId()]); ?>" class="link-button tiny">Edit</a>
+                    <a href="<?= $this->url('account-location-edit', ['uuid' => $location->getId()]); ?>" class="link-button tiny">Edit</a>
                 </td>
             </tr>
         <?php endforeach; ?>
