@@ -44,12 +44,49 @@ $this->headTitle('Meetups');
                     <?php endif; ?>
                 </td>
             </tr>
+        </tbody>
+    </table>
+
+    <br />
+
+    <h3>Talks</h3>
+    <br />
+
+    <a href="#" class="link-button">Add a Talk</a>
+    <a href="#" class="link-button">Add a Schedule Item</a>
+
+    <table>
+        <thead>
             <tr>
-                <td class="label">Talks</td>
+                <td>Speaker</td>
+                <td>Time</td>
+                <td>Title &amp; Abstract</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($meetup->getTalks() as $talk): ?>
+            <tr>
+                <td class="nowrap">
+                <?php if (null !== $talk->getSpeaker()): ?>
+                    <?= $this->escapeHtml($talk->getSpeaker()->getFullName()); ?>
+                <?php else: ?>
+                    &nbsp;
+                <?php endif; ?>
+                </td>
                 <td>
-                    @todo
+                    <?= $talk->getTime()->format('H:i'); ?>
+                </td>
+                <td>
+                    <h4><?= $this->escapeHtml($talk->getTitle()); ?></h4>
+                    <?= $this->escapeHtml($talk->getAbstract()); ?>
+                </td>
+                <td class="nowrap">
+                    <a href="#" class="link-button tiny">Edit</a>
+                    <a href="#" class="link-button tiny">Delete</a>
                 </td>
             </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
