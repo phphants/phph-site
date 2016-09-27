@@ -8,7 +8,7 @@ use App\Entity\Video;
 interface GetAllVideosInterface
 {
     /**
-     * Return all Videos. Returns an empty array if there none exist.
+     * Return all Videos. Returns an empty array if none exist.
      * @return Video[]
      */
     public function __invoke() : array;
