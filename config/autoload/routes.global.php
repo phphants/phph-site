@@ -30,6 +30,7 @@ return [
             App\Action\Account\Location\EditLocationAction::class => App\Action\Account\Location\EditLocationActionFactory::class,
             App\Action\Account\Talk\AddTalkAction::class => App\Action\Account\Talk\AddTalkActionFactory::class,
             App\Action\Account\Talk\EditTalkAction::class => App\Action\Account\Talk\EditTalkActionFactory::class,
+            App\Action\Account\Talk\DeleteTalkAction::class => App\Action\Account\Talk\DeleteTalkActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -204,6 +205,15 @@ return [
                 App\Action\Account\Talk\EditTalkAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-talk-delete',
+            'path' => '/account/meetup/talk/{uuid}/delete',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Talk\DeleteTalkAction::class,
+            ],
+            'allowed_methods' => ['GET'],
         ],
     ],
 ];
