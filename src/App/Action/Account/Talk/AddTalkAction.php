@@ -79,13 +79,21 @@ final class AddTalkAction implements MiddlewareInterface
             if ($this->form->isValid()) {
                 $data = $this->form->getData();
                 $this->entityManager->transactional(function () use ($meetup, $data) {
-                    $talk = Talk::fromStandardTalk(
-                        $meetup,
-                        new \DateTimeImmutable($data['time']),
-                        $this->findSpeakerByUuid->__invoke(Uuid::fromString($data['speaker'])),
-                        $data['title'],
-                        $data['abstract']
-                    );
+                    if ($data['speaker'] !== '') {
+                        $talk = Talk::fromStandardTalk(
+                            $meetup,
+                            new \DateTimeImmutable($data['time']),
+                            $this->findSpeakerByUuid->__invoke(Uuid::fromString($data['speaker'])),
+                            $data['title'],
+                            $data['abstract']
+                        );
+                    } else {
+                        $talk = Talk::fromTitle(
+                            $meetup,
+                            new \DateTimeImmutable($data['time']),
+                            $data['title']
+                        );
+                    }
                     $this->entityManager->persist($talk);
                     return $talk;
                 });
