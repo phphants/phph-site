@@ -82,7 +82,7 @@ $this->headTitle('Meetups');
                 </td>
                 <td class="nowrap">
                     <a href="<?= $this->url('account-talk-edit', ['uuid' => $talk->getId()]); ?>" class="link-button tiny">Edit</a>
-                    <a href="#" class="link-button tiny">Delete</a>
+                    <a href="<?= $this->url('account-talk-delete', ['uuid' => $talk->getId()]); ?>" class="link-button tiny ask-confirmation">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

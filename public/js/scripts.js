@@ -129,15 +129,22 @@
 
 $(document).ready(function(){
 
-  $('.lazyload-youtube').lazyYT();
+    $('.lazyload-youtube').lazyYT();
 
-	$('.nav-button').click(function(){
-		$('nav').toggleClass('nav--shown');
-		if($('nav').hasClass('nav--shown')){
-			$('.nav-button').text('Close');
-		}else{
-			$('.nav-button').text('Menu');
-		}
-	});
+    $('.nav-button').click(function(){
+        $('nav').toggleClass('nav--shown');
+        if($('nav').hasClass('nav--shown')){
+            $('.nav-button').text('Close');
+        }else{
+            $('.nav-button').text('Menu');
+        }
+    });
+
+    $('.ask-confirmation').click(function (e) {
+        e.preventDefault();
+        if (confirm('Are you sure you wish to perform this action?')) {
+            window.location.href = $(this).attr('href');
+        }
+    });
 
 });
