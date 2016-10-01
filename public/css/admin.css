@@ -44,9 +44,13 @@ form label span {
     display: block;
 }
 
-form label input[type=text], form label input[type=password], form label input[type=url] {
+form label input[type=text], form label input[type=password], form label input[type=url], textarea {
     padding: 3px 5px;
     width: 250px;
+}
+textarea {
+    width: 100%;
+    height: 180px;
 }
 
 /* spacing between elements */
