@@ -64,4 +64,19 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         self::assertNull($talk->getSpeaker());
         self::assertNull($talk->getAbstract());
     }
+
+    public function testEmptyAbstractIsConvertedToNull()
+    {
+        $meetup = $this->createMock(Meetup::class);
+        $time = new \DateTimeImmutable('2016-12-31 23:59:59');
+        $speaker = Speaker::fromNameAndTwitter('Foobar');
+
+        $talk = Talk::fromStandardTalk($meetup, $time, $speaker, 'Talk title', '');
+
+        self::assertNull($talk->getAbstract());
+
+        $talk->updateFromData($time, 'Talk title', '', $speaker);
+
+        self::assertNull($talk->getAbstract());
+    }
 }

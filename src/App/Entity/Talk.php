@@ -79,6 +79,9 @@ use Ramsey\Uuid\Uuid;
         $talk->speaker = $speaker;
         $talk->title = $title;
         $talk->abstract = $abstract;
+        if ($talk->abstract === '') {
+            $talk->abstract = null;
+        }
         return $talk;
     }
 
