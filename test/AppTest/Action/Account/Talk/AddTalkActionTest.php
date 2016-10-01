@@ -1,0 +1,184 @@
+<?php
+declare(strict_types = 1);
+
+namespace AppTest\Action\Account\Talk;
+
+use App\Action\Account\Talk\AddTalkAction;
+use App\Entity\Meetup;
+use App\Entity\Speaker;
+use App\Service\Meetup\FindMeetupByUuidInterface;
+use App\Service\Speaker\FindSpeakerByUuidInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequest;
+use Zend\Expressive\Helper\UrlHelper;
+use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Form\FormInterface;
+
+/**
+ * @covers \App\Action\Account\Talk\AddTalkAction
+ */
+final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
+{
+    public function testGetRequestRendersTemplate()
+    {
+        $when = '2016-12-31';
+
+        /** @var Meetup|\PHPUnit_Framework_MockObject_MockObject $meetup */
+        $meetup = $this->createMock(Meetup::class);
+        $meetup->expects(self::any())->method('getId')->willReturn(Uuid::uuid4());
+        $meetup->expects(self::once())->method('getFromDate')->willReturn(new \DateTimeImmutable($when));
+
+        $renderer = $this->createMock(TemplateRendererInterface::class);
+        $renderer->expects(self::once())->method('render')->with('account::talk/edit')->willReturn('content...');
+
+        $urlHelper = $this->createMock(UrlHelper::class);
+        $urlHelper->expects(self::never())->method('generate');
+
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::once())->method('setData')->with([
+            'time' => '2016-12-31 19:30:00',
+        ]);
+        $form->expects(self::never())->method('isValid');
+        $form->expects(self::never())->method('getData');
+
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager->expects(self::never())->method('transactional');
+
+        $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
+        $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
+
+        $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
+        $findSpeaker->expects(self::never())->method('__invoke');
+
+        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+            (new ServerRequest(['/']))
+                ->withMethod('GET')
+                ->withAttribute('meetup', $meetup->getId()),
+            new Response()
+        );
+
+        self::assertInstanceOf(Response\HtmlResponse::class, $response);
+        self::assertSame('content...', (string)$response->getBody());
+    }
+
+    public function testInvalidPostRequestRendersTemplate()
+    {
+        $when = '2016-12-31';
+
+        /** @var Meetup|\PHPUnit_Framework_MockObject_MockObject $meetup */
+        $meetup = $this->createMock(Meetup::class);
+        $meetup->expects(self::any())->method('getId')->willReturn(Uuid::uuid4());
+        $meetup->expects(self::once())->method('getFromDate')->willReturn(new \DateTimeImmutable($when));
+
+        $renderer = $this->createMock(TemplateRendererInterface::class);
+        $renderer->expects(self::once())->method('render')->with('account::talk/edit')->willReturn('content...');
+
+        $urlHelper = $this->createMock(UrlHelper::class);
+        $urlHelper->expects(self::never())->method('generate');
+
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::at(0))->method('setData')->with([
+            'time' => '2016-12-31 19:30:00',
+        ]);
+        $form->expects(self::at(1))->method('setData')->with([
+            'time' => '',
+            'speaker' => '',
+            'title' => '',
+            'abstract' => '',
+        ]);
+        $form->expects(self::once())->method('isValid')->willReturn(false);
+        $form->expects(self::never())->method('getData');
+
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager->expects(self::never())->method('transactional');
+
+        $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
+        $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
+
+        $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
+        $findSpeaker->expects(self::never())->method('__invoke');
+
+        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+            (new ServerRequest(['/']))
+                ->withMethod('post')
+                ->withAttribute('meetup', $meetup->getId())
+                ->withParsedBody([
+                    'time' => '',
+                    'speaker' => '',
+                    'title' => '',
+                    'abstract' => '',
+                ]),
+            new Response()
+        );
+
+        self::assertInstanceOf(Response\HtmlResponse::class, $response);
+        self::assertSame('content...', (string)$response->getBody());
+    }
+
+    public function testValidPostRequestCreatesMeetupAndPersists()
+    {
+        $speaker = Speaker::fromNameAndTwitter('Foo Bar', 'foobar');
+
+        $when = '2016-12-31';
+
+        /** @var Meetup|\PHPUnit_Framework_MockObject_MockObject $meetup */
+        $meetup = $this->createMock(Meetup::class);
+        $meetup->expects(self::any())->method('getId')->willReturn(Uuid::uuid4());
+        $meetup->expects(self::once())->method('getFromDate')->willReturn(new \DateTimeImmutable($when));
+
+        $renderer = $this->createMock(TemplateRendererInterface::class);
+        $renderer->expects(self::never())->method('render');
+
+        $redirectUrl = uniqid('/account/meetup/', true);
+        $urlHelper = $this->createMock(UrlHelper::class);
+        $urlHelper->expects(self::once())
+            ->method('generate')
+            ->with('account-meetup-view')
+            ->willReturn($redirectUrl);
+
+        $form = $this->createMock(FormInterface::class);
+        $form->expects(self::at(0))->method('setData')->with([
+            'time' => '2016-12-31 19:30:00',
+        ]);
+        $form->expects(self::at(1))->method('setData')->with([
+            'time' => '2016-11-30 19:45:00',
+            'speaker' => $speaker->getId(),
+            'title' => 'My great talk',
+            'abstract' => 'The abstract about my fantastic talk',
+        ]);
+        $form->expects(self::once())->method('isValid')->willReturn(true);
+        $form->expects(self::once())->method('getData')->willReturn([
+            'time' => '2016-11-30 19:45:00',
+            'speaker' => $speaker->getId(),
+            'title' => 'My great talk',
+            'abstract' => 'The abstract about my fantastic talk',
+        ]);
+
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
+
+        $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
+        $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
+
+        $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
+        $findSpeaker->expects(self::once())->method('__invoke')->with($speaker->getId())->willReturn($speaker);
+
+        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+            (new ServerRequest(['/']))
+                ->withMethod('post')
+                ->withAttribute('meetup', $meetup->getId())
+                ->withParsedBody([
+                    'time' => '2016-11-30 19:45:00',
+                    'speaker' => $speaker->getId(),
+                    'title' => 'My great talk',
+                    'abstract' => 'The abstract about my fantastic talk',
+                ]),
+            new Response()
+        );
+
+        self::assertInstanceOf(Response\RedirectResponse::class, $response);
+        self::assertSame($redirectUrl, $response->getHeaderLine('Location'));
+    }
+}

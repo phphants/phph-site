@@ -28,6 +28,7 @@ return [
             App\Action\Account\Location\ListLocationsAction::class => App\Action\Account\Location\ListLocationsActionFactory::class,
             App\Action\Account\Location\AddLocationAction::class => App\Action\Account\Location\AddLocationActionFactory::class,
             App\Action\Account\Location\EditLocationAction::class => App\Action\Account\Location\EditLocationActionFactory::class,
+            App\Action\Account\Talk\AddTalkAction::class => App\Action\Account\Talk\AddTalkActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -184,6 +185,15 @@ return [
                 App\Action\Account\LogoutAction::class,
             ],
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-talk-add',
+            'path' => '/account/meetup/{meetup}/add-talk',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Talk\AddTalkAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
         ],
     ],
 ];

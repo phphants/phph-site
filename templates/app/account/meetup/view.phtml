@@ -52,8 +52,7 @@ $this->headTitle('Meetups');
     <h3>Talks</h3>
     <br />
 
-    <a href="#" class="link-button">Add a Talk</a>
-    <a href="#" class="link-button">Add a Schedule Item</a>
+    <a href="<?= $this->url('account-talk-add', ['meetup' => $meetup->getId()]); ?>" class="link-button">Add a Talk</a>
 
     <table>
         <thead>
