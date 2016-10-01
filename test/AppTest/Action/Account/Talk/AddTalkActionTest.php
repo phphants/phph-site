@@ -52,7 +52,8 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
         $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
         $findSpeaker->expects(self::never())->method('__invoke');
 
-        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+        $action = new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper);
+        $response = $action->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('GET')
                 ->withAttribute('meetup', $meetup->getId()),
@@ -100,7 +101,8 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
         $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
         $findSpeaker->expects(self::never())->method('__invoke');
 
-        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+        $action = new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper);
+        $response = $action->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withAttribute('meetup', $meetup->getId())
@@ -165,7 +167,8 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
         $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
         $findSpeaker->expects(self::once())->method('__invoke')->with($speaker->getId())->willReturn($speaker);
 
-        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+        $action = new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper);
+        $response = $action->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withAttribute('meetup', $meetup->getId())
@@ -228,7 +231,8 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
         $findSpeaker = $this->createMock(FindSpeakerByUuidInterface::class);
         $findSpeaker->expects(self::never())->method('__invoke');
 
-        $response = (new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper))->__invoke(
+        $action = new AddTalkAction($renderer, $form, $entityManager, $findMeetup, $findSpeaker, $urlHelper);
+        $response = $action->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withAttribute('meetup', $meetup->getId())
