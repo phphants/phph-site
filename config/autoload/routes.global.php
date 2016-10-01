@@ -29,6 +29,7 @@ return [
             App\Action\Account\Location\AddLocationAction::class => App\Action\Account\Location\AddLocationActionFactory::class,
             App\Action\Account\Location\EditLocationAction::class => App\Action\Account\Location\EditLocationActionFactory::class,
             App\Action\Account\Talk\AddTalkAction::class => App\Action\Account\Talk\AddTalkActionFactory::class,
+            App\Action\Account\Talk\EditTalkAction::class => App\Action\Account\Talk\EditTalkActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -192,6 +193,15 @@ return [
             'middleware' => [
                 App\Middleware\Authentication::class,
                 App\Action\Account\Talk\AddTalkAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-talk-edit',
+            'path' => '/account/meetup/talk/{uuid}/edit',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Talk\EditTalkAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
         ],
