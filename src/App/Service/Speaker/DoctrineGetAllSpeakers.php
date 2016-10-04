@@ -19,9 +19,10 @@ class DoctrineGetAllSpeakers implements GetAllSpeakersInterface
 
     /**
      * {@inheritdoc}
+     * @throws \UnexpectedValueException
      */
     public function __invoke() : array
     {
-        return $this->speakers->findAll();
+        return $this->speakers->findBy([], ['name' => 'ASC']);
     }
 }
