@@ -39,7 +39,7 @@ class SpeakerForm extends Form implements InputFilterProviderInterface
                 ],
             ],
             'twitter' => [
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     ['name' => StripTags::class],
                     ['name' => StringTrim::class],

@@ -51,15 +51,12 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
 
         $form->setData([
             'name' => '',
-            'twitter' => '',
+            'twitter' => '', // note, twitter handle not required, so no validation messages here
         ]);
 
         self::assertFalse($form->isValid());
         self::assertSame([
             'name' => [
-                NotEmpty::IS_EMPTY => 'Value is required and can\'t be empty',
-            ],
-            'twitter' => [
                 NotEmpty::IS_EMPTY => 'Value is required and can\'t be empty',
             ],
         ], $form->getMessages());
