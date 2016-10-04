@@ -3,12 +3,16 @@ declare(strict_types = 1);
 
 namespace App\Form\Account;
 
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Uri;
 
-class LocationForm extends Form
+class LocationForm extends Form implements InputFilterProviderInterface
 {
     public function __construct()
     {
@@ -24,5 +28,37 @@ class LocationForm extends Form
                 'timeout' => 120,
             ],
         ]));
+    }
+
+    public function getInputFilterSpecification() : array
+    {
+        return [
+            'name' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'address' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'url' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+                'validators' => [
+                    [
+                        'name' => Uri::class,
+                    ]
+                ],
+            ],
+        ];
     }
 }
