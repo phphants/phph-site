@@ -21,6 +21,11 @@ $this->headTitle($title);
                 <span>Locations</span>
             </a>
         </li>
+        <li class="speakers">
+            <a href="<?= $this->escapeHtmlAttr($this->url('account-speakers-list')); ?>">
+                <span>Speakers</span>
+            </a>
+        </li>
         <li class="logout">
             <a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">
                 <span>Logout</span>
