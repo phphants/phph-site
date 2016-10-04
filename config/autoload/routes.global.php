@@ -25,6 +25,9 @@ return [
             App\Action\Account\Meetup\EditMeetupAction::class => App\Action\Account\Meetup\EditMeetupActionFactory::class,
             App\Action\Account\Meetup\ViewMeetupAction::class => App\Action\Account\Meetup\ViewMeetupActionFactory::class,
             App\Action\Account\Meetup\ListMeetupsAction::class => App\Action\Account\Meetup\ListMeetupsActionFactory::class,
+            App\Action\Account\Location\ListLocationsAction::class => App\Action\Account\Location\ListLocationsActionFactory::class,
+            App\Action\Account\Location\AddLocationAction::class => App\Action\Account\Location\AddLocationActionFactory::class,
+            App\Action\Account\Location\EditLocationAction::class => App\Action\Account\Location\EditLocationActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -143,6 +146,33 @@ return [
             'middleware' => [
                 App\Middleware\Authentication::class,
                 App\Action\Account\Meetup\EditMeetupAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-locations-list',
+            'path' => '/account/locations',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Location\ListLocationsAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-location-add',
+            'path' => '/account/location/add',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Location\AddLocationAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-location-edit',
+            'path' => '/account/location/{uuid}/edit',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Location\EditLocationAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
         ],

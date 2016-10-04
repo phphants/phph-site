@@ -1,12 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace AppTest\Action\Account\Meetup;
+namespace AppTest\Action\Account\Location;
 
-use App\Action\Account\Meetup\AddMeetupAction;
+use App\Action\Account\Location\AddLocationAction;
 use App\Entity\Location;
-use App\Service\Location\FindLocationByUuidInterface;
-use App\Entity\Meetup;
 use Doctrine\ORM\EntityManagerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
@@ -15,14 +13,14 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Form\FormInterface;
 
 /**
- * @covers \App\Action\Account\Meetup\AddMeetupAction
+ * @covers \App\Action\Account\Location\AddLocationAction
  */
-final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
+final class AddLocationActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetRequestRendersTemplate()
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
-        $renderer->expects(self::once())->method('render')->with('account::meetup/edit')->willReturn('content...');
+        $renderer->expects(self::once())->method('render')->with('account::location/edit')->willReturn('content...');
 
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
@@ -35,10 +33,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
 
-        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
-        $findLocation->expects(self::never())->method('__invoke');
-
-        $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(
+        $response = (new AddLocationAction($renderer, $form, $entityManager, $urlHelper))->__invoke(
             (new ServerRequest(['/']))->withMethod('GET'),
             new Response()
         );
@@ -50,7 +45,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPostRequestRendersTemplate()
     {
         $renderer = $this->createMock(TemplateRendererInterface::class);
-        $renderer->expects(self::once())->method('render')->with('account::meetup/edit')->willReturn('content...');
+        $renderer->expects(self::once())->method('render')->with('account::location/edit')->willReturn('content...');
 
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::never())->method('generate');
@@ -67,10 +62,7 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
 
-        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
-        $findLocation->expects(self::never())->method('__invoke');
-
-        $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(
+        $response = (new AddLocationAction($renderer, $form, $entityManager, $urlHelper))->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody([
@@ -85,51 +77,46 @@ final class AddMeetupActionTest extends \PHPUnit_Framework_TestCase
         self::assertSame('content...', (string)$response->getBody());
     }
 
-    public function testValidPostRequestCreatesMeetupAndPersists()
+    public function testValidPostRequestCreatesLocationAndPersists()
     {
-        $location = Location::fromNameAddressAndUrl('foo', 'bar', 'baz');
-
         $renderer = $this->createMock(TemplateRendererInterface::class);
         $renderer->expects(self::never())->method('render');
 
         $urlHelper = $this->createMock(UrlHelper::class);
         $urlHelper->expects(self::once())
             ->method('generate')
-            ->with('account-meetup-view')
-            ->willReturn('/account/meetup/view');
+            ->with('account-locations-list')
+            ->willReturn('/account/locations');
 
         $form = $this->createMock(FormInterface::class);
         $form->expects(self::once())->method('setData')->with([
-            'from' => '2015-01-01 18:00',
-            'to' => '2015-01-01 23:00',
-            'location' => $location->getId(),
+            'name' => 'A Venue Name',
+            'address' => 'Venue Street, Venue Town',
+            'url' => 'https://a-great-venue.com',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(true);
         $form->expects(self::once())->method('getData')->willReturn([
-            'from' => '2015-01-01 18:00',
-            'to' => '2015-01-01 23:00',
-            'location' => $location->getId(),
+            'name' => 'A Venue Name',
+            'address' => 'Venue Street, Venue Town',
+            'url' => 'https://a-great-venue.com',
         ]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
-        $entityManager->expects(self::once())->method('persist')->with(self::isInstanceOf(Meetup::class));
+        $entityManager->expects(self::once())->method('persist')->with(self::isInstanceOf(Location::class));
 
-        $findLocation = $this->createMock(FindLocationByUuidInterface::class);
-        $findLocation->expects(self::once())->method('__invoke')->with($location->getId())->willReturn($location);
-
-        $response = (new AddMeetupAction($renderer, $form, $entityManager, $findLocation, $urlHelper))->__invoke(
+        $response = (new AddLocationAction($renderer, $form, $entityManager, $urlHelper))->__invoke(
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody([
-                    'from' => '2015-01-01 18:00',
-                    'to' => '2015-01-01 23:00',
-                    'location' => $location->getId(),
+                    'name' => 'A Venue Name',
+                    'address' => 'Venue Street, Venue Town',
+                    'url' => 'https://a-great-venue.com',
                 ]),
             new Response()
         );
 
         self::assertInstanceOf(Response\RedirectResponse::class, $response);
-        self::assertSame('/account/meetup/view', $response->getHeaderLine('Location'));
+        self::assertSame('/account/locations', $response->getHeaderLine('Location'));
     }
 }

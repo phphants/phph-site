@@ -1,0 +1,41 @@
+<?php
+declare(strict_types=1);
+
+$this->headTitle('Locations');
+
+/** @var \App\Entity\Location[] $locations */
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>List Locations</h1>
+
+    <a href="<?= $this->escapeHtmlAttr($this->url('account-location-add')); ?>" class="link-button">Add a new location</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Address</td>
+                <td>URL</td>
+                <td>&nbsp;</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($locations as $location): ?>
+            <tr>
+                <td><?= $this->escapeHtml($location->getName()); ?></td>
+                <td><?= $this->escapeHtml($location->getAddress()); ?></td>
+                <td>
+                    [<a href="<?= $this->escapeHtmlAttr($location->getUrl()); ?>">link</a>]
+                </td>
+                <td class="nowrap">
+                    <a href="<?= $this->escapeHtmlAttr($this->url('account-location-edit', ['uuid' => $location->getId()])); ?>" class="link-button tiny">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>

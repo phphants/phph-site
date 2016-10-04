@@ -44,6 +44,11 @@ form label span {
     display: block;
 }
 
+form label input[type=text], form label input[type=password], form label input[type=url] {
+    padding: 3px 5px;
+    width: 250px;
+}
+
 /* spacing between elements */
 form label, form fieldset, form input[type=submit] {
     margin-top: 20px;
@@ -78,7 +83,7 @@ table {
     margin-top: 20px;
 }
 table thead td {
-    background-color: #373737;
+    background-color: #2E2E2E;
     color: white;
 }
 table td {
@@ -97,4 +102,53 @@ table tr.past td {
 }
 table tr.past td a.link-button.tiny {
     font-style: normal;
+}
+table td.nowrap {
+    white-space: nowrap;
+}
+
+ul.dashboard {
+
+}
+
+ul.dashboard li {
+    margin-right: 50px;
+    display: block;
+    float: left;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 126px;
+    text-align: center;
+}
+ul.dashboard li a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding-top: 110px;
+    font-size: 16px;
+    line-height: 16px;
+}
+ul.dashboard li a span {
+    text-decoration: none;
+    background-color: #EC6A36;
+    color: white;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+ul.dashboard li a:hover span {
+    background-color: #ec8152;
+    cursor: pointer;
+}
+ul.dashboard li.meetups {
+    background-image: url('/images/admin/meetups.png');
+}
+ul.dashboard li.speakers {
+    background-image: url('/images/admin/speakers.png');
+}
+ul.dashboard li.locations {
+    background-image: url('/images/admin/locations.png');
+}
+ul.dashboard li.logout {
+    background-image: url('/images/admin/logout.png');
 }

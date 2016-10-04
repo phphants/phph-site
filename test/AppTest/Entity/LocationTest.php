@@ -24,4 +24,23 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         self::assertSame('Some Place, Some Town, County, A1 1AA', $location->getAddress());
         self::assertSame('http://test-uri', $location->getUrl());
     }
+
+    public function testUpdateFromData()
+    {
+        $location = Location::fromNameAddressAndUrl(
+            'Venue Name',
+            'Some Place, Some Town, County, A1 1AA',
+            'http://test-uri'
+        );
+
+        $location->updateFromData(
+            'Venue 2',
+            'Address 2',
+            'https://test-uri-2'
+        );
+
+        self::assertSame('Venue 2', $location->getName());
+        self::assertSame('Address 2', $location->getAddress());
+        self::assertSame('https://test-uri-2', $location->getUrl());
+    }
 }
