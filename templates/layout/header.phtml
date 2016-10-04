@@ -11,19 +11,19 @@ declare(strict_types=1);
     <nav>
         <ul class="navigation">
             <li>
-                <a href="<?= $this->url('home'); ?>">Home</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('home')); ?>">Home</a>
             </li>
             <li>
-                <a href="<?= $this->url('meetups'); ?>">Meetups</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('meetups')); ?>">Meetups</a>
             </li>
             <li>
-                <a href="<?= $this->url('videos'); ?>">Videos</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('videos')); ?>">Videos</a>
             </li>
             <li>
-                <a href="<?= $this->url('sponsors'); ?>">Sponsors</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('sponsors')); ?>">Sponsors</a>
             </li>
             <li>
-                <a href="<?= $this->url('contact'); ?>">Contact</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('contact')); ?>">Contact</a>
             </li>
         </ul>
     </nav>
@@ -34,16 +34,16 @@ declare(strict_types=1);
     <nav class="admin"><div class="wrapper">
         <ul>
             <li>
-                <a href="<?= $this->url('account-dashboard'); ?>">Dashboard</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('account-dashboard')); ?>">Dashboard</a>
             </li>
             <li>
-                <a href="<?= $this->url('account-meetups-list'); ?>">Meetups</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('account-meetups-list')); ?>">Meetups</a>
             </li>
             <li>
-                <a href="<?= $this->url('account-locations-list'); ?>">Locations</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('account-locations-list')); ?>">Locations</a>
             </li>
             <li>
-                <a href="<?= $this->url('account-logout'); ?>">Logout</a>
+                <a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">Logout</a>
             </li>
         </ul>
     </div></nav>
