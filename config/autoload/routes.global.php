@@ -31,6 +31,9 @@ return [
             App\Action\Account\Talk\AddTalkAction::class => App\Action\Account\Talk\AddTalkActionFactory::class,
             App\Action\Account\Talk\EditTalkAction::class => App\Action\Account\Talk\EditTalkActionFactory::class,
             App\Action\Account\Talk\DeleteTalkAction::class => App\Action\Account\Talk\DeleteTalkActionFactory::class,
+            App\Action\Account\Speaker\ListSpeakersAction::class => App\Action\Account\Speaker\ListSpeakersActionFactory::class,
+            App\Action\Account\Speaker\AddSpeakerAction::class => App\Action\Account\Speaker\AddSpeakerActionFactory::class,
+            App\Action\Account\Speaker\EditSpeakerAction::class => App\Action\Account\Speaker\EditSpeakerActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
         ],
     ],
@@ -176,6 +179,33 @@ return [
             'middleware' => [
                 App\Middleware\Authentication::class,
                 App\Action\Account\Location\EditLocationAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-speakers-list',
+            'path' => '/account/speakers',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Speaker\ListSpeakersAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-speaker-add',
+            'path' => '/account/speaker/add',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Speaker\AddSpeakerAction::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-speaker-edit',
+            'path' => '/account/speaker/{uuid}/edit',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Action\Account\Speaker\EditSpeakerAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
         ],

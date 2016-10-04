@@ -1,0 +1,45 @@
+<?php
+declare(strict_types=1);
+
+$this->headTitle('Speakers');
+
+/** @var \App\Entity\Speaker[] $speakers */
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>List Speakers</h1>
+
+    <a href="<?= $this->escapeHtmlAttr($this->url('account-speaker-add')); ?>" class="link-button">Add a new speaker</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Twitter</td>
+                <td>&nbsp;</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($speakers as $speaker): ?>
+            <tr>
+                <td><?= $this->escapeHtml($speaker->getFullName()); ?></td>
+                <td>
+                <?php if (null !== $speaker->getTwitterHandle()): ?>
+                    <a href="<?= $this->escapeHtmlAttr($speaker->getTwitterHandle()); ?>">
+                        @<?= $this->escapeHtml($speaker->getTwitterHandle()); ?>
+                    </a>
+                <?php else: ?>
+                    (none)
+                <?php endif; ?>
+                </td>
+                <td class="nowrap">
+                    <a href="<?= $this->escapeHtmlAttr($this->url('account-speaker-edit', ['uuid' => $speaker->getId()])); ?>" class="link-button tiny">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>
