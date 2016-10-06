@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Service\Video;
+namespace App\Service\Talk;
 
-use App\Entity\Video;
+use App\Entity\Talk;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -11,15 +11,15 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 /**
  * @codeCoverageIgnore
  */
-final class GetAllVideosFactory implements FactoryInterface
+final class FindTalksWithVideoFactory implements FactoryInterface
 {
     public function __invoke(
         ContainerInterface $container,
         $requestedName,
         array $options = null
-    ) : GetAllVideosInterface {
-        return new DoctrineGetAllVideos(
-            $container->get(EntityManagerInterface::class)->getRepository(Video::class)
+    ) : FindTalksWithVideoInterface {
+        return new DoctrineFindTalksWithVideo(
+            $container->get(EntityManagerInterface::class)
         );
     }
 }

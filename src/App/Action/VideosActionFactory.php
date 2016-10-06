@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Action;
 
-use App\Service\Video\GetAllVideosInterface;
+use App\Service\Talk\FindTalksWithVideoInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -16,7 +16,7 @@ final class VideosActionFactory
     {
         return new VideosAction(
             $container->get(TemplateRendererInterface::class),
-            $container->get(GetAllVideosInterface::class)
+            $container->get(FindTalksWithVideoInterface::class)
         );
     }
 }
