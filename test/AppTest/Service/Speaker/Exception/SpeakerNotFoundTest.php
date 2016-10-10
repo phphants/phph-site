@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  */
 class SpeakerNotFoundTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFromUsername()
+    public function testFromUuid()
     {
         $uuid = Uuid::fromString('204a5eee-a406-475d-95c2-9cb28f2b086d');
 

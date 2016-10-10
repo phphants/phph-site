@@ -12,11 +12,11 @@ class DoctrineFindTalkByUuid implements FindTalkByUuidInterface
     /**
      * @var ObjectRepository
      */
-    private $speakers;
+    private $talks;
 
-    public function __construct(ObjectRepository $speakers)
+    public function __construct(ObjectRepository $talks)
     {
-        $this->speakers = $speakers;
+        $this->talks = $talks;
     }
 
     /**
@@ -24,13 +24,13 @@ class DoctrineFindTalkByUuid implements FindTalkByUuidInterface
      */
     public function __invoke(UuidInterface $uuid) : Talk
     {
-        /** @var Talk|null $speaker */
-        $speaker = $this->speakers->findOneBy(['id' => (string)$uuid]);
+        /** @var Talk|null $talk */
+        $talk = $this->talks->findOneBy(['id' => (string)$uuid]);
 
-        if (null === $speaker) {
+        if (null === $talk) {
             throw Exception\TalkNotFound::fromUuid($uuid);
         }
 
-        return $speaker;
+        return $talk;
     }
 }

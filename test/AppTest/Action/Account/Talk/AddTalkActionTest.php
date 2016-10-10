@@ -6,6 +6,7 @@ namespace AppTest\Action\Account\Talk;
 use App\Action\Account\Talk\AddTalkAction;
 use App\Entity\Meetup;
 use App\Entity\Speaker;
+use App\Entity\Talk;
 use App\Service\Meetup\FindMeetupByUuidInterface;
 use App\Service\Speaker\FindSpeakerByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +46,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
+        $entityManager->expects(self::never())->method('persist');
 
         $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
         $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
@@ -94,6 +96,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::never())->method('transactional');
+        $entityManager->expects(self::never())->method('persist');
 
         $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
         $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
@@ -160,6 +163,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
+        $entityManager->expects(self::once())->method('persist')->with(self::isInstanceOf(Talk::class));
 
         $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
         $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);
@@ -224,6 +228,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
+        $entityManager->expects(self::once())->method('persist')->with(self::isInstanceOf(Talk::class));
 
         $findMeetup = $this->createMock(FindMeetupByUuidInterface::class);
         $findMeetup->expects(self::once())->method('__invoke')->with($meetup->getId())->willReturn($meetup);

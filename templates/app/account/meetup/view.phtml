@@ -11,8 +11,8 @@ $this->headTitle('Meetups');
 <div class="wrapper content">
     <h1>View Meetup : </h1>
 
-    <a href="<?= $this->url('account-meetups-list'); ?>" class="link-button">Back to meetups list</a>
-    <a href="<?= $this->url('account-meetup-edit', ['uuid' => $meetup->getId()]); ?>" class="link-button">Edit this meetup</a>
+    <a href="<?= $this->escapeHtml($this->url('account-meetups-list')); ?>" class="link-button">Back to meetups list</a>
+    <a href="<?= $this->escapeHtml($this->url('account-meetup-edit', ['uuid' => $meetup->getId()])); ?>" class="link-button">Edit this meetup</a>
 
     <table>
         <tbody>
@@ -52,7 +52,7 @@ $this->headTitle('Meetups');
     <h3>Talks</h3>
     <br />
 
-    <a href="<?= $this->url('account-talk-add', ['meetup' => $meetup->getId()]); ?>" class="link-button">Add a Talk</a>
+    <a href="<?= $this->escapeHtml($this->url('account-talk-add', ['meetup' => $meetup->getId()])); ?>" class="link-button">Add a Talk</a>
 
     <table>
         <thead>
@@ -81,8 +81,8 @@ $this->headTitle('Meetups');
                     <?= $this->escapeHtml($talk->getAbstract()); ?>
                 </td>
                 <td class="nowrap">
-                    <a href="<?= $this->url('account-talk-edit', ['uuid' => $talk->getId()]); ?>" class="link-button tiny">Edit</a>
-                    <a href="<?= $this->url('account-talk-delete', ['uuid' => $talk->getId()]); ?>" class="link-button tiny ask-confirmation">Delete</a>
+                    <a href="<?= $this->escapeHtml($this->url('account-talk-edit', ['uuid' => $talk->getId()])); ?>" class="link-button tiny">Edit</a>
+                    <a href="<?= $this->escapeHtml($this->url('account-talk-delete', ['uuid' => $talk->getId()])); ?>" class="link-button tiny ask-confirmation">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>
