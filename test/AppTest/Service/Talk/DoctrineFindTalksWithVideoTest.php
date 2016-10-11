@@ -30,8 +30,7 @@ class DoctrineFindTalksWithVideoTest extends \PHPUnit_Framework_TestCase
                 self::assertContains('t.youTubeId IS NOT NULL', $dqlQuery);
                 self::assertContains('ORDER BY t.time DESC', $dqlQuery);
                 return $queryObjectMock;
-            }
-        );
+            });
 
         self::assertSame($videos, (new DoctrineFindTalksWithVideo($entityManager))->__invoke());
     }

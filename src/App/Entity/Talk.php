@@ -122,7 +122,7 @@ use Ramsey\Uuid\Uuid;
     /**
      * @return void
      */
-    public function removeYouTubeId()
+    public function removeYoutubeId()
     {
         $this->youtubeId = null;
     }

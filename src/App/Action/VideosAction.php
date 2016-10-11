@@ -22,8 +22,10 @@ final class VideosAction implements MiddlewareInterface
      */
     private $talksWithVideo;
 
-    public function __construct(TemplateRendererInterface $templateRenderer, FindTalksWithVideoInterface $talksWithVideo)
-    {
+    public function __construct(
+        TemplateRendererInterface $templateRenderer,
+        FindTalksWithVideoInterface $talksWithVideo
+    ) {
         $this->templateRenderer = $templateRenderer;
         $this->talksWithVideo = $talksWithVideo;
     }
