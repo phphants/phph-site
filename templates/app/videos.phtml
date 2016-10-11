@@ -31,8 +31,8 @@ $this->headTitle($title);
                 <span class="unbold">on</span>
                 <?= $this->escapeHtml($talk->getTime()->format('d F Y')); ?>
             </h4>
-            <div class="lazyload-youtube" data-youtube-id="<?= $this->escapeHtmlAttr($talk->getYouTubeId()); ?>" data-ratio="16:9">
-              <a href="https://youtu.be/<?= $this->escapeHtmlAttr($talk->getYouTubeId()); ?>">Watch on YouTube</a>
+            <div class="lazyload-youtube" data-youtube-id="<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>" data-ratio="16:9">
+              <a href="https://youtu.be/<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>">Watch on YouTube</a>
             </div>
         </li>
     <?php endforeach; ?>

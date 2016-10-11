@@ -21,9 +21,9 @@ class Version20161005104033 extends AbstractMigration
             'Migration can only be executed safely on \'postgresql\'.'
         );
 
-        $this->addSql('ALTER TABLE talk ADD youTubeId VARCHAR(512) DEFAULT NULL');
+        $this->addSql('ALTER TABLE talk ADD youtube_id VARCHAR(512) DEFAULT NULL');
 
-        $this->addSql('UPDATE talk SET youTubeId = video.youtubeId FROM video WHERE video.talk_id = talk.id');
+        $this->addSql('UPDATE talk SET youtube_id = video.youtubeId FROM video WHERE video.talk_id = talk.id');
 
         $this->addSql('DROP TABLE video');
     }
@@ -43,8 +43,8 @@ class Version20161005104033 extends AbstractMigration
         $this->addSql('CREATE INDEX idx_7cc7da2c6f0601d5 ON video (talk_id)');
         $this->addSql('ALTER TABLE video ADD CONSTRAINT fk_7cc7da2c6f0601d5 FOREIGN KEY (talk_id) REFERENCES talk (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 
-        $this->addSql('INSERT INTO video (id, talk_id, youtubeId) SELECT uuid_generate_v4(), id, youTubeId FROM talk WHERE youTubeId IS NOT NULL');
+        $this->addSql('INSERT INTO video (id, talk_id, youtubeId) SELECT uuid_generate_v4(), id, youtube_id FROM talk WHERE youtube_id IS NOT NULL');
 
-        $this->addSql('ALTER TABLE talk DROP youtubeId');
+        $this->addSql('ALTER TABLE talk DROP youtube_id');
     }
 }

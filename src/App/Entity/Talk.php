@@ -53,10 +53,10 @@ use Ramsey\Uuid\Uuid;
     private $abstract;
 
     /**
-     * @ORM\Column(name="youTubeId", type="string", length=512, nullable=true)
+     * @ORM\Column(name="youtube_id", type="string", length=512, nullable=true)
      * @var string|null
      */
-    private $youTubeId;
+    private $youtubeId;
 
     private function __construct()
     {
@@ -111,12 +111,12 @@ use Ramsey\Uuid\Uuid;
     }
 
     /**
-     * @param string $youTubeId
+     * @param string $youtubeId
      * @return void
      */
-    public function setYouTubeId(string $youTubeId)
+    public function setYoutubeId(string $youtubeId)
     {
-        $this->youTubeId = $youTubeId;
+        $this->youtubeId = $youtubeId;
     }
 
     /**
@@ -124,12 +124,12 @@ use Ramsey\Uuid\Uuid;
      */
     public function removeYouTubeId()
     {
-        $this->youTubeId = null;
+        $this->youtubeId = null;
     }
 
-    public function getYouTubeId() : string
+    public function getYoutubeId() : string
     {
-        return $this->youTubeId;
+        return $this->youtubeId;
     }
 
     public function getId() : string
