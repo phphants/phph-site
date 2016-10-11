@@ -79,4 +79,35 @@ class TalkTest extends \PHPUnit_Framework_TestCase
 
         self::assertNull($talk->getAbstract());
     }
+
+    public function testYoutubeIdFunctions()
+    {
+        $meetup = $this->createMock(Meetup::class);
+        $time = new \DateTimeImmutable('2016-12-31 23:59:59');
+
+        $talk = Talk::fromTitle($meetup, $time, 'Some thing');
+
+        self::assertAttributeSame(null, 'youtubeId', $talk);
+
+        $talk->setYoutubeId('abc123');
+
+        self::assertSame('abc123', $talk->getYoutubeId());
+
+        $talk->removeYoutubeId();
+
+        self::assertAttributeSame(null, 'youtubeId', $talk);
+    }
+
+    public function testGetYoutubeIdCausesTypeErrorWhenNull()
+    {
+        $meetup = $this->createMock(Meetup::class);
+        $time = new \DateTimeImmutable('2016-12-31 23:59:59');
+
+        $talk = Talk::fromTitle($meetup, $time, 'Some thing');
+        $talk->removeYoutubeId();
+
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('must be of the type string, null returned');
+        $talk->getYoutubeId();
+    }
 }
