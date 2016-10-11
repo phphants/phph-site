@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace AppTest\Form\Account;
 
-use App\Form\Account\TalkFieldset;
+use App\Form\Account\TalkForm;
 use App\Service\Speaker\GetAllSpeakersInterface;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
@@ -14,15 +14,15 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputInterface;
 
 /**
- * @covers \App\Form\Account\TalkFieldset
+ * @covers \App\Form\Account\TalkForm
  */
-final class TalkFieldsetTest extends \PHPUnit_Framework_TestCase
+final class TalkFormTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormHasExpectedFields()
     {
         $speakers = $this->createMock(GetAllSpeakersInterface::class);
 
-        $form = new TalkFieldset($speakers);
+        $form = new TalkForm($speakers);
 
         self::assertInstanceOf(DateTimeSelect::class, $form->get('time'));
         self::assertInstanceOf(Select::class, $form->get('speaker'));
@@ -34,7 +34,7 @@ final class TalkFieldsetTest extends \PHPUnit_Framework_TestCase
     {
         $speakers = $this->createMock(GetAllSpeakersInterface::class);
 
-        $inputFilter = (new InputFilterFactory())->createInputFilter(new TalkFieldset($speakers));
+        $inputFilter = (new InputFilterFactory())->createInputFilter(new TalkForm($speakers));
         self::assertInstanceOf(InputFilterInterface::class, $inputFilter);
         self::assertInstanceOf(InputInterface::class, $inputFilter->get('time'));
         self::assertInstanceOf(InputInterface::class, $inputFilter->get('speaker'));

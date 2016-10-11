@@ -79,7 +79,39 @@ use Ramsey\Uuid\Uuid;
         $talk->speaker = $speaker;
         $talk->title = $title;
         $talk->abstract = $abstract;
+        if ($talk->abstract === '') {
+            $talk->abstract = null;
+        }
         return $talk;
+    }
+
+    /**
+     * @param DateTimeImmutable $time
+     * @param Speaker $speaker
+     * @param string $title
+     * @param string $abstract
+     * @return void
+     */
+    public function updateFromData(DateTimeImmutable $time, string $title, string $abstract, Speaker $speaker = null)
+    {
+        $this->time = $time;
+        $this->speaker = $speaker;
+        $this->title = $title;
+        $this->abstract = $abstract;
+
+        if ($this->abstract === '') {
+            $this->abstract = null;
+        }
+    }
+
+    public function getId() : string
+    {
+        return (string)$this->id;
+    }
+
+    public function getMeetup() : Meetup
+    {
+        return $this->meetup;
     }
 
     /**

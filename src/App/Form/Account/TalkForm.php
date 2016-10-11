@@ -5,18 +5,20 @@ namespace App\Form\Account;
 
 use App\Entity\Speaker;
 use App\Service\Speaker\GetAllSpeakersInterface;
+use Zend\Form\Element\Csrf;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
+use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
-use Zend\Form\Fieldset;
+use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class TalkFieldset extends Fieldset implements InputFilterProviderInterface
+class TalkForm extends Form implements InputFilterProviderInterface
 {
     public function __construct(GetAllSpeakersInterface $speakers)
     {
-        parent::__construct('talkFieldset');
+        parent::__construct('talkForm');
 
         $speakerList = $speakers();
 
@@ -28,6 +30,7 @@ class TalkFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->add(
             (new Select('speaker'))
+                ->setEmptyOption('no speaker')
                 ->setValueOptions(
                     array_combine(
                         array_map(function (Speaker $speaker) {
@@ -38,7 +41,7 @@ class TalkFieldset extends Fieldset implements InputFilterProviderInterface
                         }, $speakerList)
                     )
                 )
-                ->setLabel('Speaker')
+                ->setLabel('Speaker (optional)')
         );
 
         $this->add(
@@ -48,8 +51,15 @@ class TalkFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->add(
             (new Textarea('abstract'))
-                ->setLabel('Abstract')
+                ->setLabel('Abstract (optional)')
         );
+
+        $this->add((new Submit('submit'))->setValue('Save'));
+        $this->add(new Csrf('talkForm_csrf', [
+            'csrf_options' => [
+                'timeout' => 120,
+            ],
+        ]));
     }
 
     public function getInputFilterSpecification() : array

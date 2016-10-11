@@ -20,6 +20,8 @@ return [
             App\Service\Location\GetAllLocationsInterface::class => App\Service\Location\GetAllLocationsFactory::class,
             App\Service\Location\FindLocationByUuidInterface::class => App\Service\Location\FindLocationByUuidFactory::class,
             App\Service\Speaker\GetAllSpeakersInterface::class => App\Service\Speaker\GetAllSpeakersFactory::class,
+            App\Service\Speaker\FindSpeakerByUuidInterface::class => App\Service\Speaker\FindSpeakerByUuidFactory::class,
+            App\Service\Talk\FindTalkByUuidInterface::class => App\Service\Talk\FindTalkByUuidFactory::class,
             App\Service\Authentication\AuthenticationServiceInterface::class => App\Service\Authentication\Factory::class,
             App\Service\Video\GetAllVideosInterface::class => App\Service\Video\GetAllVideosFactory::class,
             Doctrine\ORM\EntityManagerInterface::class => ContainerInteropDoctrine\EntityManagerFactory::class,
