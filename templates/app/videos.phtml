@@ -18,15 +18,6 @@ $this->headTitle($title);
             <h3 class="title"><?= $this->escapeHtml($talk->getTitle()); ?></h3>
             <h4 class="speaker">
                 <span class="unbold">by</span>
-
-                <?php
-
-                if (null === $talk->getSpeaker()) {
-                    echo "OMG";
-                }
-
-
-                ?>
                 <?= $this->escapeHtml($talk->getSpeaker()->getFullName()); ?>
                 <span class="unbold">on</span>
                 <?= $this->escapeHtml($talk->getTime()->format('d F Y')); ?>
