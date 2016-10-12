@@ -23,6 +23,6 @@ class DoctrineGetAllSpeakers implements GetAllSpeakersInterface
      */
     public function __invoke() : array
     {
-        return $this->speakers->findBy([], ['name' => 'ASC']);
+        return $this->speakers->findBy([], ['fullName' => 'ASC']);
     }
 }

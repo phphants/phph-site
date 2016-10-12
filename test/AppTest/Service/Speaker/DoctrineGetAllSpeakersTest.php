@@ -22,7 +22,7 @@ class DoctrineGetAllSpeakersTest extends \PHPUnit_Framework_TestCase
         $objectRepository = $this->createMock(ObjectRepository::class);
         $objectRepository->expects(self::once())
             ->method('findBy')
-            ->with([], ['name' => 'ASC'])
+            ->with([], ['fullName' => 'ASC'])
             ->willReturn($speakers);
 
         self::assertSame($speakers, (new DoctrineGetAllSpeakers($objectRepository))->__invoke());
