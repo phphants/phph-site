@@ -52,6 +52,12 @@ use Ramsey\Uuid\Uuid;
      */
     private $abstract;
 
+    /**
+     * @ORM\Column(name="youtube_id", type="string", length=512, nullable=true)
+     * @var string|null
+     */
+    private $youtubeId;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
@@ -102,6 +108,28 @@ use Ramsey\Uuid\Uuid;
         if ($this->abstract === '') {
             $this->abstract = null;
         }
+    }
+
+    /**
+     * @param string $youtubeId
+     * @return void
+     */
+    public function setYoutubeId(string $youtubeId)
+    {
+        $this->youtubeId = $youtubeId;
+    }
+
+    /**
+     * @return void
+     */
+    public function removeYoutubeId()
+    {
+        $this->youtubeId = null;
+    }
+
+    public function getYoutubeId() : string
+    {
+        return $this->youtubeId;
     }
 
     public function getId() : string

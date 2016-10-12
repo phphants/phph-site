@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-/** @var \App\Entity\Video[] $videos */
+/** @var \App\Entity\Talk[] $talksWithVideo */
 
-$title = "Videos";
+$title = 'Videos';
 $this->headTitle($title);
 
 ?>
@@ -13,17 +13,17 @@ $this->headTitle($title);
 <div class="wrapper content">
     <h1><?php echo $title; ?></h1>
     <ul id="videos">
-    <?php foreach ($videos as $video): ?>
+    <?php foreach ($talksWithVideo as $talk): ?>
         <li>
-            <h3 class="title"><?= $this->escapeHtml($video->getTalk()->getTitle()); ?></h3>
+            <h3 class="title"><?= $this->escapeHtml($talk->getTitle()); ?></h3>
             <h4 class="speaker">
                 <span class="unbold">by</span>
-                <?= $this->escapeHtml($video->getTalk()->getSpeaker()->getFullName()); ?>
+                <?= $this->escapeHtml($talk->getSpeaker()->getFullName()); ?>
                 <span class="unbold">on</span>
-                <?= $this->escapeHtml($video->getTalk()->getTime()->format('d F Y')); ?>
+                <?= $this->escapeHtml($talk->getTime()->format('d F Y')); ?>
             </h4>
-            <div class="lazyload-youtube" data-youtube-id="<?= $this->escapeHtmlAttr($video->getYoutubeId()); ?>" data-ratio="16:9">
-              <a href="https://youtu.be/<?= $this->escapeHtmlAttr($video->getYoutubeId()); ?>">Watch on YouTube</a>
+            <div class="lazyload-youtube" data-youtube-id="<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>" data-ratio="16:9">
+              <a href="https://youtu.be/<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>">Watch on YouTube</a>
             </div>
         </li>
     <?php endforeach; ?>
