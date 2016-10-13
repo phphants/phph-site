@@ -100,8 +100,9 @@ use Ramsey\Uuid\Uuid;
      * @param DateTimeImmutable $time
      * @param string $title
      * @param string $abstract
-     * @param Speaker $speaker
-     * @param string $youtubeId
+     * @param Speaker|null $speaker
+     * @param string|null $youtubeId
+     * @return void
      */
     public function updateFromData(
         DateTimeImmutable $time,
