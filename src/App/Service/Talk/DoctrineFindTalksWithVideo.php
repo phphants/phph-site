@@ -27,7 +27,7 @@ class DoctrineFindTalksWithVideo implements FindTalksWithVideoInterface
             SELECT t
             FROM ' . Talk::class . ' t
             WHERE
-                t.youTubeId IS NOT NULL
+                t.youtubeId IS NOT NULL
             ORDER BY t.time DESC
         ');
 
