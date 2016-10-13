@@ -60,7 +60,8 @@ $this->headTitle('Meetups');
                 <td>Speaker</td>
                 <td>Time</td>
                 <td>Title &amp; Abstract</td>
-                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
         </thead>
         <tbody>
@@ -79,6 +80,11 @@ $this->headTitle('Meetups');
                 <td>
                     <h4><?= $this->escapeHtml($talk->getTitle()); ?></h4>
                     <?= $this->escapeHtml($talk->getAbstract()); ?>
+                </td>
+                <td>
+                    <?php if (null !== $talk->getYoutubeId()): ?>
+                        <a href="https://youtu.be/<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>" class="video-icon-link" target="_blank">&#x1f4f9;</a>
+                    <?php endif; ?>
                 </td>
                 <td class="nowrap">
                     <a href="<?= $this->escapeHtmlAttr($this->url('account-talk-edit', ['uuid' => $talk->getId()])); ?>" class="link-button tiny">Edit</a>

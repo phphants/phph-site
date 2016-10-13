@@ -90,6 +90,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => '',
             'title' => '',
             'abstract' => '',
+            'youtubeId' => '',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(false);
         $form->expects(self::never())->method('getData');
@@ -114,6 +115,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
                     'speaker' => '',
                     'title' => '',
                     'abstract' => '',
+                    'youtubeId' => '',
                 ]),
             new Response()
         );
@@ -152,6 +154,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => $speaker->getId(),
             'title' => 'My great talk',
             'abstract' => 'The abstract about my fantastic talk',
+            'youtubeId' => 'stVnFCyDyeY',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(true);
         $form->expects(self::once())->method('getData')->willReturn([
@@ -159,6 +162,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => $speaker->getId(),
             'title' => 'My great talk',
             'abstract' => 'The abstract about my fantastic talk',
+            'youtubeId' => 'stVnFCyDyeY',
         ]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
@@ -181,6 +185,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
                     'speaker' => $speaker->getId(),
                     'title' => 'My great talk',
                     'abstract' => 'The abstract about my fantastic talk',
+                    'youtubeId' => 'stVnFCyDyeY',
                 ]),
             new Response()
         );
@@ -217,6 +222,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => '',
             'title' => 'Opening speech',
             'abstract' => '',
+            'youtubeId' => '',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(true);
         $form->expects(self::once())->method('getData')->willReturn([
@@ -224,6 +230,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => '',
             'title' => 'Opening speech',
             'abstract' => '',
+            'youtubeId' => '',
         ]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
@@ -246,6 +253,7 @@ final class AddTalkActionTest extends \PHPUnit_Framework_TestCase
                     'speaker' => '',
                     'title' => 'Opening speech',
                     'abstract' => '',
+                    'youtubeId' => '',
                 ]),
             new Response()
         );

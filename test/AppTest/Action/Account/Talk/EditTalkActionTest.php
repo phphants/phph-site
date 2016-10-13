@@ -142,6 +142,7 @@ final class EditTalkActionTest extends \PHPUnit_Framework_TestCase
                     'speaker' => '',
                     'title' => '',
                     'abstract' => '',
+                    'youtubeId' => '',
                 ]),
             new Response()
         );
@@ -168,6 +169,7 @@ final class EditTalkActionTest extends \PHPUnit_Framework_TestCase
             'speaker' => $speaker->getId(),
             'title' => 'A Fantastic Talk',
             'abstract' => 'Some abstract text about this talk',
+            'youtubeId' => 'stVnFCyDyeY',
         ]);
 
         $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
@@ -183,6 +185,7 @@ final class EditTalkActionTest extends \PHPUnit_Framework_TestCase
                     'speaker' => $speaker->getId(),
                     'title' => 'A Fantastic Talk',
                     'abstract' => 'Some abstract text about this talk',
+                    'youtubeId' => 'stVnFCyDyeY',
                 ]),
             new Response()
         );

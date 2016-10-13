@@ -77,7 +77,8 @@ use Ramsey\Uuid\Uuid;
         DateTimeImmutable $time,
         Speaker $speaker,
         string $title,
-        string $abstract
+        string $abstract,
+        string $youtubeId = null
     ) : self {
         $talk = new self();
         $talk->meetup = $meetup;
@@ -85,49 +86,49 @@ use Ramsey\Uuid\Uuid;
         $talk->speaker = $speaker;
         $talk->title = $title;
         $talk->abstract = $abstract;
+        $talk->youtubeId = $youtubeId;
         if ($talk->abstract === '') {
             $talk->abstract = null;
+        }
+        if ($talk->youtubeId === '') {
+            $talk->youtubeId = null;
         }
         return $talk;
     }
 
     /**
      * @param DateTimeImmutable $time
-     * @param Speaker $speaker
      * @param string $title
      * @param string $abstract
-     * @return void
+     * @param Speaker $speaker
+     * @param string $youtubeId
      */
-    public function updateFromData(DateTimeImmutable $time, string $title, string $abstract, Speaker $speaker = null)
-    {
+    public function updateFromData(
+        DateTimeImmutable $time,
+        string $title,
+        string $abstract,
+        Speaker $speaker = null,
+        string $youtubeId = null
+    ) {
         $this->time = $time;
         $this->speaker = $speaker;
         $this->title = $title;
         $this->abstract = $abstract;
+        $this->youtubeId = $youtubeId;
 
         if ($this->abstract === '') {
             $this->abstract = null;
         }
+
+        if ($this->youtubeId === '') {
+            $this->youtubeId = null;
+        }
     }
 
     /**
-     * @param string $youtubeId
-     * @return void
+     * @return string|null
      */
-    public function setYoutubeId(string $youtubeId)
-    {
-        $this->youtubeId = $youtubeId;
-    }
-
-    /**
-     * @return void
-     */
-    public function removeYoutubeId()
-    {
-        $this->youtubeId = null;
-    }
-
-    public function getYoutubeId() : string
+    public function getYoutubeId()
     {
         return $this->youtubeId;
     }

@@ -157,3 +157,12 @@ ul.dashboard li.locations {
 ul.dashboard li.logout {
     background-image: url('/images/admin/logout.png');
 }
+
+.video-icon-link {
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
+}
+.video-icon-link:hover {
+    color: #EC6A36;
+}

@@ -85,7 +85,8 @@ final class AddTalkAction implements MiddlewareInterface
                             new \DateTimeImmutable($data['time']),
                             $this->findSpeakerByUuid->__invoke(Uuid::fromString($data['speaker'])),
                             $data['title'],
-                            $data['abstract']
+                            $data['abstract'],
+                            $data['youtubeId']
                         );
                     } else {
                         $talk = Talk::fromTitle(
