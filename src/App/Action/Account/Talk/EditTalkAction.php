@@ -73,6 +73,7 @@ final class EditTalkAction implements MiddlewareInterface
             'speaker' => null !== $talk->getSpeaker() ? $talk->getSpeaker()->getId() : '',
             'title' => $talk->getTitle(),
             'abstract' => $talk->getAbstract(),
+            'youtubeId' => $talk->getYoutubeId(),
         ]);
 
         if ('POST' === strtoupper($request->getMethod())) {
@@ -89,7 +90,8 @@ final class EditTalkAction implements MiddlewareInterface
                         new \DateTimeImmutable($data['time']),
                         $data['title'],
                         $data['abstract'],
-                        $speaker
+                        $speaker,
+                        $data['youtubeId']
                     );
                 });
                 return new RedirectResponse($this->urlHelper->generate('account-meetup-view', [

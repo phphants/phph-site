@@ -26,6 +26,7 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         self::assertSame('Some thing', $talk->getTitle());
         self::assertNull($talk->getSpeaker());
         self::assertNull($talk->getAbstract());
+        self::assertNull($talk->getYoutubeId());
     }
 
     public function testFromStandardTalk()
@@ -34,7 +35,14 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         $time = new \DateTimeImmutable('2016-12-31 23:59:59');
         $speaker = Speaker::fromNameAndTwitter('Foobar');
 
-        $talk = Talk::fromStandardTalk($meetup, $time, $speaker, 'Talk title', 'About the talk some text');
+        $talk = Talk::fromStandardTalk(
+            $meetup,
+            $time,
+            $speaker,
+            'Talk title',
+            'About the talk some text',
+            'stVnFCyDyeY'
+        );
 
         self::assertTrue(Uuid::isValid($talk->getId()));
         self::assertSame($meetup, $talk->getMeetup());
@@ -42,6 +50,7 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         self::assertSame('Talk title', $talk->getTitle());
         self::assertSame($speaker, $talk->getSpeaker());
         self::assertSame('About the talk some text', $talk->getAbstract());
+        self::assertSame('stVnFCyDyeY', $talk->getYoutubeId());
     }
 
     public function testUpdateFromData()
@@ -56,6 +65,7 @@ class TalkTest extends \PHPUnit_Framework_TestCase
             new \DateTimeImmutable('2017-11-30 23:59:59'),
             'Updated talk title',
             '',
+            null,
             null
         );
 
@@ -63,6 +73,7 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         self::assertSame('Updated talk title', $talk->getTitle());
         self::assertNull($talk->getSpeaker());
         self::assertNull($talk->getAbstract());
+        self::assertNull($talk->getYoutubeId());
     }
 
     public function testEmptyAbstractIsConvertedToNull()
@@ -80,34 +91,18 @@ class TalkTest extends \PHPUnit_Framework_TestCase
         self::assertNull($talk->getAbstract());
     }
 
-    public function testYoutubeIdFunctions()
+    public function testEmptyYoutubeIdIsConvertedToNull()
     {
         $meetup = $this->createMock(Meetup::class);
         $time = new \DateTimeImmutable('2016-12-31 23:59:59');
+        $speaker = Speaker::fromNameAndTwitter('Foobar');
 
-        $talk = Talk::fromTitle($meetup, $time, 'Some thing');
+        $talk = Talk::fromStandardTalk($meetup, $time, $speaker, 'Talk title', 'About the talk some text', '');
 
-        self::assertAttributeSame(null, 'youtubeId', $talk);
+        self::assertNull($talk->getYoutubeId());
 
-        $talk->setYoutubeId('abc123');
+        $talk->updateFromData($time, 'Talk title', 'About the talk some text', $speaker, '');
 
-        self::assertSame('abc123', $talk->getYoutubeId());
-
-        $talk->removeYoutubeId();
-
-        self::assertAttributeSame(null, 'youtubeId', $talk);
-    }
-
-    public function testGetYoutubeIdCausesTypeErrorWhenNull()
-    {
-        $meetup = $this->createMock(Meetup::class);
-        $time = new \DateTimeImmutable('2016-12-31 23:59:59');
-
-        $talk = Talk::fromTitle($meetup, $time, 'Some thing');
-        $talk->removeYoutubeId();
-
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('must be of the type string, null returned');
-        $talk->getYoutubeId();
+        self::assertNull($talk->getYoutubeId());
     }
 }

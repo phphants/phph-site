@@ -5,6 +5,8 @@ namespace App\Form\Account;
 
 use App\Entity\Speaker;
 use App\Service\Speaker\GetAllSpeakersInterface;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\DateTimeSelect;
 use Zend\Form\Element\Select;
@@ -13,9 +15,12 @@ use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Regex;
 
 class TalkForm extends Form implements InputFilterProviderInterface
 {
+    const YOUTUBE_VALIDATION_MESSAGE = 'YouTube video IDs must consist of 11 alphanumeric characters with - or _';
+
     public function __construct(GetAllSpeakersInterface $speakers)
     {
         parent::__construct('talkForm');
@@ -54,6 +59,14 @@ class TalkForm extends Form implements InputFilterProviderInterface
                 ->setLabel('Abstract (optional)')
         );
 
+        $this->add(
+            (new Text('youtubeId'))
+                ->setLabel('YouTube Id (leave blank for none)')
+                ->setAttributes([
+                    'placeholder' => 'stVnFCyDyeY',
+                ])
+        );
+
         $this->add((new Submit('submit'))->setValue('Save'));
         $this->add(new Csrf('talkForm_csrf', [
             'csrf_options' => [
@@ -76,9 +89,31 @@ class TalkForm extends Form implements InputFilterProviderInterface
             ],
             'title' => [
                 'required' => true,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
             ],
             'abstract' => [
                 'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'youtubeId' => [
+                'required' => false,
+                'validators' => [
+                    [
+                        'name' => Regex::class,
+                        'options' => [
+                            'pattern' => '/^[a-zA-Z0-9_-]{11}$/',
+                            'messages' => [
+                                Regex::NOT_MATCH => self::YOUTUBE_VALIDATION_MESSAGE,
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
     }
