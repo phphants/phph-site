@@ -27,7 +27,7 @@ class DoctrineFindTalksWithVideoTest extends \PHPUnit_Framework_TestCase
         $entityManager->expects(self::once())
             ->method('createQuery')
             ->willReturnCallback(function ($dqlQuery) use ($queryObjectMock) {
-                self::assertContains('t.youTubeId IS NOT NULL', $dqlQuery);
+                self::assertContains('t.youtubeId IS NOT NULL', $dqlQuery);
                 self::assertContains('ORDER BY t.time DESC', $dqlQuery);
                 return $queryObjectMock;
             });
