@@ -41,7 +41,24 @@ use Ramsey\Uuid\Uuid;
         $speaker = new self();
         $speaker->fullName = $fullName;
         $speaker->twitterHandle = $twitterHandle;
+        if ($speaker->twitterHandle === '') {
+            $speaker->twitterHandle = null;
+        }
         return $speaker;
+    }
+
+    /**
+     * @param string $fullName
+     * @param string|null $twitterHandle
+     * @return void
+     */
+    public function updateFromData(string $fullName, string $twitterHandle = null)
+    {
+        $this->fullName = $fullName;
+        $this->twitterHandle = $twitterHandle;
+        if ($this->twitterHandle === '') {
+            $this->twitterHandle = null;
+        }
     }
 
     public function getId() : string
