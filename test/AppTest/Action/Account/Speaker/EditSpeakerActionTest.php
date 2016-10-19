@@ -135,7 +135,7 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
         self::assertSame('content...', (string)$response->getBody());
     }
 
-    public function testValidPostRequestCreatesMeetupAndPersists()
+    public function testValidPostRequestUpdatesSpeaker()
     {
         $this->renderer->expects(self::never())->method('render');
 
