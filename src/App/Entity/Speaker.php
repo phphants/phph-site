@@ -31,18 +31,42 @@ use Ramsey\Uuid\Uuid;
      */
     private $twitterHandle;
 
+    /**
+     * @ORM\Column(name="biography", type="text", nullable=true)
+     * @var string|null
+     */
+    private $biography;
+
+    /**
+     * @ORM\Column(name="imageFilename", type="string", length=1024, nullable=true)
+     * @var string|null
+     */
+    private $imageFilename;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
     }
 
-    public static function fromNameAndTwitter(string $fullName, string $twitterHandle = null) : self
-    {
+    public static function fromNameAndTwitter(
+        string $fullName,
+        string $twitterHandle = null,
+        string $biography = null,
+        string $imageFilename = null
+    ) : self {
         $speaker = new self();
         $speaker->fullName = $fullName;
         $speaker->twitterHandle = $twitterHandle;
+        $speaker->biography = $biography;
+        $speaker->imageFilename = $imageFilename;
         if ($speaker->twitterHandle === '') {
             $speaker->twitterHandle = null;
+        }
+        if ($speaker->biography === '') {
+            $speaker->biography = null;
+        }
+        if ($speaker->imageFilename === '') {
+            $speaker->imageFilename = null;
         }
         return $speaker;
     }
@@ -52,12 +76,24 @@ use Ramsey\Uuid\Uuid;
      * @param string|null $twitterHandle
      * @return void
      */
-    public function updateFromData(string $fullName, string $twitterHandle = null)
-    {
+    public function updateFromData(
+        string $fullName,
+        string $twitterHandle = null,
+        string $biography = null,
+        string $imageFilename = null
+    ) {
         $this->fullName = $fullName;
         $this->twitterHandle = $twitterHandle;
+        $this->biography = $biography;
+        $this->imageFilename = $imageFilename;
         if ($this->twitterHandle === '') {
             $this->twitterHandle = null;
+        }
+        if ($this->biography === '') {
+            $this->biography = null;
+        }
+        if ($this->imageFilename === '') {
+            $this->imageFilename = null;
         }
     }
 
@@ -77,5 +113,21 @@ use Ramsey\Uuid\Uuid;
     public function getTwitterHandle()
     {
         return $this->twitterHandle;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBiography()
+    {
+        return $this->biography;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageFilename()
+    {
+        return $this->imageFilename;
     }
 }
