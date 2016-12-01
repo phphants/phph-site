@@ -59,7 +59,8 @@ final class AddSpeakerAction implements MiddlewareInterface
                 $this->entityManager->transactional(function () use ($data) {
                     $speaker = Speaker::fromNameAndTwitter(
                         $data['name'],
-                        $data['twitter']
+                        $data['twitter'],
+                        $data['biography']
                     );
                     $this->entityManager->persist($speaker);
                     return $speaker;

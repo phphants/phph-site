@@ -8,6 +8,7 @@ use Zend\Filter\StripTags;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
@@ -19,6 +20,7 @@ class SpeakerForm extends Form implements InputFilterProviderInterface
 
         $this->add((new Text('name'))->setLabel('Name'));
         $this->add((new Text('twitter'))->setLabel('Twitter Handle'));
+        $this->add((new Textarea('biography'))->setLabel('Biography'));
 
         $this->add((new Submit('submit'))->setValue('Save'));
         $this->add(new Csrf('speakerForm_csrf', [
@@ -40,6 +42,13 @@ class SpeakerForm extends Form implements InputFilterProviderInterface
             ],
             'twitter' => [
                 'required' => false,
+                'filters' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                ],
+            ],
+            'biography' => [
+                'required' => true,
                 'filters' => [
                     ['name' => StripTags::class],
                     ['name' => StringTrim::class],

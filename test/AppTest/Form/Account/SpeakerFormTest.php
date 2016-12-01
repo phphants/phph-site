@@ -7,8 +7,8 @@ use App\Form\Account\SpeakerForm;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 use Zend\Validator\NotEmpty;
-use Zend\Validator\Uri;
 
 /**
  * @covers \App\Form\Account\SpeakerForm
@@ -21,6 +21,7 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf(Text::class, $form->get('name'));
         self::assertInstanceOf(Text::class, $form->get('twitter'));
+        self::assertInstanceOf(Textarea::class, $form->get('biography'));
         self::assertInstanceOf(Submit::class, $form->get('submit'));
         self::assertInstanceOf(Csrf::class, $form->get('speakerForm_csrf'));
     }
@@ -34,6 +35,7 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
         $form->setData([
             'name' => ' foo<bar>baz ',
             'twitter' => ' foo<bar>baz ',
+            'biography' => ' foo<bar>baz ',
         ]);
 
         $form->isValid();
@@ -41,6 +43,7 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
         self::assertSame([
             'name' => 'foobaz',
             'twitter' => 'foobaz',
+            'biography' => 'foobaz',
         ], $form->getData());
     }
 
@@ -52,11 +55,15 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
         $form->setData([
             'name' => '',
             'twitter' => '', // note, twitter handle not required, so no validation messages here
+            'biography' => '',
         ]);
 
         self::assertFalse($form->isValid());
         self::assertSame([
             'name' => [
+                NotEmpty::IS_EMPTY => 'Value is required and can\'t be empty',
+            ],
+            'biography' => [
                 NotEmpty::IS_EMPTY => 'Value is required and can\'t be empty',
             ],
         ], $form->getMessages());
@@ -70,6 +77,7 @@ final class SpeakerFormTest extends \PHPUnit_Framework_TestCase
         $form->setData([
             'name' => 'Foo Bar',
             'twitter' => 'foobar',
+            'biography' => 'This is some biography text...',
         ]);
 
         self::assertTrue($form->isValid());

@@ -54,6 +54,7 @@ final class AddSpeakerActionTest extends \PHPUnit_Framework_TestCase
         $form->expects(self::once())->method('setData')->with([
             'name' => '',
             'twitter' => '',
+            'biography' => '',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(false);
         $form->expects(self::never())->method('getData');
@@ -67,6 +68,7 @@ final class AddSpeakerActionTest extends \PHPUnit_Framework_TestCase
                 ->withParsedBody([
                     'name' => '',
                     'twitter' => '',
+                    'biography' => '',
                 ]),
             new Response()
         );
@@ -90,11 +92,13 @@ final class AddSpeakerActionTest extends \PHPUnit_Framework_TestCase
         $form->expects(self::once())->method('setData')->with([
             'name' => 'Foo Bar',
             'twitter' => 'foobar',
+            'biography' => 'Bio text about speaker',
         ]);
         $form->expects(self::once())->method('isValid')->willReturn(true);
         $form->expects(self::once())->method('getData')->willReturn([
             'name' => 'Foo Bar',
             'twitter' => 'foobar',
+            'biography' => 'Bio text about speaker',
         ]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
@@ -107,6 +111,7 @@ final class AddSpeakerActionTest extends \PHPUnit_Framework_TestCase
                 ->withParsedBody([
                     'name' => 'Foo Bar',
                     'twitter' => 'foobar',
+                    'biography' => 'Bio text about speaker',
                 ]),
             new Response()
         );

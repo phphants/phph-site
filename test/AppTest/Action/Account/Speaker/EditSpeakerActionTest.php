@@ -57,7 +57,8 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
     {
         $this->speaker = Speaker::fromNameAndTwitter(
             'Foo Bar',
-            'foobar'
+            'foobar',
+            'Some bio text about the speaker'
         );
 
         $this->form = $this->createMock(FormInterface::class);
@@ -127,6 +128,7 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
                 ->withParsedBody([
                     'name' => '',
                     'twitter' => '',
+                    'biography' => '',
                 ]),
             new Response()
         );
@@ -149,6 +151,7 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
         $this->form->expects(self::once())->method('getData')->willReturn([
             'name' => 'Speaker Name',
             'twitter' => 'SpeakerTwitter',
+            'biography' => 'Biography text about speaker...',
         ]);
 
         $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
@@ -160,12 +163,14 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
                 ->withParsedBody([
                     'name' => 'Speaker Name',
                     'twitter' => 'SpeakerTwitter',
+                    'biography' => 'Biography text about speaker...',
                 ]),
             new Response()
         );
 
         self::assertSame('Speaker Name', $this->speaker->getFullName());
         self::assertSame('SpeakerTwitter', $this->speaker->getTwitterHandle());
+        self::assertSame('Biography text about speaker...', $this->speaker->getBiography());
 
         self::assertInstanceOf(Response\RedirectResponse::class, $response);
         self::assertSame('/account/speakers', $response->getHeaderLine('Location'));

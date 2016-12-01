@@ -65,6 +65,7 @@ final class EditSpeakerAction implements MiddlewareInterface
         $this->form->setData([
             'name' => $speaker->getFullName(),
             'twitter' => $speaker->getTwitterHandle(),
+            'biography' => $speaker->getBiography(),
         ]);
 
         if ('POST' === strtoupper($request->getMethod())) {
@@ -76,7 +77,8 @@ final class EditSpeakerAction implements MiddlewareInterface
                 $this->entityManager->transactional(function () use ($speaker, $data) {
                     $speaker->updateFromData(
                         $data['name'],
-                        $data['twitter']
+                        $data['twitter'],
+                        $data['biography']
                     );
                 });
                 return new RedirectResponse($this->urlHelper->generate('account-speakers-list'));
