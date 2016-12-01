@@ -612,7 +612,7 @@ footer .details a:hover {
 }
 
 footer .links{
-	width: 60%;
+	width: 100%;
 	margin: 0 auto 1em;
 	overflow: hidden;
 }
@@ -626,7 +626,7 @@ footer .links{
 
 footer .links li {
 	float: left;
-	width: 20%;
+	width: 14%;
 
 	font-size: .9em;
 	list-style: none;
