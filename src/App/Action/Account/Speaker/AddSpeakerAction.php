@@ -81,6 +81,7 @@ final class AddSpeakerAction implements MiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('account::speaker/edit', [
             'title' => 'Add a new speaker',
             'form' => $this->form,
+            'speaker' => null,
         ]));
     }
 }

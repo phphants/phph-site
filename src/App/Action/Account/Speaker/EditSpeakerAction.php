@@ -98,6 +98,7 @@ final class EditSpeakerAction implements MiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('account::speaker/edit', [
             'title' => 'Edit speaker',
             'form' => $this->form,
+            'speaker' => $speaker,
         ]));
     }
 }

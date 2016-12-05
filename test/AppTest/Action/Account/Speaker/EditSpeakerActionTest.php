@@ -99,6 +99,7 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
         $this->renderer->expects(self::once())->method('render')->with('account::speaker/edit', [
             'title' => 'Edit speaker',
             'form' => $this->form,
+            'speaker' => $this->speaker,
         ])->willReturn('content...');
 
         $this->urlHelper->expects(self::never())->method('generate');
@@ -122,7 +123,11 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer->expects(self::once())
             ->method('render')
-            ->with('account::speaker/edit')
+            ->with('account::speaker/edit', [
+                'title' => 'Edit speaker',
+                'form' => $this->form,
+                'speaker' => $this->speaker,
+            ])
             ->willReturn('content...');
 
         $this->urlHelper->expects(self::never())->method('generate');

@@ -167,6 +167,13 @@ ul.dashboard li.logout {
     color: #EC6A36;
 }
 .micro-speaker-headshot {
+    width: 22px;
     height: 22px;
     display: block;
+}
+.full-speaker-headshot {
+    float: right;
+    display: block;
+    width: 150px;
+    height: 150px;
 }
