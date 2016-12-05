@@ -166,3 +166,7 @@ ul.dashboard li.logout {
 .video-icon-link:hover {
     color: #EC6A36;
 }
+.micro-speaker-headshot {
+    height: 22px;
+    display: block;
+}

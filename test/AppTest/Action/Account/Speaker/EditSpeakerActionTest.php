@@ -5,13 +5,15 @@ namespace AppTest\Action\Account\Speaker;
 
 use App\Action\Account\Speaker\EditSpeakerAction;
 use App\Entity\Speaker;
+use App\Form\Account\SpeakerForm;
 use App\Service\Speaker\FindSpeakerByUuidInterface;
+use App\Service\Speaker\MoveSpeakerHeadshotInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
+use Zend\Diactoros\UploadedFile;
 use Zend\Expressive\Helper\UrlHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Form\FormInterface;
 
 /**
  * @covers \App\Action\Account\Speaker\EditSpeakerAction
@@ -19,7 +21,7 @@ use Zend\Form\FormInterface;
 final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var FormInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SpeakerForm|\PHPUnit_Framework_MockObject_MockObject
      */
     private $form;
 
@@ -49,6 +51,11 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
     private $findSpeaker;
 
     /**
+     * @var MoveSpeakerHeadshotInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $moveSpeakerHeadshot;
+
+    /**
      * @var EditSpeakerAction
      */
     private $action;
@@ -61,7 +68,7 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
             'Some bio text about the speaker'
         );
 
-        $this->form = $this->createMock(FormInterface::class);
+        $this->form = $this->createMock(SpeakerForm::class);
         $this->renderer = $this->createMock(TemplateRendererInterface::class);
         $this->urlHelper = $this->createMock(UrlHelper::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
@@ -70,19 +77,22 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
             ->method('__invoke')
             ->with($this->speaker->getId())
             ->willReturn($this->speaker);
+        $this->moveSpeakerHeadshot = $this->createMock(MoveSpeakerHeadshotInterface::class);
 
         $this->action = new EditSpeakerAction(
             $this->renderer,
             $this->findSpeaker,
             $this->form,
             $this->entityManager,
-            $this->urlHelper
+            $this->urlHelper,
+            $this->moveSpeakerHeadshot
         );
     }
 
     public function testGetRequestRendersTemplate()
     {
         $this->form->expects(self::once())->method('setData');
+        $this->form->expects(self::never())->method('setDataWithUploadedFiles');
         $this->form->expects(self::never())->method('isValid');
         $this->form->expects(self::never())->method('getData');
 
@@ -94,6 +104,8 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
         $this->urlHelper->expects(self::never())->method('generate');
 
         $this->entityManager->expects(self::never())->method('transactional');
+
+        $this->moveSpeakerHeadshot->expects(self::never())->method('__invoke');
 
         $response = $this->action->__invoke(
             (new ServerRequest(['/']))
@@ -115,11 +127,23 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
 
         $this->urlHelper->expects(self::never())->method('generate');
 
-        $this->form->expects(self::exactly(2))->method('setData');
+        $this->form->expects(self::once())->method('setData');
+        $this->form->expects(self::once())
+            ->method('setDataWithUploadedFiles')
+            ->with(
+                [
+                    'name' => '',
+                    'twitter' => '',
+                    'biography' => '',
+                ],
+                []
+            );
         $this->form->expects(self::once())->method('isValid')->willReturn(false);
         $this->form->expects(self::never())->method('getData');
 
         $this->entityManager->expects(self::never())->method('transactional');
+
+        $this->moveSpeakerHeadshot->expects(self::never())->method('__invoke');
 
         $response = $this->action->__invoke(
             (new ServerRequest(['/']))
@@ -146,25 +170,51 @@ final class EditSpeakerActionTest extends \PHPUnit_Framework_TestCase
             ->with('account-speakers-list')
             ->willReturn('/account/speakers');
 
-        $this->form->expects(self::exactly(2))->method('setData');
+        $tempFile = uniqid('/tmp/test-file', true);
+        $uploadedFile = new UploadedFile($tempFile, 123, 0);
+
+        $request = (new ServerRequest(['/']))
+            ->withMethod('post')
+            ->withAttribute('uuid', $this->speaker->getId())
+            ->withParsedBody([
+                'name' => 'Speaker Name',
+                'twitter' => 'SpeakerTwitter',
+                'biography' => 'Biography text about speaker...',
+            ])
+            ->withUploadedFiles([
+                'imageFilename' => $uploadedFile,
+            ]);
+
+        $this->form->expects(self::once())->method('setData');
+        $this->form->expects(self::once())
+            ->method('setDataWithUploadedFiles')
+            ->with(
+                [
+                    'name' => 'Speaker Name',
+                    'twitter' => 'SpeakerTwitter',
+                    'biography' => 'Biography text about speaker...',
+                ],
+                [
+                    'imageFilename' => $uploadedFile,
+                ]
+            );
         $this->form->expects(self::once())->method('isValid')->willReturn(true);
         $this->form->expects(self::once())->method('getData')->willReturn([
             'name' => 'Speaker Name',
             'twitter' => 'SpeakerTwitter',
             'biography' => 'Biography text about speaker...',
+            'imageFilename' => [
+                'tmp_name' => $tempFile,
+            ],
         ]);
 
         $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
 
+        $this->moveSpeakerHeadshot->expects(self::once())->method('__invoke')
+            ->with($uploadedFile);
+
         $response = $this->action->__invoke(
-            (new ServerRequest(['/']))
-                ->withMethod('post')
-                ->withAttribute('uuid', $this->speaker->getId())
-                ->withParsedBody([
-                    'name' => 'Speaker Name',
-                    'twitter' => 'SpeakerTwitter',
-                    'biography' => 'Biography text about speaker...',
-                ]),
+            $request,
             new Response()
         );
 

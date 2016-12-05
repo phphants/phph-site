@@ -74,6 +74,8 @@ use Ramsey\Uuid\Uuid;
     /**
      * @param string $fullName
      * @param string|null $twitterHandle
+     * @param string $biography
+     * @param string $imageFilename
      * @return void
      */
     public function updateFromData(
