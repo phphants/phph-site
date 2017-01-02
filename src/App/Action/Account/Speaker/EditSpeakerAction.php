@@ -4,7 +4,9 @@ declare(strict_types = 1);
 namespace App\Action\Account\Speaker;
 
 use App\Entity\Speaker;
+use App\Form\Account\SpeakerForm;
 use App\Service\Speaker\FindSpeakerByUuidInterface;
+use App\Service\Speaker\MoveSpeakerHeadshotInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -29,7 +31,7 @@ final class EditSpeakerAction implements MiddlewareInterface
     private $findSpeakerByUuid;
 
     /**
-     * @var FormInterface
+     * @var FormInterface|SpeakerForm
      */
     private $form;
 
@@ -43,18 +45,25 @@ final class EditSpeakerAction implements MiddlewareInterface
      */
     private $urlHelper;
 
+    /**
+     * @var MoveSpeakerHeadshotInterface
+     */
+    private $moveSpeakerHeadshot;
+
     public function __construct(
         TemplateRendererInterface $templateRenderer,
         FindSpeakerByUuidInterface $findSpeakerByUuid,
         FormInterface $form,
         EntityManagerInterface $entityManager,
-        UrlHelper $urlHelper
+        UrlHelper $urlHelper,
+        MoveSpeakerHeadshotInterface $moveSpeakerHeadshot
     ) {
         $this->templateRenderer = $templateRenderer;
         $this->findSpeakerByUuid = $findSpeakerByUuid;
         $this->form = $form;
         $this->entityManager = $entityManager;
         $this->urlHelper = $urlHelper;
+        $this->moveSpeakerHeadshot = $moveSpeakerHeadshot;
     }
 
     public function __invoke(Request $request, Response $response, callable $next = null) : Response
@@ -65,18 +74,22 @@ final class EditSpeakerAction implements MiddlewareInterface
         $this->form->setData([
             'name' => $speaker->getFullName(),
             'twitter' => $speaker->getTwitterHandle(),
+            'biography' => $speaker->getBiography(),
         ]);
 
         if ('POST' === strtoupper($request->getMethod())) {
-            $parsedBody = $request->getParsedBody();
-            $this->form->setData($parsedBody);
+            $this->form->setDataWithUploadedFiles($request->getParsedBody(), $request->getUploadedFiles());
 
             if ($this->form->isValid()) {
                 $data = $this->form->getData();
-                $this->entityManager->transactional(function () use ($speaker, $data) {
+                $this->entityManager->transactional(function () use ($speaker, $data, $request) {
                     $speaker->updateFromData(
                         $data['name'],
-                        $data['twitter']
+                        $data['twitter'],
+                        $data['biography'],
+                        null !== $data['imageFilename']['tmp_name']
+                            ? $this->moveSpeakerHeadshot->__invoke($request->getUploadedFiles()['imageFilename'])
+                            : $speaker->getImageFilename()
                     );
                 });
                 return new RedirectResponse($this->urlHelper->generate('account-speakers-list'));
@@ -85,6 +98,7 @@ final class EditSpeakerAction implements MiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('account::speaker/edit', [
             'title' => 'Edit speaker',
             'form' => $this->form,
+            'speaker' => $speaker,
         ]));
     }
 }

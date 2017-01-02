@@ -21,6 +21,7 @@ return [
             App\Service\Location\FindLocationByUuidInterface::class => App\Service\Location\FindLocationByUuidFactory::class,
             App\Service\Speaker\GetAllSpeakersInterface::class => App\Service\Speaker\GetAllSpeakersFactory::class,
             App\Service\Speaker\FindSpeakerByUuidInterface::class => App\Service\Speaker\FindSpeakerByUuidFactory::class,
+            App\Service\Speaker\MoveSpeakerHeadshotInterface::class => App\Service\Speaker\MoveSpeakerHeadshotFactory::class,
             App\Service\Talk\FindTalkByUuidInterface::class => App\Service\Talk\FindTalkByUuidFactory::class,
             App\Service\Talk\FindTalksWithVideoInterface::class => App\Service\Talk\FindTalksWithVideoFactory::class,
             App\Service\Authentication\AuthenticationServiceInterface::class => App\Service\Authentication\Factory::class,

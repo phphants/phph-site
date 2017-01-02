@@ -5,6 +5,7 @@ namespace App\Action\Account\Speaker;
 
 use App\Form\Account\SpeakerForm;
 use App\Service\Speaker\FindSpeakerByUuidInterface;
+use App\Service\Speaker\MoveSpeakerHeadshotInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Helper\UrlHelper;
@@ -22,7 +23,8 @@ final class EditSpeakerActionFactory
             $container->get(FindSpeakerByUuidInterface::class),
             new SpeakerForm(),
             $container->get(EntityManagerInterface::class),
-            $container->get(UrlHelper::class)
+            $container->get(UrlHelper::class),
+            $container->get(MoveSpeakerHeadshotInterface::class)
         );
     }
 }
