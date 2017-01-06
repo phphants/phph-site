@@ -204,9 +204,10 @@ html {
 }
 
 body {
-	margin-bottom: 125px;
-	padding-bottom: 25px;
-
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	
 	font-family: "Open Sans", sans-serif;
 
 	background: #eee;
@@ -446,6 +447,7 @@ header .nav-button:active{
 }
 
 .content{
+	flex: 1;
 	padding: 1em .5em;
 	overflow: hidden; /* acts as a clearfix */
 }
@@ -586,8 +588,6 @@ p.talk-abstract {
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 	padding: 1em;
 
