@@ -25,6 +25,7 @@ return [
             App\Service\Talk\FindTalkByUuidInterface::class => App\Service\Talk\FindTalkByUuidFactory::class,
             App\Service\Talk\FindTalksWithVideoInterface::class => App\Service\Talk\FindTalksWithVideoFactory::class,
             App\Service\Authentication\AuthenticationServiceInterface::class => App\Service\Authentication\Factory::class,
+            App\Service\Authorization\AuthorizationServiceInterface::class => App\Service\Authorization\Factory::class,
             Doctrine\ORM\EntityManagerInterface::class => ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
         'delegators' => [
