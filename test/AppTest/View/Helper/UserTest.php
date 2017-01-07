@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace AppTest\View\Helper;
 
 use App\Service\Authentication\AuthenticationServiceInterface;
+use App\Service\Authorization\AuthorizationServiceInterface;
 use App\View\Helper\User;
 
 /**
@@ -13,17 +14,25 @@ class UserTest extends \PHPUnit_Framework_TestCase
 {
     public function testIsLoggedInReturnsTrueWhenLoggedIn()
     {
+        /** @var AuthenticationServiceInterface|\PHPUnit_Framework_MockObject_MockObject $authentication */
         $authentication = $this->createMock(AuthenticationServiceInterface::class);
         $authentication->expects(self::once())->method('hasIdentity')->willReturn(true);
 
-        self::assertTrue((new User($authentication))->isLoggedIn());
+        /** @var AuthorizationServiceInterface|\PHPUnit_Framework_MockObject_MockObject $authorization */
+        $authorization = $this->createMock(AuthorizationServiceInterface::class);
+
+        self::assertTrue((new User($authentication, $authorization))->isLoggedIn());
     }
 
     public function testIsLoggedInReturnsFalseWhenNotLoggedIn()
     {
+        /** @var AuthenticationServiceInterface|\PHPUnit_Framework_MockObject_MockObject $authentication */
         $authentication = $this->createMock(AuthenticationServiceInterface::class);
         $authentication->expects(self::once())->method('hasIdentity')->willReturn(false);
 
-        self::assertFalse((new User($authentication))->isLoggedIn());
+        /** @var AuthorizationServiceInterface|\PHPUnit_Framework_MockObject_MockObject $authorization */
+        $authorization = $this->createMock(AuthorizationServiceInterface::class);
+
+        self::assertFalse((new User($authentication, $authorization))->isLoggedIn());
     }
 }
