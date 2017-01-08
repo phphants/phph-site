@@ -19,6 +19,7 @@ return [
             App\Action\ChatHelpAction::class => App\Action\ChatHelpActionFactory::class,
             App\Action\TeamAction::class => App\Action\TeamActionFactory::class,
             App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
+            App\Action\Account\RegisterAction::class => App\Action\Account\RegisterActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
             App\Action\Account\LogoutAction::class => App\Action\Account\LogoutActionFactory::class,
             App\Action\Account\Meetup\AddMeetupAction::class => App\Action\Account\Meetup\AddMeetupActionFactory::class,
@@ -110,6 +111,12 @@ return [
             'name' => 'account-login',
             'path' => '/account/login',
             'middleware' => App\Action\Account\LoginAction::class,
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-register',
+            'path' => '/account/register',
+            'middleware' => App\Action\Account\RegisterAction::class,
             'allowed_methods' => ['GET', 'POST'],
         ],
         [
