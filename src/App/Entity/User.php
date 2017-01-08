@@ -62,6 +62,10 @@ use Ramsey\Uuid\Uuid;
 
     public function verifyPassword(PasswordHashInterface $algorithm, string $password) : bool
     {
+        if ('' === $this->password) {
+            return false;
+        }
+
         return $algorithm->verify($password, $this->password);
     }
 

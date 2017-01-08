@@ -35,13 +35,16 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
     public function testAuthenticateReturnsFalseWhenPasswordNotValid()
     {
         $email = uniqid('foo@bar.com', true);
+        $correctPassword = uniqid('correct password', true);
         $incorrectPassword = uniqid('incorrect password', true);
+        $hash = uniqid('hashed password', true);
 
         /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
         $hasher = $this->createMock(PasswordHashInterface::class);
-        $hasher->expects(self::once())->method('verify')->with($incorrectPassword)->willReturn(false);
+        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $hasher->expects(self::once())->method('verify')->with($incorrectPassword, $hash)->willReturn(false);
 
-        $user = User::new($email, $hasher, uniqid('correct password', true));
+        $user = User::new($email, $hasher, $correctPassword);
 
         /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
@@ -60,10 +63,12 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
     {
         $email = uniqid('foo@bar.com', true);
         $correctPassword = uniqid('correct password', true);
+        $hash = uniqid('hashed password', true);
 
         /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
         $hasher = $this->createMock(PasswordHashInterface::class);
-        $hasher->expects(self::once())->method('verify')->with($correctPassword)->willReturn(true);
+        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $hasher->expects(self::once())->method('verify')->with($correctPassword, $hash)->willReturn(true);
 
         $user = User::new($email, $hasher, $correctPassword);
 
