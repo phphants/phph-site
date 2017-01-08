@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Service\Authentication;
 
 use App\Service\User\FindUserByEmailInterface;
+use App\Service\User\PhpPasswordHash;
 use Interop\Container\ContainerInterface;
 use Zend\Authentication\Storage\Session;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -24,7 +25,8 @@ class Factory implements FactoryInterface
     ) : ZendAuthenticationService {
         return new ZendAuthenticationService(
             $container->get(FindUserByEmailInterface::class),
-            new Session()
+            new Session(),
+            new PhpPasswordHash()
         );
     }
 }

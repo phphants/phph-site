@@ -6,6 +6,7 @@ namespace App\Service\Authentication;
 use App\Entity\User;
 use App\Service\User\Exception\UserNotFound;
 use App\Service\User\FindUserByEmailInterface;
+use App\Service\User\PasswordHashInterface;
 use Zend\Authentication\Storage\StorageInterface;
 
 class ZendAuthenticationService implements AuthenticationServiceInterface
@@ -20,10 +21,19 @@ class ZendAuthenticationService implements AuthenticationServiceInterface
      */
     private $storage;
 
-    public function __construct(FindUserByEmailInterface $findUserByEmail, StorageInterface $storage)
-    {
+    /**
+     * @var PasswordHashInterface
+     */
+    private $passwordAlgorithm;
+
+    public function __construct(
+        FindUserByEmailInterface $findUserByEmail,
+        StorageInterface $storage,
+        PasswordHashInterface $passwordAlgorithm
+    ) {
         $this->findUserByEmail = $findUserByEmail;
         $this->storage = $storage;
+        $this->passwordAlgorithm = $passwordAlgorithm;
     }
 
     public function authenticate(string $login, string $password) : bool
@@ -34,7 +44,7 @@ class ZendAuthenticationService implements AuthenticationServiceInterface
             return false;
         }
 
-        if (!$user->verifyPassword($password)) {
+        if (!$user->verifyPassword($this->passwordAlgorithm, $password)) {
             return false;
         }
 

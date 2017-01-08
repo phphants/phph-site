@@ -6,6 +6,7 @@ namespace AppTest\Entity;
 use App\Entity\User;
 use App\Service\Authorization\Role\AdministratorRole;
 use App\Service\Authorization\Role\AttendeeRole;
+use App\Service\User\PhpPasswordHash;
 
 /**
  * @covers \App\Entity\User
@@ -38,16 +39,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testPasswordVerification()
     {
-        $user = $this->createValidUser();
+        $plaintext = uniqid('plaintext', true);
 
-        $passwordProperty = new \ReflectionProperty($user, 'password');
-        $passwordProperty->setAccessible(true);
+        $hasher = new PhpPasswordHash();
 
-        // A hash of "correct horse battery staple"
-        $passwordProperty->setValue($user, '$2y$10$pnU37zwxwqIjvdmVHI.EouCUMrU3V10x522a3TVeYQMzEitIShzEy');
+        $user = User::new('foo@bar.com', $hasher, $plaintext);
 
-        self::assertFalse($user->verifyPassword('incorrect password'));
-        self::assertTrue($user->verifyPassword('correct horse battery staple'));
+        self::assertFalse($user->verifyPassword($hasher, uniqid('incorrect password', true)));
+        self::assertTrue($user->verifyPassword($hasher, $plaintext));
     }
 
     public function roleProvider()
