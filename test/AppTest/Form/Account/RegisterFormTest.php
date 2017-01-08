@@ -5,6 +5,7 @@ namespace AppTest\Form\Account;
 
 use App\Form\Account\RegisterForm;
 use App\Validator\GoogleRecaptchaValidator;
+use App\Validator\UserDoesNotExistValidator;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Password;
@@ -20,9 +21,11 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
     public function testFormHasExpectedFields()
     {
         $recaptchaKey = uniqid('recaptchaKey', true);
-        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->createMock(ValidatorInterface::class);
-        $form = new RegisterForm($validator, $recaptchaKey);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $recaptchaValidator */
+        $recaptchaValidator = $this->createMock(ValidatorInterface::class);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $userExistsValidator */
+        $userExistsValidator = $this->createMock(ValidatorInterface::class);
+        $form = new RegisterForm($recaptchaValidator, $recaptchaKey, $userExistsValidator);
 
         self::assertInstanceOf(Text::class, $form->get('email'));
         self::assertInstanceOf(Password::class, $form->get('password'));
@@ -35,9 +38,11 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
     public function testValidationForEmptySubmission()
     {
         $recaptchaKey = uniqid('recaptchaKey', true);
-        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->createMock(ValidatorInterface::class);
-        $form = new RegisterForm($validator, $recaptchaKey);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $recaptchaValidator */
+        $recaptchaValidator = $this->createMock(ValidatorInterface::class);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $userExistsValidator */
+        $userExistsValidator = $this->createMock(ValidatorInterface::class);
+        $form = new RegisterForm($recaptchaValidator, $recaptchaKey, $userExistsValidator);
 
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
@@ -71,13 +76,19 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
     public function testValidationForInvalidSubmission()
     {
         $recaptchaKey = uniqid('recaptchaKey', true);
-        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->createMock(ValidatorInterface::class);
-        $validator->expects(self::once())->method('isValid')->willReturn(false);
-        $validator->expects(self::once())->method('getMessages')->willReturn([
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $recaptchaValidator */
+        $recaptchaValidator = $this->createMock(ValidatorInterface::class);
+        $recaptchaValidator->expects(self::once())->method('isValid')->willReturn(false);
+        $recaptchaValidator->expects(self::once())->method('getMessages')->willReturn([
             GoogleRecaptchaValidator::INVALID_INPUT_RESPONSE => 'The response parameter is invalid or malformed.',
         ]);
-        $form = new RegisterForm($validator, $recaptchaKey);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $userExistsValidator */
+        $userExistsValidator = $this->createMock(ValidatorInterface::class);
+        $userExistsValidator->expects(self::once())->method('isValid')->willReturn(false);
+        $userExistsValidator->expects(self::once())->method('getMessages')->willReturn([
+            UserDoesNotExistValidator::USER_EXISTS => 'A user with this email already exists.',
+        ]);
+        $form = new RegisterForm($recaptchaValidator, $recaptchaKey, $userExistsValidator);
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
 
@@ -94,6 +105,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
                 'email' => [
                     'emailAddressInvalidFormat'
                         => 'The input is not a valid email address. Use the basic format local-part@hostname',
+                    'userExists' => 'A user with this email already exists.',
                 ],
                 'password' => [
                     'stringLengthTooShort' => 'The input is less than 8 characters long',
@@ -112,10 +124,13 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
     public function testValidationForValidSubmission()
     {
         $recaptchaKey = uniqid('recaptchaKey', true);
-        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->createMock(ValidatorInterface::class);
-        $validator->expects(self::once())->method('isValid')->willReturn(true);
-        $form = new RegisterForm($validator, $recaptchaKey);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $recaptchaValidator */
+        $recaptchaValidator = $this->createMock(ValidatorInterface::class);
+        $recaptchaValidator->expects(self::once())->method('isValid')->willReturn(true);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $userExistsValidator */
+        $userExistsValidator = $this->createMock(ValidatorInterface::class);
+        $userExistsValidator->expects(self::once())->method('isValid')->willReturn(true);
+        $form = new RegisterForm($recaptchaValidator, $recaptchaKey, $userExistsValidator);
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
 
