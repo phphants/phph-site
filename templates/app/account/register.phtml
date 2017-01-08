@@ -2,6 +2,9 @@
 declare(strict_types = 1);
 
 /** @var \App\Form\Account\RegisterForm $form */
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+
+$this->headScript()->appendFile('https://www.google.com/recaptcha/api.js');
 
 $title = 'Register';
 $this->headTitle($title);
@@ -21,6 +24,10 @@ $this->headTitle($title);
     <?= $this->formRow($form->get('password')); ?>
 
     <?= $this->formRow($form->get('confirmPassword')); ?>
+
+    <br />
+    <div class="g-recaptcha" data-sitekey="<?= $this->escapeHtmlAttr($form->get('g-recaptcha-response')->getAttribute('recaptchaPublicKey')); ?>"></div>
+    <?= $this->formElementErrors($form->get('g-recaptcha-response')); ?>
 
     <?= $this->formRow($form->get('submit')); ?>
 

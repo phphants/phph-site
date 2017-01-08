@@ -4,10 +4,13 @@ declare(strict_types = 1);
 namespace AppTest\Form\Account;
 
 use App\Form\Account\RegisterForm;
+use App\Validator\GoogleRecaptchaValidator;
 use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Password;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
+use Zend\Validator\ValidatorInterface;
 
 /**
  * @covers \App\Form\Account\RegisterForm
@@ -16,18 +19,26 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormHasExpectedFields()
     {
-        $form = new RegisterForm();
+        $recaptchaKey = uniqid('recaptchaKey', true);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
+        $validator = $this->createMock(ValidatorInterface::class);
+        $form = new RegisterForm($validator, $recaptchaKey);
 
         self::assertInstanceOf(Text::class, $form->get('email'));
         self::assertInstanceOf(Password::class, $form->get('password'));
         self::assertInstanceOf(Password::class, $form->get('confirmPassword'));
+        self::assertInstanceOf(Hidden::class, $form->get('g-recaptcha-response'));
         self::assertInstanceOf(Submit::class, $form->get('submit'));
         self::assertInstanceOf(Csrf::class, $form->get('registerForm_csrf'));
     }
 
     public function testValidationForEmptySubmission()
     {
-        $form = new RegisterForm();
+        $recaptchaKey = uniqid('recaptchaKey', true);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
+        $validator = $this->createMock(ValidatorInterface::class);
+        $form = new RegisterForm($validator, $recaptchaKey);
+
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
 
@@ -49,6 +60,9 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
                 'confirmPassword' => [
                     'isEmpty' => 'Value is required and can\'t be empty',
                 ],
+                'g-recaptcha-response' => [
+                    'isEmpty' => 'Value is required and can\'t be empty',
+                ],
             ],
             $form->getMessages()
         );
@@ -56,7 +70,14 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationForInvalidSubmission()
     {
-        $form = new RegisterForm();
+        $recaptchaKey = uniqid('recaptchaKey', true);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
+        $validator = $this->createMock(ValidatorInterface::class);
+        $validator->expects(self::once())->method('isValid')->willReturn(false);
+        $validator->expects(self::once())->method('getMessages')->willReturn([
+            GoogleRecaptchaValidator::INVALID_INPUT_RESPONSE => 'The response parameter is invalid or malformed.',
+        ]);
+        $form = new RegisterForm($validator, $recaptchaKey);
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
 
@@ -64,6 +85,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
             'email' => uniqid('not a valid email', true),
             'password' => 'pwd',
             'confirmPassword' => uniqid('confirmPassword', true),
+            'g-recaptcha-response' => uniqid('gRecaptchaResponse', true),
         ]);
 
         self::assertFalse($form->isValid());
@@ -78,6 +100,9 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
                 'confirmPassword' => [
                     'notSame' => 'The two given tokens do not match',
                 ],
+                'g-recaptcha-response' => [
+                    'invalid-input-response' => 'The response parameter is invalid or malformed.',
+                ],
             ],
             $form->getMessages()
         );
@@ -85,7 +110,11 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationForValidSubmission()
     {
-        $form = new RegisterForm();
+        $recaptchaKey = uniqid('recaptchaKey', true);
+        /** @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
+        $validator = $this->createMock(ValidatorInterface::class);
+        $validator->expects(self::once())->method('isValid')->willReturn(true);
+        $form = new RegisterForm($validator, $recaptchaKey);
         $form->getInputFilter()->remove('registerForm_csrf');
         $form->getInputFilter()->remove('submit');
 
@@ -94,6 +123,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
             'email' => 'valid@email.com',
             'password' => $password,
             'confirmPassword' => $password,
+            'g-recaptcha-response' => uniqid('gRecaptchaResponse', true),
         ]);
 
         self::assertTrue($form->isValid());
