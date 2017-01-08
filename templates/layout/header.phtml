@@ -30,7 +30,7 @@ declare(strict_types=1);
 </div>
 </header>
 
-<?php if ($this->user()->hasRole(\App\Service\Authorization\Role\AdministratorRole::NAME)): ?>
+<?php if ($this->user()->isAdministrator()): ?>
     <nav class="admin"><div class="wrapper">
         <ul>
             <li>

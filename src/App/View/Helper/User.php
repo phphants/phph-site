@@ -5,7 +5,8 @@ namespace App\View\Helper;
 
 use App\Service\Authentication\AuthenticationServiceInterface;
 use App\Service\Authorization\AuthorizationServiceInterface;
-use App\Service\Authorization\Role\RoleFactory;
+use App\Service\Authorization\Role\AdministratorRole;
+use App\Service\Authorization\Role\AttendeeRole;
 use Zend\View\Helper\AbstractHelper;
 
 final class User extends AbstractHelper
@@ -33,8 +34,8 @@ final class User extends AbstractHelper
         return $this->authenticationService->hasIdentity();
     }
 
-    public function hasRole(string $roleName) : bool
+    public function isAdministrator() : bool
     {
-        return $this->authorizationService->hasRole(RoleFactory::getRole($roleName));
+        return $this->authorizationService->hasRole(new AdministratorRole());
     }
 }
