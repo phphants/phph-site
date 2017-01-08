@@ -5,8 +5,10 @@ namespace App\Action\Account;
 
 use App\Form\Account\RegisterForm;
 use App\Service\GoogleRecaptcha\VerifyGoogleRecaptcha;
+use App\Service\User\FindUserByEmailInterface;
 use App\Service\User\PhpPasswordHash;
 use App\Validator\GoogleRecaptchaValidator;
+use App\Validator\UserDoesNotExistValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Http\Adapter\Guzzle6\Client;
 use Interop\Container\ContainerInterface;
@@ -37,7 +39,8 @@ final class RegisterActionFactory
                         $recaptchaConfig['secret-key']
                     )
                 ),
-                $recaptchaConfig['site-key']
+                $recaptchaConfig['site-key'],
+                new UserDoesNotExistValidator($container->get(FindUserByEmailInterface::class))
             )
         );
     }

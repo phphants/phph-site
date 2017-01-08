@@ -22,11 +22,20 @@ class RegisterForm extends Form implements InputFilterProviderInterface
      */
     private $recaptchaValidator;
 
-    public function __construct(ValidatorInterface $recaptchaValidator, string $recaptchaPublicKey)
-    {
+    /**
+     * @var ValidatorInterface
+     */
+    private $userDoesNotExistValidator;
+
+    public function __construct(
+        ValidatorInterface $recaptchaValidator,
+        string $recaptchaPublicKey,
+        ValidatorInterface $userDoesNotExistValidator
+    ) {
         parent::__construct('registerForm');
 
         $this->recaptchaValidator = $recaptchaValidator;
+        $this->userDoesNotExistValidator = $userDoesNotExistValidator;
 
         $this->add((new Text('email'))->setLabel('Email Address'));
         $this->add((new Password('password'))->setLabel('Password'));
@@ -52,7 +61,7 @@ class RegisterForm extends Form implements InputFilterProviderInterface
                     [
                         'name' => EmailAddress::class,
                     ],
-                    // @todo verify user does not already exist
+                    $this->userDoesNotExistValidator,
                 ],
             ],
             'password' => [
