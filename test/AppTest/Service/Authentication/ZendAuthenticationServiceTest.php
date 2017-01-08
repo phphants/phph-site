@@ -8,6 +8,7 @@ use App\Service\Authentication\Exception\NotAuthenticated;
 use App\Service\Authentication\ZendAuthenticationService;
 use App\Service\User\Exception\UserNotFound;
 use App\Service\User\FindUserByEmailInterface;
+use App\Service\User\PasswordHashInterface;
 use Zend\Authentication\Storage\StorageInterface;
 
 /**
@@ -17,102 +18,152 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testAuthenticateReturnsFalseWhenUserNotFound()
     {
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
         $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willThrowException(new UserNotFound());
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::never())->method('write');
 
-        self::assertFalse((new ZendAuthenticationService($users, $storage))->authenticate('foo@bar.com', ''));
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
+        self::assertFalse((new ZendAuthenticationService($users, $storage, $hasher))->authenticate('foo@bar.com', ''));
     }
 
     public function testAuthenticateReturnsFalseWhenPasswordNotValid()
     {
-        $user = $this->createMock(User::class);
-        $user->expects(self::once())->method('verifyPassword')->with('incorrect password')->willReturn(false);
+        $email = uniqid('foo@bar.com', true);
+        $correctPassword = uniqid('correct password', true);
+        $incorrectPassword = uniqid('incorrect password', true);
+        $hash = uniqid('hashed password', true);
 
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $hasher->expects(self::once())->method('verify')->with($incorrectPassword, $hash)->willReturn(false);
+
+        $user = User::new($email, $hasher, $correctPassword);
+
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willReturn($user);
+        $users->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::never())->method('write');
 
         self::assertFalse(
-            (new ZendAuthenticationService($users, $storage))->authenticate('foo@bar.com', 'incorrect password')
+            (new ZendAuthenticationService($users, $storage, $hasher))->authenticate($email, $incorrectPassword)
         );
     }
 
     public function testAuthenticateWritesUserToStorageAndReturnsTrueWhenSuccessAuthentication()
     {
-        $user = $this->createMock(User::class);
-        $user->expects(self::once())->method('verifyPassword')->with('correct horse battery staple')->willReturn(true);
-        $user->expects(self::once())->method('getEmail')->willReturn('foo@bar.com');
+        $email = uniqid('foo@bar.com', true);
+        $correctPassword = uniqid('correct password', true);
+        $hash = uniqid('hashed password', true);
 
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $hasher->expects(self::once())->method('verify')->with($correctPassword, $hash)->willReturn(true);
+
+        $user = User::new($email, $hasher, $correctPassword);
+
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willReturn($user);
+        $users->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('write')->with('foo@bar.com');
+        $storage->expects(self::once())->method('write')->with($email);
 
         self::assertTrue(
-            (new ZendAuthenticationService($users, $storage))->authenticate(
-                'foo@bar.com',
-                'correct horse battery staple'
+            (new ZendAuthenticationService($users, $storage, $hasher))->authenticate(
+                $email,
+                $correctPassword
             )
         );
     }
 
     public function testHasIdentityReturnsFalseWhenUserIsNotAuthenticated()
     {
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::once())->method('isEmpty')->willReturn(true);
 
-        self::assertFalse((new ZendAuthenticationService($users, $storage))->hasIdentity());
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
+        self::assertFalse((new ZendAuthenticationService($users, $storage, $hasher))->hasIdentity());
     }
 
     public function testHasIdentityReturnsTrueWhenUserIsAuthenticated()
     {
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::once())->method('isEmpty')->willReturn(false);
 
-        self::assertTrue((new ZendAuthenticationService($users, $storage))->hasIdentity());
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
+        self::assertTrue((new ZendAuthenticationService($users, $storage, $hasher))->hasIdentity());
     }
 
     public function testGetIdentityThrowsExceptionWhenUserIsNotAuthenticated()
     {
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::once())->method('read')->willReturn(false);
 
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
         $this->expectException(NotAuthenticated::class);
-        (new ZendAuthenticationService($users, $storage))->getIdentity();
+        (new ZendAuthenticationService($users, $storage, $hasher))->getIdentity();
     }
 
     public function testGetIdentityReturnsUserWhenUserIsAuthenticated()
     {
         $user = $this->createMock(User::class);
 
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
         $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willReturn($user);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::once())->method('read')->willReturn('foo@bar.com');
 
-        self::assertSame($user, (new ZendAuthenticationService($users, $storage))->getIdentity());
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
+        self::assertSame($user, (new ZendAuthenticationService($users, $storage, $hasher))->getIdentity());
     }
 
     public function testClearIdentityClearsTheStorage()
     {
+        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
 
+        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
         $storage = $this->createMock(StorageInterface::class);
         $storage->expects(self::once())->method('clear');
 
-        self::assertTrue((new ZendAuthenticationService($users, $storage))->clearIdentity());
+        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
+        $hasher = $this->createMock(PasswordHashInterface::class);
+
+        self::assertTrue((new ZendAuthenticationService($users, $storage, $hasher))->clearIdentity());
     }
 }

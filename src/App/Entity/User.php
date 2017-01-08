@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Service\Authorization\Role\AttendeeRole;
 use App\Service\Authorization\Role\RoleFactory;
 use App\Service\Authorization\Role\RoleInterface;
+use App\Service\User\PasswordHashInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -44,14 +46,27 @@ use Ramsey\Uuid\Uuid;
         $this->id = Uuid::uuid4();
     }
 
+    public static function new(string $email, PasswordHashInterface $algorithm, string $password) : self
+    {
+        $instance = new self();
+        $instance->email = $email;
+        $instance->password = $algorithm->hash($password);
+        $instance->role = AttendeeRole::NAME;
+        return $instance;
+    }
+
     public function getEmail() : string
     {
         return $this->email;
     }
 
-    public function verifyPassword(string $password) : bool
+    public function verifyPassword(PasswordHashInterface $algorithm, string $password) : bool
     {
-        return password_verify($password, $this->password);
+        if ('' === $this->password) {
+            return false;
+        }
+
+        return $algorithm->verify($password, $this->password);
     }
 
     public function getRole() : RoleInterface
