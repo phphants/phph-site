@@ -207,7 +207,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	
+
 	font-family: "Open Sans", sans-serif;
 
 	background: #eee;
@@ -692,4 +692,30 @@ ul#team li img {
 
 .error {
 	color: #ff0000;
+}
+
+.attending-button {
+    border: 1px solid grey;
+    background-color: silver;
+    display: inline-block;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    padding: 0 5px;
+    margin: 0 5px;
+    font-weight: normal;
+}
+.attending-button:hover {
+    background-color: grey;
+}
+.attending-button.is-attending {
+    background-color: #005500;
+    border-color: #003300;
+    color: #ffffff;
+}
+.attending-button.is-attending:hover {
+    background-color: #004400;
+}
+.attending-button.is-attending:before {
+    content: '\2713';
 }

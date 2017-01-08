@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace AppTest\Entity;
 
+use App\Entity\Location;
+use App\Entity\Meetup;
 use App\Entity\User;
 use App\Service\Authorization\Role\AdministratorRole;
 use App\Service\Authorization\Role\AttendeeRole;
@@ -17,9 +19,17 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testGetEmail()
     {
         $email = uniqid('email', true);
-        $user = User::new($email, new PhpPasswordHash(), '');
+        $user = User::new($email, 'My Name', new PhpPasswordHash(), '');
 
         self::assertSame($email, $user->getEmail());
+    }
+
+    public function testGetDisplayName()
+    {
+        $displayName = uniqid('displayName', true);
+        $user = User::new('foo@bar.com', $displayName, new PhpPasswordHash(), '');
+
+        self::assertSame($displayName, $user->displayName());
     }
 
     public function testPasswordVerification()
@@ -28,7 +38,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $hasher = new PhpPasswordHash();
 
-        $user = User::new('foo@bar.com', $hasher, $plaintext);
+        $user = User::new('foo@bar.com', 'My Name', $hasher, $plaintext);
 
         self::assertFalse($user->verifyPassword($hasher, uniqid('incorrect password', true)));
         self::assertTrue($user->verifyPassword($hasher, $plaintext));
@@ -41,7 +51,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $hasher->expects(self::never())->method('verify');
 
         $originalPassword = uniqid('plaintext', true);
-        $user = User::new('foo@bar.com', $hasher, $originalPassword);
+        $user = User::new('foo@bar.com', 'My Name', $hasher, $originalPassword);
 
         $passwordProperty = new \ReflectionProperty($user, 'password');
         $passwordProperty->setAccessible(true);
@@ -66,7 +76,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRole(string $roleName, string $expectedClass)
     {
-        $user = User::new('foo@bar.com', new PhpPasswordHash(), 'password');
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
 
         $roleProperty = new \ReflectionProperty($user, 'role');
         $roleProperty->setAccessible(true);
@@ -79,8 +89,26 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         self::assertInstanceOf(
             AttendeeRole::class,
-            User::new('foo@bar.com', new PhpPasswordHash(), 'password')
+            User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password')
                 ->getRole()
         );
+    }
+
+    public function testMeetupAttendance()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+        self::assertFalse($user->isAttending($meetup));
+
+        $meetup->attend($user);
+        self::assertTrue($user->isAttending($meetup));
+
+        $meetup->cancelAttendance($user);
+        self::assertFalse($user->isAttending($meetup));
     }
 }

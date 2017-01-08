@@ -62,10 +62,18 @@ use Ramsey\Uuid\Uuid;
      */
     private $talks;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="meetupsAttended")
+     * @ORM\JoinTable(name="meetup_attendees")
+     * @var Meetup[]
+     */
+    private $attendees;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->talks = new ArrayCollection();
+        $this->attendees = new ArrayCollection();
     }
 
     /**
@@ -165,5 +173,17 @@ use Ramsey\Uuid\Uuid;
     public function isBefore(\DateTimeImmutable $date) : bool
     {
         return ($this->toDate < $date);
+    }
+
+    public function attend(User $user) : void
+    {
+        $this->attendees->add($user);
+        $user->meetupsAttended()->add($this);
+    }
+
+    public function cancelAttendance(User $user) : void
+    {
+        $this->attendees->removeElement($user);
+        $user->meetupsAttended()->removeElement($this);
     }
 }

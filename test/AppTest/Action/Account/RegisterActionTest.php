@@ -12,7 +12,6 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Helper\UrlHelper;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Form\Element\Text;
 use Zend\Form\FormInterface;
 
 /**
@@ -99,6 +98,7 @@ final class RegisterActionTest extends \PHPUnit_Framework_TestCase
         $this->urlHelper->expects(self::never())->method('generate');
 
         $this->form->expects(self::once())->method('setData')->with([
+            'name' => '',
             'email' => '',
             'password' => '',
             'confirmPassword' => '',
@@ -110,6 +110,7 @@ final class RegisterActionTest extends \PHPUnit_Framework_TestCase
             (new ServerRequest(['/']))
                 ->withMethod('post')
                 ->withParsedBody([
+                    'name' => '',
                     'email' => '',
                     'password' => '',
                     'confirmPassword' => '',
@@ -124,10 +125,12 @@ final class RegisterActionTest extends \PHPUnit_Framework_TestCase
 
     public function testValidPostRequestCreatesUserAndRedirects()
     {
+        $name = uniqid('name', true);
         $email = uniqid('email', true);
         $password = uniqid('password', true);
         $hash = uniqid('hash', true);
         $data = [
+            'name' => $name,
             'email' => $email,
             'password' => $password,
             'confirmPassword' => $password,
@@ -136,7 +139,8 @@ final class RegisterActionTest extends \PHPUnit_Framework_TestCase
         $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
         $this->entityManager->expects(self::once())
             ->method('persist')
-            ->with(self::callback(function (User $user) use ($email, $password) {
+            ->with(self::callback(function (User $user) use ($name, $email, $password) {
+                self::assertSame($name, $user->displayName());
                 self::assertSame($email, $user->getEmail());
                 self::assertInstanceOf(AttendeeRole::class, $user->getRole());
                 self::assertTrue($user->verifyPassword($this->hasher, $password));

@@ -44,7 +44,7 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
         $hasher->expects(self::once())->method('verify')->with($incorrectPassword, $hash)->willReturn(false);
 
-        $user = User::new($email, $hasher, $correctPassword);
+        $user = User::new($email, 'My Name', $hasher, $correctPassword);
 
         /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);
@@ -70,7 +70,7 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
         $hasher->expects(self::once())->method('verify')->with($correctPassword, $hash)->willReturn(true);
 
-        $user = User::new($email, $hasher, $correctPassword);
+        $user = User::new($email, 'My Name', $hasher, $correctPassword);
 
         /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
         $users = $this->createMock(FindUserByEmailInterface::class);

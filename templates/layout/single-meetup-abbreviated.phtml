@@ -7,7 +7,7 @@ declare(strict_types = 1);
 $abbreviatedTalks = $meetup->getAbbreviatedTalks();
 ?>
 
-<h2><?= $meetup->getFromDate()->format('jS F Y'); ?></h2>
+<h2><?= $meetup->getFromDate()->format('jS F Y'); ?> <?= $this->partial('layout::attending-button', ['meetup' => $meetup]); ?></h2>
 
 <?php if (count($abbreviatedTalks) > 0): ?>
 <ul class="meetup-details">

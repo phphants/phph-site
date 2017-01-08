@@ -37,7 +37,7 @@ class UserDoesNotExistValidatorTest extends \PHPUnit_Framework_TestCase
         $findUserByEmail->expects(self::once())
             ->method('__invoke')
             ->with($email)
-            ->willReturn(User::new($email, new PhpPasswordHash(), 'correct horse battery staple'));
+            ->willReturn(User::new($email, 'My Name', new PhpPasswordHash(), 'correct horse battery staple'));
 
         $validator = new UserDoesNotExistValidator($findUserByEmail);
         self::assertFalse($validator->isValid($email));
