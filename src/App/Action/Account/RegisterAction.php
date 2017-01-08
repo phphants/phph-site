@@ -67,7 +67,7 @@ final class RegisterAction implements MiddlewareInterface
 
                 $this->entityManager->transactional(function () use ($data) {
                     $this->entityManager->persist(
-                        User::new($data['email'], $this->passwordAlgorithm, $data['password'])
+                        User::new($data['email'], $data['name'], $this->passwordAlgorithm, $data['password'])
                     );
                 });
                 return new RedirectResponse($this->urlHelper->generate('account-login'));

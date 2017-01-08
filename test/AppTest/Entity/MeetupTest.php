@@ -145,7 +145,7 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
 
-        $user = User::new('foo@bar.com', new PhpPasswordHash(), 'password');
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
         self::assertFalse($user->isAttending($meetup));
 
         $meetup->attend($user);

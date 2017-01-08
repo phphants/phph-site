@@ -102,7 +102,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReturnsUserFromAuthenticationService()
     {
-        $user = UserEntity::new('foo@bar.com', new PhpPasswordHash(), 'correct horse battery staple');
+        $user = UserEntity::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'correct horse battery staple');
 
         /** @var AuthenticationServiceInterface|\PHPUnit_Framework_MockObject_MockObject $authentication */
         $authentication = $this->createMock(AuthenticationServiceInterface::class);

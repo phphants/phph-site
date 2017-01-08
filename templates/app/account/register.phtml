@@ -17,6 +17,8 @@ $this->headTitle($title);
 
     <?= $this->form()->openTag($form); ?>
 
+    <?= $this->formRow($form->get('name')); ?>
+
     <?= $this->formRow($form->get('email')->setAttributes([
         'placeholder' => 'foo@bar.com',
     ])); ?>

@@ -44,6 +44,12 @@ use Ramsey\Uuid\Uuid;
     private $role;
 
     /**
+     * @ORM\Column(name="display_name", type="string", length=1024, nullable=false)
+     * @var string
+     */
+    private $displayName;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Meetup::class, mappedBy="attendees")
      * @var Meetup[]
      */
@@ -55,10 +61,11 @@ use Ramsey\Uuid\Uuid;
         $this->meetupsAttended = new ArrayCollection();
     }
 
-    public static function new(string $email, PasswordHashInterface $algorithm, string $password) : self
+    public static function new(string $email, string $displayName, PasswordHashInterface $algorithm, string $password) : self
     {
         $instance = new self();
         $instance->email = $email;
+        $instance->displayName = $displayName;
         $instance->password = $algorithm->hash($password);
         $instance->role = AttendeeRole::NAME;
         return $instance;
@@ -67,6 +74,11 @@ use Ramsey\Uuid\Uuid;
     public function getEmail() : string
     {
         return $this->email;
+    }
+
+    public function displayName() : string
+    {
+        return $this->displayName;
     }
 
     public function verifyPassword(PasswordHashInterface $algorithm, string $password) : bool

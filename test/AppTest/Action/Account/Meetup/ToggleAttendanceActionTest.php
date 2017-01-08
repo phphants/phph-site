@@ -62,7 +62,7 @@ final class ToggleAttendanceActionTest extends \PHPUnit_Framework_TestCase
             Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1')
         );
 
-        $this->user = User::new('foo@bar.com', new PhpPasswordHash(), 'correct horse battery staple');
+        $this->user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'correct horse battery staple');
 
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
 

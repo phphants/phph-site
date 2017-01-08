@@ -27,6 +27,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         $userExistsValidator = $this->createMock(ValidatorInterface::class);
         $form = new RegisterForm($recaptchaValidator, $recaptchaKey, $userExistsValidator);
 
+        self::assertInstanceOf(Text::class, $form->get('name'));
         self::assertInstanceOf(Text::class, $form->get('email'));
         self::assertInstanceOf(Password::class, $form->get('password'));
         self::assertInstanceOf(Password::class, $form->get('confirmPassword'));
@@ -48,6 +49,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         $form->getInputFilter()->remove('submit');
 
         $form->setData([
+            'name' => '',
             'email' => '',
             'password' => '',
             'confirmPassword' => '',
@@ -56,6 +58,9 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         self::assertFalse($form->isValid());
         self::assertSame(
             [
+                'name' => [
+                    'isEmpty' => 'Value is required and can\'t be empty',
+                ],
                 'email' => [
                     'isEmpty' => 'Value is required and can\'t be empty',
                 ],
@@ -93,6 +98,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         $form->getInputFilter()->remove('submit');
 
         $form->setData([
+            'name' => '',
             'email' => uniqid('not a valid email', true),
             'password' => 'pwd',
             'confirmPassword' => uniqid('confirmPassword', true),
@@ -102,6 +108,9 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         self::assertFalse($form->isValid());
         self::assertSame(
             [
+                'name' => [
+                    'isEmpty' => 'Value is required and can\'t be empty',
+                ],
                 'email' => [
                     'emailAddressInvalidFormat'
                         => 'The input is not a valid email address. Use the basic format local-part@hostname',
@@ -136,6 +145,7 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
 
         $password = uniqid('correct horse battery staple', true);
         $form->setData([
+            'name' => uniqid('My Name', true),
             'email' => 'valid@email.com',
             'password' => $password,
             'confirmPassword' => $password,

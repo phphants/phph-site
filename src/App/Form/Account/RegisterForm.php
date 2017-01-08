@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Form\Account;
 
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element\Password;
@@ -37,6 +39,7 @@ class RegisterForm extends Form implements InputFilterProviderInterface
         $this->recaptchaValidator = $recaptchaValidator;
         $this->userDoesNotExistValidator = $userDoesNotExistValidator;
 
+        $this->add((new Text('name'))->setLabel('Your Name'));
         $this->add((new Text('email'))->setLabel('Email Address'));
         $this->add((new Password('password'))->setLabel('Password'));
         $this->add((new Password('confirmPassword'))->setLabel('Confirm Password'));
@@ -55,6 +58,13 @@ class RegisterForm extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification() : array
     {
         return [
+            'name' => [
+                'required' => true,
+                'filters' => [
+                    ['name' => StringTrim::class],
+                    ['name' => StripTags::class],
+                ],
+            ],
             'email' => [
                 'required' => true,
                 'validators' => [
