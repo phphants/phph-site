@@ -61,8 +61,12 @@ use Ramsey\Uuid\Uuid;
         $this->meetupsAttended = new ArrayCollection();
     }
 
-    public static function new(string $email, string $displayName, PasswordHashInterface $algorithm, string $password) : self
-    {
+    public static function new(
+        string $email,
+        string $displayName,
+        PasswordHashInterface $algorithm,
+        string $password
+    ) : self {
         $instance = new self();
         $instance->email = $email;
         $instance->displayName = $displayName;
