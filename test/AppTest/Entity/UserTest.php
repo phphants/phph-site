@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace AppTest\Entity;
 
 use App\Entity\User;
+use App\Service\Authorization\Role\AdministratorRole;
+use App\Service\Authorization\Role\AttendeeRole;
 
 /**
  * @covers \App\Entity\User
@@ -46,5 +48,29 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         self::assertFalse($user->verifyPassword('incorrect password'));
         self::assertTrue($user->verifyPassword('correct horse battery staple'));
+    }
+
+    public function roleProvider()
+    {
+        return [
+            'administrator' => [AdministratorRole::NAME, AdministratorRole::class],
+            'attendee' => [AttendeeRole::NAME, AttendeeRole::class],
+        ];
+    }
+
+    /**
+     * @param string $roleName
+     * @param string $expectedClass
+     * @dataProvider roleProvider
+     */
+    public function testGetRole(string $roleName, string $expectedClass)
+    {
+        $user = $this->createValidUser();
+
+        $roleProperty = new \ReflectionProperty($user, 'role');
+        $roleProperty->setAccessible(true);
+        $roleProperty->setValue($user, $roleName);
+
+        self::assertInstanceOf($expectedClass, $user->getRole());
     }
 }

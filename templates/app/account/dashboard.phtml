@@ -11,6 +11,7 @@ $this->headTitle($title);
     <h1><?php echo $title; ?></h1>
 
     <ul class="dashboard">
+        <?php if ($this->user()->isAdministrator()): ?>
         <li class="meetups">
             <a href="<?= $this->escapeHtmlAttr($this->url('account-meetups-list')); ?>">
                 <span>Meetups</span>
@@ -26,6 +27,7 @@ $this->headTitle($title);
                 <span>Speakers</span>
             </a>
         </li>
+        <?php endif; ?>
         <li class="logout">
             <a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">
                 <span>Logout</span>

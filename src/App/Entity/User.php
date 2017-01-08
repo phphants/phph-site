@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Service\Authorization\Role\RoleFactory;
+use App\Service\Authorization\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -31,6 +33,12 @@ use Ramsey\Uuid\Uuid;
      */
     private $password;
 
+    /**
+     * @ORM\Column(name="role", type="string", length=1024, nullable=false)
+     * @var string
+     */
+    private $role;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
@@ -44,5 +52,10 @@ use Ramsey\Uuid\Uuid;
     public function verifyPassword(string $password) : bool
     {
         return password_verify($password, $this->password);
+    }
+
+    public function getRole() : RoleInterface
+    {
+        return RoleFactory::getRole($this->role);
     }
 }

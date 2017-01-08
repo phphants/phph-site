@@ -35,6 +35,8 @@ return [
             App\Action\Account\Speaker\AddSpeakerAction::class => App\Action\Account\Speaker\AddSpeakerActionFactory::class,
             App\Action\Account\Speaker\EditSpeakerAction::class => App\Action\Account\Speaker\EditSpeakerActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
+            App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class => App\Service\Authorization\Middleware\HasAdministratorRoleMiddlewareFactory::class,
+            App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class => App\Service\Authorization\Middleware\HasAttendeeRoleMiddlewareFactory::class,
         ],
     ],
     'routes' => [
@@ -115,6 +117,7 @@ return [
             'path' => '/account/dashboard',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
                 App\Action\Account\DashboardAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -124,6 +127,7 @@ return [
             'path' => '/account/meetups',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Meetup\ListMeetupsAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -133,6 +137,7 @@ return [
             'path' => '/account/meetup/add',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Meetup\AddMeetupAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -142,6 +147,7 @@ return [
             'path' => '/account/meetup/{uuid}',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Meetup\ViewMeetupAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -151,6 +157,7 @@ return [
             'path' => '/account/meetup/{uuid}/edit',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Meetup\EditMeetupAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -160,6 +167,7 @@ return [
             'path' => '/account/locations',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Location\ListLocationsAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -169,6 +177,7 @@ return [
             'path' => '/account/location/add',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Location\AddLocationAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -178,6 +187,7 @@ return [
             'path' => '/account/location/{uuid}/edit',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Location\EditLocationAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -187,6 +197,7 @@ return [
             'path' => '/account/speakers',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Speaker\ListSpeakersAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -196,6 +207,7 @@ return [
             'path' => '/account/speaker/add',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Speaker\AddSpeakerAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -205,6 +217,7 @@ return [
             'path' => '/account/speaker/{uuid}/edit',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Speaker\EditSpeakerAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -214,6 +227,7 @@ return [
             'path' => '/account/logout',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
                 App\Action\Account\LogoutAction::class,
             ],
             'allowed_methods' => ['GET'],
@@ -223,6 +237,7 @@ return [
             'path' => '/account/meetup/{meetup}/add-talk',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Talk\AddTalkAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -232,6 +247,7 @@ return [
             'path' => '/account/meetup/talk/{uuid}/edit',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Talk\EditTalkAction::class,
             ],
             'allowed_methods' => ['GET', 'POST'],
@@ -241,6 +257,7 @@ return [
             'path' => '/account/meetup/talk/{uuid}/delete',
             'middleware' => [
                 App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Talk\DeleteTalkAction::class,
             ],
             'allowed_methods' => ['GET'],
