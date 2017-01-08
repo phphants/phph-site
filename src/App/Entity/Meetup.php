@@ -174,4 +174,16 @@ use Ramsey\Uuid\Uuid;
     {
         return ($this->toDate < $date);
     }
+
+    public function attend(User $user) : void
+    {
+        $this->attendees->add($user);
+        $user->meetupsAttended()->add($this);
+    }
+
+    public function cancelAttendance(User $user) : void
+    {
+        $this->attendees->removeElement($user);
+        $user->meetupsAttended()->removeElement($this);
+    }
 }

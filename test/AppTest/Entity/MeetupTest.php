@@ -8,6 +8,8 @@ use App\Entity\Location;
 use App\Entity\Meetup;
 use App\Entity\Speaker;
 use App\Entity\Talk;
+use App\Entity\User;
+use App\Service\User\PhpPasswordHash;
 use Assert\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
@@ -133,5 +135,23 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('To date should be after From date');
         $meetup->updateFromData($newFrom, $newTo, $location);
+    }
+
+    public function testAttendance()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        $user = User::new('foo@bar.com', new PhpPasswordHash(), 'password');
+        self::assertFalse($user->isAttending($meetup));
+
+        $meetup->attend($user);
+        self::assertTrue($user->isAttending($meetup));
+
+        $meetup->cancelAttendance($user);
+        self::assertFalse($user->isAttending($meetup));
     }
 }

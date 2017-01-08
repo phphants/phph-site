@@ -8,6 +8,7 @@ use App\Service\Authorization\Role\RoleFactory;
 use App\Service\Authorization\Role\RoleInterface;
 use App\Service\User\PasswordHashInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -80,5 +81,15 @@ use Ramsey\Uuid\Uuid;
     public function getRole() : RoleInterface
     {
         return RoleFactory::getRole($this->role);
+    }
+
+    public function isAttending(Meetup $meetup) : bool
+    {
+        return $this->meetupsAttended->contains($meetup);
+    }
+
+    public function meetupsAttended() : Collection
+    {
+        return $this->meetupsAttended;
     }
 }

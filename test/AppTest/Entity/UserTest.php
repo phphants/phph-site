@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace AppTest\Entity;
 
+use App\Entity\Location;
+use App\Entity\Meetup;
 use App\Entity\User;
 use App\Service\Authorization\Role\AdministratorRole;
 use App\Service\Authorization\Role\AttendeeRole;
@@ -82,5 +84,23 @@ class UserTest extends \PHPUnit_Framework_TestCase
             User::new('foo@bar.com', new PhpPasswordHash(), 'password')
                 ->getRole()
         );
+    }
+
+    public function testMeetupAttendance()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        $user = User::new('foo@bar.com', new PhpPasswordHash(), 'password');
+        self::assertFalse($user->isAttending($meetup));
+
+        $meetup->attend($user);
+        self::assertTrue($user->isAttending($meetup));
+
+        $meetup->cancelAttendance($user);
+        self::assertFalse($user->isAttending($meetup));
     }
 }
