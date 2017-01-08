@@ -92,7 +92,8 @@ final class RegisterFormTest extends \PHPUnit_Framework_TestCase
         self::assertSame(
             [
                 'email' => [
-                    'emailAddressInvalidFormat' => 'The input is not a valid email address. Use the basic format local-part@hostname',
+                    'emailAddressInvalidFormat'
+                        => 'The input is not a valid email address. Use the basic format local-part@hostname',
                 ],
                 'password' => [
                     'stringLengthTooShort' => 'The input is less than 8 characters long',
