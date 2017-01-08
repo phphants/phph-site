@@ -7,6 +7,7 @@ use App\Service\Authorization\Role\AttendeeRole;
 use App\Service\Authorization\Role\RoleFactory;
 use App\Service\Authorization\Role\RoleInterface;
 use App\Service\User\PasswordHashInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -41,9 +42,16 @@ use Ramsey\Uuid\Uuid;
      */
     private $role;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Meetup::class, mappedBy="attendees")
+     * @var Meetup[]
+     */
+    private $meetupsAttended;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
+        $this->meetupsAttended = new ArrayCollection();
     }
 
     public static function new(string $email, PasswordHashInterface $algorithm, string $password) : self
