@@ -147,4 +147,22 @@ $(document).ready(function(){
         }
     });
 
+    $('.attending-button').click(function (e) {
+        var attendingButton = $(this);
+        e.preventDefault();
+        $.post(attendingButton.attr('href'))
+            .done(function (result) {
+                if (result.attending) {
+                    attendingButton.addClass('is-attending');
+                    attendingButton.text(result.isPast ? 'I went to this' : 'I will be there');
+                    return;
+                }
+                attendingButton.removeClass('is-attending');
+                attendingButton.text(result.isPast ? 'I wasn\'t there' : 'I won\'t be there');
+            })
+            .fail(function () {
+                alert('Could not toggle your attendance status...');
+            })
+    });
+
 });
