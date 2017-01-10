@@ -10,5 +10,10 @@ return [
             'site-key' => 'POPULATE THIS',
             'secret-key' => 'POPULATE THIS',
         ],
+        'twitter' => [
+            'identifier' => 'POPULATE THIS',
+            'secret' => 'POPULATE THIS',
+            'callback_uri' => 'https://www.phphants.co.uk/account/twitter/callback',
+        ],
     ],
 ];

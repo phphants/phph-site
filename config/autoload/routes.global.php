@@ -36,6 +36,8 @@ return [
             App\Action\Account\Speaker\ListSpeakersAction::class => App\Action\Account\Speaker\ListSpeakersActionFactory::class,
             App\Action\Account\Speaker\AddSpeakerAction::class => App\Action\Account\Speaker\AddSpeakerActionFactory::class,
             App\Action\Account\Speaker\EditSpeakerAction::class => App\Action\Account\Speaker\EditSpeakerActionFactory::class,
+            App\Service\Twitter\AuthenticateAction::class => App\Service\Twitter\AuthenticateActionFactory::class,
+            App\Service\Twitter\CallbackAction::class => App\Service\Twitter\CallbackActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
             App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class => App\Service\Authorization\Middleware\HasAdministratorRoleMiddlewareFactory::class,
             App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class => App\Service\Authorization\Middleware\HasAttendeeRoleMiddlewareFactory::class,
@@ -277,6 +279,22 @@ return [
                 App\Middleware\Authentication::class,
                 App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
                 App\Action\Account\Talk\DeleteTalkAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-twitter-authenticate',
+            'path' => '/account/twitter/authenticate',
+            'middleware' => [
+                App\Service\Twitter\AuthenticateAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-twitter-callback',
+            'path' => '/account/twitter/callback',
+            'middleware' => [
+                App\Service\Twitter\CallbackAction::class,
             ],
             'allowed_methods' => ['GET'],
         ],
