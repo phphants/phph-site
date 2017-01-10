@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\UserThirdPartyAuthentication\Twitter;
+use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
+use App\Service\Authentication\ThirdPartyAuthenticationData;
 use App\Service\Authorization\Role\AttendeeRole;
 use App\Service\Authorization\Role\RoleFactory;
 use App\Service\Authorization\Role\RoleInterface;
@@ -55,10 +58,17 @@ use Ramsey\Uuid\Uuid;
      */
     private $meetupsAttended;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserThirdPartyAuthentication::class, mappedBy="user", cascade={"persist"})
+     * @var ArrayCollection|UserThirdPartyAuthentication[]
+     */
+    private $thirdPartyLogins;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->meetupsAttended = new ArrayCollection();
+        $this->thirdPartyLogins = new ArrayCollection();
     }
 
     public static function new(
@@ -72,6 +82,19 @@ use Ramsey\Uuid\Uuid;
         $instance->displayName = $displayName;
         $instance->password = $algorithm->hash($password);
         $instance->role = AttendeeRole::NAME;
+        return $instance;
+    }
+
+    public static function fromThirdPartyAuthentication(ThirdPartyAuthenticationData $thirdPartyAuthentication) : self
+    {
+        $instance = new self();
+        $instance->email = $thirdPartyAuthentication->email();
+        $instance->displayName = $thirdPartyAuthentication->displayName();
+        $instance->password = '';
+        $instance->role = AttendeeRole::NAME;
+
+        $instance->thirdPartyLogins->add(UserThirdPartyAuthentication::new($instance, $thirdPartyAuthentication));
+
         return $instance;
     }
 
@@ -107,5 +130,16 @@ use Ramsey\Uuid\Uuid;
     public function meetupsAttended() : Collection
     {
         return $this->meetupsAttended;
+    }
+
+    public function twitterHandle() : ?string
+    {
+        foreach ($this->thirdPartyLogins as $login) {
+            if ($login instanceof Twitter) {
+                return $login->twitter();
+            }
+        }
+
+        return null;
     }
 }
