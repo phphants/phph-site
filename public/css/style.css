@@ -719,3 +719,18 @@ ul#team li img {
 .attending-button.is-attending:before {
     content: '\2713';
 }
+
+.login-with {
+    width: 300px;
+    padding: 10px 30px;
+    background-color: #f9f9f9;
+    border: 1px solid #ec6a36;
+    display: block;
+}
+.login-with:hover {
+    border-color: #ec8152;
+    background-color: #ffffff;
+}
+.login-with img {
+    display: block;
+}
