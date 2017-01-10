@@ -11,6 +11,6 @@ interface TwitterAuthenticationInterface
 
     public function createThirdPartyAuthentication(
         string $oauthToken,
-        string $oauthVerifier)
-    : ThirdPartyAuthenticationData;
+        string $oauthVerifier
+    ) : ThirdPartyAuthenticationData;
 }

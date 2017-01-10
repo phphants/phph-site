@@ -43,8 +43,10 @@ final class TwitterAuthentication implements TwitterAuthenticationInterface
         return $this->twitter->getAuthorizationUrl($temporaryCredentials);
     }
 
-    public function createThirdPartyAuthentication(string $oauthToken, string $oauthVerifier) : ThirdPartyAuthenticationData
-    {
+    public function createThirdPartyAuthentication(
+        string $oauthToken,
+        string $oauthVerifier
+    ) : ThirdPartyAuthenticationData {
         $sessionData = json_decode($this->session->offsetGet(self::SESSION_KEY), true);
 
         $temporaryCredentials = new TemporaryCredentials();
