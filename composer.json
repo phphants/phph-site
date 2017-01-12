@@ -17,6 +17,7 @@
         "sabre/vobject": "^4.1",
         "dasprid/container-interop-doctrine": "^0.2.2",
         "doctrine/migrations": "^1.4",
+        "doctrine/common": "2.7.1 as 2.6.99",
         "ramsey/uuid": "^3.5",
         "zendframework/zend-authentication": "^2.5",
         "zendframework/zend-session": "^2.7",
