@@ -4,11 +4,15 @@ declare(strict_types = 1);
 namespace AppTest\Service\Authentication;
 
 use App\Entity\User;
+use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Service\Authentication\Exception\NotAuthenticated;
+use App\Service\Authentication\ThirdPartyAuthenticationData;
 use App\Service\Authentication\ZendAuthenticationService;
 use App\Service\User\Exception\UserNotFound;
 use App\Service\User\FindUserByEmailInterface;
+use App\Service\User\FindUserByThirdPartyAuthenticationInterface;
 use App\Service\User\PasswordHashInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Zend\Authentication\Storage\StorageInterface;
 
 /**
@@ -16,20 +20,67 @@ use Zend\Authentication\Storage\StorageInterface;
  */
 class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $findUsersByEmail;
+
+    /**
+     * @var FindUserByThirdPartyAuthenticationInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $findUsersByThirdPartyAuthentication;
+
+    /**
+     * @var EntityManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $entityManager;
+
+    /**
+     * @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $storage;
+
+    /**
+     * @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $hasher;
+
+    /**
+     * @var ZendAuthenticationService
+     */
+    private $authenticationService;
+
+    public function setUp()
+    {
+        $this->findUsersByEmail = $this->createMock(FindUserByEmailInterface::class);
+        $this->findUsersByThirdPartyAuthentication = $this->createMock(
+            FindUserByThirdPartyAuthenticationInterface::class
+        );
+        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->storage = $this->createMock(StorageInterface::class);
+        $this->hasher = $this->createMock(PasswordHashInterface::class);
+
+        $this->authenticationService = new ZendAuthenticationService(
+            $this->findUsersByEmail,
+            $this->findUsersByThirdPartyAuthentication,
+            $this->entityManager,
+            $this->storage,
+            $this->hasher
+        );
+    }
+
     public function testAuthenticateReturnsFalseWhenUserNotFound()
     {
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willThrowException(new UserNotFound());
+        $this->findUsersByEmail->expects(self::once())
+            ->method('__invoke')
+            ->with('foo@bar.com')
+            ->willThrowException(new UserNotFound());
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::never())->method('write');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
 
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
+        $this->storage->expects(self::never())->method('write');
 
-        self::assertFalse((new ZendAuthenticationService($users, $storage, $hasher))->authenticate('foo@bar.com', ''));
+        self::assertFalse($this->authenticationService->authenticate('foo@bar.com', ''));
     }
 
     public function testAuthenticateReturnsFalseWhenPasswordNotValid()
@@ -39,24 +90,18 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $incorrectPassword = uniqid('incorrect password', true);
         $hash = uniqid('hashed password', true);
 
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
-        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
-        $hasher->expects(self::once())->method('verify')->with($incorrectPassword, $hash)->willReturn(false);
+        $this->hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $this->hasher->expects(self::once())->method('verify')->with($incorrectPassword, $hash)->willReturn(false);
 
-        $user = User::new($email, 'My Name', $hasher, $correctPassword);
+        $user = User::new($email, 'My Name', $this->hasher, $correctPassword);
 
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
+        $this->findUsersByEmail->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::never())->method('write');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
 
-        self::assertFalse(
-            (new ZendAuthenticationService($users, $storage, $hasher))->authenticate($email, $incorrectPassword)
-        );
+        $this->storage->expects(self::never())->method('write');
+
+        self::assertFalse($this->authenticationService->authenticate($email, $incorrectPassword));
     }
 
     public function testAuthenticateWritesUserToStorageAndReturnsTrueWhenSuccessAuthentication()
@@ -65,105 +110,122 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $correctPassword = uniqid('correct password', true);
         $hash = uniqid('hashed password', true);
 
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
-        $hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
-        $hasher->expects(self::once())->method('verify')->with($correctPassword, $hash)->willReturn(true);
+        $this->hasher->expects(self::once())->method('hash')->with($correctPassword)->willReturn($hash);
+        $this->hasher->expects(self::once())->method('verify')->with($correctPassword, $hash)->willReturn(true);
 
-        $user = User::new($email, 'My Name', $hasher, $correctPassword);
+        $user = User::new($email, 'My Name', $this->hasher, $correctPassword);
 
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
+        $this->findUsersByEmail->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('write')->with($email);
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
 
-        self::assertTrue(
-            (new ZendAuthenticationService($users, $storage, $hasher))->authenticate(
-                $email,
-                $correctPassword
-            )
-        );
+        $this->storage->expects(self::once())->method('write')->with($email);
+
+        self::assertTrue($this->authenticationService->authenticate($email, $correctPassword));
     }
 
     public function testHasIdentityReturnsFalseWhenUserIsNotAuthenticated()
     {
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
+        $this->findUsersByEmail->expects(self::never())->method('__invoke');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+        $this->storage->expects(self::once())->method('isEmpty')->willReturn(true);
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('isEmpty')->willReturn(true);
-
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
-
-        self::assertFalse((new ZendAuthenticationService($users, $storage, $hasher))->hasIdentity());
+        self::assertFalse($this->authenticationService->hasIdentity());
     }
 
     public function testHasIdentityReturnsTrueWhenUserIsAuthenticated()
     {
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
+        $this->findUsersByEmail->expects(self::never())->method('__invoke');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+        $this->storage->expects(self::once())->method('isEmpty')->willReturn(false);
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('isEmpty')->willReturn(false);
-
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
-
-        self::assertTrue((new ZendAuthenticationService($users, $storage, $hasher))->hasIdentity());
+        self::assertTrue($this->authenticationService->hasIdentity());
     }
 
     public function testGetIdentityThrowsExceptionWhenUserIsNotAuthenticated()
     {
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
-
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('read')->willReturn(false);
-
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
+        $this->findUsersByEmail->expects(self::never())->method('__invoke');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+        $this->storage->expects(self::once())->method('read')->willReturn(false);
 
         $this->expectException(NotAuthenticated::class);
-        (new ZendAuthenticationService($users, $storage, $hasher))->getIdentity();
+        $this->authenticationService->getIdentity();
     }
 
     public function testGetIdentityReturnsUserWhenUserIsAuthenticated()
     {
         $user = $this->createMock(User::class);
 
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
-        $users->expects(self::once())->method('__invoke')->with('foo@bar.com')->willReturn($user);
+        $this->findUsersByEmail->expects(self::once())->method('__invoke')->with('foo@bar.com')->willReturn($user);
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+        $this->storage->expects(self::once())->method('read')->willReturn('foo@bar.com');
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('read')->willReturn('foo@bar.com');
-
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
-
-        self::assertSame($user, (new ZendAuthenticationService($users, $storage, $hasher))->getIdentity());
+        self::assertSame($user, $this->authenticationService->getIdentity());
     }
 
     public function testClearIdentityClearsTheStorage()
     {
-        /** @var FindUserByEmailInterface|\PHPUnit_Framework_MockObject_MockObject $users */
-        $users = $this->createMock(FindUserByEmailInterface::class);
+        $this->findUsersByEmail->expects(self::never())->method('__invoke');
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+        $this->storage->expects(self::once())->method('clear');
 
-        /** @var StorageInterface|\PHPUnit_Framework_MockObject_MockObject $storage */
-        $storage = $this->createMock(StorageInterface::class);
-        $storage->expects(self::once())->method('clear');
+        self::assertTrue($this->authenticationService->clearIdentity());
+    }
 
-        /** @var PasswordHashInterface|\PHPUnit_Framework_MockObject_MockObject $hasher */
-        $hasher = $this->createMock(PasswordHashInterface::class);
+    public function testUserCreatedWhenThirdPartyAuthenticatesAndUserDoesNotExist()
+    {
+        $email = uniqid('email', true);
+        $displayName = uniqid('displayName', true);
+        $authData = ThirdPartyAuthenticationData::new(
+            Twitter::class,
+            uniqid('id', true),
+            $email,
+            $displayName,
+            []
+        );
 
-        self::assertTrue((new ZendAuthenticationService($users, $storage, $hasher))->clearIdentity());
+        $this->findUsersByThirdPartyAuthentication->expects(self::once())
+            ->method('__invoke')
+            ->with($authData)
+            ->willThrowException(new UserNotFound());
+
+        $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
+        $this->entityManager->expects(self::once())
+            ->method('persist')
+            ->with(self::callback(function (User $newUser) use ($email, $displayName) {
+                self::assertSame($email, $newUser->getEmail());
+                self::assertSame($displayName, $newUser->displayName());
+                return true;
+            }));
+
+        $this->storage->expects(self::once())->method('write')->with($email);
+
+        $this->authenticationService->thirdPartyAuthenticate($authData);
+    }
+
+    public function testUserLoggedInWhenUserAlreadyExists()
+    {
+        $email = uniqid('email', true);
+        $displayName = uniqid('displayName', true);
+        $authData = ThirdPartyAuthenticationData::new(
+            Twitter::class,
+            uniqid('id', true),
+            $email,
+            $displayName,
+            []
+        );
+        $user = User::fromThirdPartyAuthentication($authData);
+
+        $this->findUsersByThirdPartyAuthentication->expects(self::once())
+            ->method('__invoke')
+            ->with($authData)
+            ->willReturn($user);
+
+        $this->entityManager->expects(self::never())->method('transactional');
+        $this->entityManager->expects(self::never())->method('persist');
+
+        $this->storage->expects(self::once())->method('write')->with($email);
+
+        $this->authenticationService->thirdPartyAuthenticate($authData);
     }
 }

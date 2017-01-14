@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace AppTest\Service\User\Exception;
 
+use App\Entity\UserThirdPartyAuthentication\Twitter;
+use App\Service\Authentication\ThirdPartyAuthenticationData;
 use App\Service\User\Exception\UserNotFound;
 
 /**
@@ -16,5 +18,25 @@ class UserNotFoundTest extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf(UserNotFound::class, $exception);
         self::assertSame('User with email "foo@bar.com" was not found', $exception->getMessage());
+    }
+
+    public function testFromThirdPartyAuthentication()
+    {
+        $id = uniqid('id', true);
+        $authData = ThirdPartyAuthenticationData::new(
+            Twitter::class,
+            $id,
+            uniqid('email', true),
+            uniqid('displayName', true),
+            []
+        );
+
+        $exception = UserNotFound::fromThirdPartyAuthentication($authData);
+
+        self::assertInstanceOf(UserNotFound::class, $exception);
+        self::assertSame(
+            sprintf('User for service "%s" with ID "%s" was not found', Twitter::class, $id),
+            $exception->getMessage()
+        );
     }
 }

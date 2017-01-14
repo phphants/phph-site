@@ -25,4 +25,16 @@ $this->headTitle($title);
     <?= $this->formRow($form->get('loginForm_csrf')); ?>
     <?= $this->form()->closeTag(); ?>
 
+    <br />
+
+    <h1>Or log in using...</h1>
+
+    <ul>
+        <li>
+            <a href="<?= $this->url('account-twitter-authenticate'); ?>" class="login-with">
+                <img src="/images/third-party-login/twitter.png" alt="Login with Twitter" />
+            </a>
+        </li>
+    </ul>
+
 </div>

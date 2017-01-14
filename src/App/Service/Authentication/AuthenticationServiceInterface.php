@@ -9,6 +9,8 @@ interface AuthenticationServiceInterface
 {
     public function authenticate(string $login, string $password) : bool;
 
+    public function thirdPartyAuthenticate(ThirdPartyAuthenticationData $thirdPartyAuthentication) : bool;
+
     public function hasIdentity() : bool;
 
     /**
