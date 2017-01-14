@@ -8,6 +8,10 @@
 
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,600,800|Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
     <?= $this->headLink()
+        ->appendStylesheet($this->basePath() . '/third-party/lazy-youtube/style.css')
+        ->appendStylesheet($this->basePath() . '/third-party/bootstrap-3.3.7/css/bootstrap.min.css')
+        ->appendStylesheet($this->basePath() . '/third-party/font-awesome-4.7.0/css/font-awesome.min.css')
+        ->appendStylesheet($this->basePath() . '/third-party/bootstrap-social/bootstrap-social.css')
         ->appendStylesheet($this->basePath() . '/css/style.css')
         ->appendStylesheet($this->basePath() . '/css/admin.css')
     ; ?>

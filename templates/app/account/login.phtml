@@ -29,15 +29,15 @@ $this->headTitle($title);
 
     <h1>Or log in using...</h1>
 
-    <ul>
+    <ul class="login-with">
         <li>
-            <a href="<?= $this->url('account-twitter-authenticate'); ?>" class="login-with">
-                <img src="/images/third-party-login/twitter.png" alt="Login with Twitter" />
+            <a href="<?= $this->url('account-twitter-authenticate'); ?>" class="btn btn-block btn-social btn-twitter">
+                <span class="fa fa-twitter"></span> Sign in with Twitter
             </a>
         </li>
         <li>
-            <a href="<?= $this->url('account-github-authenticate'); ?>" class="login-with">
-                Login with GitHub
+            <a href="<?= $this->url('account-github-authenticate'); ?>" class="btn btn-block btn-social btn-github">
+                <span class="fa fa-github"></span> Sign in with GitHub
             </a>
         </li>
     </ul>
