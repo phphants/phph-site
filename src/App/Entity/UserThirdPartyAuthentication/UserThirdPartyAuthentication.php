@@ -15,6 +15,7 @@ use Ramsey\Uuid\Uuid;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="service", type="string", length=1024)
  * @ORM\DiscriminatorMap({
+ *     GitHub::class = GitHub::class,
  *     Twitter::class = Twitter::class
  * })
  */

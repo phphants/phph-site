@@ -15,5 +15,10 @@ return [
             'secret' => 'POPULATE THIS',
             'callback_uri' => 'https://www.phphants.co.uk/account/twitter/callback',
         ],
+        'github' => [
+            'clientId' => 'POPULATE THIS',
+            'clientSecret' => 'POPULATE THIS',
+            'redirectUri' => 'https://www.phphants.co.uk/account/github/callback',
+        ],
     ],
 ];

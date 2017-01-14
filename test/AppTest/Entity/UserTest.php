@@ -6,6 +6,7 @@ namespace AppTest\Entity;
 use App\Entity\Location;
 use App\Entity\Meetup;
 use App\Entity\User;
+use App\Entity\UserThirdPartyAuthentication\GitHub;
 use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
 use App\Service\Authorization\Role\AdministratorRole;
@@ -153,5 +154,28 @@ class UserTest extends \PHPUnit_Framework_TestCase
         ));
 
         self::assertSame($twitterHandle, $user->twitterHandle());
+    }
+
+    public function testGitHubUsernameReturnsNullWhenNoGitHubLoginExists()
+    {
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+        self::assertNull($user->githubUsername());
+    }
+
+    public function testGitHubUsernameReturnsString()
+    {
+        $gitHubUsername = uniqid('gitHubUsername', true);
+
+        $user = User::fromThirdPartyAuthentication(ThirdPartyAuthenticationData::new(
+            GitHub::class,
+            uniqid('id', true),
+            uniqid('email', true),
+            uniqid('displayName', true),
+            [
+                'username' => $gitHubUsername,
+            ]
+        ));
+
+        self::assertSame($gitHubUsername, $user->githubUsername());
     }
 }

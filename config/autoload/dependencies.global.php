@@ -27,6 +27,7 @@ return [
             App\Service\Authentication\AuthenticationServiceInterface::class => App\Service\Authentication\Factory::class,
             App\Service\Authorization\AuthorizationServiceInterface::class => App\Service\Authorization\Factory::class,
             App\Service\Twitter\TwitterAuthenticationInterface::class => App\Service\Twitter\TwitterAuthenticationFactory::class,
+            App\Service\GitHub\GitHubAuthenticationInterface::class => App\Service\GitHub\GitHubAuthenticationFactory::class,
             Doctrine\ORM\EntityManagerInterface::class => ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
         'delegators' => [

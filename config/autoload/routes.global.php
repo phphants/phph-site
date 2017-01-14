@@ -38,6 +38,8 @@ return [
             App\Action\Account\Speaker\EditSpeakerAction::class => App\Action\Account\Speaker\EditSpeakerActionFactory::class,
             App\Service\Twitter\AuthenticateAction::class => App\Service\Twitter\AuthenticateActionFactory::class,
             App\Service\Twitter\CallbackAction::class => App\Service\Twitter\CallbackActionFactory::class,
+            App\Service\GitHub\AuthenticateAction::class => App\Service\GitHub\AuthenticateActionFactory::class,
+            App\Service\GitHub\CallbackAction::class => App\Service\GitHub\CallbackActionFactory::class,
             App\Middleware\Authentication::class => App\Middleware\AuthenticationFactory::class,
             App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class => App\Service\Authorization\Middleware\HasAdministratorRoleMiddlewareFactory::class,
             App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class => App\Service\Authorization\Middleware\HasAttendeeRoleMiddlewareFactory::class,
@@ -295,6 +297,22 @@ return [
             'path' => '/account/twitter/callback',
             'middleware' => [
                 App\Service\Twitter\CallbackAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-github-authenticate',
+            'path' => '/account/github/authenticate',
+            'middleware' => [
+                App\Service\GitHub\AuthenticateAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-github-callback',
+            'path' => '/account/github/callback',
+            'middleware' => [
+                App\Service\GitHub\CallbackAction::class,
             ],
             'allowed_methods' => ['GET'],
         ],
