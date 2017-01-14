@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\UserThirdPartyAuthentication\GitHub;
 use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
@@ -137,6 +138,17 @@ use Ramsey\Uuid\Uuid;
         foreach ($this->thirdPartyLogins as $login) {
             if ($login instanceof Twitter) {
                 return $login->twitter();
+            }
+        }
+
+        return null;
+    }
+
+    public function githubUsername() : ?string
+    {
+        foreach ($this->thirdPartyLogins as $login) {
+            if ($login instanceof GitHub) {
+                return $login->displayName();
             }
         }
 
