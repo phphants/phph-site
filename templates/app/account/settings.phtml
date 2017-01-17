@@ -1,0 +1,37 @@
+<?php
+declare(strict_types = 1);
+
+$title = 'Account Settings';
+$this->headTitle($title);
+
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+/** @var \App\Entity\User $user */
+$user = $this->user()->get();
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>Account Settings</h1>
+
+    <p>All information on this page is private to you.</p>
+
+    <dl>
+        <dt>Name</dt>
+        <dd><?= $this->escapeHtml($user->displayName()); ?></dd>
+        <dt>Email</dt>
+        <dd><?= $this->escapeHtml($user->getEmail()); ?></dd>
+    </dl>
+
+    <h2>Linked Accounts</h2>
+    <ul>
+    <?php foreach ($user->thirdPartyLogins() as $thirdPartyLogin): ?>
+        <li>
+            <span class="fa fa-<?= strtolower($this->escapeHtmlAttr($thirdPartyLogin->type())); ?>"></span>
+            <strong><?= $this->escapeHtml($thirdPartyLogin->type()); ?></strong>
+            signed in as
+            <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>

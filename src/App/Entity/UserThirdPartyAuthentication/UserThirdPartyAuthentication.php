@@ -58,6 +58,16 @@ abstract class UserThirdPartyAuthentication
         $this->id = Uuid::uuid4();
     }
 
+    public function id() : string
+    {
+        return (string)$this->id;
+    }
+
+    public function type() : string
+    {
+        return (new \ReflectionClass($this))->getShortName();
+    }
+
     public static function new(User $user, ThirdPartyAuthenticationData $data) : self
     {
         $discriminator = $data->serviceClass();

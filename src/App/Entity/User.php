@@ -150,6 +150,14 @@ use Ramsey\Uuid\Uuid;
         return $this->meetupsAttended;
     }
 
+    /**
+     * @return UserThirdPartyAuthentication[]
+     */
+    public function thirdPartyLogins() : array
+    {
+        return $this->thirdPartyLogins->toArray();
+    }
+
     public function twitterHandle() : ?string
     {
         foreach ($this->thirdPartyLogins as $login) {
