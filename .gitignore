@@ -3,3 +3,4 @@
 .buildpath
 vendor
 .idea
+node_modules
