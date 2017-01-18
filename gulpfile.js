@@ -26,7 +26,7 @@ var config = {
 };
 
 gulp.task('default', ['build'], function () {
-    gulp.watch(config.paths.scss, ['styles']);
+    gulp.watch(config.paths.css, ['styles']);
     gulp.watch(config.paths.js, ['scripts']);
 });
 
