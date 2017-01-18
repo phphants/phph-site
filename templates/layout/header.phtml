@@ -29,25 +29,3 @@ declare(strict_types=1);
     </nav>
 </div>
 </header>
-
-<?php if ($this->user()->isAdministrator()): ?>
-    <nav class="admin"><div class="wrapper">
-        <ul>
-            <li>
-                <a href="<?= $this->escapeHtmlAttr($this->url('account-dashboard')); ?>">Dashboard</a>
-            </li>
-            <li>
-                <a href="<?= $this->escapeHtmlAttr($this->url('account-meetups-list')); ?>">Meetups</a>
-            </li>
-            <li>
-                <a href="<?= $this->escapeHtmlAttr($this->url('account-locations-list')); ?>">Locations</a>
-            </li>
-            <li>
-                <a href="<?= $this->escapeHtmlAttr($this->url('account-speakers-list')); ?>">Speakers</a>
-            </li>
-            <li>
-                <a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">Logout</a>
-            </li>
-        </ul>
-    </div></nav>
-<?php endif; ?>
