@@ -260,7 +260,7 @@ header .nav-button:active{
 }
 
 .content{
-    flex: 1;
+    flex: 1 0 auto;
     padding: 1em .5em;
     overflow: hidden; /* acts as a clearfix */
 }
