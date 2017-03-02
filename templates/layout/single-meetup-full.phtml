@@ -13,6 +13,11 @@ declare(strict_types = 1);
     </li>
 
     <li>
+        <strong>Registered attendees:</strong>
+        <?= $meetup->attendance(); ?>
+    </li>
+
+    <li>
         <strong>Location:</strong>
         <?php if (null !== $meetup->getLocation()->getUrl()): ?>
             <a href="<?= $this->escapeHtmlAttr($meetup->getLocation()->getUrl()); ?>">

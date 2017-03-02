@@ -19,6 +19,7 @@ if ($this->user()->isAttendee()) {
     <a
         href="<?= $this->escapeHtmlAttr($this->url('account-meetup-toggle-attendance', ['uuid' => $meetup->getId()])); ?>"
         class="attending-button <?= $isAttending ? 'is-attending' : ''; ?>"
+        title="Click to toggle whether you are attending this meetup or not"
     >
         <?= $label; ?>
     </a>

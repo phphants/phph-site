@@ -186,4 +186,17 @@ use Ramsey\Uuid\Uuid;
         $this->attendees->removeElement($user);
         $user->meetupsAttended()->removeElement($this);
     }
+
+    /**
+     * @return User[]
+     */
+    public function attendees() : array
+    {
+        return $this->attendees->toArray();
+    }
+
+    public function attendance() : int
+    {
+        return $this->attendees->count();
+    }
 }

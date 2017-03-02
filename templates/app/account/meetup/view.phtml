@@ -94,4 +94,23 @@ $this->headTitle('Meetups');
         <?php endforeach; ?>
         </tbody>
     </table>
+
+    <h3>Registered attendees</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Email</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($meetup->attendees() as $attendee): ?>
+            <tr>
+                <td><?= $this->escapeHtml($attendee->displayName()); ?></td>
+                <td><?= $this->escapeHtml($attendee->getEmail()); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
