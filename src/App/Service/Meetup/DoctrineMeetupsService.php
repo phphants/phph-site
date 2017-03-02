@@ -31,7 +31,6 @@ class DoctrineMeetupsService implements MeetupsServiceInterface
         $query = $this->entityManager->createQuery('
             SELECT meetup
             FROM ' . Meetup::class . ' meetup
-                JOIN meetup.eventbriteData eventbriteData 
             WHERE meetup.fromDate >= :fromDate
             ORDER BY meetup.fromDate ASC
         ')->setParameters([

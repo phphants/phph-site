@@ -182,6 +182,11 @@ header .nav-button:active{
     opacity: .5;
 }
 
+header .login-status-text {
+    margin-top: -10px;
+    font-size: 14px;
+}
+
 @media (max-width: 600px){
     header .nav-button{
         display: block;
