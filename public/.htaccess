@@ -2,6 +2,11 @@ Redirect 302 /donate https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_
 Redirect 302 /phpsc17 https://ti.to/phphants/php-south-coast-2017/discount/HAMPSHIRE2017
 
 RewriteEngine On
+
+# Rewrite phphants.co.uk to www.phphants.co.uk for consistency
+RewriteCond %{HTTP_HOST} ^phphants.co.uk [NC]
+RewriteRule ^(.*)$ http://www.phphants.co.uk/$1 [L,R=301]
+
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
 RewriteCond %{REQUEST_FILENAME} -s [OR]
