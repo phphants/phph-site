@@ -17,23 +17,23 @@ $this->headTitle('Meetups');
     <table>
         <tbody>
             <tr>
-                <td class="label">Start Date &amp; Time</td>
+                <th class="row-label">Start Date &amp; Time</th>
                 <td><?= $meetup->getFromDate()->format('d F Y \a\t H:i'); ?></td>
             </tr>
             <tr>
-                <td class="label">End Date &amp; Time</td>
+                <th class="row-label">End Date &amp; Time</th>
                 <td><?= $meetup->getToDate()->format('d F Y \a\t H:i'); ?></td>
             </tr>
             <tr>
-                <td class="label">Location</td>
+                <th class="row-label">Location</th>
                 <td><?= $this->escapeHtml($meetup->getLocation()->getName()); ?></td>
             </tr>
             <tr>
-                <td class="label">Topic</td>
+                <th class="row-label">Topic</th>
                 <td><?= $this->escapeHtml(null !== $meetup->getTopic() ? $meetup->getTopic() : 'n/a'); ?></td>
             </tr>
             <tr>
-                <td class="label">Eventbrite Link</td>
+                <th class="row-label">Eventbrite Link</th>
                 <td>
                     <?php if (null !== $meetup->getEventbriteData()): ?>
                         <a href="<?= $this->escapeHtmlAttr($meetup->getEventbriteData()->getUrl()); ?>">
