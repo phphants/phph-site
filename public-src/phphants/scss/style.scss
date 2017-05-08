@@ -515,14 +515,18 @@ ul#team li img {
 $buttonBgNotThere: #afafaf;
 $buttonBgAttending: #81bf16;
 $buttonText: #fff;
+.attending-button, .attending-button.is-attending {
+    &:focus, &:visited, &:hover, &:active {
+        text-decoration: none;
+    }
+}
 .attending-button {
     border: 1px solid darken($buttonBgNotThere, 15%);
     background-color: $buttonBgNotThere;
     display: inline-block;
     border-radius: 4px;
     color: $buttonText;
-    text-decoration: none;
-    padding: 0 5px;
+    padding: 2px 5px;
     margin: 0 5px;
     font-weight: normal;
     font-size: 0.9em;
@@ -543,8 +547,9 @@ $buttonText: #fff;
 }
 
 ul.login-with {
-}
-    ul.login-with li {
+    li {
         margin-bottom: 5px;
         width: 300px;
     }
+}
+
