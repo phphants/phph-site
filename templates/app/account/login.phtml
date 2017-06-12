@@ -31,15 +31,19 @@ $this->headTitle($title);
 
     <ul class="login-with">
         <li>
-            <a href="<?= $this->url('account-twitter-authenticate'); ?>" class="btn btn-block btn-social btn-twitter">
+            <a href="<?= $this->escapeHtmlAttr($this->url('account-twitter-authenticate')); ?>" class="btn btn-block btn-social btn-twitter">
                 <span class="fa fa-twitter"></span> Sign in with Twitter
             </a>
         </li>
         <li>
-            <a href="<?= $this->url('account-github-authenticate'); ?>" class="btn btn-block btn-social btn-github">
+            <a href="<?= $this->escapeHtmlAttr($this->url('account-github-authenticate')); ?>" class="btn btn-block btn-social btn-github">
                 <span class="fa fa-github"></span> Sign in with GitHub
             </a>
         </li>
     </ul>
+
+    <h1>If you don't have an account...</h1>
+
+    <p>You can <a href="<?= $this->escapeHtmlAttr($this->url('account-register')); ?>">register now</a> with your email.</p>
 
 </div>

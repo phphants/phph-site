@@ -57,31 +57,40 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-}
-table thead td {
-    background-color: #2E2E2E;
-    color: white;
-}
-table td {
-    padding: 5px 10px;
-    vertical-align: top;
-}
-table td.label {
-    text-align: right;
-    font-weight: bold;
-}
-tbody tr:nth-child(odd) {
-    background-color: rgba(192, 192, 192, 0.2);
-}
-table tr.past td {
-    color: grey;
-    font-style: italic;
-}
-table tr.past td a.link-button.tiny {
-    font-style: normal;
-}
-table td.nowrap {
-    white-space: nowrap;
+
+    thead {
+        td {
+            background-color: #2E2E2E;
+            color: white;
+        }
+    }
+    td, th {
+        padding: 5px 10px;
+        vertical-align: top;
+
+        &.row-label {
+            text-align: right;
+            font-weight: bold;
+        }
+        &.nowrap {
+            white-space: nowrap;
+        }
+    }
+    tr {
+        &:nth-child(odd) {
+            background-color: rgba(192, 192, 192, 0.2);
+        }
+        &.past {
+            td {
+                color: grey;
+                font-style: italic;
+
+                a.link-button.tiny {
+                    font-style: normal;
+                }
+            }
+        }
+    }
 }
 
 ul.dashboard {

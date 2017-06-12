@@ -2,12 +2,11 @@
 declare(strict_types = 1);
 
 /** @var \App\Entity\Meetup $meetup */
+$isPast = $meetup->isBefore(new \DateTimeImmutable());
 
 if ($this->user()->isAttendee()) {
     /** @var \App\Entity\User $user */
     $user = $this->user()->get();
-
-    $isPast = $meetup->isBefore(new \DateTimeImmutable());
     $isAttending = $user->isAttending($meetup);
 
     if ($isAttending) {
@@ -20,8 +19,13 @@ if ($this->user()->isAttendee()) {
     <a
         href="<?= $this->escapeHtmlAttr($this->url('account-meetup-toggle-attendance', ['uuid' => $meetup->getId()])); ?>"
         class="attending-button <?= $isAttending ? 'is-attending' : ''; ?>"
+        title="Click to toggle whether you are attending this meetup or not"
     >
         <?= $label; ?>
     </a>
+    <?php
+} elseif (!$isPast) {
+    ?>
+    <strong>(<a href="<?= $this->escapeHtmlAttr($this->url('account-login')); ?>">login</a> to let us know if you're coming)</strong>
     <?php
 }

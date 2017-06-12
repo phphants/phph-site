@@ -182,6 +182,11 @@ header .nav-button:active{
     opacity: .5;
 }
 
+header .login-status-text {
+    margin-top: -10px;
+    font-size: 14px;
+}
+
 @media (max-width: 600px){
     header .nav-button{
         display: block;
@@ -511,35 +516,44 @@ ul#team li img {
     color: #ff0000;
 }
 
+$buttonBgNotThere: #afafaf;
+$buttonBgAttending: #81bf16;
+$buttonText: #fff;
+.attending-button, .attending-button.is-attending {
+    &:focus, &:visited, &:hover, &:active {
+        text-decoration: none;
+    }
+}
 .attending-button {
-    border: 1px solid grey;
-    background-color: silver;
+    border: 1px solid darken($buttonBgNotThere, 15%);
+    background-color: $buttonBgNotThere;
     display: inline-block;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    padding: 0 5px;
+    border-radius: 4px;
+    color: $buttonText;
+    padding: 2px 5px;
     margin: 0 5px;
     font-weight: normal;
+    font-size: 0.9em;
 }
 .attending-button:hover {
-    background-color: grey;
+    background-color: darken($buttonBgNotThere, 20%);
 }
 .attending-button.is-attending {
-    background-color: #005500;
-    border-color: #003300;
-    color: #ffffff;
+    background-color: $buttonBgAttending;
+    border-color: darken($buttonBgAttending, 15%);
+    color: $buttonText;
 }
 .attending-button.is-attending:hover {
-    background-color: #004400;
+    background-color: darken($buttonBgAttending, 10%);
 }
 .attending-button.is-attending:before {
     content: '\2713';
 }
 
 ul.login-with {
-}
-    ul.login-with li {
+    li {
         margin-bottom: 5px;
         width: 300px;
     }
+}
+
