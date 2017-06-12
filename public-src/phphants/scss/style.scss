@@ -259,16 +259,20 @@ header .nav-button:active{
     cursor: pointer;
 }
 
-.content{
-    flex: 1 0 auto;
+.content {
+    display: flex;
     padding: 1em .5em;
     overflow: hidden; /* acts as a clearfix */
-}
-
-.content section {
-    width: 50%;
-    float: left;
-    padding: .5em;
+    flex-wrap: wrap;
+    * {
+        flex-basis: 100%;
+    }
+    section {
+        padding: .5em;
+        //flex-basis: 50%;
+        //flex-grow: 1;
+        flex: 1 1 50%;
+    }
 }
 
 @media (max-width: 600px) {
