@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  phph-postgres:
+    build: docker/postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=phphants
+    ports:
+      - 5432:5432
+
+  phph-php-fpm:
+    build: docker/php-fpm
+    volumes:
+      - .:/app
+    depends_on:
+      - phph-postgres
+    links:
+      - phph-postgres
+
+  phph-nginx:
+    build: docker/nginx
+    volumes:
+      - .:/app
+    depends_on:
+      - phph-php-fpm
+    links:
+      - phph-php-fpm
+    ports:
+      - 8080:8080
+

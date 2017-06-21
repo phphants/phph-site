@@ -10,20 +10,45 @@ For more information, visit us at [PHP Hampshire](http://phphants.co.uk).
 
 ### Prerequisites
 
- * PostgreSQL
- * Apache
- * PHP 7.1
+ * Docker
+ * Docker Compose
 
-### PHP Dependencies
+### Project setup
+
+First, you need to configure the application:
 
 ```bash
-git clone https://github.com/phphants/phph-site.git
-cd phph-site
-composer install
 cp config/autoload/local.php.dist config/autoload/local.php
-# Edit the local.php config to suit your environment
-vendor/bin/doctrine-migrations migrate
 ```
+
+Edit the configuration file accordingly with API tokens.
+
+The DB URL for the Docker environment is:
+
+```
+postgres://postgres:postgres@phph-postgres/phphants
+```
+
+Then, create the docker containers:
+
+```bash
+$ docker-compose build
+```
+
+And run the environment with:
+
+```bash
+$ docker-compose up --abort-on-container-exit --force-recreate
+```
+
+Once up and running, you can run the migrations to create the schema:
+
+```bash
+$ ./run-in-php-docker.sh vendor/bin/doctrine-migrations migrations:migrate
+```
+
+This will set you up with a blank database to start with, you'll need to manually populate the user table to create the
+first user at the moment.
 
 ### Front end assets
 
