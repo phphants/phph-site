@@ -14,6 +14,7 @@ For more information, visit us at [PHP Hampshire](http://phphants.co.uk).
 git clone https://github.com/phphants/phph-site.git
 cd phph-site
 composer install
+vendor/bin/doctrine-migrations migrate
 ```
 
 ### Front end assets
