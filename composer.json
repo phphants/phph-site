@@ -47,6 +47,7 @@
         }
     },
     "scripts": {
+        "migrate": "doctrine-migrations migrate",
         "phpcs": "phpcs",
         "server": "php -S localhost:8080 -t public",
         "test": "phpunit"
