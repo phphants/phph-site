@@ -8,12 +8,20 @@ For more information, visit us at [PHP Hampshire](http://phphants.co.uk).
 
 ## Installation
 
+### Prerequisites
+
+ * PostgreSQL
+ * Apache
+ * PHP 7.1
+
 ### PHP Dependencies
 
 ```bash
 git clone https://github.com/phphants/phph-site.git
 cd phph-site
 composer install
+cp config/autoload/local.php.dist config/autoload/local.php
+# Edit the local.php config to suit your environment
 vendor/bin/doctrine-migrations migrate
 ```
 
