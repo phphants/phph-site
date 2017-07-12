@@ -210,4 +210,17 @@ use Ramsey\Uuid\Uuid;
     {
         return $this->meetupAttendees->count();
     }
+
+    public function checkInAttendee(User $user, \DateTimeImmutable $atTime) : void
+    {
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+                $meetupAttendee->checkIn($atTime);
+                return;
+            }
+        }
+
+        throw Exception\UserNotAttending::fromMeetupAndUser($this, $user);
+    }
 }
