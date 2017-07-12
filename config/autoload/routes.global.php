@@ -27,6 +27,8 @@ return [
             App\Action\Account\Meetup\ViewMeetupAction::class => App\Action\Account\Meetup\ViewMeetupActionFactory::class,
             App\Action\Account\Meetup\ToggleAttendanceAction::class => App\Action\Account\Meetup\ToggleAttendanceActionFactory::class,
             App\Action\Account\Meetup\ListMeetupsAction::class => App\Action\Account\Meetup\ListMeetupsActionFactory::class,
+            App\Action\Account\Meetup\CheckInUserAction::class => App\Action\Account\Meetup\CheckInUserActionFactory::class,
+            App\Action\Account\Meetup\CancelCheckInAction::class => App\Action\Account\Meetup\CancelCheckInActionFactory::class,
             App\Action\Account\Location\ListLocationsAction::class => App\Action\Account\Location\ListLocationsActionFactory::class,
             App\Action\Account\Location\AddLocationAction::class => App\Action\Account\Location\AddLocationActionFactory::class,
             App\Action\Account\Location\EditLocationAction::class => App\Action\Account\Location\EditLocationActionFactory::class,
@@ -183,6 +185,26 @@ return [
                 App\Action\Account\Meetup\ToggleAttendanceAction::class,
             ],
             'allowed_methods' => ['POST'],
+        ],
+        [
+            'name' => 'account-meetup-check-in-user',
+            'path' => '/account/meetup/{meetup}/check-in/{user}',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
+                App\Action\Account\Meetup\CheckInUserAction::class,
+            ],
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-meetup-cancel-check-in',
+            'path' => '/account/meetup/{meetup}/cancel-check-in/{user}',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAdministratorRoleMiddleware::class,
+                App\Action\Account\Meetup\CancelCheckInAction::class,
+            ],
+            'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'account-locations-list',
