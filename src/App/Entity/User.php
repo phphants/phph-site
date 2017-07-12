@@ -26,6 +26,7 @@ use Ramsey\Uuid\Uuid;
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @var string
      */
     private $id;
 
@@ -67,7 +68,7 @@ use Ramsey\Uuid\Uuid;
 
     private function __construct()
     {
-        $this->id = Uuid::uuid4();
+        $this->id = (string)Uuid::uuid4();
         $this->meetupsAttended = new ArrayCollection();
         $this->thirdPartyLogins = new ArrayCollection();
     }
@@ -97,6 +98,11 @@ use Ramsey\Uuid\Uuid;
         $instance->thirdPartyLogins->add(UserThirdPartyAuthentication::new($instance, $thirdPartyAuthentication));
 
         return $instance;
+    }
+
+    public function id() : string
+    {
+        return $this->id;
     }
 
     public function getEmail() : string
