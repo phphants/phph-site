@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
@@ -36,6 +37,12 @@ use Ramsey\Uuid\Uuid;
      */
     private $user;
 
+    /**
+     * @ORM\Column(name="check_in_time", type="datetime", nullable=true)
+     * @var DateTimeImmutable|null
+     */
+    private $checkInTime;
+
     public function __construct(Meetup $meetup, User $attendee)
     {
         $this->id = Uuid::uuid4();
@@ -51,5 +58,15 @@ use Ramsey\Uuid\Uuid;
     public function attendee() : User
     {
         return $this->user;
+    }
+
+    public function checkIn(\DateTimeImmutable $checkInTime) : void
+    {
+        $this->checkInTime = $checkInTime;
+    }
+
+    public function checkedIn() : bool
+    {
+        return null !== $this->checkInTime;
     }
 }
