@@ -102,13 +102,21 @@ $this->headTitle('Meetups');
             <tr>
                 <td>Name</td>
                 <td>Email</td>
+                <td>Checked In</td>
             </tr>
         </thead>
         <tbody>
         <?php foreach ($meetup->attendees() as $attendee): ?>
             <tr>
-                <td><?= $this->escapeHtml($attendee->displayName()); ?></td>
-                <td><?= $this->escapeHtml($attendee->getEmail()); ?></td>
+                <td><?= $this->escapeHtml($attendee->attendee()->displayName()); ?></td>
+                <td><?= $this->escapeHtml($attendee->attendee()->getEmail()); ?></td>
+                <td>
+                    <?php if ($attendee->checkedIn()) : ?>
+                        CHECKED IN
+                    <?php else: ?>
+                        <a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-check-in-user', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>" class="link-button tiny">Check in</a>
+                    <?php endif; ?>
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
