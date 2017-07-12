@@ -199,7 +199,7 @@ use Ramsey\Uuid\Uuid;
     }
 
     /**
-     * @return User[]
+     * @return MeetupAttendee[]
      */
     public function attendees() : array
     {
