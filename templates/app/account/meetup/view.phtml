@@ -112,7 +112,7 @@ $this->headTitle('Meetups');
                 <td><?= $this->escapeHtml($attendee->attendee()->getEmail()); ?></td>
                 <td>
                     <?php if ($attendee->checkedIn()) : ?>
-                        CHECKED IN
+                        &#x2713; Checked In (<a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-cancel-check-in', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>">undo</a>)
                     <?php else: ?>
                         <a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-check-in-user', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>" class="link-button tiny">Check in</a>
                     <?php endif; ?>
