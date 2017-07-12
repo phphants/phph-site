@@ -14,6 +14,7 @@ return [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             App\Service\User\FindUserByEmailInterface::class => App\Service\User\FindUserByEmailFactory::class,
+            App\Service\User\FindUserByIdInterface::class => App\Service\User\FindUserByIdFactory::class,
             App\Service\Meetup\FindMeetupByUuidInterface::class => App\Service\Meetup\FindMeetupByUuidFactory::class,
             App\Service\Meetup\MeetupsServiceInterface::class => App\Service\Meetup\MeetupsServiceFactory::class,
             App\Service\Meetup\GetAllMeetupsInterface::class => App\Service\Meetup\GetAllMeetupsFactory::class,
