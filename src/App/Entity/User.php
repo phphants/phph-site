@@ -54,8 +54,8 @@ use Ramsey\Uuid\Uuid;
     private $displayName;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Meetup::class, mappedBy="attendees")
-     * @var Meetup[]
+     * @ORM\OneToMany(targetEntity=MeetupAttendee::class, mappedBy="user")
+     * @var ArrayCollection|MeetupAttendee[]
      */
     private $meetupsAttended;
 
@@ -125,7 +125,13 @@ use Ramsey\Uuid\Uuid;
 
     public function isAttending(Meetup $meetup) : bool
     {
-        return $this->meetupsAttended->contains($meetup);
+        foreach ($this->meetupsAttended as $meetupAttended) {
+            if ($meetupAttended->meetup()->getId() === $meetup->getId()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function meetupsAttended() : Collection

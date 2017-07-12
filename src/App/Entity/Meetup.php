@@ -63,17 +63,16 @@ use Ramsey\Uuid\Uuid;
     private $talks;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="meetupsAttended")
-     * @ORM\JoinTable(name="meetup_attendees")
-     * @var Meetup[]
+     * @ORM\OneToMany(targetEntity=MeetupAttendee::class, mappedBy="meetup")
+     * @var ArrayCollection|MeetupAttendee[]
      */
-    private $attendees;
+    private $meetupAttendees;
 
     private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->talks = new ArrayCollection();
-        $this->attendees = new ArrayCollection();
+        $this->meetupAttendees = new ArrayCollection();
     }
 
     /**
@@ -177,14 +176,26 @@ use Ramsey\Uuid\Uuid;
 
     public function attend(User $user) : void
     {
-        $this->attendees->add($user);
-        $user->meetupsAttended()->add($this);
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+                return;
+            }
+        }
+        $attendance = new MeetupAttendee($this, $user);
+        $this->meetupAttendees->add($attendance);
+        $user->meetupsAttended()->add($attendance);
     }
 
     public function cancelAttendance(User $user) : void
     {
-        $this->attendees->removeElement($user);
-        $user->meetupsAttended()->removeElement($this);
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+                $this->meetupAttendees->removeElement($meetupAttendee);
+                $user->meetupsAttended()->removeElement($meetupAttendee);
+            }
+        }
     }
 
     /**
@@ -192,11 +203,11 @@ use Ramsey\Uuid\Uuid;
      */
     public function attendees() : array
     {
-        return $this->attendees->toArray();
+        return $this->meetupAttendees->toArray();
     }
 
     public function attendance() : int
     {
-        return $this->attendees->count();
+        return $this->meetupAttendees->count();
     }
 }
