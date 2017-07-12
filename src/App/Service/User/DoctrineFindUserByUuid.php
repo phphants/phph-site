@@ -7,7 +7,7 @@ use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Ramsey\Uuid\UuidInterface;
 
-class DoctrineFindUserById implements FindUserByIdInterface
+class DoctrineFindUserByUuid implements FindUserByUuidInterface
 {
     /**
      * @var ObjectRepository

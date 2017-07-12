@@ -11,7 +11,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 /**
  * @codeCoverageIgnore
  */
-class FindUserByIdFactory implements FactoryInterface
+class FindUserByUuidFactory implements FactoryInterface
 {
     /**
      * {@inheritdoc}
@@ -21,8 +21,8 @@ class FindUserByIdFactory implements FactoryInterface
         ContainerInterface $container,
         $requestedName,
         array $options = null
-    ) : DoctrineFindUserById {
-        return new DoctrineFindUserById(
+    ) : DoctrineFindUserByUuid {
+        return new DoctrineFindUserByUuid(
             $container->get(EntityManagerInterface::class)->getRepository(User::class)
         );
     }

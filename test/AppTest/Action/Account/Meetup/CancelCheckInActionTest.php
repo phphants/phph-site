@@ -8,7 +8,7 @@ use App\Entity\Location;
 use App\Entity\Meetup;
 use App\Entity\User;
 use App\Service\Meetup\FindMeetupByUuidInterface;
-use App\Service\User\FindUserByIdInterface;
+use App\Service\User\FindUserByUuidInterface;
 use App\Service\User\PhpPasswordHash;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -44,8 +44,8 @@ final class CancelCheckInActionTest extends \PHPUnit_Framework_TestCase
             ->with($meetup->getId())
             ->willReturn($meetup);
 
-        /** @var FindUserByIdInterface|\PHPUnit_Framework_MockObject_MockObject $findUser */
-        $findUser = $this->createMock(FindUserByIdInterface::class);
+        /** @var FindUserByUuidInterface|\PHPUnit_Framework_MockObject_MockObject $findUser */
+        $findUser = $this->createMock(FindUserByUuidInterface::class);
         $findUser->expects(self::once())
             ->method('__invoke')
             ->with(Uuid::fromString($user->id()))

@@ -6,7 +6,7 @@ namespace App\Service\User;
 use App\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 
-interface FindUserByIdInterface
+interface FindUserByUuidInterface
 {
     /**
      * @param UuidInterface $userId

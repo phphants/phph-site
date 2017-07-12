@@ -4,15 +4,15 @@ declare(strict_types = 1);
 namespace AppTest\Service\User;
 
 use App\Entity\User;
-use App\Service\User\DoctrineFindUserById;
+use App\Service\User\DoctrineFindUserByUuid;
 use App\Service\User\Exception\UserNotFound;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Ramsey\Uuid\Uuid;
 
 /**
- * @covers \App\Service\User\DoctrineFindUserById
+ * @covers \App\Service\User\DoctrineFindUserByUuid
  */
-class DoctrineFindUserByIdTest extends \PHPUnit_Framework_TestCase
+class DoctrineFindUserByUuidTest extends \PHPUnit_Framework_TestCase
 {
     public function testInvokeThrowsExceptionIfUserNotFound()
     {
@@ -26,7 +26,7 @@ class DoctrineFindUserByIdTest extends \PHPUnit_Framework_TestCase
             ->willReturn(null);
 
         $this->expectException(UserNotFound::class);
-        (new DoctrineFindUserById($objectRepository))->__invoke($uuid);
+        (new DoctrineFindUserByUuid($objectRepository))->__invoke($uuid);
     }
 
     public function testInvokeReturnsUserWhenFound()
@@ -43,6 +43,6 @@ class DoctrineFindUserByIdTest extends \PHPUnit_Framework_TestCase
             ->with((string)$uuid)
             ->willReturn($user);
 
-        self::assertSame($user, (new DoctrineFindUserById($objectRepository))->__invoke($uuid));
+        self::assertSame($user, (new DoctrineFindUserByUuid($objectRepository))->__invoke($uuid));
     }
 }

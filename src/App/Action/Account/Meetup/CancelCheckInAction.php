@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace App\Action\Account\Meetup;
 
 use App\Service\Meetup\FindMeetupByUuidInterface;
-use App\Service\User\FindUserByIdInterface;
+use App\Service\User\FindUserByUuidInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,9 +26,9 @@ final class CancelCheckInAction implements MiddlewareInterface
     private $findMeetupByUuid;
 
     /**
-     * @var FindUserByIdInterface
+     * @var FindUserByUuidInterface
      */
-    private $findUserById;
+    private $findUserByUuid;
 
     /**
      * @var UrlHelper
@@ -38,19 +38,19 @@ final class CancelCheckInAction implements MiddlewareInterface
     public function __construct(
         EntityManagerInterface $entityManager,
         FindMeetupByUuidInterface $findMeetupByUuid,
-        FindUserByIdInterface $findUserById,
+        FindUserByUuidInterface $findUserByUuid,
         UrlHelper $urlHelper
     ) {
         $this->entityManager = $entityManager;
         $this->findMeetupByUuid = $findMeetupByUuid;
-        $this->findUserById = $findUserById;
+        $this->findUserByUuid = $findUserByUuid;
         $this->urlHelper = $urlHelper;
     }
 
     public function __invoke(Request $request, Response $response, callable $next = null) : Response
     {
         $meetup = $this->findMeetupByUuid->__invoke(Uuid::fromString($request->getAttribute('meetup')));
-        $user = $this->findUserById->__invoke(Uuid::fromString($request->getAttribute('user')));
+        $user = $this->findUserByUuid->__invoke(Uuid::fromString($request->getAttribute('user')));
 
         $this->entityManager->transactional(function () use ($meetup, $user) {
             $meetup->cancelCheckIn($user);
