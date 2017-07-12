@@ -223,4 +223,17 @@ use Ramsey\Uuid\Uuid;
 
         throw Exception\UserNotAttending::fromMeetupAndUser($this, $user);
     }
+
+    public function cancelCheckIn(User $user) : void
+    {
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+                $meetupAttendee->cancelCheckIn();
+                return;
+            }
+        }
+
+        throw Exception\UserNotAttending::fromMeetupAndUser($this, $user);
+    }
 }

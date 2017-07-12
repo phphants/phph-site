@@ -185,4 +185,35 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
             self::assertTrue($meetupAttendee->checkedIn());
         }
     }
+
+    public function testCancelCheckInThrowsExceptionIfUserNotAttendingMeetup()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+
+        $this->expectException(UserNotAttending::class);
+        $meetup->cancelCheckIn($user);
+    }
+
+    public function testCancelCheckInCancelsCheckInForUserIfAttending()
+    {
+        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+
+        $meetup->attend($user);
+        $meetup->checkInAttendee($user, new \DateTimeImmutable());
+        $meetup->cancelCheckIn($user);
+
+        foreach ($meetup->attendees() as $meetupAttendee) {
+            self::assertFalse($meetupAttendee->checkedIn());
+        }
+    }
 }
