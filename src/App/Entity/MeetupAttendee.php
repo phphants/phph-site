@@ -65,6 +65,11 @@ use Ramsey\Uuid\Uuid;
         $this->checkInTime = $checkInTime;
     }
 
+    public function cancelCheckIn() : void
+    {
+        $this->checkInTime = null;
+    }
+
     public function checkedIn() : bool
     {
         return null !== $this->checkInTime;
