@@ -178,7 +178,7 @@ use Ramsey\Uuid\Uuid;
     {
         foreach ($this->meetupAttendees as $meetupAttendee) {
             /** @var MeetupAttendee $meetupAttendee */
-            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
                 return;
             }
         }
@@ -191,7 +191,7 @@ use Ramsey\Uuid\Uuid;
     {
         foreach ($this->meetupAttendees as $meetupAttendee) {
             /** @var MeetupAttendee $meetupAttendee */
-            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
                 $this->meetupAttendees->removeElement($meetupAttendee);
                 $user->meetupsAttended()->removeElement($meetupAttendee);
             }
@@ -215,7 +215,7 @@ use Ramsey\Uuid\Uuid;
     {
         foreach ($this->meetupAttendees as $meetupAttendee) {
             /** @var MeetupAttendee $meetupAttendee */
-            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
                 $meetupAttendee->checkIn($atTime);
                 return;
             }
@@ -228,7 +228,7 @@ use Ramsey\Uuid\Uuid;
     {
         foreach ($this->meetupAttendees as $meetupAttendee) {
             /** @var MeetupAttendee $meetupAttendee */
-            if ($meetupAttendee->attendee()->getEmail() === $user->getEmail()) {
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
                 $meetupAttendee->cancelCheckIn();
                 return;
             }
