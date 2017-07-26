@@ -55,7 +55,12 @@ use Ramsey\Uuid\Uuid;
     private $displayName;
 
     /**
-     * @ORM\OneToMany(targetEntity=MeetupAttendee::class, mappedBy="user")
+     * @ORM\OneToMany(
+     *     targetEntity=MeetupAttendee::class,
+     *     mappedBy="user",
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
+     * )
      * @var ArrayCollection|MeetupAttendee[]
      */
     private $meetupsAttended;
