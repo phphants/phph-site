@@ -32,7 +32,7 @@ class Version20170712151355 extends AbstractMigration
         $this->addSql('ALTER TABLE meetup_attendees ADD CONSTRAINT FK_FB2E8EEC591E2316 FOREIGN KEY (meetup_id) REFERENCES meetup (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE meetup_attendees ADD CONSTRAINT FK_FB2E8EECA76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;');
 
-        $this->addSql('INSERT INTO meetup_attendees (id, meetup_id, user_id, check_in_time) SELECT uuid_generate_v4(), meetup_id, user_id, NULL FROM meetup_attendees_old');
+        $this->addSql('INSERT INTO meetup_attendees (id, meetup_id, user_id, check_in_time) SELECT gen_random_uuid(), meetup_id, user_id, NULL FROM meetup_attendees_old');
 
         $this->addSql('DROP TABLE meetup_attendees_old');
     }
