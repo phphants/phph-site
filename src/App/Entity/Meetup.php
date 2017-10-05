@@ -63,17 +63,21 @@ use Ramsey\Uuid\Uuid;
     private $talks;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="meetupsAttended")
-     * @ORM\JoinTable(name="meetup_attendees")
-     * @var Meetup[]
+     * @ORM\OneToMany(
+     *     targetEntity=MeetupAttendee::class,
+     *     mappedBy="meetup",
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
+     * )
+     * @var ArrayCollection|MeetupAttendee[]
      */
-    private $attendees;
+    private $meetupAttendees;
 
     private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->talks = new ArrayCollection();
-        $this->attendees = new ArrayCollection();
+        $this->meetupAttendees = new ArrayCollection();
     }
 
     /**
@@ -177,26 +181,64 @@ use Ramsey\Uuid\Uuid;
 
     public function attend(User $user) : void
     {
-        $this->attendees->add($user);
-        $user->meetupsAttended()->add($this);
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
+                return;
+            }
+        }
+        $attendance = new MeetupAttendee($this, $user);
+        $this->meetupAttendees->add($attendance);
+        $user->meetupsAttended()->add($attendance);
     }
 
     public function cancelAttendance(User $user) : void
     {
-        $this->attendees->removeElement($user);
-        $user->meetupsAttended()->removeElement($this);
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
+                $this->meetupAttendees->removeElement($meetupAttendee);
+                $user->meetupsAttended()->removeElement($meetupAttendee);
+            }
+        }
     }
 
     /**
-     * @return User[]
+     * @return MeetupAttendee[]
      */
     public function attendees() : array
     {
-        return $this->attendees->toArray();
+        return $this->meetupAttendees->toArray();
     }
 
     public function attendance() : int
     {
-        return $this->attendees->count();
+        return $this->meetupAttendees->count();
+    }
+
+    public function checkInAttendee(User $user, \DateTimeImmutable $atTime) : void
+    {
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
+                $meetupAttendee->checkIn($atTime);
+                return;
+            }
+        }
+
+        throw Exception\UserNotAttending::fromMeetupAndUser($this, $user);
+    }
+
+    public function cancelCheckIn(User $user) : void
+    {
+        foreach ($this->meetupAttendees as $meetupAttendee) {
+            /** @var MeetupAttendee $meetupAttendee */
+            if ($meetupAttendee->attendee()->id() === $user->id()) {
+                $meetupAttendee->cancelCheckIn();
+                return;
+            }
+        }
+
+        throw Exception\UserNotAttending::fromMeetupAndUser($this, $user);
     }
 }

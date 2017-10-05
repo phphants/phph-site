@@ -6,6 +6,7 @@ namespace AppTest\Service\User\Exception;
 use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
 use App\Service\User\Exception\UserNotFound;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Service\User\Exception\UserNotFound
@@ -18,6 +19,16 @@ class UserNotFoundTest extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf(UserNotFound::class, $exception);
         self::assertSame('User with email "foo@bar.com" was not found', $exception->getMessage());
+    }
+
+    public function testFromId()
+    {
+        $uuid = Uuid::uuid4();
+
+        $exception = UserNotFound::fromId($uuid);
+
+        self::assertInstanceOf(UserNotFound::class, $exception);
+        self::assertSame('User with ID "' . (string)$uuid . '" was not found', $exception->getMessage());
     }
 
     public function testFromThirdPartyAuthentication()
