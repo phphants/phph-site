@@ -43,7 +43,7 @@ class Version20161005104033 extends AbstractMigration
         $this->addSql('CREATE INDEX idx_7cc7da2c6f0601d5 ON video (talk_id)');
         $this->addSql('ALTER TABLE video ADD CONSTRAINT fk_7cc7da2c6f0601d5 FOREIGN KEY (talk_id) REFERENCES talk (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 
-        $this->addSql('INSERT INTO video (id, talk_id, youtubeId) SELECT uuid_generate_v4(), id, youtube_id FROM talk WHERE youtube_id IS NOT NULL');
+        $this->addSql('INSERT INTO video (id, talk_id, youtubeId) SELECT gen_random_uuid(), id, youtube_id FROM talk WHERE youtube_id IS NOT NULL');
 
         $this->addSql('ALTER TABLE talk DROP youtube_id');
     }
