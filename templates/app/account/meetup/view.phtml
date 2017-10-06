@@ -13,6 +13,7 @@ $this->headTitle('Meetups');
 
     <a href="<?= $this->escapeHtmlAttr($this->url('account-meetups-list')); ?>" class="link-button">Back to meetups list</a>
     <a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-edit', ['uuid' => $meetup->getId()])); ?>" class="link-button">Edit this meetup</a>
+    <a href="#attendees" class="link-button">Jump to attendees</a>
 
     <table>
         <tbody>
@@ -58,10 +59,10 @@ $this->headTitle('Meetups');
         <thead>
             <tr>
                 <td>Speaker</td>
-                <td>Time</td>
+                <td class="hide-mobile">Time</td>
                 <td>Title &amp; Abstract</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td class="hide-mobile">&nbsp;</td>
+                <td class="hide-mobile">&nbsp;</td>
             </tr>
         </thead>
         <tbody>
@@ -74,19 +75,19 @@ $this->headTitle('Meetups');
                     &nbsp;
                 <?php endif; ?>
                 </td>
-                <td>
+                <td class="hide-mobile">
                     <?= $talk->getTime()->format('H:i'); ?>
                 </td>
                 <td>
                     <h4><?= $this->escapeHtml($talk->getTitle()); ?></h4>
                     <?= $this->escapeHtml($talk->getAbstract()); ?>
                 </td>
-                <td>
+                <td class="hide-mobile">
                     <?php if (null !== $talk->getYoutubeId()): ?>
                         <a href="https://youtu.be/<?= $this->escapeHtmlAttr($talk->getYoutubeId()); ?>" class="video-icon-link" target="_blank">&#x1f4f9;</a>
                     <?php endif; ?>
                 </td>
-                <td class="nowrap">
+                <td class="nowrap hide-mobile">
                     <a href="<?= $this->escapeHtmlAttr($this->url('account-talk-edit', ['uuid' => $talk->getId()])); ?>" class="link-button tiny">Edit</a>
                     <a href="<?= $this->escapeHtmlAttr($this->url('account-talk-delete', ['uuid' => $talk->getId()])); ?>" class="link-button tiny ask-confirmation">Delete</a>
                 </td>
@@ -95,13 +96,13 @@ $this->headTitle('Meetups');
         </tbody>
     </table>
 
-    <h3>Registered attendees</h3>
+    <h3 id="attendees">Registered attendees</h3>
 
     <table>
         <thead>
             <tr>
                 <td>Name</td>
-                <td>Email</td>
+                <td class="hide-mobile">Email</td>
                 <td>Checked In</td>
             </tr>
         </thead>
@@ -109,10 +110,10 @@ $this->headTitle('Meetups');
         <?php foreach ($meetup->attendees() as $attendee): ?>
             <tr>
                 <td><?= $this->escapeHtml($attendee->attendee()->displayName()); ?></td>
-                <td><?= $this->escapeHtml($attendee->attendee()->getEmail()); ?></td>
+                <td class="hide-mobile"><?= $this->escapeHtml($attendee->attendee()->getEmail()); ?></td>
                 <td>
                     <?php if ($attendee->checkedIn()) : ?>
-                        &#x2713; Checked In (<a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-cancel-check-in', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>">undo</a>)
+                        &#x2713; Attending (<a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-cancel-check-in', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>">undo</a>)
                     <?php else: ?>
                         <a href="<?= $this->escapeHtmlAttr($this->url('account-meetup-check-in-user', ['meetup' => $meetup->getId(), 'user' => $attendee->attendee()->id()])); ?>" class="link-button tiny">Check in</a>
                     <?php endif; ?>
