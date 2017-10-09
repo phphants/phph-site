@@ -56,6 +56,13 @@ final class CheckInUserAction implements MiddlewareInterface
             $meetup->checkInAttendee($user, new \DateTimeImmutable());
         });
 
-        return new RedirectResponse($this->urlHelper->generate('account-meetup-view', ['uuid' => $meetup->getId()], [], 'attendees'));
+        return new RedirectResponse(
+            $this->urlHelper->generate(
+                'account-meetup-view',
+                ['uuid' => $meetup->getId()],
+                [],
+                'attendees'
+            )
+        );
     }
 }
