@@ -56,6 +56,13 @@ final class CancelCheckInAction implements MiddlewareInterface
             $meetup->cancelCheckIn($user);
         });
 
-        return new RedirectResponse($this->urlHelper->generate('account-meetup-view', ['uuid' => $meetup->getId()]));
+        return new RedirectResponse(
+            $this->urlHelper->generate(
+                'account-meetup-view',
+                ['uuid' => $meetup->getId()],
+                [],
+                'attendees'
+            )
+        );
     }
 }
