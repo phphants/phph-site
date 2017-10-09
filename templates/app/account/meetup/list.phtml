@@ -17,7 +17,7 @@ $this->headTitle('Meetups');
         <thead>
             <tr>
                 <td>Meetup Date</td>
-                <td>Location</td>
+                <td class="hide-mobile">Location</td>
                 <td>Speaker(s)</td>
                 <td>&nbsp;</td>
             </tr>
@@ -25,8 +25,8 @@ $this->headTitle('Meetups');
         <tbody>
         <?php foreach ($meetups as $meetup): ?>
             <tr class="<?= $meetup->isBefore(new \DateTimeImmutable('now')) ? 'past' : 'future'; ?>">
-                <td><?= $meetup->getFromDate()->format('d F Y'); ?></td>
-                <td><?= $this->escapeHtml($meetup->getLocation()->getName()); ?></td>
+                <td><?= $meetup->getFromDate()->format('M-y'); ?></td>
+                <td class="hide-mobile"><?= $this->escapeHtml($meetup->getLocation()->getName()); ?></td>
                 <td>
                     <?php
                     $speakers = [];
