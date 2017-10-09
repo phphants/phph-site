@@ -56,7 +56,6 @@ a.link-button {
 .hide-mobile {
     @media (max-width: 320px) {
         display: none;
-        visibility: hidden;
     }
 }
 a.link-button.tiny {
