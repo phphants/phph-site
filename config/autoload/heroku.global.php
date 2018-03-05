@@ -18,6 +18,15 @@ return [
         ],
     ],
     'phph-site' => [
+        's3' => [
+            'credentials' => [
+                'key' => \getenv('AWS_S3_KEY'),
+                'secret' => \getenv('AWS_S3_SECRET'),
+            ],
+            'region' => \getenv('AWS_S3_REGION'),
+            'version' => 'latest',
+            'bucket' => \getenv('AWS_S3_BUCKET'),
+        ],
         'google-recaptcha' => [
             'site-key' => \getenv('GOOGLE_RECAPTCHA_SITE_KEY'),
             'secret-key' => \getenv('GOOGLE_RECAPTCHA_SECRET_KEY'),
