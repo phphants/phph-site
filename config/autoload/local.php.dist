@@ -21,7 +21,7 @@ return [
             ],
             'region' => 'eu-west-2',
             'version' => 'latest',
-            'bucket' => 'phph-s3-test',
+            'bucket' => 'POPULATE THIS',
         ],
         'google-recaptcha' => [
             'site-key' => 'POPULATE THIS',
