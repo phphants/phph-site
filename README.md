@@ -21,7 +21,13 @@ First, you need to configure the application:
 cp config/autoload/local.php.dist config/autoload/local.php
 ```
 
-Edit the configuration file accordingly with API tokens.
+Edit the configuration file accordingly with API tokens as required.
+You'll need to create applications and generate tokens for:
+
+ * Twitter (for social login)
+ * GitHub (for social login)
+ * Google recaptcha (for registration form captcha)
+ * AWS S3 (for avatar storage)
 
 The DB URL for the Docker environment is:
 
@@ -47,10 +53,20 @@ Once up and running, you can run the migrations to create the schema:
 $ ./run-in-php-docker.sh vendor/bin/doctrine-migrations migrations:migrate
 ```
 
-This will set you up with a blank database to start with, you'll need to manually populate the user table to create the
-first user at the moment.
+You'll have a blank database now. For testing purposes, you can create
+seed data using this command:
 
-### Front end assets
+```bash
+$ ./run-in-php-docker.sh php data/migrations/create-sample-fixtures.php
+```
+
+Don't run this on production though! You can now log in with one of two
+users:
+
+ * `admin@phphants.co.uk` / `password`
+ * `attendee@phphants.co.uk` / `password`
+
+## Front end assets
 
 Front end assets are built using [Gulp](http://gulpjs.com/). The two main useful commands are `gulp` (to watch for
 changes) and `gulp build` (a one-off build of front end assets).
@@ -105,15 +121,4 @@ $ gulp build
 [08:57:52] Starting 'build'...
 [08:57:52] Finished 'build' after 793 μs
 $
-```
-
-### Virtual Host
-
-Afterwards, set up a virtual host to point to to the `public/` directory of the project. For example in Apache:
-
-```apacheconfig
-<VirtualHost *:80>
-  ServerName phph.localhost
-  DocumentRoot /path/to/phph-site/public
-</VirtualHost>
 ```
