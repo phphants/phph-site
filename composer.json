@@ -33,7 +33,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "league/oauth1-client": "^1.7",
         "league/oauth2-github": "^0.2.2",
-        "http-interop/http-middleware": "^0.2.0"
+        "http-interop/http-middleware": "^0.2.0",
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5",

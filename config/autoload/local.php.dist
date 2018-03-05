@@ -14,6 +14,15 @@ return [
         ],
     ],
     'phph-site' => [
+        's3' => [
+            'credentials' => [
+                'key' => 'POPULATE THIS',
+                'secret' => 'POPULATE THIS',
+            ],
+            'region' => 'eu-west-2',
+            'version' => 'latest',
+            'bucket' => 'phph-s3-test',
+        ],
         'google-recaptcha' => [
             'site-key' => 'POPULATE THIS',
             'secret-key' => 'POPULATE THIS',
