@@ -27,7 +27,7 @@ $this->headTitle('Speakers');
             <tr>
                 <td>
                     <?php if (null !== $speaker->getImageFilename()): ?>
-                        <img src="<?= $this->basePath('/images/speakers/' . $speaker->getImageFilename()); ?>" class="micro-speaker-headshot" />
+                        <img src="<?= $this->escapeHtmlAttr($this->speakerHeadshot($speaker->getImageFilename())); ?>" class="micro-speaker-headshot" />
                     <?php endif; ?>
                 </td>
                 <td><?= $this->escapeHtml($speaker->getFullName()); ?></td>

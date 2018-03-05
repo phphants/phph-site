@@ -17,7 +17,7 @@ $form->prepare();
     <?= $this->form()->openTag($form); ?>
 
     <?php if (null !== $speaker && null !== $speaker->getImageFilename()): ?>
-        <img src="/images/speakers/<?= $this->escapeHtmlAttr($speaker->getImageFilename()); ?>" class="full-speaker-headshot" />
+        <img src="<?= $this->escapeHtmlAttr($this->speakerHeadshot($speaker->getImageFilename())); ?>" class="full-speaker-headshot" />
     <?php endif; ?>
 
     <?= $this->form($form); ?>
