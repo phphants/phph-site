@@ -5,7 +5,7 @@
     "homepage": "https://phphants.co.uk",
     "license": "MIT",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "ext-intl": "*",
         "ext-pdo_pgsql": "*",
         "roave/security-advisories": "dev-master",
