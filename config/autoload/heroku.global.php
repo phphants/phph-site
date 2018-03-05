@@ -6,8 +6,8 @@ if (!getenv('HEROKU')) {
 }
 
 return [
-    'debug' => false,
-    'config_cache_enabled' => false,
+    'debug' => (bool)\getenv('DEBUG'),
+    'config_cache_enabled' => true,
     'doctrine' => [
         'connection' => [
             'orm_default' => [
