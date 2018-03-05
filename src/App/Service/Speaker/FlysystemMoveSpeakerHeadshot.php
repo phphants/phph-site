@@ -27,7 +27,7 @@ final class FlysystemMoveSpeakerHeadshot implements MoveSpeakerHeadshotInterface
      */
     public function __invoke(UploadedFileInterface $uploadedFile): string
     {
-        switch($uploadedFile->getClientMediaType()) {
+        switch ($uploadedFile->getClientMediaType()) {
             case 'image/png':
                 $extension = 'png';
                 break;
