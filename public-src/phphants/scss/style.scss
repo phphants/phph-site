@@ -185,6 +185,9 @@ header .nav-button:active{
 header .login-status-text {
     margin-top: -10px;
     font-size: 14px;
+    a:hover {
+        color: #fff;
+    }
 }
 
 @media (max-width: 600px){
