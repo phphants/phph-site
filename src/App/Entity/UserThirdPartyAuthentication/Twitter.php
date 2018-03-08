@@ -19,4 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->twitter();
     }
+
+    public static function routeNameForAuthentication() : string
+    {
+        return 'account-twitter-authenticate';
+    }
 }

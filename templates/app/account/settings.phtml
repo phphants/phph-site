@@ -30,8 +30,8 @@ $user = $this->user()->get();
     <ul>
     <?php foreach ($user->thirdPartyLogins() as $thirdPartyLogin): ?>
         <li>
-            <span class="fa fa-<?= strtolower($this->escapeHtmlAttr($thirdPartyLogin->type())); ?>"></span>
-            <strong><?= $this->escapeHtml($thirdPartyLogin->type()); ?></strong>
+            <span class="fa fa-<?= strtolower($this->escapeHtmlAttr($thirdPartyLogin::type())); ?>"></span>
+            <strong><?= $this->escapeHtml($thirdPartyLogin::type()); ?></strong>
             linked to account
             <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
         </li>

@@ -14,4 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->userData['username'] ?? $this->uniqueId();
     }
+
+    public static function routeNameForAuthentication() : string
+    {
+        return 'account-github-authenticate';
+    }
 }
