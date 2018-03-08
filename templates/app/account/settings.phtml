@@ -24,12 +24,15 @@ $user = $this->user()->get();
     </dl>
 
     <h2>Linked Accounts</h2>
+    <?php if (!count($user->thirdPartyLogins())): ?>
+        <p>You don't have any linked social logins.</p>
+    <?php endif; ?>
     <ul>
     <?php foreach ($user->thirdPartyLogins() as $thirdPartyLogin): ?>
         <li>
             <span class="fa fa-<?= strtolower($this->escapeHtmlAttr($thirdPartyLogin->type())); ?>"></span>
             <strong><?= $this->escapeHtml($thirdPartyLogin->type()); ?></strong>
-            signed in as
+            linked to account
             <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
         </li>
     <?php endforeach; ?>
