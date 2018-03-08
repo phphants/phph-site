@@ -5,41 +5,25 @@ namespace AppTest\Entity\UserThirdPartyAuthentication;
 
 use App\Entity\User;
 use App\Entity\UserThirdPartyAuthentication\GitHub;
-use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
-use App\Service\User\PhpPasswordHash;
 
 /**
  * @covers \App\Entity\UserThirdPartyAuthentication\GitHub
  */
 class GitHubTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRouteNameForAuthenticatingReturnsCorrectly(): void
+    {
+        self::assertSame('account-github-authenticate', GitHub::routeNameForAuthentication());
+    }
+
     /**
      * @covers \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication::type
      * @throws \ReflectionException
      */
     public function testTypeIsReturnedCorrectly(): void
     {
-        self::assertSame(
-            'GitHub',
-            UserThirdPartyAuthentication::new(
-                User::new(
-                    uniqid('email', true),
-                    uniqid('displayName', true),
-                    new PhpPasswordHash(),
-                    uniqid('password', true)
-                ),
-                ThirdPartyAuthenticationData::new(
-                    GitHub::class,
-                    uniqid('id', true),
-                    uniqid('email', true),
-                    uniqid('displayName', true),
-                    [
-                        'username' => uniqid('gitHubUsername', true),
-                    ]
-                )
-            )::type()
-        );
+        self::assertSame('GitHub', GitHub::type());
     }
 
     public function testGitHubUsernameReturnsWhenSet()

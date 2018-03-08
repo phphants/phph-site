@@ -13,6 +13,7 @@ use App\Service\Authorization\Role\AdministratorRole;
 use App\Service\Authorization\Role\AttendeeRole;
 use App\Service\User\PasswordHashInterface;
 use App\Service\User\PhpPasswordHash;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Entity\User
@@ -35,6 +36,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(User::class, $user);
         self::assertSame($email, $user->getEmail());
         self::assertSame($displayName, $user->displayName());
+        self::assertCount(1, $user->thirdPartyLogins());
     }
 
     public function testGetEmail()
@@ -177,5 +179,78 @@ class UserTest extends \PHPUnit_Framework_TestCase
         ));
 
         self::assertSame($gitHubUsername, $user->githubUsername());
+    }
+
+    public function testAssociatingNewThirdPartyLoginToExistingUser(): void
+    {
+        $user = User::new(uniqid('email', true), uniqid('name', true), new PhpPasswordHash(), uniqid('password', true));
+
+        self::assertCount(0, $user->thirdPartyLogins());
+
+        $user->associateThirdPartyLogin(ThirdPartyAuthenticationData::new(
+            GitHub::class,
+            uniqid('id', true),
+            uniqid('email', true),
+            uniqid('displayName', true),
+            [
+                'username' => uniqid('githubUsername', true),
+            ]
+        ));
+
+        self::assertCount(1, $user->thirdPartyLogins());
+    }
+
+    public function testThirdPartyLoginCanBeDisassociatedFromUser(): void
+    {
+        $user = User::fromThirdPartyAuthentication(ThirdPartyAuthenticationData::new(
+            GitHub::class,
+            uniqid('id', true),
+            uniqid('email', true),
+            uniqid('displayName', true),
+            [
+                'username' => uniqid('githubUsername', true),
+            ]
+        ));
+
+        self::assertCount(1, $user->thirdPartyLogins());
+
+        /** @var GitHub $thirdPartyLogin */
+        $thirdPartyLogin = array_values($user->thirdPartyLogins())[0];
+
+        $user->disassociateThirdPartyLoginByUuid(Uuid::fromString($thirdPartyLogin->id()));
+
+        self::assertCount(0, $user->thirdPartyLogins());
+    }
+
+    public function testDomainExceptionIsThrownWhenUserDoesNotHaveMatchingThirdPartyLoginToDisassociate(): void
+    {
+        $email = uniqid('email', true);
+        $user = User::new($email, uniqid('name', true), new PhpPasswordHash(), uniqid('password', true));
+        $idToRemove = Uuid::uuid4();
+        self::assertCount(0, $user->thirdPartyLogins());
+
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage(sprintf('User %s does not have a login for %s', $email, (string)$idToRemove));
+        $user->disassociateThirdPartyLoginByUuid($idToRemove);
+    }
+
+    public function testAssociatingExactlyTheSameThirdPartyLoginTwiceDoesNotAddItAgain()
+    {
+        $authData = ThirdPartyAuthenticationData::new(
+            GitHub::class,
+            uniqid('id', true),
+            uniqid('email', true),
+            uniqid('displayName', true),
+            [
+                'username' => uniqid('githubUsername', true),
+            ]
+        );
+        $user = User::fromThirdPartyAuthentication($authData);
+
+        self::assertCount(1, $user->thirdPartyLogins());
+
+        $user->associateThirdPartyLogin($authData);
+
+        self::assertCount(1, $user->thirdPartyLogins());
     }
 }

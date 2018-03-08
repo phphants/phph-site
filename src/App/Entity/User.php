@@ -186,7 +186,7 @@ use Ramsey\Uuid\UuidInterface;
         $matching = $this->thirdPartyLogins->filter(function (UserThirdPartyAuthentication $auth) use ($uuid) {
             return $auth->id() === (string)$uuid;
         })->first();
-        if (null === $matching) {
+        if (false === $matching) {
             throw new \DomainException(sprintf('User %s does not have a login for %s', $this->email, (string)$uuid));
         }
         $this->thirdPartyLogins->removeElement($matching);

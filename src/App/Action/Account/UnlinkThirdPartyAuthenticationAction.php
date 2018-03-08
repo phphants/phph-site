@@ -8,19 +8,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Ramsey\Uuid\Uuid;
-use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Helper\UrlHelper;
-use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Stratigility\MiddlewareInterface;
 
 final class UnlinkThirdPartyAuthenticationAction implements MiddlewareInterface
 {
-    /**
-     * @var TemplateRendererInterface
-     */
-    private $templateRenderer;
-
     /**
      * @var EntityManagerInterface
      */

@@ -9,6 +9,7 @@ use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
 use Assert\AssertionFailedException;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @covers \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication
@@ -66,5 +67,6 @@ class UserThirdPartyAuthenticationTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(Twitter::class, $thirdPartyAuth);
         self::assertSame($id, $thirdPartyAuth->uniqueId());
         self::assertSame($user, $thirdPartyAuth->user());
+        self::assertTrue(Uuid::isValid($thirdPartyAuth->id()));
     }
 }
