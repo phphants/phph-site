@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity
@@ -66,7 +67,12 @@ use Ramsey\Uuid\Uuid;
     private $meetupsAttended;
 
     /**
-     * @ORM\OneToMany(targetEntity=UserThirdPartyAuthentication::class, mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(
+     *     targetEntity=UserThirdPartyAuthentication::class,
+     *     mappedBy="user",
+     *     cascade={"persist"},
+     *     orphanRemoval=true
+     * )
      * @var ArrayCollection|UserThirdPartyAuthentication[]
      */
     private $thirdPartyLogins;
@@ -161,6 +167,21 @@ use Ramsey\Uuid\Uuid;
     public function associateThirdPartyLogin(ThirdPartyAuthenticationData $thirdPartyAuthentication): void
     {
         $this->thirdPartyLogins->add(UserThirdPartyAuthentication::new($this, $thirdPartyAuthentication));
+    }
+
+    /**
+     * @param UuidInterface $uuid
+     * @throws \DomainException
+     */
+    public function disassociateThirdPartyLoginByUuid(UuidInterface $uuid): void
+    {
+        $matching = $this->thirdPartyLogins->filter(function (UserThirdPartyAuthentication $auth) use ($uuid) {
+            return $auth->id() === (string)$uuid;
+        })->first();
+        if (null === $matching) {
+            throw new \DomainException(sprintf('User %s does not have a login for %s', $this->email, (string)$uuid));
+        }
+        $this->thirdPartyLogins->removeElement($matching);
     }
 
     public function twitterHandle() : ?string

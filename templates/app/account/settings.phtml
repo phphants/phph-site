@@ -34,7 +34,7 @@ $user = $this->user()->get();
             <strong><?= $this->escapeHtml($thirdPartyLogin::type()); ?></strong>
             linked to account
             <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
-            (unlink)
+            (<a href="<?= $this->escapeHtmlAttr($this->url('account-unlink-third-party-login', ['loginId' => $thirdPartyLogin->id()])); ?>">unlink</a>)
         </li>
     <?php endforeach; ?>
     </ul>
