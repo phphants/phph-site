@@ -7,6 +7,9 @@ use Zend\Expressive\Helper;
 
 return [
     'dependencies' => [
+        'abstract_factories' => [
+            \Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
+        ],
         'invokables' => [
             Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
         ],

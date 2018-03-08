@@ -21,7 +21,7 @@ return [
             App\Action\Account\LoginAction::class => App\Action\Account\LoginActionFactory::class,
             App\Action\Account\RegisterAction::class => App\Action\Account\RegisterActionFactory::class,
             App\Action\Account\DashboardAction::class => App\Action\Account\DashboardActionFactory::class,
-            App\Action\Account\SettingsAction::class => App\Action\Account\SettingsActionFactory::class,
+            App\Action\Account\SettingsAction::class => \Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
             App\Action\Account\LogoutAction::class => App\Action\Account\LogoutActionFactory::class,
             App\Action\Account\Meetup\AddMeetupAction::class => App\Action\Account\Meetup\AddMeetupActionFactory::class,
             App\Action\Account\Meetup\EditMeetupAction::class => App\Action\Account\Meetup\EditMeetupActionFactory::class,
