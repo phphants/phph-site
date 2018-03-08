@@ -166,10 +166,12 @@ use Ramsey\Uuid\UuidInterface;
 
     public function associateThirdPartyLogin(ThirdPartyAuthenticationData $thirdPartyAuthentication): void
     {
-        $existingMatchingLogins = $this->thirdPartyLogins->filter(function (UserThirdPartyAuthentication $auth) use ($thirdPartyAuthentication) {
-            return $auth::type() === $thirdPartyAuthentication->serviceClass()::type()
-                && $auth->uniqueId() === $thirdPartyAuthentication->uniqueId();
-        });
+        $existingMatchingLogins = $this->thirdPartyLogins->filter(
+            function (UserThirdPartyAuthentication $auth) use ($thirdPartyAuthentication) {
+                return $auth::type() === $thirdPartyAuthentication->serviceClass()::type()
+                    && $auth->uniqueId() === $thirdPartyAuthentication->uniqueId();
+            }
+        );
         // Already have this login, don't add it again
         if ($existingMatchingLogins->count()) {
             return;
