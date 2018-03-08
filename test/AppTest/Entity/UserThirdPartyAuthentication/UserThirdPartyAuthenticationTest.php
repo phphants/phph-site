@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace AppTest\Entity\UserThirdPartyAuthentication;
 
 use App\Entity\User;
+use App\Entity\UserThirdPartyAuthentication\GitHub;
 use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
@@ -14,6 +15,17 @@ use Assert\AssertionFailedException;
  */
 class UserThirdPartyAuthenticationTest extends \PHPUnit_Framework_TestCase
 {
+    public function testKindsAreReturned(): void
+    {
+        self::assertEquals(
+            [
+                Twitter::class,
+                GitHub::class,
+            ],
+            UserThirdPartyAuthentication::kinds()
+        );
+    }
+
     public function testExceptionIsThrownWhenRequestedDiscriminatorIsNotAValidThirdPartyAuthenticationClass()
     {
         /** @var User|\PHPUnit_Framework_MockObject_MockObject $user */
