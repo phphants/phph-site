@@ -158,6 +158,11 @@ use Ramsey\Uuid\Uuid;
         return $this->thirdPartyLogins->toArray();
     }
 
+    public function associateThirdPartyLogin(ThirdPartyAuthenticationData $thirdPartyAuthentication): void
+    {
+        $this->thirdPartyLogins->add(UserThirdPartyAuthentication::new($this, $thirdPartyAuthentication));
+    }
+
     public function twitterHandle() : ?string
     {
         foreach ($this->thirdPartyLogins as $login) {

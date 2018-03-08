@@ -34,7 +34,25 @@ $user = $this->user()->get();
             <strong><?= $this->escapeHtml($thirdPartyLogin::type()); ?></strong>
             linked to account
             <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
+            (unlink)
         </li>
     <?php endforeach; ?>
+    </ul>
+
+    <h3>Link your login for:</h3>
+    <ul class="login-with">
+        <?php foreach (\App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication::kinds() as $kind): ?>
+            <?php
+            /** @var \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication $kind */
+            $route = $kind::routeNameForAuthentication();
+            $name = $kind::type();
+            $nameLowercase = strtolower($name);
+            ?>
+            <li>
+                <a href="<?= $this->escapeHtmlAttr($this->url($route)); ?>" class="btn btn-block btn-social btn-<?= $this->escapeHtmlAttr($nameLowercase); ?>">
+                    <span class="fa fa-<?= $this->escapeHtmlAttr($nameLowercase); ?>"></span> Sign in with <?= $this->escapeHtml($name); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
     </ul>
 </div>

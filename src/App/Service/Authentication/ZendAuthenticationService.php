@@ -70,6 +70,14 @@ class ZendAuthenticationService implements AuthenticationServiceInterface
 
     public function thirdPartyAuthenticate(ThirdPartyAuthenticationData $thirdPartyAuthentication) : bool
     {
+        // If we're already logged in, associate the new third party login with the existing account
+        if ($this->hasIdentity()) {
+            $this->entityManager->transactional(function () use ($thirdPartyAuthentication) {
+                $this->getIdentity()->associateThirdPartyLogin($thirdPartyAuthentication);
+            });
+            return true;
+        }
+
         try {
             $user = $this->findUserByThirdPartyAuthentication->__invoke($thirdPartyAuthentication);
         } catch (UserNotFound $userNotFound) {
