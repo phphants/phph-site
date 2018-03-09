@@ -27,6 +27,8 @@ $this->headTitle($title);
 
     <?= $this->formRow($form->get('confirmPassword')); ?>
 
+    <?= $this->partial('partial::xkcd936'); ?>
+
     <br />
     <div class="g-recaptcha" data-sitekey="<?= $this->escapeHtmlAttr($form->get('g-recaptcha-response')->getAttribute('recaptchaPublicKey')); ?>"></div>
     <?= $this->formElementErrors($form->get('g-recaptcha-response')); ?>

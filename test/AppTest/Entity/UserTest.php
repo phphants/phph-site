@@ -253,4 +253,19 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         self::assertCount(1, $user->thirdPartyLogins());
     }
+
+    public function testUserPasswordCanBeChanged()
+    {
+        $algo = new PhpPasswordHash();
+
+        $firstPassword = uniqid('firstPassword', true);
+        $secondPassword = uniqid('secondPassword', true);
+        $user = User::new(uniqid('email', true), uniqid('name', true), $algo, $firstPassword);
+        self::assertTrue($user->verifyPassword($algo, $firstPassword));
+        self::assertFalse($user->verifyPassword($algo, $secondPassword));
+
+        $user->changePassword($algo, $secondPassword);
+        self::assertFalse($user->verifyPassword($algo, $firstPassword));
+        self::assertTrue($user->verifyPassword($algo, $secondPassword));
+    }
 }
