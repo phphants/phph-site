@@ -1,0 +1,21 @@
+<?php
+declare(strict_types = 1);
+
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+
+$title = 'Confirm account deletion';
+$this->headTitle($title);
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1><?php echo $title; ?></h1>
+
+    <form action="" method="post">
+        <p>Are you SURE you wish to delete your account? You can't get it back.</p>
+
+        <input type="submit" value="Yes, DELETE my account" />
+    </form>
+
+</div>

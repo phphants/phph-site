@@ -28,6 +28,7 @@ $user = $this->user()->get();
     <ul>
         <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-profile')); ?>">Update my profile</a></li>
         <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-password')); ?>">Change my password</a></li>
+        <li>Only if you're very sure, you can go ahead and <a href="<?= $this->escapeHtmlAttr($this->url('account-settings-delete-me')); ?>">delete your account</a>, but we'll be sad to see you go.</li>
     </ul>
 
     <h2>Linked Accounts</h2>
