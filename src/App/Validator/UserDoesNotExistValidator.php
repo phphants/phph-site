@@ -30,10 +30,15 @@ final class UserDoesNotExistValidator extends AbstractValidator
     /**
      * {@inheritdoc}
      */
-    public function isValid($value)
+    public function isValid($value, array $context = null)
     {
         try {
-            $this->findUserByEmail->__invoke($value);
+            $user = $this->findUserByEmail->__invoke($value);
+
+            if (null !== $context && array_key_exists('userId', $context) && $user->id() === $context['userId']) {
+                return true;
+            }
+
             $this->error(self::USER_EXISTS);
             return false;
         } catch (UserNotFound $userNotFound) {

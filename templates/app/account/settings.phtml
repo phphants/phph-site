@@ -26,6 +26,7 @@ $user = $this->user()->get();
     <h2>Actions</h2>
 
     <ul>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-profile')); ?>">Update my profile</a></li>
         <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-password')); ?>">Change my password</a></li>
     </ul>
 

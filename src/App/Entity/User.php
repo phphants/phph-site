@@ -231,4 +231,10 @@ use Ramsey\Uuid\UuidInterface;
     {
         $this->password = $algorithm->hash($password);
     }
+
+    public function changeProfile(string $displayName, string $email): void
+    {
+        $this->displayName = $displayName;
+        $this->email = $email;
+    }
 }
