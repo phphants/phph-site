@@ -7,6 +7,7 @@ use App\Entity\UserThirdPartyAuthentication\GitHub;
 use App\Entity\UserThirdPartyAuthentication\Twitter;
 use App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication;
 use App\Service\Authentication\ThirdPartyAuthenticationData;
+use App\Service\Authorization\Role\AdministratorRole;
 use App\Service\Authorization\Role\AttendeeRole;
 use App\Service\Authorization\Role\RoleFactory;
 use App\Service\Authorization\Role\RoleInterface;
@@ -140,6 +141,11 @@ use Ramsey\Uuid\UuidInterface;
         return RoleFactory::getRole($this->role);
     }
 
+    public function eligibleForPrizeDraws() : bool
+    {
+        return !$this->getRole() instanceof AdministratorRole;
+    }
+
     public function isAttending(Meetup $meetup) : bool
     {
         foreach ($this->meetupsAttended as $meetupAttended) {
@@ -214,5 +220,10 @@ use Ramsey\Uuid\UuidInterface;
         }
 
         return null;
+    }
+
+    public function promoteToAdministrator(): void
+    {
+        $this->role = AdministratorRole::NAME;
     }
 }
