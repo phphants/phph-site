@@ -211,6 +211,32 @@ use Ramsey\Uuid\Uuid;
         return $this->meetupAttendees->toArray();
     }
 
+    /**
+     * @return MeetupAttendee[]
+     */
+    private function attendeesEligibleForPrizeDraws() : array
+    {
+        return $this->meetupAttendees->filter(function (MeetupAttendee $attendee) {
+            return $attendee->checkedIn() && $attendee->attendee()->eligibleForPrizeDraws();
+        })->toArray();
+    }
+
+    /**
+     * Pick a winner at random (uses `random_int`) from the eligible and checked in attendees
+     *
+     * @return User
+     * @throws \RuntimeException
+     */
+    public function pickPrizeDrawWinner() : User
+    {
+        /** @var MeetupAttendee[] $eligibleAttendees */
+        $eligibleAttendees = array_values($this->attendeesEligibleForPrizeDraws());
+        if (0 === \count($eligibleAttendees)) {
+            throw new \RuntimeException('There are no eligible attendees');
+        }
+        return $eligibleAttendees[random_int(0, \count($eligibleAttendees) - 1)]->attendee();
+    }
+
     public function attendance() : int
     {
         return $this->meetupAttendees->count();

@@ -12,6 +12,7 @@ use App\Entity\Talk;
 use App\Entity\User;
 use App\Service\User\PhpPasswordHash;
 use Assert\InvalidArgumentException;
+use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -21,8 +22,8 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 {
     public function testFromStandardMeetup()
     {
-        $from = new \DateTimeImmutable('2016-12-31 19:00:00');
-        $to = new \DateTimeImmutable('2016-12-31 23:00:00');
+        $from = new DateTimeImmutable('2016-12-31 19:00:00');
+        $to = new DateTimeImmutable('2016-12-31 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location', 'Address', 'http://test-uri');
         $topic = 'MyTopic';
 
@@ -45,16 +46,16 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateFromData()
     {
-        $from = new \DateTimeImmutable('2016-12-31 19:00:00');
-        $to = new \DateTimeImmutable('2016-12-31 23:00:00');
+        $from = new DateTimeImmutable('2016-12-31 19:00:00');
+        $to = new DateTimeImmutable('2016-12-31 23:00:00');
         $location1 = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
         $location2 = Location::fromNameAddressAndUrl('Location 2', 'Address 2', 'http://test-uri-2');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location1);
 
         $meetup->updateFromData(
-            new \DateTimeImmutable('2017-12-31 19:00:00'),
-            new \DateTimeImmutable('2017-12-31 23:00:00'),
+            new DateTimeImmutable('2017-12-31 19:00:00'),
+            new DateTimeImmutable('2017-12-31 23:00:00'),
             $location2
         );
 
@@ -65,8 +66,8 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAbbreviatedTalksOnlyFetchesTalksWithSpeakers()
     {
-        $from = new \DateTimeImmutable('2016-12-31 19:00:00');
-        $to = new \DateTimeImmutable('2016-12-31 23:00:00');
+        $from = new DateTimeImmutable('2016-12-31 19:00:00');
+        $to = new DateTimeImmutable('2016-12-31 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location', 'Address', 'http://test-uri');
         $talkWithSpeaker = $this->createMock(Talk::class);
         $talkWithoutSpeaker = $this->createMock(Talk::class);
@@ -91,30 +92,30 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testIsBeforeReturnsTrueWhenToDateIsBeforeRequestedDate()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
 
-        self::assertTrue($meetup->isBefore(new \DateTimeImmutable('2016-06-05 19:00:00')));
+        self::assertTrue($meetup->isBefore(new DateTimeImmutable('2016-06-05 19:00:00')));
     }
 
     public function testIsBeforeReturnsFalseWhenToDateIsAfterRequestedDate()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
 
-        self::assertFalse($meetup->isBefore(new \DateTimeImmutable('2016-05-05 19:00:00')));
+        self::assertFalse($meetup->isBefore(new DateTimeImmutable('2016-05-05 19:00:00')));
     }
 
     public function testExceptionThrownWhenFromDateIsAfterToDateWhenCreatingMeetup()
     {
-        $from = new \DateTimeImmutable('2016-06-01 23:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $from = new DateTimeImmutable('2016-06-01 23:00:00');
+        $to = new DateTimeImmutable('2016-06-01 19:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $this->expectException(InvalidArgumentException::class);
@@ -124,14 +125,14 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionThrownWhenFromDateIsAfterToDateWhenUpdatingMeetup()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
 
-        $newFrom = new \DateTimeImmutable('2016-06-01 23:00:00');
-        $newTo = new \DateTimeImmutable('2016-06-01 19:00:00');
+        $newFrom = new DateTimeImmutable('2016-06-01 23:00:00');
+        $newTo = new DateTimeImmutable('2016-06-01 19:00:00');
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('To date should be after From date');
@@ -140,8 +141,8 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testAttendance()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
@@ -158,28 +159,28 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testCheckInUserThrowsExceptionIfUserNotAttendingMeetup()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
         $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
 
         $this->expectException(UserNotAttending::class);
-        $meetup->checkInAttendee($user, new \DateTimeImmutable());
+        $meetup->checkInAttendee($user, new DateTimeImmutable());
     }
 
     public function testCheckInUserChecksInUserIfAttending()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
         $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
 
         $meetup->attend($user);
-        $meetup->checkInAttendee($user, new \DateTimeImmutable());
+        $meetup->checkInAttendee($user, new DateTimeImmutable());
 
         foreach ($meetup->attendees() as $meetupAttendee) {
             self::assertTrue($meetupAttendee->checkedIn());
@@ -188,8 +189,8 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testCancelCheckInThrowsExceptionIfUserNotAttendingMeetup()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
@@ -201,19 +202,81 @@ class MeetupTest extends \PHPUnit_Framework_TestCase
 
     public function testCancelCheckInCancelsCheckInForUserIfAttending()
     {
-        $from = new \DateTimeImmutable('2016-06-01 19:00:00');
-        $to = new \DateTimeImmutable('2016-06-01 23:00:00');
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
         $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
 
         $meetup = Meetup::fromStandardMeetup($from, $to, $location);
         $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
 
         $meetup->attend($user);
-        $meetup->checkInAttendee($user, new \DateTimeImmutable());
+        $meetup->checkInAttendee($user, new DateTimeImmutable());
         $meetup->cancelCheckIn($user);
 
         foreach ($meetup->attendees() as $meetupAttendee) {
             self::assertFalse($meetupAttendee->checkedIn());
         }
+    }
+
+    public function testSelectingPrizeDrawWinnerThrowsExceptionWhenNoAttendees(): void
+    {
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('There are no eligible attendees');
+        $meetup->pickPrizeDrawWinner();
+    }
+
+    public function testSelectingPrizeDrawWinnerThrowsExceptionWhenOnlyAdminAttend(): void
+    {
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+        $user->promoteToAdministrator();
+
+        $meetup->attend($user);
+        $meetup->checkInAttendee($user, new DateTimeImmutable());
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('There are no eligible attendees');
+        $meetup->pickPrizeDrawWinner();
+    }
+
+    public function testSelectingPrizeDrawWinnerThrowsExceptionWhenAttendeeIsNotCheckedIn(): void
+    {
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+
+        $meetup->attend($user);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('There are no eligible attendees');
+        $meetup->pickPrizeDrawWinner();
+    }
+
+    public function testSelectingPrizeDrawWinnerWhenValid(): void
+    {
+        $from = new DateTimeImmutable('2016-06-01 19:00:00');
+        $to = new DateTimeImmutable('2016-06-01 23:00:00');
+        $location = Location::fromNameAddressAndUrl('Location 1', 'Address 1', 'http://test-uri-1');
+
+        $meetup = Meetup::fromStandardMeetup($from, $to, $location);
+        $user = User::new('foo@bar.com', 'My Name', new PhpPasswordHash(), 'password');
+
+        $meetup->attend($user);
+        $meetup->checkInAttendee($user, new DateTimeImmutable());
+
+        self::assertSame($user, $meetup->pickPrizeDrawWinner());
     }
 }
