@@ -28,6 +28,11 @@ $this->headTitle($title);
             </a>
         </li>
         <?php endif; ?>
+        <li class="settings">
+            <a href="<?= $this->escapeHtmlAttr($this->url('account-settings')); ?>">
+                <span>Settings</span>
+            </a>
+        </li>
         <li class="logout">
             <a href="<?= $this->escapeHtmlAttr($this->url('account-logout')); ?>">
                 <span>Logout</span>

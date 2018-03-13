@@ -12,6 +12,20 @@ use App\Service\Authentication\ThirdPartyAuthenticationData;
  */
 class GitHubTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRouteNameForAuthenticatingReturnsCorrectly(): void
+    {
+        self::assertSame('account-github-authenticate', GitHub::routeNameForAuthentication());
+    }
+
+    /**
+     * @covers \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication::type
+     * @throws \ReflectionException
+     */
+    public function testTypeIsReturnedCorrectly(): void
+    {
+        self::assertSame('GitHub', GitHub::type());
+    }
+
     public function testGitHubUsernameReturnsWhenSet()
     {
         $githubUsername = uniqid('githubUsername', true);

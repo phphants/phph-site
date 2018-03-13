@@ -22,6 +22,15 @@ use Ramsey\Uuid\Uuid;
 abstract class UserThirdPartyAuthentication
 {
     /**
+     * All known kinds of third party authentication
+     * @var string[]
+     */
+    private const KINDS = [
+        Twitter::class,
+        GitHub::class,
+    ];
+
+    /**
      * @ORM\Id
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
@@ -48,14 +57,44 @@ abstract class UserThirdPartyAuthentication
     protected $userData = [];
 
     /**
+     * All known kinds of third party authentication
+     * @return string[]
+     */
+    public static function kinds(): array
+    {
+        return self::KINDS;
+    }
+
+    /**
      * Should return a human-friendly name that represents the login, e.g. their username
      * @return string
      */
     abstract public function displayName() : string;
 
+    /**
+     * Should return the route name to be used when starting authentication using this method of authentication
+     * @return string
+     */
+    abstract public static function routeNameForAuthentication(): string;
+
     private function __construct()
     {
         $this->id = Uuid::uuid4();
+    }
+
+    public function id() : string
+    {
+        return (string)$this->id;
+    }
+
+    /**
+     * Get the type of this authentication method, e.g. "GitHub" or "Twitter"
+     * @return string
+     * @throws \ReflectionException
+     */
+    public static function type() : string
+    {
+        return (new \ReflectionClass(static::class))->getShortName();
     }
 
     public static function new(User $user, ThirdPartyAuthenticationData $data) : self

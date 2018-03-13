@@ -12,6 +12,20 @@ use App\Service\Authentication\ThirdPartyAuthenticationData;
  */
 class TwitterTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRouteNameForAuthenticatingReturnsCorrectly(): void
+    {
+        self::assertSame('account-twitter-authenticate', Twitter::routeNameForAuthentication());
+    }
+
+    /**
+     * @covers \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication::type
+     * @throws \ReflectionException
+     */
+    public function testTypeIsReturnedCorrectly(): void
+    {
+        self::assertSame('Twitter', Twitter::type());
+    }
+
     public function testTwitterHandleReturnsWhenSet()
     {
         $twitterHandle = uniqid('twitterHandle', true);
@@ -28,6 +42,10 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         );
 
         self::assertSame($twitterHandle, $user->twitterHandle());
+
+        /** @var Twitter $userThirdPartyAuth */
+        $userThirdPartyAuth = array_values($user->thirdPartyLogins())[0];
+        self::assertSame($twitterHandle, $userThirdPartyAuth->displayName());
     }
 
     public function testTwitterHandleReturnsNullWhenNotSet()

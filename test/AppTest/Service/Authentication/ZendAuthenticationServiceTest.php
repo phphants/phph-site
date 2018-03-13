@@ -12,6 +12,7 @@ use App\Service\User\Exception\UserNotFound;
 use App\Service\User\FindUserByEmailInterface;
 use App\Service\User\FindUserByThirdPartyAuthenticationInterface;
 use App\Service\User\PasswordHashInterface;
+use App\Service\User\PhpPasswordHash;
 use Doctrine\ORM\EntityManagerInterface;
 use Zend\Authentication\Storage\StorageInterface;
 
@@ -198,12 +199,13 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
                 return true;
             }));
 
+        $this->storage->expects(self::once())->method('isEmpty')->willReturn(true);
         $this->storage->expects(self::once())->method('write')->with($email);
 
         $this->authenticationService->thirdPartyAuthenticate($authData);
     }
 
-    public function testUserLoggedInWhenUserAlreadyExists()
+    public function testUserLoggedInWhenUserAlreadyExistsAndNotAlreadyLoggedIn(): void
     {
         $email = uniqid('email', true);
         $displayName = uniqid('displayName', true);
@@ -224,8 +226,39 @@ class ZendAuthenticationServiceTest extends \PHPUnit_Framework_TestCase
         $this->entityManager->expects(self::never())->method('transactional');
         $this->entityManager->expects(self::never())->method('persist');
 
+        $this->storage->expects(self::once())->method('isEmpty')->willReturn(true);
         $this->storage->expects(self::once())->method('write')->with($email);
 
         $this->authenticationService->thirdPartyAuthenticate($authData);
+    }
+
+    public function testNewThirdPartyAuthIsAddedWhenUserAlreadyLoggedInAndDoesNotHaveServiceAddedYet(): void
+    {
+        $email = uniqid('email', true);
+        $displayName = uniqid('displayName', true);
+        $authData = ThirdPartyAuthenticationData::new(
+            Twitter::class,
+            uniqid('id', true),
+            $email,
+            $displayName,
+            []
+        );
+
+        $user = User::new($email, $displayName, new PhpPasswordHash(), uniqid('password', true));
+        self::assertCount(0, $user->thirdPartyLogins());
+
+        $this->findUsersByThirdPartyAuthentication->expects(self::never())->method('__invoke');
+
+        $this->entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
+        $this->entityManager->expects(self::never())->method('persist');
+
+        $this->findUsersByEmail->expects(self::once())->method('__invoke')->with($email)->willReturn($user);
+
+        $this->storage->expects(self::once())->method('isEmpty')->willReturn(false);
+        $this->storage->expects(self::once())->method('read')->willReturn($email);
+
+        $this->authenticationService->thirdPartyAuthenticate($authData);
+
+        self::assertCount(1, $user->thirdPartyLogins());
     }
 }

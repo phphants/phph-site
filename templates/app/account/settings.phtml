@@ -1,0 +1,58 @@
+<?php
+declare(strict_types = 1);
+
+$title = 'Account Settings';
+$this->headTitle($title);
+
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+/** @var \App\Entity\User $user */
+$user = $this->user()->get();
+?>
+
+</div><!-- end of gradient-wrapper -->
+
+<div class="wrapper content">
+    <h1>Account Settings</h1>
+
+    <p>All information on this page is private to you.</p>
+
+    <dl>
+        <dt>Name</dt>
+        <dd><?= $this->escapeHtml($user->displayName()); ?></dd>
+        <dt>Email</dt>
+        <dd><?= $this->escapeHtml($user->getEmail()); ?></dd>
+    </dl>
+
+    <h2>Linked Accounts</h2>
+    <?php if (!count($user->thirdPartyLogins())): ?>
+        <p>You don't have any linked social logins.</p>
+    <?php endif; ?>
+    <ul>
+    <?php foreach ($user->thirdPartyLogins() as $thirdPartyLogin): ?>
+        <li>
+            <span class="fa fa-<?= strtolower($this->escapeHtmlAttr($thirdPartyLogin::type())); ?>"></span>
+            <strong><?= $this->escapeHtml($thirdPartyLogin::type()); ?></strong>
+            linked to account
+            <strong><?= $this->escapeHtml($thirdPartyLogin->displayName()); ?></strong>
+            (<a href="<?= $this->escapeHtmlAttr($this->url('account-unlink-third-party-login', ['loginId' => $thirdPartyLogin->id()])); ?>">unlink</a>)
+        </li>
+    <?php endforeach; ?>
+    </ul>
+
+    <h3>Link your login for:</h3>
+    <ul class="login-with">
+        <?php foreach (\App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication::kinds() as $kind): ?>
+            <?php
+            /** @var \App\Entity\UserThirdPartyAuthentication\UserThirdPartyAuthentication $kind */
+            $route = $kind::routeNameForAuthentication();
+            $name = $kind::type();
+            $nameLowercase = strtolower($name);
+            ?>
+            <li>
+                <a href="<?= $this->escapeHtmlAttr($this->url($route)); ?>" class="btn btn-block btn-social btn-<?= $this->escapeHtmlAttr($nameLowercase); ?>">
+                    <span class="fa fa-<?= $this->escapeHtmlAttr($nameLowercase); ?>"></span> Sign in with <?= $this->escapeHtml($name); ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
