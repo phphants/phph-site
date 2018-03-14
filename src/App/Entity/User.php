@@ -226,4 +226,15 @@ use Ramsey\Uuid\UuidInterface;
     {
         $this->role = AdministratorRole::NAME;
     }
+
+    public function changePassword(PasswordHashInterface $algorithm, string $password): void
+    {
+        $this->password = $algorithm->hash($password);
+    }
+
+    public function changeProfile(string $displayName, string $email): void
+    {
+        $this->displayName = $displayName;
+        $this->email = $email;
+    }
 }

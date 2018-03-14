@@ -29,6 +29,7 @@ return [
             'account' => ['templates/app/account'],
             'layout' => ['templates/layout'],
             'error' => ['templates/error'],
+            'partial' => ['templates/partial'],
         ],
     ],
 

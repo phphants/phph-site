@@ -23,6 +23,14 @@ $user = $this->user()->get();
         <dd><?= $this->escapeHtml($user->getEmail()); ?></dd>
     </dl>
 
+    <h2>Actions</h2>
+
+    <ul>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-profile')); ?>">Update my profile</a></li>
+        <li><a href="<?= $this->escapeHtmlAttr($this->url('account-settings-change-password')); ?>">Change my password</a></li>
+        <li>Only if you're very sure, you can go ahead and <a href="<?= $this->escapeHtmlAttr($this->url('account-settings-delete-me')); ?>">delete your account</a>, but we'll be sad to see you go.</li>
+    </ul>
+
     <h2>Linked Accounts</h2>
     <?php if (!count($user->thirdPartyLogins())): ?>
         <p>You don't have any linked social logins.</p>

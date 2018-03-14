@@ -24,6 +24,9 @@ return [
             App\Action\Account\RegisterAction::class => App\Action\Account\RegisterActionFactory::class,
             App\Action\Account\DashboardAction::class => ReflectionBasedAbstractFactory::class,
             App\Action\Account\SettingsAction::class => ReflectionBasedAbstractFactory::class,
+            App\Action\Account\Settings\ChangePassword::class => App\Action\Account\Settings\ChangePasswordFactory::class,
+            App\Action\Account\Settings\ChangeProfileHandler::class => App\Action\Account\Settings\ChangeProfileHandlerFactory::class,
+            App\Action\Account\Settings\DeleteMeHandler::class => ReflectionBasedAbstractFactory::class,
             App\Action\Account\UnlinkThirdPartyAuthenticationAction::class => ReflectionBasedAbstractFactory::class,
             App\Action\Account\LogoutAction::class => ReflectionBasedAbstractFactory::class,
             App\Action\Account\Meetup\AddMeetupAction::class => App\Action\Account\Meetup\AddMeetupActionFactory::class,
@@ -156,6 +159,36 @@ return [
                 App\Action\Account\SettingsAction::class,
             ],
             'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'account-settings-change-password',
+            'path' => '/account/settings/change-password',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
+                App\Action\Account\Settings\ChangePassword::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-settings-change-profile',
+            'path' => '/account/settings/change-profile',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
+                App\Action\Account\Settings\ChangeProfileHandler::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'account-settings-delete-me',
+            'path' => '/account/settings/delete-me',
+            'middleware' => [
+                App\Middleware\Authentication::class,
+                App\Service\Authorization\Middleware\HasAttendeeRoleMiddleware::class,
+                App\Action\Account\Settings\DeleteMeHandler::class,
+            ],
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name' => 'account-unlink-third-party-login',
