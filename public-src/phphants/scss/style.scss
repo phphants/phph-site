@@ -336,8 +336,12 @@ header .login-status-text {
 .content p strong a { color: inherit; }
 
 .paypal-donate{
-    width: 50%;
-    margin: 10px auto 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  input[type=image] {
+    width: 40%;
+  }
 }
 
 .announcement {
@@ -499,18 +503,23 @@ ul#videos .video {
     }
 }
 
-ul#team li {
+ul#team li, ul#past-leaders li {
     overflow: hidden; /* clearfix */
     padding-bottom: 20px;
     list-style-type: none;
 }
-ul#team li img {
+
+ul#team li img, ul#past-leaders li img {
     width: 220px;
     height: 200px;
     float: left;
     padding-right: 20px;
 }
 
+ul#past-leaders li img {
+  width: 110px;
+  height: 90px;
+}
 .error {
     color: #ff0000;
 }
