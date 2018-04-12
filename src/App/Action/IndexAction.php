@@ -23,19 +23,6 @@ final class IndexAction implements MiddlewareInterface
 
     public function __invoke(Request $request, Response $response, callable $next = null) : HtmlResponse
     {
-        $currentDate = strtotime(date('U'));
-        $nextMeet    = strtotime('second wednesday of '.date('M'));
-        if ($currentDate >= $nextMeet) {
-            $nextMeet = strtotime('second wednesday of '.date('M', strtotime("+1 month")));
-        }
-
-        return new HtmlResponse(
-            $this->templateRenderer->render(
-                'app::index',
-                [
-                    'nextMeet' => date('l jS \of F Y', $nextMeet),
-                ]
-            )
-        );
+        return new HtmlResponse($this->templateRenderer->render('app::index'));
     }
 }
