@@ -336,8 +336,12 @@ header .login-status-text {
 .content p strong a { color: inherit; }
 
 .paypal-donate{
-    width: 50%;
-    margin: 10px auto 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  input[type=image] {
+    width: 40%;
+  }
 }
 
 .announcement {
@@ -504,6 +508,7 @@ ul#team li {
     padding-bottom: 20px;
     list-style-type: none;
 }
+
 ul#team li img {
     width: 220px;
     height: 200px;
