@@ -47,8 +47,13 @@ a.link-button {
     padding: 7px 20px;
     font-size: 14px;
     text-decoration: none;
+  @media (max-width: 600px) {
+    width: calc(50% - 2px);
+    float: left;
+    margin: 2px 2px 0 0;
+  }
+
     @media (max-width: 320px) {
-        display: inline-block;
         margin: 5px auto 0 auto;
         width: 100%;
     }
@@ -104,17 +109,22 @@ table {
 }
 
 ul.dashboard {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  flex-flow: row wrap;
 }
 
 ul.dashboard li {
-    margin-right: 50px;
-    display: block;
-    float: left;
     background-repeat: no-repeat;
-    width: 100px;
-    height: 126px;
+  background-size: 80%;
+  background-position-x: center;
+  background-position-y: 30px;
+  width: 90px;
     text-align: center;
+  margin: auto;
+  list-style: none;
 }
 ul.dashboard li a {
     width: 100%;
@@ -170,4 +180,17 @@ ul.dashboard li.logout {
     display: block;
     width: 150px;
     height: 150px;
+}
+
+@media (max-width: 768px) {
+  table#admin-meetups {
+    a.link-button.tiny {
+      width: 100%;
+      display: block;
+      margin: 3px;
+    }
+    td, th {
+      vertical-align: middle;
+    }
+  }
 }

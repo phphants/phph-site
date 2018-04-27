@@ -70,7 +70,7 @@ header {
 
     text-indent: -9999px; /* hides the text */
 
-    background: url('../images/phphants.png') no-repeat center;
+  background: url('../images/phph-logo-white.svg') no-repeat center;
     background-size: 100%;
 }
 
@@ -193,6 +193,7 @@ header .login-status-text {
 @media (max-width: 600px){
     header .nav-button{
         display: block;
+      margin: 5px;
     }
 }
 
