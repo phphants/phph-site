@@ -30,6 +30,7 @@ class TalkForm extends Form implements InputFilterProviderInterface
         $this->add(
             (new DateTimeSelect('time'))
                 ->setShouldShowSeconds(false)
+                ->setMaxYear(date('Y') + 1)
                 ->setLabel('Start Time')
         );
 
