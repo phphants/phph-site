@@ -63,12 +63,16 @@ use Ramsey\Uuid\Uuid;
         $this->id = Uuid::uuid4();
     }
 
-    public static function fromTitle(Meetup $meetup, DateTimeImmutable $time, string $title) : self
+    public static function fromTitle(Meetup $meetup, DateTimeImmutable $time, string $title, string $abstract) : self
     {
         $talk = new self();
         $talk->meetup = $meetup;
         $talk->time = $time;
         $talk->title = $title;
+        $talk->abstract = $abstract;
+        if ($talk->abstract === '') {
+            $talk->abstract = null;
+        }
         return $talk;
     }
 

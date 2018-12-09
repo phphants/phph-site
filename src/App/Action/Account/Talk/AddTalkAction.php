@@ -92,7 +92,8 @@ final class AddTalkAction implements MiddlewareInterface
                         $talk = Talk::fromTitle(
                             $meetup,
                             new \DateTimeImmutable($data['time']),
-                            $data['title']
+                            $data['title'],
+                            $data['abstract']
                         );
                     }
                     $this->entityManager->persist($talk);

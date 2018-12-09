@@ -23,7 +23,7 @@ final class DeleteTalkActionTest extends \PHPUnit_Framework_TestCase
         $meetup = $this->createMock(Meetup::class);
         $meetup->expects(self::any())->method('getId')->willReturn(Uuid::uuid4());
 
-        $talkToDelete = Talk::fromTitle($meetup, new \DateTimeImmutable(), 'The Talk Title');
+        $talkToDelete = Talk::fromTitle($meetup, new \DateTimeImmutable(), 'The Talk Title', '');
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())->method('transactional')->willReturnCallback('call_user_func');
